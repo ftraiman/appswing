@@ -1,7 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29a0d871-c414-4424-a6b6-c5e67e0fb69a" name="Changes" comment="" />
+    <list default="true" id="29a0d871-c414-4424-a6b6-c5e67e0fb69a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/dist/README.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/SwingApp.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/allclasses-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/allclasses-noframe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/constant-values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/deprecated-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/Prueba.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/class-use/Prueba.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/UsuarioControlador.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/class-use/UsuarioControlador.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/UsuarioControladorImpl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/class-use/UsuarioControladorImpl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/impl/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/controladores/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Artista.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Espectaculo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Espectador.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Funcion.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Paquete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/Usuario.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Artista.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Espectaculo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Espectador.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Funcion.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Paquete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/class-use/Usuario.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/entidades/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/UsuarioServicio.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/class-use/UsuarioServicio.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/UsuarioServicioImpl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/class-use/UsuarioServicioImpl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/impl/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/logica/servicios/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/class-use/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/main/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/ConexionDB.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/class-use/ConexionDB.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/edu/innova/persistencia/package-use.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/overview-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/package-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javadoc/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/lib/mysql-connector-java-5.1.41-bin.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Artista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Espectaculo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Funcion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Paquete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/params.txt" beforeDir="false" afterPath="$PROJECT_DIR$/params.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/innova/logica/entidades/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/innova/logica/servicios/UsuarioServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/innova/logica/servicios/UsuarioServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/innova/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/innova/main/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/innova/persistencia/ConexionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/innova/persistencia/ConexionDB.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,10 +122,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2954023" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
@@ -46,14 +146,10 @@
       </method>
     </configuration>
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="edu.innova.main.main" />
-      <module name="appswing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.innova.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="prueba" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -87,6 +183,7 @@
       <option name="presentableId" value="Default" />
       <updated>1628175307406</updated>
       <workItem from="1628175313155" duration="3302000" />
+      <workItem from="1628607383389" duration="3814000" />
     </task>
     <servers />
   </component>
@@ -103,5 +200,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

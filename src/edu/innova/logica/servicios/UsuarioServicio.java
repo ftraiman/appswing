@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.innova.logica.servicios;
 
-/**
- *
- * @author federico
- */
-public class UsuarioServicio {
-    
+import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Espectador;
+import edu.innova.logica.entidades.Usuario;
+import java.sql.SQLException;
+import java.util.List;
+
+public interface UsuarioServicio {
+
+    Usuario getUsuarioPorId(Long id) throws SQLException;
+
+    Usuario getUsuarioPorNickName(String nickname) throws SQLException;
+
+    List<Espectador> getTodosLosEspectadores() throws SQLException;
+
+    List<Artista> getTodosLosArtistas() throws SQLException;
+
+    void altaUsuario(Usuario usuario);
 }

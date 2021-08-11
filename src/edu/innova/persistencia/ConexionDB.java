@@ -11,8 +11,8 @@ import java.util.Properties;
 
 public class ConexionDB {
 
-    static final String QUERY = "SELECT * FROM tasks";
-    private static Statement conexion;
+    static final String QUERY = "SELECT * FROM usuarios";
+    private static Connection conexion;
     private static Properties prop = new Properties();
     
     public ConexionDB() {
@@ -21,8 +21,7 @@ public class ConexionDB {
                 String path = System.getProperty("user.dir");
                 InputStream stream = new FileInputStream(path + File.separator + "params.txt");
                 prop.load(stream);
-                Connection conn = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
-                conexion = conn.createStatement();
+                conexion = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
                 System.err.println("Conexion exitosa a la DB");
             }
         } catch (Exception e) {
@@ -31,7 +30,7 @@ public class ConexionDB {
         }
     }
     
-    public Statement getConexion() {
+    public Connection getConexion() {
         return conexion;
     }
 
@@ -43,15 +42,16 @@ public class ConexionDB {
                 String path = System.getProperty("user.dir");
                 InputStream stream = new FileInputStream(path + File.separator + "params.txt");
                 prop.load(stream);
-                Connection conn = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
-                conexion = conn.createStatement();
+                conexion = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
+//                conexion = conn
+//                conexion = conn.createStatement();
             }
 
-            ResultSet rs = conexion.executeQuery(QUERY);
+            ResultSet rs = conexion.createStatement().executeQuery(QUERY);
 
             while (rs.next()) {
 
-                System.out.println("ID: " + rs.getString("name"));
+                System.out.println("ID: " + rs.getString("nickname"));
             }
         } catch (Exception e) {
             e.printStackTrace();
