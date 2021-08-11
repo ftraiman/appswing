@@ -4,12 +4,18 @@ import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PlataformaServicioImpl implements PlataformaServicio {
-    
-    private final String altaPlataforma = "INSERT INTO plataformas (nombre, descripcion, url) VALUES (?, ?, ?)";
 
+    private final String altaPlataforma = "INSERT INTO plataformas (nombre, descripcion, url) VALUES (?, ?, ?)";
+    private final String plataformaPorId = "SELECT * FROM plataformas WHERE id = ?";
+    private final String todasLasPlataformas = "SELECT * FROM plataformas";
+    
     private static PlataformaServicioImpl plataformaServicio;
 
     private ConexionDB conexion = new ConexionDB();
@@ -23,14 +29,37 @@ public class PlataformaServicioImpl implements PlataformaServicio {
         }
         return plataformaServicio;
     }
-    
+
     public void altaPlataforma(Plataforma plataforma) throws SQLException {
-        
+
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaPlataforma);
         sentencia.setString(1, plataforma.getNombre());
         sentencia.setString(2, plataforma.getDescripcion());
         sentencia.setString(3, plataforma.getUrl());
-        sentencia.executeUpdate();        
+        sentencia.executeUpdate();
     }
 
+    public Plataforma getPlataformaPorId(Long idPlataforma) throws SQLException {
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(plataformaPorId);
+        sentencia.setLong(1, idPlataforma);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            return plataformaMapper(rs);
+        }
+        throw new NoSuchElementException(String.format("Plataforma con id %s no encontrado", idPlataforma));
+    }
+    
+    public List<Plataforma> getTodasLasPlataformas() throws SQLException {
+        List<Plataforma> plataformas = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(todasLasPlataformas);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            plataformas.add(plataformaMapper(rs));
+        }
+        return plataformas;
+    }
+
+    private Plataforma plataformaMapper(ResultSet rs) throws SQLException {
+        return new Plataforma(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), rs.getString("url"));
+    }
 }
