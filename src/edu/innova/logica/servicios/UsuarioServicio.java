@@ -16,5 +16,7 @@ public interface UsuarioServicio {
 
     List<Artista> getTodosLosArtistas() throws SQLException;
 
-    void altaUsuario(Usuario usuario);
+    void altaUsuario(Usuario usuario) throws SQLException;
+    
+    void modificarUsuario(Usuario usuario) throws SQLException;
 }

@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.innova.logica.servicios.impl;
 
-import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
@@ -18,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UsuarioServicioImpl implements UsuarioServicio {
 
@@ -29,6 +21,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String todosLosArtistas = "SELECT * FROM usuarios WHERE tipo = 'artista'";
     private final String nuevoEspectador = "INSERT INTO usuarios (nickname, nombre, apellido, email, tipo, fechaNacimiento) VALUES(?, ?, ?, ?, ?, ?)";
     private final String nuevoArtista = "INSERT INTO usuarios (nickname, nombre, apellido, email, tipo, fechaNacimiento, descripcion, biografia, linkUsuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String modificarUsuario = "UPDATE usuarios SET nombre = ?, apellido = ?, fechaNacimiento = ?, linkUsuario = ?, descripcion = ?, biografia = ? WHERE id = ?";
 
     private static UsuarioServicioImpl servicioUsuario;
 
@@ -103,44 +96,53 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void altaUsuario(Usuario usuario) {
+    public void altaUsuario(Usuario usuario) throws SQLException {
 
         if (usuario instanceof Espectador) {
             Espectador espectador = (Espectador) usuario;
-            try {
-//                String nuevoEspectador = "INSERT INTO usuarios (nickname, nombre, apellido, email, tipo, fechaNacimiento)"
-//                        + "VALUES(?, ?, ?, ?, ?, ?)";
-                PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoEspectador);
-                sentencia.setString(1, espectador.getNickname());
-                sentencia.setString(2, espectador.getNombre());
-                sentencia.setString(3, espectador.getApellido());
-                sentencia.setString(4, espectador.getEmail());
-                sentencia.setString(5, espectador.getTipo());
-                sentencia.setDate(6, new java.sql.Date(espectador.getFechaNacimiento().getTime()));
-                sentencia.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoEspectador);
+            sentencia.setString(1, espectador.getNickname());
+            sentencia.setString(2, espectador.getNombre());
+            sentencia.setString(3, espectador.getApellido());
+            sentencia.setString(4, espectador.getEmail());
+            sentencia.setString(5, espectador.getTipo());
+            sentencia.setDate(6, new java.sql.Date(espectador.getFechaNacimiento().getTime()));
+            sentencia.executeQuery();
         } else if (usuario instanceof Artista) {
             Artista artista = (Artista) usuario;
-            try {
-                String nuevoArtista = "INSERT INTO usuarios (nickname, nombre, apellido, email, tipo, fechaNacimiento, descripcion, biografia, linkUsuario)"
-                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoArtista);
-                sentencia.setString(1, artista.getNickname());
-                sentencia.setString(2, artista.getNombre());
-                sentencia.setString(3, artista.getApellido());
-                sentencia.setString(4, artista.getEmail());
-                sentencia.setString(5, artista.getTipo());
-                sentencia.setDate(6, new java.sql.Date(artista.getFechaNacimiento().getTime()));
-                sentencia.setString(7, artista.getDescripcion());
-                sentencia.setString(8, artista.getBiografia());
-                sentencia.setString(9, artista.getLinkUsuario());
-                sentencia.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoArtista);
+            sentencia.setString(1, artista.getNickname());
+            sentencia.setString(2, artista.getNombre());
+            sentencia.setString(3, artista.getApellido());
+            sentencia.setString(4, artista.getEmail());
+            sentencia.setString(5, artista.getTipo());
+            sentencia.setDate(6, new java.sql.Date(artista.getFechaNacimiento().getTime()));
+            sentencia.setString(7, artista.getDescripcion());
+            sentencia.setString(8, artista.getBiografia());
+            sentencia.setString(9, artista.getLinkUsuario());
+            sentencia.executeQuery();
         }
+    }
+
+    public void modificarUsuario(Usuario usuario) throws SQLException {
+
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(modificarUsuario);
+
+        String linkUsuario = usuario instanceof Artista ? ((Artista) usuario).getLinkUsuario() : null;
+        String descripcion = usuario instanceof Artista ? ((Artista) usuario).getDescripcion() : null;
+        String biografia = usuario instanceof Artista ? ((Artista) usuario).getBiografia() : null;
+
+        sentencia.setString(1, usuario.getNombre());
+        sentencia.setString(2, usuario.getApellido());
+        sentencia.setDate(3, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
+        sentencia.setString(4, linkUsuario);
+        sentencia.setString(5, descripcion);
+        sentencia.setString(6, biografia);
+        sentencia.setLong(7, usuario.getId());
+        sentencia.executeUpdate();
+
     }
 
     private Usuario espectadorMapper(ResultSet rs) throws SQLException {
