@@ -1,5 +1,6 @@
 package edu.innova.logica.servicios.impl;
 
+import edu.innova.logica.Constantes;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
@@ -12,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UsuarioServicioImpl implements UsuarioServicio {
 
@@ -53,9 +52,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         ResultSet rs = sentencia.executeQuery();
         while (rs.next()) {
             String tipo = rs.getString("tipo");
-            if ("espectador".equalsIgnoreCase(tipo)) {
+            if (Constantes.ESPECTADOR.equalsIgnoreCase(tipo)) {
                 return espectadorMapper(rs);
-            } else if ("artista".equalsIgnoreCase(tipo)) {
+            } else if (Constantes.ARTISTA.equalsIgnoreCase(tipo)) {
                 return artistaMapper(rs);
             }
         }
@@ -147,7 +146,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         } else if (usuario instanceof Artista) {
             Artista artista = (Artista) usuario;
             try {
-                
                 PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoArtista);
                 sentencia.setString(1, artista.getNickname());
                 sentencia.setString(2, artista.getNombre());
