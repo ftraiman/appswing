@@ -5,10 +5,14 @@
  */
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.entidades.Usuario;
+
 /**
  *
  * @author federico
  */
 public interface UsuarioControlador  {
+    
+    public abstract void altaUsuario(Usuario usuario);
     
 }
