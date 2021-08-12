@@ -25,6 +25,15 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+    public Usuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.tipo = tipo;
+    }
+    
     public Long getId() {
         return id;
     }

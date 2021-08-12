@@ -17,6 +17,13 @@ public class Artista extends Usuario {
         this.biografia = biografia;
         this.linkUsuario = linkUsuario;
     }
+    
+    public Artista(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo, String descripcion, String biografia, String linkUsuario) {
+        super(nickname, nombre, apellido, email, fechaNacimiento, tipo);
+        this.descripcion = descripcion;
+        this.biografia = biografia;
+        this.linkUsuario = linkUsuario;
+    }
 
     public String getDescripcion() {
         return descripcion;
