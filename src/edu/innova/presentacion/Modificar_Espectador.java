@@ -7,10 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
@@ -18,25 +15,15 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = new Fabrica();
         try {
+            
             List<Espectador> espectadores = fabrica.getEspectadorServicioImpl().getTodosLosEspectadores();
             DefaultListModel<Espectador> modelEspectadores = new DefaultListModel<>();
             listEspectadores.setModel(modelEspectadores);
-
-//            listEspectadores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//                @Override
-//                public void valueChanged(ListSelectionEvent e) {
-//                    Espectador espectadorSeleccionado = listEspectadores.getSelectedValue();
-//                    System.err.println(espectadorSeleccionado);
-//                }
-//            });
-//            
             espectadores.forEach(e -> modelEspectadores.addElement(e));
-
         } catch (SQLException ex) {
             Logger.getLogger(Modificar_Espectador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -159,8 +146,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         this.txtNombre.setText(espectadorSeleccionado.getNombre());
         this.txtApellido.setText(espectadorSeleccionado.getApellido());
         this.txtNickname.setText(espectadorSeleccionado.getNickname());
-                
-        System.err.println(espectadorSeleccionado);
+        this.txtEmail.setText(espectadorSeleccionado.getEmail());
     }//GEN-LAST:event_listEspectadoresValueChanged
 
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
