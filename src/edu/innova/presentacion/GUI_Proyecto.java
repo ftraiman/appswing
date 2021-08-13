@@ -2,14 +2,11 @@ package edu.innova.presentacion;
 
 import javax.swing.JFrame;
 
-
 public class GUI_Proyecto extends javax.swing.JFrame {
-
 
     public GUI_Proyecto() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,6 +21,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Artista = new javax.swing.JMenuItem();
         Espectador = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -75,6 +74,19 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu3.setText("Consultas");
         Menu.add(jMenu3);
 
+        jMenu2.setText("Modificar");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Espectador");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCheckBoxMenuItem1);
+
+        Menu.add(jMenu2);
+
         setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -93,7 +105,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        
+
     }//GEN-LAST:event_formComponentHidden
 
     private void EspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EspectadorActionPerformed
@@ -108,6 +120,11 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         ra.show();
     }//GEN-LAST:event_ArtistaActionPerformed
 
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        Modificar_Espectador me = new Modificar_Espectador();
+        this.Panel.add(me);
+        me.show();
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -128,7 +145,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI_Proyecto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI_Proyecto().setVisible(true);
@@ -143,7 +159,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuBar Menu;
     private javax.swing.JDesktopPane Panel;
     private javax.swing.JMenu Registro;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables

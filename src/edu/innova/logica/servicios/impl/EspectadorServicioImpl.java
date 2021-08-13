@@ -17,7 +17,7 @@ public class EspectadorServicioImpl implements EspectadorServicio {
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String espectadorPorId = "SELECT * FROM espectadores WHERE id = ?";
     private final String espectadorPorNickname = "SELECT * FROM espectadores WHERE nickname = ?";
-    private final String todosLosEspectadores = "SELECT * FROM espectadores WHERE tipo = 'espectador'";
+    private final String todosLosEspectadores = "SELECT * FROM espectadores";
     private final String nuevoEspectador = "INSERT INTO espectadores (nickname, nombre, apellido, email, fechaNacimiento) VALUES(?, ?, ?, ?, ?)";
     private final String modificarUsuario = "UPDATE espectadores SET nombre = ?, apellido = ?, fechaNacimiento = ? WHERE id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
