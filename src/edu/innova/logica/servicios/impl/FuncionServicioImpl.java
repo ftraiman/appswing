@@ -13,7 +13,6 @@ import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
-import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.persistencia.ConexionDB;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import edu.innova.logica.servicios.EspectadorServicio;
 
 /**
  *
@@ -45,7 +45,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     //OBTENER LA CONEXION A LA BASE DE DATOS
     private ConexionDB conexion = new ConexionDB();
 
-    private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
+    private EspectadorServicio usuarioServicio = new EspectadorServicioImpl().getInstance();
 //    private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
 
     public FuncionServicioImpl() {//DEFAULT

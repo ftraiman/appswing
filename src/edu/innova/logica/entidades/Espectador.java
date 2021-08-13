@@ -5,11 +5,11 @@ import java.util.Date;
 public class Espectador extends Usuario {
 
     public Espectador(Long id, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo) {
-        super(id, nickname, nombre, apellido, email, fechaNacimiento, tipo);
+        super(id, nickname, nombre, apellido, email, fechaNacimiento);
     }
     
     public Espectador(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo) {
-        super(nickname, nombre, apellido, email, fechaNacimiento, tipo);
+        super(nickname, nombre, apellido, email, fechaNacimiento);
     }
     
 }

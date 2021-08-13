@@ -10,30 +10,27 @@ public class Usuario {
     protected String apellido;
     protected String email;
     protected Date fechaNacimiento;
-    protected String tipo;
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo) {
+    public Usuario(Long id, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         this.id = id;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
-        this.tipo = tipo;
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String tipo) {
+    public Usuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
-        this.tipo = tipo;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -82,17 +79,9 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", tipo=" + tipo + '}';
+        return "Usuario{" + "id=" + id + ", nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
 }

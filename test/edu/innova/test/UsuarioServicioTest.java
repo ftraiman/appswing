@@ -4,16 +4,16 @@ import edu.innova.logica.Constantes;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
-import edu.innova.logica.servicios.UsuarioServicio;
-import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
+import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import edu.innova.logica.servicios.EspectadorServicio;
 
 public class UsuarioServicioTest {
 
     public static void main(String[] args) throws SQLException {
-        UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
+        EspectadorServicio usuarioServicio = new EspectadorServicioImpl().getInstance();
         
 //        Alta espectador
 //        Espectador espectador = new Espectador(Long.MIN_VALUE, "flash", "Barry", "Allen", "flash@dc.com", new Date(), Constantes.ESPECTADOR);

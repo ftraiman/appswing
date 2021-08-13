@@ -6,13 +6,13 @@ import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.EspectaculoServicio;
-import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
-import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
+import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import edu.innova.logica.servicios.EspectadorServicio;
 
 public class EspectaculoServicioTest {
 
