@@ -7,25 +7,25 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
+    private Fabrica fabrica = new Fabrica();
+
     public Modificar_Espectador() {
         initComponents();
-        Fabrica fabrica = new Fabrica();
         try {
-            
             List<Espectador> espectadores = fabrica.getEspectadorServicioImpl().getTodosLosEspectadores();
             DefaultListModel<Espectador> modelEspectadores = new DefaultListModel<>();
             listEspectadores.setModel(modelEspectadores);
             espectadores.forEach(e -> modelEspectadores.addElement(e));
         } catch (SQLException ex) {
-            Logger.getLogger(Modificar_Espectador.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,6 +49,8 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         spnDia = new javax.swing.JSpinner();
         spnMes = new javax.swing.JSpinner();
         spnAnio = new javax.swing.JSpinner();
+        lblNombre1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -100,6 +102,10 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
         spnAnio.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, null, 1));
 
+        lblNombre1.setText("Id");
+
+        txtId.setText("Id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,16 +126,15 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
                                     .addComponent(lblEmail))
                                 .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(lblNombre1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtId))
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
@@ -156,7 +161,10 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombre1)
+                        .addComponent(txtId))
                     .addComponent(lblNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,48 +198,45 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
     private void listEspectadoresValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEspectadoresValueChanged
         Espectador espectadorSeleccionado = listEspectadores.getSelectedValue();
+        this.txtId.setText(String.valueOf(espectadorSeleccionado.getId()));
         this.txtNombre.setText(espectadorSeleccionado.getNombre());
         this.txtApellido.setText(espectadorSeleccionado.getApellido());
         this.txtNickname.setText(espectadorSeleccionado.getNickname());
         this.txtEmail.setText(espectadorSeleccionado.getEmail());
-        
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(espectadorSeleccionado.getFechaNacimiento());
         this.spnDia.setValue(calendar.get(Calendar.DAY_OF_MONTH));
         this.spnMes.setValue(calendar.get(Calendar.MONTH));
         this.spnAnio.setValue(calendar.get(Calendar.YEAR));
-        
-        
+
     }//GEN-LAST:event_listEspectadoresValueChanged
 
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
+        Long id = Long.valueOf(this.txtId.getText());
         String nombre = this.txtNombre.getText();
         String apellido = this.txtApellido.getText();
         String nickname = this.txtNickname.getText();
         String email = this.txtEmail.getText();
-        
+
         String dia = this.spnDia.getValue().toString();
         String mes = this.spnMes.getValue().toString();
         String anio = this.spnAnio.getValue().toString();
-        
-        Date fechaNacimiento = null;
-        
+
         try {
-            fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
+            Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
+            Espectador espectador = new Espectador(id, nickname, nombre, apellido, email, fechaNacimiento);
+            fabrica.getEspectadorServicioImpl().modificarUsuario(espectador);
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", e.getMessage()));
         } catch (Exception e) {
-            // Mensaje de fecha invalida
+            JOptionPane.showMessageDialog(rootPane, String.format("Error no esperado [%s]", e.getMessage()));
         }
-        
-        
-        // TODO ver como viene la fecha
-        
-        
-        Espectador espectador;
-        espectador = new Espectador(nickname, nombre, apellido, email, fechaNacimiento);
-        
-        
-        
-        
+        JOptionPane.showMessageDialog(rootPane, "El Espectador fue modificado correctamente");
+        this.dispose();
     }//GEN-LAST:event_btnActualizarEspectadorActionPerformed
 
 
@@ -246,6 +251,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNickname;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<Espectador> listEspectadores;
     private javax.swing.JSpinner spnAnio;
@@ -253,6 +259,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner spnMes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JLabel txtId;
     private javax.swing.JTextField txtNickname;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
