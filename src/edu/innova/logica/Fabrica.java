@@ -7,8 +7,10 @@ package edu.innova.logica;
 
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
+import edu.innova.logica.servicios.ArtistaServicio;
 import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
 import edu.innova.logica.servicios.EspectadorServicio;
+import edu.innova.logica.servicios.impl.ArtistaServicioImpl;
 
 /**
  *
@@ -24,7 +26,7 @@ public class Fabrica {
         return instancia;
     }
     //Obtener instancia de UsuarioServicioImpl
-    public EspectadorServicio getUsuarioServicioImpl() 
+    public EspectadorServicio getEspectadorServicioImpl() 
     {
         EspectadorServicio cont = new EspectadorServicioImpl();
         return cont;
@@ -36,5 +38,10 @@ public class Fabrica {
         return cont;
     }
     
+    public ArtistaServicio getArtistaServicioImpl()
+    {
+        ArtistaServicio cont = new ArtistaServicioImpl();
+        return cont;
+    }
     
 }

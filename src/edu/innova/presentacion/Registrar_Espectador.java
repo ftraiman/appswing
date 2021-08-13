@@ -178,7 +178,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         Date fecha = new Date(fn);
         
        
-      fabrica.getUsuarioControladorImpl().altaUsuario(new Espectador(nickname,nombre,apellido,email,fecha, "espectador"));
+      fabrica.getUsuarioControladorImpl().altaUsuario(new Espectador(nickname,nombre,apellido,email,fecha));
       
       this.Nombretxt.setText("");
       this.Apellidotxt.setText("");

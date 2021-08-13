@@ -34,15 +34,15 @@ public class DatosDePrueba {
 //        artistaServicio.altaUsuario(macCarney);
 
         // Alta espectadores
-        Espectador charlyGood = new Espectador(Long.MIN_VALUE, "charlygood", "Carlos", "Desprolijo bueno", "charlygood@penadoy.com", new Date(), Constantes.ESPECTADOR);
-        Espectador chory = new Espectador(Long.MIN_VALUE, "elchory", "No me acuerdo", "Castro", "chori@naciomal.com", new Date(), Constantes.ESPECTADOR);
-        Espectador forlan = new Espectador(Long.MIN_VALUE, "cachibacha", "Diego", "Forlan", "diego@teRajaronAPatadasDelDelManya.com", new Date(), Constantes.ESPECTADOR);
-        Espectador suarez = new Espectador(Long.MIN_VALUE, "lucho", "Luis", "Suarez", "luisito@paraDeMorder.com", new Date(), Constantes.ESPECTADOR);
+        //Espectador charlyGood = new Espectador(Long.MIN_VALUE, "charlygood", "Carlos", "Desprolijo bueno", "charlygood@penadoy.com", new Date(), Constantes.ESPECTADOR);
+        // Espectador chory = new Espectador(Long.MIN_VALUE, "elchory", "No me acuerdo", "Castro", "chori@naciomal.com", new Date(), Constantes.ESPECTADOR);
+        //Espectador forlan = new Espectador(Long.MIN_VALUE, "cachibacha", "Diego", "Forlan", "diego@teRajaronAPatadasDelDelManya.com", new Date(), Constantes.ESPECTADOR);
+        //Espectador suarez = new Espectador(Long.MIN_VALUE, "lucho", "Luis", "Suarez", "luisito@paraDeMorder.com", new Date(), Constantes.ESPECTADOR);
         
-        espectadorServicio.altaUsuario(charlyGood);
-        espectadorServicio.altaUsuario(chory);
-        espectadorServicio.altaUsuario(forlan);
-        espectadorServicio.altaUsuario(suarez);
+        //espectadorServicio.altaUsuario(charlyGood);
+        //espectadorServicio.altaUsuario(chory);
+        //espectadorServicio.altaUsuario(forlan);
+        //espectadorServicio.altaUsuario(suarez);
         
         // Alta plataformas
 //        Plataforma feis = new Plataforma(Long.MIN_VALUE, "Facebook", "Descripcion de Facebook", "www.Facebook.com");

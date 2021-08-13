@@ -241,7 +241,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         String link = this.link.getText();
         
        
-      fabrica.getUsuarioControladorImpl().altaUsuario(new Artista(nickname,nombre,apellido,email,fecha,"artista",descripcion,bio,link));
+      fabrica.getUsuarioControladorImpl().altaUsuario(new Artista(nickname,nombre,apellido,email,fecha,descripcion,bio,link));
       
       this.Nombretxt.setText("");
       this.Apellidotxt.setText("");

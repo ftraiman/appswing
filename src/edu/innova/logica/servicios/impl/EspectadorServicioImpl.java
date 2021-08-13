@@ -119,7 +119,7 @@ public class EspectadorServicioImpl implements EspectadorServicio {
     private Espectador espectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
         return new Espectador(rs.getLong("id"), rs.getString("nickname"), rs.getString("nombre"),
-                rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("tipo"));
+                rs.getString("apellido"), rs.getString("email"), fechaNacimiento);
     }
     //========================= DEVUELVE EL ESPECTADOR =======================//
 }
