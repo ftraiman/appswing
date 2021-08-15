@@ -17,9 +17,13 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     public Modificar_Espectador() {
         initComponents();
         try {
+            // Obtengo del EspectadorServicio todos los espectadores
             List<Espectador> espectadores = fabrica.getEspectadorServicioImpl().getTodosLosEspectadores();
+            // Creo un DefaultListModel que almacena los objetos Espectador
             DefaultListModel<Espectador> modelEspectadores = new DefaultListModel<>();
+            // Le cargo al JList el modelEspectadores
             listEspectadores.setModel(modelEspectadores);
+            // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
             espectadores.forEach(e -> modelEspectadores.addElement(e));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
@@ -197,6 +201,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listEspectadoresValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEspectadoresValueChanged
+        // Al seleccionarse un Espectador del JList, se cargan en la pantalla sus datos 
         Espectador espectadorSeleccionado = listEspectadores.getSelectedValue();
         this.txtId.setText(String.valueOf(espectadorSeleccionado.getId()));
         this.txtNombre.setText(espectadorSeleccionado.getNombre());
@@ -213,6 +218,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listEspectadoresValueChanged
 
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
+        // Al presionar el boton actualizar, obtengo todos los datos del Usuario
         Long id = Long.valueOf(this.txtId.getText());
         String nombre = this.txtNombre.getText();
         String apellido = this.txtApellido.getText();
@@ -224,8 +230,11 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         String anio = this.spnAnio.getValue().toString();
 
         try {
+            // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
+            // Se carga el objeto para ser actualizado
             Espectador espectador = new Espectador(id, nickname, nombre, apellido, email, fechaNacimiento);
+            // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
             fabrica.getEspectadorServicioImpl().modificarUsuario(espectador);
 
         } catch (IllegalArgumentException e) {
