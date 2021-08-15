@@ -1,5 +1,8 @@
 package edu.innova.presentacion;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class GUI_Proyecto extends javax.swing.JFrame {
@@ -21,6 +24,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Artista = new javax.swing.JMenuItem();
         Espectador = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenu_Usuarios = new javax.swing.JMenu();
+        jMenuItem_Espectador = new javax.swing.JMenuItem();
+        jMenuItem_Artistas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
@@ -72,6 +78,27 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Menu.add(Registro);
 
         jMenu3.setText("Consultas");
+
+        jMenu_Usuarios.setText("Consultar usuarios");
+
+        jMenuItem_Espectador.setText("Espectador");
+        jMenuItem_Espectador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_EspectadorActionPerformed(evt);
+            }
+        });
+        jMenu_Usuarios.add(jMenuItem_Espectador);
+
+        jMenuItem_Artistas.setText("Artistas");
+        jMenuItem_Artistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ArtistasActionPerformed(evt);
+            }
+        });
+        jMenu_Usuarios.add(jMenuItem_Artistas);
+
+        jMenu3.add(jMenu_Usuarios);
+
         Menu.add(jMenu3);
 
         jMenu2.setText("Modificar");
@@ -126,6 +153,27 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         me.show();
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
+    private void jMenuItem_EspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_EspectadorActionPerformed
+        try {
+            Todos_Los_Espectadores te = new Todos_Los_Espectadores();
+            this.Panel.add(te);
+            te.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem_EspectadorActionPerformed
+
+    private void jMenuItem_ArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ArtistasActionPerformed
+        try {
+            Todos_Los_Artistas ta = new Todos_Los_Artistas();
+            this.Panel.add(ta);
+            ta.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem_ArtistasActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -164,5 +212,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem_Artistas;
+    private javax.swing.JMenuItem jMenuItem_Espectador;
+    private javax.swing.JMenu jMenu_Usuarios;
     // End of variables declaration//GEN-END:variables
 }

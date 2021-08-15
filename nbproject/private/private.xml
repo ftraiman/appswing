@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/main/main.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/presentacion/Registrar_Artista.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/impl/FuncionServicioImpl.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/presentacion/Registrar_Espectador.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/DatosDePrueba.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/entidades/Usuario.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/EspectaculoServicio.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/FuncionServicio.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/impl/PlataformaServicioImpl.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/impl/ArtistaServicioImpl.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/impl/EspectadorServicioImpl.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/EspectadorServicio.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/presentacion/GUI_Proyecto.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/test/edu/innova/test/PlataformaServicioTest.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/ArtistaServicio.java</file>
-            <file>file:/Users/federico/ws/Java/innova/servidorCentral/src/edu/innova/logica/servicios/impl/EspectaculoServicioImpl.java</file>
+            <file>file:/C:/Users/henry/Desktop/JAVA%20Projects/appswing/src/edu/innova/presentacion/Todos_Los_Artistas.java</file>
+            <file>file:/C:/Users/henry/Desktop/JAVA%20Projects/appswing/src/edu/innova/presentacion/Todos_Los_Espectadores.java</file>
+            <file>file:/C:/Users/henry/Desktop/JAVA%20Projects/appswing/src/edu/innova/logica/servicios/impl/ArtistaServicioImpl.java</file>
+            <file>file:/C:/Users/henry/Desktop/JAVA%20Projects/appswing/src/edu/innova/presentacion/GUI_Proyecto.java</file>
         </group>
     </open-files>
 </project-private>

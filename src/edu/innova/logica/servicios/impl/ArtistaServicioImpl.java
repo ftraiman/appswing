@@ -1,8 +1,6 @@
 package edu.innova.logica.servicios.impl;
 
-import edu.innova.logica.Constantes;
 import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.ArtistaServicio;
 import edu.innova.persistencia.ConexionDB;
@@ -13,14 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import edu.innova.logica.servicios.EspectadorServicio;
 
 public class ArtistaServicioImpl implements ArtistaServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String artistaPorId = "SELECT * FROM artistas WHERE id = ?";
     private final String artistaPorNickname = "SELECT * FROM artistas WHERE nickname = ?";
-    private final String todosLosArtistas = "SELECT * FROM artistas WHERE tipo = 'artista'";
+    private final String todosLosArtistas = "SELECT * FROM artistas";
     private final String nuevoArtista = "INSERT INTO artistas (nickname, nombre, apellido, email, tipo, fechaNacimiento, descripcion, biografia, linkUsuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String modificarArtista = "UPDATE artistas SET nombre = ?, apellido = ?, fechaNacimiento = ?, linkUsuario = ?, descripcion = ?, biografia = ? WHERE id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
