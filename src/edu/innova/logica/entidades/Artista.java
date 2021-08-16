@@ -24,7 +24,7 @@ public class Artista extends Usuario {
         this.biografia = biografia;
         this.linkUsuario = linkUsuario;
     }
-
+    
     public String getDescripcion() {
         return descripcion;
     }

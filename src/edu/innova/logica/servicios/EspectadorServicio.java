@@ -20,6 +20,6 @@ public interface EspectadorServicio {
 
     public void altaUsuario(Usuario usuario) throws SQLException;
 
-    public void modificarUsuario(Usuario usuario) throws SQLException;
+    public void modificarUsuario(Usuario usuario);
 
 }

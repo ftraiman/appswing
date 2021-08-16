@@ -71,27 +71,30 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
     @Override
     public void modificarUsuario(Usuario usuario) {
-
-        if (usuario instanceof Espectador) {
-            try {
+        try {
+            if (usuario instanceof Espectador) {
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
                 espectadorServicio.modificarUsuario(espectador);
-            } catch (SQLException ex) {
-                throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
+            } else if (usuario instanceof Artista) {
+                Artista artista = (Artista) usuario;
+                validarParametrosModificarArtista(artista);
+                espectadorServicio.modificarUsuario(artista);
             }
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
     }
-    
+
     @Override
     public List<Espectador> getTodosLosEspectadores() {
         try {
             return espectadorServicio.getTodosLosEspectadores();
         } catch (BaseDeDatosException ex) {
-            throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
     }
-    
+
     @Override
     public List<Artista> getTodosLosArtistas() {
         try {
@@ -107,7 +110,11 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
     }
 
-    
+    private void validarParametrosModificarArtista(Artista artista) {
+        HelperStrings.stringNoVacio(artista.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(artista.getApellido(), "apellido");
+        HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
+        //TODO averiguar si hay que validar la biografia o la descripcion
+    }
 
-    
 }

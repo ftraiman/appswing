@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.EspectadorServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EspectadorServicioImpl implements EspectadorServicio {
 
@@ -107,14 +109,21 @@ public class EspectadorServicioImpl implements EspectadorServicio {
     //============================= ALTA ESPECTADOR =============================//
 
     //============================ MODIFICAR ESPECTADOR =========================//
-    public void modificarUsuario(Usuario usuario) throws SQLException {
+    @Override
+    public void modificarUsuario(Usuario usuario) {
 
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(modificarUsuario);
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(modificarUsuario);
+        
         sentencia.setString(1, usuario.getNombre());
         sentencia.setString(2, usuario.getApellido());
         sentencia.setDate(3, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
         sentencia.setLong(4, usuario.getId());
         sentencia.executeUpdate();
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
 
     }
     //============================ MODIFICAR ESPECTADOR =========================//
