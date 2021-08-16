@@ -1,5 +1,7 @@
 package edu.innova.persistencia;
 
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
+import edu.innova.exceptions.InnovaModelException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -24,6 +26,9 @@ public class ConexionDB {
                 conexion = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
                 System.err.println("Conexion exitosa a la DB");
             }
+        } catch (CommunicationsException e) {
+            System.err.println("Error al conectar a la DB");
+            throw new InnovaModelException(String.format("Error al conectar a la DB [%s]", e.getMessage()));
         } catch (Exception e) {
             System.err.println("Error al conectar a la DB");
             e.printStackTrace();

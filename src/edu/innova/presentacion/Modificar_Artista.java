@@ -21,15 +21,16 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
         initComponents();
         try {
             // Obtengo del EspectadorServicio todos los espectadores
-            List<Artista> artistas = fabrica.getArtistaServicioImpl().getTodosLosArtistas();
+            List<Artista> artistas = fabrica.getUsuarioControlador().getTodosLosArtistas();
             // Creo un DefaultListModel que almacena los objetos Espectador
             DefaultListModel<Artista> modelArtistas = new DefaultListModel<>();
             // Le cargo al JList el modelEspectadores
             listArtistas.setModel(modelArtistas);
             // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
             artistas.forEach(e -> modelArtistas.addElement(e));
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
+        } catch (InnovaModelException ex) {
+            JOptionPane.showMessageDialog(rootPane, String.format(ex.getMessage()));
+            this.dispose();
         }
     }
 

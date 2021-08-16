@@ -90,11 +90,22 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+    
+    @Override
+    public List<Artista> getTodosLosArtistas() {
+        try {
+            return artistaServicio.getTodosLosArtistas();
+        } catch (SQLException ex) {
+            throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+    }
 
     private void validarParametrosModificarEspectador(Espectador espectador) {
         HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
     }
+
+    
 
     
 }
