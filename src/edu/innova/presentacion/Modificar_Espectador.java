@@ -2,10 +2,8 @@ package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
-import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -284,7 +282,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         try {
             return Long.valueOf(id);
         } catch(NumberFormatException e) {
-            throw new IllegalArgumentException("Error al obtener el id"); //To change body of generated methods, choose Tools | Templates.
+            throw new IllegalArgumentException("id"); //To change body of generated methods, choose Tools | Templates.
         }               
     }
 
