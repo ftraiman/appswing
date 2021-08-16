@@ -23,6 +23,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Cliente = new javax.swing.JMenu();
         Artista = new javax.swing.JMenuItem();
         Espectador = new javax.swing.JMenuItem();
+        Espectaculo = new javax.swing.JMenu();
+        EspectaculoC = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -75,6 +77,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Cliente.add(Espectador);
 
         Registro.add(Cliente);
+
+        Espectaculo.setText("Espectaculo");
+
+        EspectaculoC.setText("Crear Espectaculo");
+        EspectaculoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EspectaculoCActionPerformed(evt);
+            }
+        });
+        Espectaculo.add(EspectaculoC);
+
+        Registro.add(Espectaculo);
 
         Menu.add(Registro);
 
@@ -129,15 +143,11 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Panel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Panel)
         );
 
         pack();
@@ -187,7 +197,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem_ArtistasActionPerformed
 
-    private void jMenuModificarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificarArtistaActionPerformed
+    private void EspectaculoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EspectaculoCActionPerformed
+        Registrar_Espectaculos re = new Registrar_Espectaculos();
+        this.Panel.add(re);
+        re.show();
+    }//GEN-LAST:event_EspectaculoCActionPerformed
+
+     private void jMenuModificarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificarArtistaActionPerformed
         Modificar_Artista ma = new Modificar_Artista();
         this.Panel.add(ma);
         ma.show();
@@ -223,6 +239,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Artista;
     private javax.swing.JMenu Cliente;
+    private javax.swing.JMenu Espectaculo;
+    private javax.swing.JMenuItem EspectaculoC;
     private javax.swing.JMenuItem Espectador;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JDesktopPane Panel;

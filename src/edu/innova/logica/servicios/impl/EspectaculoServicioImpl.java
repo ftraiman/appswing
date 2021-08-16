@@ -21,7 +21,7 @@ import edu.innova.logica.servicios.EspectadorServicio;
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaEspectaculo = "INSERT INTO espectaculos (idUsuario, idPlataforma, nombre, descripcion, duracion, espectadoresMinimos, url, costo, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";    
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
@@ -51,15 +51,17 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     @Override
     public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) throws SQLException {
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaEspectaculo);
-        sentencia.setLong(1, idArtista);
-        sentencia.setLong(2, idPlataforma);
-        sentencia.setString(3, espectaculo.getNombre());
-        sentencia.setString(4, espectaculo.getDescripcion());
-        sentencia.setInt(5, espectaculo.getDuracion());
-        sentencia.setInt(6, espectaculo.getEspectadoredMinimos());
-        sentencia.setString(7, espectaculo.getUrl());
-        sentencia.setBigDecimal(8, espectaculo.getCosto());
-        sentencia.setDate(9, new java.sql.Date(espectaculo.getFechaRegistro().getTime()));
+      
+        sentencia.setString(1, espectaculo.getNombre());
+        sentencia.setBigDecimal(2, espectaculo.getCosto());
+        sentencia.setString(3, espectaculo.getUrl());
+        sentencia.setInt(4, espectaculo.getDuracion());
+        sentencia.setString(5, espectaculo.getDescripcion());
+        sentencia.setDate(6, new java.sql.Date(espectaculo.getFechaRegistro().getTime()));
+        sentencia.setLong(7, idArtista);
+        sentencia.setLong(8, idPlataforma);
+        sentencia.setInt(9, espectaculo.getEspectadoresMinimos());
+        sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
         sentencia.executeUpdate();
     }
     //==================== AlTA DE ESPECTACULO ===================//
@@ -98,6 +100,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         String descripcion = rs.getString("descripcion");
         Integer duracion = rs.getInt("duracion");
         Integer espectadoresMinimos = rs.getInt("espectadoresMinimos");
+        Integer espectadoresMaximos = rs.getInt("espectadoresMaximos");
         String url = rs.getString("url");
         BigDecimal costo = rs.getBigDecimal("costo");
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");       
@@ -106,7 +109,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
         
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, url, costo, fechaRegistro, funciones);
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos,espectadoresMaximos, url, costo, fechaRegistro, funciones);
     }
 
 }

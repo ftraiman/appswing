@@ -4,6 +4,7 @@ import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
 import java.util.Date;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
@@ -178,6 +179,21 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         Date fecha = new Date(fn);
         
        
+       if(nombre!=null && "".equals(nombre.trim())){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
+       }else if(apellido!=null && "".equals(apellido.trim())){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
+       }else if(nickname!=null && "".equals(nickname.trim())){
+           JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
+       }else if(email!=null && "".equals(email.trim())){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
+       }else if((Integer)this.Dia.getValue() != null && (Integer)this.Dia.getValue() <= 0 ){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Dia en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
+       }else if((Integer)this.Mes.getValue() != null && (Integer)this.Mes.getValue() <= 0 ){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Mes en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
+       }else if((Integer)this.Año.getValue() != null && (Integer)this.Año.getValue() <= 0 ){
+           JOptionPane.showMessageDialog(null, "No se ingreso el Año en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
+       }else{
       fabrica.getUsuarioControladorImpl().altaUsuario(new Espectador(nickname,nombre,apellido,email,fecha));
       
       this.Nombretxt.setText("");
@@ -187,6 +203,8 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
       this.Dia.setValue(0);
       this.Mes.setValue(0);
       this.Año.setValue(0);
+      }
+      
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void NombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombretxtActionPerformed

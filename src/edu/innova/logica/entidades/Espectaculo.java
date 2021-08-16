@@ -12,7 +12,8 @@ public class Espectaculo {
     private Plataforma plataforma;
     private String descripcion;
     private Integer duracion;
-    private Integer espectadoredMinimos;
+    private Integer espectadoresMinimos;
+    private Integer espectadoresMaximos;
     private String url;
     private BigDecimal costo;
     private Date fechaRegistro;
@@ -21,25 +22,27 @@ public class Espectaculo {
     public Espectaculo() {
     }
 
-    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones) {
+    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos,Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones) {
         this.id = id;
         this.artista = artista;
         this.nombre = nombre;
         this.plataforma = plataforma;
         this.descripcion = descripcion;
         this.duracion = duracion;
-        this.espectadoredMinimos = espectadoredMinimos;
+        this.espectadoresMinimos = espectadoredMinimos;
+        this.espectadoresMaximos = espectadoresMaximos;
         this.url = url;
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
         this.funciones = funciones;
     }
 
-    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, String url, BigDecimal costo, Date fechaRegistro) {
+    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos,Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
-        this.espectadoredMinimos = espectadoredMinimos;
+        this.espectadoresMinimos = espectadoredMinimos;
+        this.espectadoresMaximos = espectadoresMaximos;
         this.url = url;
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
@@ -95,12 +98,20 @@ public class Espectaculo {
         this.duracion = duracion;
     }
 
-    public Integer getEspectadoredMinimos() {
-        return espectadoredMinimos;
+    public Integer getEspectadoresMinimos() {
+        return espectadoresMinimos;
     }
 
-    public void setEspectadoredMinimos(Integer espectadoredMinimos) {
-        this.espectadoredMinimos = espectadoredMinimos;
+    public void setEspectadoresMinimos(Integer espectadoresMinimos) {
+        this.espectadoresMinimos = espectadoresMinimos;
+    }
+    
+    public Integer getEspectadoresMaximos() {
+        return espectadoresMaximos;
+    }
+
+    public void setEspectadoresMaximos(Integer espectadoresMaximos) {
+        this.espectadoresMaximos = espectadoresMaximos;
     }
 
     public String getUrl() {
@@ -137,7 +148,7 @@ public class Espectaculo {
 
     @Override
     public String toString() {
-        return "Espectaculo{" + "id=" + id + ", artista=" + artista + ", nombre=" + nombre + ", plataforma=" + plataforma + ", descripcion=" + descripcion + ", duracion=" + duracion + ", espectadoredMinimos=" + espectadoredMinimos + ", url=" + url + ", costo=" + costo + ", fechaRegistro=" + fechaRegistro + ", funciones=" + funciones + '}';
+       return "Espectaculo{" + "id=" + id + ", artista=" + artista + ", nombre=" + nombre + ", plataforma=" + plataforma + ", descripcion=" + descripcion + ", duracion=" + duracion + ", espectadoresMinimos=" + espectadoresMinimos +", espectadoresMaximos=" + espectadoresMaximos +", url=" + url + ", costo=" + costo + ", fechaRegistro=" + fechaRegistro + ", funciones=" + funciones + '}';
     }
     
     
