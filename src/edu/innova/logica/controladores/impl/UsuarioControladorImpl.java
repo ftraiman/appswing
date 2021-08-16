@@ -1,5 +1,6 @@
 package edu.innova.logica.controladores.impl;
 
+import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
@@ -13,6 +14,7 @@ import edu.innova.logica.servicios.EspectadorServicio;
 import edu.innova.logica.servicios.impl.ArtistaServicioImpl;
 import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,7 +88,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     public List<Espectador> getTodosLosEspectadores() {
         try {
             return espectadorServicio.getTodosLosEspectadores();
-        } catch (SQLException ex) {
+        } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }

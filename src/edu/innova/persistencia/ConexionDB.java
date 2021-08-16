@@ -1,14 +1,15 @@
 package edu.innova.persistencia;
 
 import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
-import edu.innova.exceptions.InnovaModelException;
+import edu.innova.exceptions.BaseDeDatosException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConexionDB {
@@ -27,11 +28,11 @@ public class ConexionDB {
                 System.err.println("Conexion exitosa a la DB");
             }
         } catch (CommunicationsException e) {
-            System.err.println("Error al conectar a la DB");
-            throw new InnovaModelException(String.format("Error al conectar a la DB [%s]", e.getMessage()));
-        } catch (Exception e) {
-            System.err.println("Error al conectar a la DB");
-            e.printStackTrace();
+            throw new BaseDeDatosException(String.format("Error al conectar a la DB [%s]", e.getMessage()));
+        } catch (SQLException e) {
+            throw new BaseDeDatosException(e.getMessage());
+        } catch (IOException ex) {
+            throw new BaseDeDatosException("Error al encontrar el archivo de configuracion");
         }
     }
     

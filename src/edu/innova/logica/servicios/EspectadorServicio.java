@@ -16,7 +16,7 @@ public interface EspectadorServicio {
 
     public Usuario getUsuarioPorNickName(String nickname) throws SQLException;
 
-    public List<Espectador> getTodosLosEspectadores() throws SQLException;
+    public List<Espectador> getTodosLosEspectadores();
 
     public void altaUsuario(Usuario usuario) throws SQLException;
 

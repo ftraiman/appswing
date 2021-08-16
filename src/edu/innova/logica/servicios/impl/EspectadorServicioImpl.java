@@ -1,5 +1,6 @@
 package edu.innova.logica.servicios.impl;
 
+import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import edu.innova.persistencia.ConexionDB;
@@ -70,13 +71,16 @@ public class EspectadorServicioImpl implements EspectadorServicio {
 
     //================== OBTENER LA LISTA DE TODOS LOS USUARIOS ==============//
     @Override
-    public List<Espectador> getTodosLosEspectadores() throws SQLException {
+    public List<Espectador> getTodosLosEspectadores() {
         List<Espectador> espectadores = new ArrayList<>();
-
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectadores);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            espectadores.add(espectadorMapper(rs));
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectadores);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectadores.add(espectadorMapper(rs));
+            }
+        } catch (SQLException e) {
+            throw new BaseDeDatosException(e.getMessage(),e.getCause());
         }
         return espectadores;
     }
