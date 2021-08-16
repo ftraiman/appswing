@@ -17,31 +17,35 @@ import edu.innova.logica.servicios.impl.ArtistaServicioImpl;
  * @author henry
  */
 public class Fabrica {
+
     private static Fabrica instancia;
-    
+
     public static Fabrica getInstance() {
         if (instancia == null) {
             instancia = new Fabrica();
         }
         return instancia;
     }
+
     //Obtener instancia de UsuarioServicioImpl
-    public EspectadorServicio getEspectadorServicioImpl() 
-    {
+    public EspectadorServicio getEspectadorServicioImpl() {
         EspectadorServicio cont = new EspectadorServicioImpl();
         return cont;
     }
+
     //Obtener instancia de UsuarioControladorImpl
-    public UsuarioControlador getUsuarioControladorImpl() 
-    {
+    public UsuarioControlador getUsuarioControladorImpl() {
         UsuarioControlador cont = new UsuarioControladorImpl();
         return cont;
     }
-    
-    public ArtistaServicio getArtistaServicioImpl()
-    {
+
+    public ArtistaServicio getArtistaServicioImpl() {
         ArtistaServicio cont = new ArtistaServicioImpl();
         return cont;
     }
     
+    public UsuarioControlador getUsuarioControlador() {
+        return new UsuarioControladorImpl();
+    }
+
 }

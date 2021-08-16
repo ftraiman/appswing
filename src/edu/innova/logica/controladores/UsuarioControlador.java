@@ -5,7 +5,9 @@
  */
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
+import java.util.List;
 
 /**
  *
@@ -14,5 +16,9 @@ import edu.innova.logica.entidades.Usuario;
 public interface UsuarioControlador  {
     
     public abstract void altaUsuario(Usuario usuario);
+    
+    void modificarUsuario(Usuario usuario);
+    
+    List<Espectador> getTodosLosEspectadores();
     
 }

@@ -4,6 +4,7 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
+import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -12,24 +13,23 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class Modificar_Espectador extends javax.swing.JInternalFrame {
+public class Modificar_Artista extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
 
-    public Modificar_Espectador() {
+    public Modificar_Artista() {
         initComponents();
         try {
             // Obtengo del EspectadorServicio todos los espectadores
-            List<Espectador> espectadores = fabrica.getUsuarioControlador().getTodosLosEspectadores();
+            List<Artista> artistas = fabrica.getArtistaServicioImpl().getTodosLosArtistas();
             // Creo un DefaultListModel que almacena los objetos Espectador
-            DefaultListModel<Espectador> modelEspectadores = new DefaultListModel<>();
+            DefaultListModel<Artista> modelArtistas = new DefaultListModel<>();
             // Le cargo al JList el modelEspectadores
-            listEspectador.setModel(modelEspectadores);
+            listArtistas.setModel(modelArtistas);
             // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
-            espectadores.forEach(e -> modelEspectadores.addElement(e));
-        } catch (InnovaModelException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format(ex.getMessage()));
-            this.dispose();
+            artistas.forEach(e -> modelArtistas.addElement(e));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
 
@@ -38,7 +38,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listEspectador = new javax.swing.JList<>();
+        listArtistas = new javax.swing.JList<>();
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
         lblNickname = new javax.swing.JLabel();
@@ -68,12 +68,12 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        listEspectador.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        listArtistas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listEspectadorValueChanged(evt);
+                listArtistasValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(listEspectador);
+        jScrollPane1.setViewportView(listArtistas);
 
         lblNombre.setText("Nombre");
 
@@ -203,22 +203,22 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listEspectadorValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEspectadorValueChanged
+    private void listArtistasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listArtistasValueChanged
         // Al seleccionarse un Espectador del JList, se cargan en la pantalla sus datos 
-        Espectador espectadorSeleccionado = listEspectador.getSelectedValue();
-        this.txtId.setText(String.valueOf(espectadorSeleccionado.getId()));
-        this.txtNombre.setText(espectadorSeleccionado.getNombre());
-        this.txtApellido.setText(espectadorSeleccionado.getApellido());
-        this.txtNickname.setText(espectadorSeleccionado.getNickname());
-        this.txtEmail.setText(espectadorSeleccionado.getEmail());
+        Artista artistaSeleccionado = listArtistas.getSelectedValue();
+        this.txtId.setText(String.valueOf(artistaSeleccionado.getId()));
+        this.txtNombre.setText(artistaSeleccionado.getNombre());
+        this.txtApellido.setText(artistaSeleccionado.getApellido());
+        this.txtNickname.setText(artistaSeleccionado.getNickname());
+        this.txtEmail.setText(artistaSeleccionado.getEmail());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(espectadorSeleccionado.getFechaNacimiento());
+        calendar.setTime(artistaSeleccionado.getFechaNacimiento());
         this.spnDia.setValue(calendar.get(Calendar.DAY_OF_MONTH));
         this.spnMes.setValue(calendar.get(Calendar.MONTH));
         this.spnAnio.setValue(calendar.get(Calendar.YEAR));
 
-    }//GEN-LAST:event_listEspectadorValueChanged
+    }//GEN-LAST:event_listArtistasValueChanged
 
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
         // Al presionar el boton actualizar, obtengo todos los datos del Usuario
@@ -268,7 +268,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JList<Espectador> listEspectador;
+    private javax.swing.JList<Artista> listArtistas;
     private javax.swing.JSpinner spnAnio;
     private javax.swing.JSpinner spnDia;
     private javax.swing.JSpinner spnMes;

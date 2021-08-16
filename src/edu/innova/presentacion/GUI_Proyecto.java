@@ -29,6 +29,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenuItem_Artistas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuModificarArtista = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -112,6 +113,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         });
         jMenu2.add(jCheckBoxMenuItem1);
 
+        jMenuModificarArtista.setText("Artista");
+        jMenuModificarArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuModificarArtistaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuModificarArtista);
+
         Menu.add(jMenu2);
 
         setJMenuBar(Menu);
@@ -174,6 +183,12 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem_ArtistasActionPerformed
 
+    private void jMenuModificarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificarArtistaActionPerformed
+        Modificar_Artista ma = new Modificar_Artista();
+        this.Panel.add(ma);
+        ma.show();
+    }//GEN-LAST:event_jMenuModificarArtistaActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -200,6 +215,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Artista;
     private javax.swing.JMenu Cliente;
@@ -215,5 +231,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenu jMenu_Usuarios;
+    private javax.swing.JMenuItem jMenuModificarArtista;
     // End of variables declaration//GEN-END:variables
 }

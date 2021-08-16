@@ -1,5 +1,6 @@
 package edu.innova.helpers;
 
+import edu.innova.exceptions.InnovaModelException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -45,6 +46,13 @@ public class HelperFecha {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Fecha invalida");
         }
+    }
+    
+    public static void validarFechaAnteriorALaActual(Date fecha) {
+        if(fecha.compareTo(new Date()) > 0) {
+            throw new InnovaModelException("La fecha ingresada es posterior a la fecha actual");
+        }
+                
     }
 
     public static void main(String[] args) {
