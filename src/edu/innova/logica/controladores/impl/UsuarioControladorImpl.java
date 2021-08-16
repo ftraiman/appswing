@@ -76,7 +76,6 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             try {
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
-                HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
                 espectadorServicio.modificarUsuario(espectador);
             } catch (SQLException ex) {
                 throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
@@ -105,6 +104,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     private void validarParametrosModificarEspectador(Espectador espectador) {
         HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
+        HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
     }
 
     

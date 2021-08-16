@@ -222,17 +222,18 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
         // Al presionar el boton actualizar, obtengo todos los datos del Usuario
-        Long id = Long.valueOf(this.txtId.getText());
-        String nombre = this.txtNombre.getText();
-        String apellido = this.txtApellido.getText();
-        String nickname = this.txtNickname.getText();
-        String email = this.txtEmail.getText();
-
-        String dia = this.spnDia.getValue().toString();
-        String mes = this.spnMes.getValue().toString();
-        String anio = this.spnAnio.getValue().toString();
-
         try {
+            
+            Long id = getLongValue(this.txtId.getText());
+            String nombre = this.txtNombre.getText();
+            String apellido = this.txtApellido.getText();
+            String nickname = this.txtNickname.getText();
+            String email = this.txtEmail.getText();
+
+            String dia = this.spnDia.getValue().toString();
+            String mes = this.spnMes.getValue().toString();
+            String anio = this.spnAnio.getValue().toString();
+
             // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
             // Se carga el objeto para ser actualizado
@@ -278,5 +279,13 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNickname;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private Long getLongValue(String id) {
+        try {
+            return Long.valueOf(id);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("Error al obtener el id"); //To change body of generated methods, choose Tools | Templates.
+        }               
+    }
 
 }
