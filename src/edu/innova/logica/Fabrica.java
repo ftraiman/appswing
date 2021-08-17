@@ -7,8 +7,10 @@ package edu.innova.logica;
 
 import edu.innova.logica.controladores.EspectaculoControlador;
 import edu.innova.logica.controladores.PaqueteControlador;
+import edu.innova.logica.controladores.PlataformaControlador;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.controladores.impl.EspectaculosControladorImpl;
+import edu.innova.logica.controladores.impl.PlataformaControladorImpl;
 import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
 import edu.innova.logica.servicios.ArtistaServicio;
@@ -55,6 +57,10 @@ public class Fabrica {
     public PlataformaServicio getPlataformaServicioImpl() {
         PlataformaServicio cont = new PlataformaServicioImpl();
         return cont;
+    }
+    
+    public PlataformaControlador getPlataformaControlador() {
+        return new PlataformaControladorImpl();
     }
 
     public EspectaculoServicio getEspectaculoServicioImpl() {

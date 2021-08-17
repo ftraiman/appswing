@@ -62,4 +62,10 @@ public class PlataformaServicioImpl implements PlataformaServicio {
     private Plataforma plataformaMapper(ResultSet rs) throws SQLException {
         return new Plataforma(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), rs.getString("url"));
     }
+
+    @Override
+    public void altaPlataforma(String nombre, String descripcion, String url) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

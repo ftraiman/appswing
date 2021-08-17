@@ -24,6 +24,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Espectador = new javax.swing.JMenuItem();
         Espectaculo = new javax.swing.JMenu();
         EspectaculoC = new javax.swing.JMenuItem();
+        Plataforma = new javax.swing.JMenu();
+        Plataforma1 = new javax.swing.JMenuItem();
         jMenuItemPaquete = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
@@ -96,6 +98,19 @@ public class GUI_Proyecto extends javax.swing.JFrame {
                 jMenuItemPaqueteActionPerformed(evt);
             }
         });
+        
+        Plataforma.setText("Plataforma");
+
+        Plataforma1.setText("Crear Plataforma");
+        Plataforma1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Plataforma1ActionPerformed(evt);
+            }
+        });
+        
+        Plataforma.add(Plataforma1);
+
+        Registro.add(Plataforma);
         Registro.add(jMenuItemPaquete);
 
         Menu.add(Registro);
@@ -217,11 +232,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         ma.show();
     }//GEN-LAST:event_jMenuModificarArtistaActionPerformed
 
+    private void Plataforma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Plataforma1ActionPerformed
+        Registrar_Plataforma rp = new Registrar_Plataforma();
+        this.Panel.add(rp);
+        rp.show();
+    }//GEN-LAST:event_Plataforma1ActionPerformed
+
     private void jMenuItemPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPaqueteActionPerformed
         Registrar_Paquete rp = new Registrar_Paquete();
         this.Panel.add(rp);
         rp.show();
     }//GEN-LAST:event_jMenuItemPaqueteActionPerformed
+    
 
     public static void main(String args[]) {
 
@@ -258,6 +280,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem Espectador;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JDesktopPane Panel;
+    private javax.swing.JMenu Plataforma;
+    private javax.swing.JMenuItem Plataforma1;
     private javax.swing.JMenu Registro;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;

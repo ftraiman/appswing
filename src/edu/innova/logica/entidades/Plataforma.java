@@ -16,6 +16,12 @@ public class Plataforma {
         this.descripcion = descripcion;
         this.url = url;
     }
+    
+      public Plataforma(String nombre, String descripcion, String url) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.url = url;
+    }
 
     public Long getId() {
         return id;
