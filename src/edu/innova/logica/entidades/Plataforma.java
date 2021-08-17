@@ -53,7 +53,7 @@ public class Plataforma {
 
     @Override
     public String toString() {
-        return "Plataforma{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", url=" + url + '}';
+        return new StringBuffer(nombre).append(" (").append(id).append(")").toString();
     }
 
 }

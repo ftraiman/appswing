@@ -1,5 +1,7 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
@@ -14,14 +16,13 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
-    
- private Fabrica fabrica = new Fabrica();
+
+    private Fabrica fabrica = new Fabrica();
 
     public Registrar_Espectaculos() {
         initComponents();
-        
+
         try {
             // Obtengo del Plataforma Servicio las plataformas
             List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
@@ -34,8 +35,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
-        
-        
+
         try {
             // Obtengo del Plataforma Servicio las plataformas
             List<Artista> plat = fabrica.getArtistaServicioImpl().getTodosLosArtistas();
@@ -48,10 +48,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
-        
-        
-    }
 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,6 +152,11 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         });
 
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,7 +192,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -301,7 +304,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         this.txtNombre.setText(plata.getNombre());
         this.txtDesc.setText(plata.getDescripcion());
         this.txtURL.setText(plata.getUrl());
-      
+
     }//GEN-LAST:event_listPlataformaValueChanged
 
     private void listArtistaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listArtistaValueChanged
@@ -311,45 +314,46 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listArtistaValueChanged
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-          Fabrica fabrica = new Fabrica();
-        
-        String nombre = this.Nombre.getText();
-        String duracion = this.Duracion.getText();
-        String espectadoresMinimos = this.EspMin.getText();
-        String espectadoresMaximos = this.EspMax.getText();
-        String costo = this.Costo.getText();
-        String fecha = this.Fecha.getText();
-       
-        BigDecimal cost = new BigDecimal(costo);
-        
-      if(nombre!=null && "".equals(nombre.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
-       }else if(duracion!=null && "".equals(duracion.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
-       }else if(espectadoresMinimos!=null && "".equals(espectadoresMinimos.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
-       }else if(espectadoresMaximos!=null && "".equals(espectadoresMaximos.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
-       }else if(costo!=null && "".equals(costo.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
-       }else{
-           
-              try {
-                  fabrica.getEspectaculoServicioImpl().altaEspectaculo(Long.parseLong(this.txtIda.getText()), Long.parseLong(this.txtId.getText()), new Espectaculo(nombre,txtDesc.getText(), Integer.parseInt(duracion), Integer.parseInt(espectadoresMinimos),Integer.parseInt(espectadoresMaximos),txtURL.getText(),cost, new Date(fecha)));
-              } catch (SQLException ex) {
-                  Logger.getLogger(Registrar_Espectaculos.class.getName()).log(Level.SEVERE, null, ex);
-              }
 
-      this.Nombre.setText("");
-      this.Duracion.setText("");
-      this.EspMin.setText("");
-      this.EspMax.setText("");
-      this.Costo.setText("");
-      this.Fecha.setText("");
-       }
-      
+        try {
+            Long idArtista = HelperStrings.getLongValue(this.txtIda.getText());
+            Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText());
+            String nombre = this.Nombre.getText();
+            Integer duracion = HelperStrings.getIntValue(this.Duracion.getText(), "duracion");
+            Integer espectadoresMinimos = HelperStrings.getIntValue(this.EspMin.getText(), "espectadores mínimos");
+            Integer espectadoresMaximos = HelperStrings.getIntValue(this.EspMax.getText(), "espectadores máximos");
+            BigDecimal costo = HelperStrings.getBigDecimalValue(this.Costo.getText());
+
+            String descripcion = txtDesc.getText();
+            String url = txtURL.getText();
+
+            //Al pedo?
+            String fecha = this.Fecha.getText();
+
+            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, new Date());
+
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
+
+            if (i == JOptionPane.YES_OPTION) {
+                fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo");
+                this.dispose();
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+        } catch (InnovaModelException ex) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error de capa lógica [%s]", ex.getMessage()));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error inesperado", ex.getMessage()));
+        }
     }//GEN-LAST:event_AceptarActionPerformed
-    
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
@@ -386,4 +390,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreA;
     private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
+
+    private void validarFecha(String fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

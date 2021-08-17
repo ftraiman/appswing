@@ -1,5 +1,8 @@
 package edu.innova.logica.servicios.impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import edu.innova.exceptions.BaseDeDatosException;
+import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Funcion;
@@ -17,13 +20,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.EspectadorServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
-    private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";    
+    private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -49,23 +54,30 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //==================== AlTA DE ESPECTACULO ===================//
     @Override
-    public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) throws SQLException {
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaEspectaculo);
-      
-        sentencia.setString(1, espectaculo.getNombre());
-        sentencia.setBigDecimal(2, espectaculo.getCosto());
-        sentencia.setString(3, espectaculo.getUrl());
-        sentencia.setInt(4, espectaculo.getDuracion());
-        sentencia.setString(5, espectaculo.getDescripcion());
-        sentencia.setDate(6, new java.sql.Date(espectaculo.getFechaRegistro().getTime()));
-        sentencia.setLong(7, idArtista);
-        sentencia.setLong(8, idPlataforma);
-        sentencia.setInt(9, espectaculo.getEspectadoresMinimos());
-        sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
-        sentencia.executeUpdate();
+    public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(altaEspectaculo);
+            sentencia.setString(1, espectaculo.getNombre());
+            sentencia.setBigDecimal(2, espectaculo.getCosto());
+            sentencia.setString(3, espectaculo.getUrl());
+            sentencia.setInt(4, espectaculo.getDuracion());
+            sentencia.setString(5, espectaculo.getDescripcion());
+            sentencia.setDate(6, new java.sql.Date(espectaculo.getFechaRegistro().getTime()));
+            sentencia.setLong(7, idArtista);
+            sentencia.setLong(8, idPlataforma);
+            sentencia.setInt(9, espectaculo.getEspectadoresMinimos());
+            sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
+            sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]",espectaculo.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+
     }
     //==================== AlTA DE ESPECTACULO ===================//
-    
+
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
     public Espectaculo getEspectaculoPorId(Long idEspectaculo) throws SQLException {
@@ -91,8 +103,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return espectaculos;
     }
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
-    
-    
+
     private Espectaculo espectaculoMapper(ResultSet rs) throws SQLException {
 
         Long id = rs.getLong("id");
@@ -103,13 +114,13 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Integer espectadoresMaximos = rs.getInt("espectadoresMaximos");
         String url = rs.getString("url");
         BigDecimal costo = rs.getBigDecimal("costo");
-        Date fechaRegistro = rs.getTimestamp("fechaRegistro");       
+        Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         Artista artista = (Artista) usuarioServicio.getUsuarioPorId(rs.getLong("idUsuario"));
         Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
-        
+
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
-        
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos,espectadoresMaximos, url, costo, fechaRegistro, funciones);
+
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones);
     }
 
 }

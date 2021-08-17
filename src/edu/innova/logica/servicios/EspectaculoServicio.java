@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EspectaculoServicio {
 
-    void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) throws SQLException;
+    void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo);
 
     List<Espectaculo> getTodosLosEspectaculos() throws SQLException;
     

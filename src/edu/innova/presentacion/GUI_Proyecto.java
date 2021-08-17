@@ -3,7 +3,6 @@ package edu.innova.presentacion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 
 public class GUI_Proyecto extends javax.swing.JFrame {
 

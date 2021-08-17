@@ -1,6 +1,8 @@
 package edu.innova.helpers;
 
+import com.sun.javafx.binding.StringFormatter;
 import edu.innova.exceptions.InnovaModelException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,9 +22,9 @@ public class HelperFecha {
             return calendar.getTime();
 
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Numeros de fecha inválida");
+            throw new IllegalArgumentException("Numeros de fecha inválida", e.getCause());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Fecha invalida");
+            throw new IllegalArgumentException("Fecha invalida", e.getCause());
         }
     }
 
@@ -42,7 +44,7 @@ public class HelperFecha {
             return calendar.getTime();
 
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Numeros de fecha inválida");
+            throw new IllegalArgumentException("Numeros de fecha inválida", e.getCause());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Fecha invalida");
         }
@@ -51,9 +53,17 @@ public class HelperFecha {
     public static void validarFechaAnteriorALaActual(Date fecha) {
         if(fecha.compareTo(new Date()) > 0) {
             throw new InnovaModelException("La fecha ingresada es posterior a la fecha actual");
-        }
-                
+        }   
     }
+    
+    public static Date validarFecha(String fecha, String formato) {
+        //"dd/MM/yyyy"
+        try {
+            return new SimpleDateFormat(formato).parse(fecha);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Fecha invalida", e.getCause());
+        }
+    } 
 
     public static void main(String[] args) {
         String dia = "30";
