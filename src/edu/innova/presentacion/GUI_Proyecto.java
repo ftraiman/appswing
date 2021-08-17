@@ -24,6 +24,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Espectador = new javax.swing.JMenuItem();
         Espectaculo = new javax.swing.JMenu();
         EspectaculoC = new javax.swing.JMenuItem();
+        jMenuItemPaquete = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -88,6 +89,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Espectaculo.add(EspectaculoC);
 
         Registro.add(Espectaculo);
+
+        jMenuItemPaquete.setText("Paquete");
+        jMenuItemPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPaqueteActionPerformed(evt);
+            }
+        });
+        Registro.add(jMenuItemPaquete);
 
         Menu.add(Registro);
 
@@ -208,6 +217,12 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         ma.show();
     }//GEN-LAST:event_jMenuModificarArtistaActionPerformed
 
+    private void jMenuItemPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPaqueteActionPerformed
+        Registrar_Paquete rp = new Registrar_Paquete();
+        this.Panel.add(rp);
+        rp.show();
+    }//GEN-LAST:event_jMenuItemPaqueteActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -249,6 +264,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemPaquete;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenuItem jMenuModificarArtista;

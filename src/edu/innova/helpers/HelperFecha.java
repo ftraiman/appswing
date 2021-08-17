@@ -1,6 +1,5 @@
 package edu.innova.helpers;
 
-import com.sun.javafx.binding.StringFormatter;
 import edu.innova.exceptions.InnovaModelException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,6 +52,12 @@ public class HelperFecha {
     public static void validarFechaAnteriorALaActual(Date fecha) {
         if(fecha.compareTo(new Date()) > 0) {
             throw new InnovaModelException("La fecha ingresada es posterior a la fecha actual");
+        }   
+    }
+    
+    public static void validarFechaPosteriorALaActual(Date fecha, String nombreParametro) {
+        if(fecha.compareTo(new Date()) < 0) {
+            throw new InnovaModelException(String.format("La fecha ingresada [%s] es anterior a la fecha actual", nombreParametro));
         }   
     }
     

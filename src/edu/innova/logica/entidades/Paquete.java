@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.innova.logica.entidades;
 
 import java.math.BigDecimal;
@@ -19,6 +14,26 @@ public class Paquete {
     private BigDecimal descuento;
     private List<Espectaculo> espectaculos;
 
+    public Paquete(String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descuento = descuento;
+    }
+
+    public Paquete(Long id, String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento, List<Espectaculo> espectaculos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descuento = descuento;
+        this.espectaculos = espectaculos;
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }
