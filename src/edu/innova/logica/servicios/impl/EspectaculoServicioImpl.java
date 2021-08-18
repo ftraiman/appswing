@@ -7,6 +7,7 @@ import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Plataforma;
+import edu.innova.logica.servicios.ArtistaServicio;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
@@ -35,7 +36,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     //OBTENER LA CONEXION A LA BASE DE DATOS
     private ConexionDB conexion = new ConexionDB();
 
-    private EspectadorServicio usuarioServicio = new EspectadorServicioImpl().getInstance();
+    private ArtistaServicio usuarioServicio = new ArtistaServicioImpl().getInstance();
     private PlataformaServicio plataformaServicio = new PlataformaServicioImpl().getInstance();
     private FuncionServicio funcionServicio = new FuncionServicioImpl().getInstance();
 

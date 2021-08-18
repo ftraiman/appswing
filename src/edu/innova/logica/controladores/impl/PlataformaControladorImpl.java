@@ -47,9 +47,9 @@ public class PlataformaControladorImpl implements PlataformaControlador{
     }
 
     private void validarNuevaPlataforma(Plataforma plataforma) {
-        if (plataforma.getNombre() == null) {
+        /*if (plataforma.getNombre() == null) {
             throw new InnovaModelException("La plataforma es inválida");
-        }
+        }*/
         
         HelperStrings.stringNoVacio(plataforma.getNombre(), "nombre");
               

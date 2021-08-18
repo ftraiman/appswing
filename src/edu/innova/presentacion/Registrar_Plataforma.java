@@ -33,6 +33,8 @@ public class Registrar_Plataforma extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setTitle("Registrar Plataforma");
+
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Descripcion:");

@@ -67,14 +67,15 @@ public class Fabrica {
         EspectaculoServicio cont = new EspectaculoServicioImpl();
         return cont;
     }
+    
+    public EspectaculoControlador getEspectaculoControlador() {
+        return new EspectaculosControladorImpl();
+    } 
 
     public UsuarioControlador getUsuarioControlador() {
         return new UsuarioControladorImpl();
     }
     
-    public EspectaculoControlador getEspectaculoControlador() {
-        return new EspectaculosControladorImpl();
-    } 
     
     public PaqueteControlador getPaqueteControlador() {
         return new PaqueteControladorImpl().getInstance();

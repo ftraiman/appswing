@@ -31,6 +31,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
         jMenuItem_Artistas = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuModificarArtista = new javax.swing.JMenuItem();
@@ -92,13 +94,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         Registro.add(Espectaculo);
 
-        jMenuItemPaquete.setText("Paquete");
-        jMenuItemPaquete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemPaqueteActionPerformed(evt);
-            }
-        });
-        
         Plataforma.setText("Plataforma");
 
         Plataforma1.setText("Crear Plataforma");
@@ -107,10 +102,16 @@ public class GUI_Proyecto extends javax.swing.JFrame {
                 Plataforma1ActionPerformed(evt);
             }
         });
-        
         Plataforma.add(Plataforma1);
 
         Registro.add(Plataforma);
+
+        jMenuItemPaquete.setText("Paquete");
+        jMenuItemPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPaqueteActionPerformed(evt);
+            }
+        });
         Registro.add(jMenuItemPaquete);
 
         Menu.add(Registro);
@@ -136,6 +137,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu_Usuarios.add(jMenuItem_Artistas);
 
         jMenu3.add(jMenu_Usuarios);
+
+        jMenu4.setText("Consultar Espectaculo");
+
+        jMenuItem2.setText("Espectaculo");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        jMenu3.add(jMenu4);
 
         Menu.add(jMenu3);
 
@@ -243,6 +256,19 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         this.Panel.add(rp);
         rp.show();
     }//GEN-LAST:event_jMenuItemPaqueteActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        try {
+            Todos_Los_Espectaculos te;
+            te = new Todos_Los_Espectaculos();
+            this.Panel.add(te);
+            te.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     
 
     public static void main(String args[]) {
@@ -287,7 +313,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemPaquete;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
