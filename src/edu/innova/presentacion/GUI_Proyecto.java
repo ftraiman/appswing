@@ -26,8 +26,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         EspectaculoC = new javax.swing.JMenuItem();
         Plataforma = new javax.swing.JMenu();
         Plataforma1 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        Paquete = new javax.swing.JMenu();
+        Crear_Paquete = new javax.swing.JMenuItem();
+        Agregar_Espectaculo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -107,17 +108,25 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         Registro.add(Plataforma);
 
-        jMenu5.setText("Paquete");
+        Paquete.setText("Paquete");
 
-        jMenuItem3.setText("Crear Paquete");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        Crear_Paquete.setText("Crear Paquete");
+        Crear_Paquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                Crear_PaqueteActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem3);
+        Paquete.add(Crear_Paquete);
 
-        Registro.add(jMenu5);
+        Agregar_Espectaculo.setText("Asignar Espectaculo");
+        Agregar_Espectaculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Agregar_EspectaculoActionPerformed(evt);
+            }
+        });
+        Paquete.add(Agregar_Espectaculo);
+
+        Registro.add(Paquete);
 
         Menu.add(Registro);
 
@@ -262,17 +271,21 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void Crear_PaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Crear_PaqueteActionPerformed
         Registrar_Paquete rp = new Registrar_Paquete();
         this.Panel.add(rp);
         rp.show();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_Crear_PaqueteActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Modificar_Espectador me = new Modificar_Espectador();
         this.Panel.add(me);
         me.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void Agregar_EspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_EspectaculoActionPerformed
+        
+    }//GEN-LAST:event_Agregar_EspectaculoActionPerformed
     
 
     public static void main(String args[]) {
@@ -303,13 +316,16 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Agregar_Espectaculo;
     private javax.swing.JMenuItem Artista;
     private javax.swing.JMenu Cliente;
+    private javax.swing.JMenuItem Crear_Paquete;
     private javax.swing.JMenu Espectaculo;
     private javax.swing.JMenuItem EspectaculoC;
     private javax.swing.JMenuItem Espectador;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JDesktopPane Panel;
+    private javax.swing.JMenu Paquete;
     private javax.swing.JMenu Plataforma;
     private javax.swing.JMenuItem Plataforma1;
     private javax.swing.JMenu Registro;
@@ -317,10 +333,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
