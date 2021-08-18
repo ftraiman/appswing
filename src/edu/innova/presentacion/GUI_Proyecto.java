@@ -284,7 +284,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void Agregar_EspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_EspectaculoActionPerformed
-        
+        Registrar_Espectaculo_en_Paquete rep = new Registrar_Espectaculo_en_Paquete();
+        this.Panel.add(rep);
+        rep.show();
     }//GEN-LAST:event_Agregar_EspectaculoActionPerformed
     
 
