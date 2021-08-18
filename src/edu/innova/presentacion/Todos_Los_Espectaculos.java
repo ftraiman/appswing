@@ -93,6 +93,9 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Espectaculo = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setTitle("Todos Los Espectaculos");
 
         Tabla_Espectaculo.setModel(new javax.swing.table.DefaultTableModel(

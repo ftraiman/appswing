@@ -26,7 +26,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         EspectaculoC = new javax.swing.JMenuItem();
         Plataforma = new javax.swing.JMenu();
         Plataforma1 = new javax.swing.JMenuItem();
-        jMenuItemPaquete = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -34,8 +35,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuModificarArtista = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -106,19 +107,23 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         Registro.add(Plataforma);
 
-        jMenuItemPaquete.setText("Paquete");
-        jMenuItemPaquete.addActionListener(new java.awt.event.ActionListener() {
+        jMenu5.setText("Paquete");
+
+        jMenuItem3.setText("Crear Paquete");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemPaqueteActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        Registro.add(jMenuItemPaquete);
+        jMenu5.add(jMenuItem3);
+
+        Registro.add(jMenu5);
 
         Menu.add(Registro);
 
         jMenu3.setText("Consultas");
 
-        jMenu_Usuarios.setText("Consultar usuarios");
+        jMenu_Usuarios.setText("Consultar Usuarios");
 
         jMenuItem_Espectador.setText("Espectador");
         jMenuItem_Espectador.addActionListener(new java.awt.event.ActionListener() {
@@ -154,15 +159,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         jMenu2.setText("Modificar");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Espectador");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jCheckBoxMenuItem1);
-
         jMenuModificarArtista.setText("Artista");
         jMenuModificarArtista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +166,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuModificarArtista);
+
+        jMenuItem4.setText("Espectador");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
 
         Menu.add(jMenu2);
 
@@ -205,12 +209,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         this.Panel.add(ra);
         ra.show();
     }//GEN-LAST:event_ArtistaActionPerformed
-
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        Modificar_Espectador me = new Modificar_Espectador();
-        this.Panel.add(me);
-        me.show();
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jMenuItem_EspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_EspectadorActionPerformed
         try {
@@ -251,12 +249,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         rp.show();
     }//GEN-LAST:event_Plataforma1ActionPerformed
 
-    private void jMenuItemPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPaqueteActionPerformed
-        Registrar_Paquete rp = new Registrar_Paquete();
-        this.Panel.add(rp);
-        rp.show();
-    }//GEN-LAST:event_jMenuItemPaqueteActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         
         try {
@@ -269,6 +261,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Registrar_Paquete rp = new Registrar_Paquete();
+        this.Panel.add(rp);
+        rp.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Modificar_Espectador me = new Modificar_Espectador();
+        this.Panel.add(me);
+        me.show();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     
 
     public static void main(String args[]) {
@@ -309,14 +313,15 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu Plataforma;
     private javax.swing.JMenuItem Plataforma1;
     private javax.swing.JMenu Registro;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItemPaquete;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenuItem jMenuModificarArtista;
