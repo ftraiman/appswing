@@ -3,27 +3,11 @@ package edu.innova.logica.servicios.impl;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
-import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Paquete;
-import edu.innova.logica.entidades.Plataforma;
-import edu.innova.logica.servicios.EspectaculoServicio;
-import edu.innova.logica.servicios.FuncionServicio;
-import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.persistencia.ConexionDB;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import edu.innova.logica.servicios.EspectadorServicio;
 import edu.innova.logica.servicios.PaqueteServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PaqueteServicioImpl implements PaqueteServicio {
 

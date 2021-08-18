@@ -210,9 +210,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // Al presionar el boton actualizar, obtengo todos los datos del Usuario
         try {
-
             String nombre = this.txtNombre.getText();
             String descripcion = this.txtDescripcion.getText();
             BigDecimal descuento = HelperStrings.getBigDecimalValue(this.txtDescuento.getText());
