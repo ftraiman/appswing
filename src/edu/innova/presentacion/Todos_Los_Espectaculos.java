@@ -17,7 +17,7 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
     public Todos_Los_Espectaculos() throws SQLException {
         initComponents();
       
-         //Crear el modelo de la tabla
+        //Crear el modelo de la tabla
         DefaultTableModel tabla = new DefaultTableModel();
         //Defino las columnas que quiero
         tabla.addColumn("Nombre");  

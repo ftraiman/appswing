@@ -4,17 +4,25 @@ import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.entidades.Paquete;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import edu.innova.logica.servicios.PaqueteServicio;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PaqueteServicioImpl implements PaqueteServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento) VALUES (?, ?, ?, ?, ?)";
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
+    private final String todosLosPaquetes = "SELECT * FROM paquetes";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     private static PaqueteServicioImpl servicio;
@@ -63,9 +71,34 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+    
 
     public static void main(String[] args) {
         PaqueteServicioImpl psi = new PaqueteServicioImpl().getInstance();
         psi.agregarEspectaculoAlPaquete(Long.MIN_VALUE, Long.MIN_VALUE);
     }
+
+    @Override
+    public List<Paquete> getTodosLosPaquetes() throws SQLException {
+          List<Paquete> paquetes = new ArrayList<>();
+        PreparedStatement sentencia;
+
+            sentencia = conexion.getConexion().prepareStatement(todosLosPaquetes);
+            ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+           //aquetes.add((Paquete) paqueteMapper(rs));
+        }
+        
+        return paquetes;
+    }
 }
+
+
+       //rivate Paquete paqueteMapper(ResultSet rs) throws SQLException {
+       //ate fechaInicio = rs.getTimestamp("fechaInicio");
+        //BigDecimal descuento = HelperStrings.getBigDecimalValue(rs.getString("descuento"));
+        //Date fechaFin = rs.getTimestamp("fechaFin");
+              
+
+       // return new Paquete(rs.getString("nombre"),rs.getString("descripcion"),fechaInicio, fechaFin ,descuento));
+

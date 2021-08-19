@@ -29,12 +29,17 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Paquete = new javax.swing.JMenu();
         Crear_Paquete = new javax.swing.JMenuItem();
         Agregar_Espectaculo = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        AgregarFE = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
         jMenuItem_Artistas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuModificarArtista = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -128,6 +133,21 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         Registro.add(Paquete);
 
+        jMenu5.setText("Funcion");
+
+        AgregarFE.setText("Alta Funcion a Espectaculo");
+        AgregarFE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarFEActionPerformed(evt);
+            }
+        });
+        jMenu5.add(AgregarFE);
+
+        jMenuItem5.setText(" Registro a Función de Espectáculo");
+        jMenu5.add(jMenuItem5);
+
+        Registro.add(jMenu5);
+
         Menu.add(Registro);
 
         jMenu3.setText("Consultas");
@@ -164,6 +184,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         jMenu3.add(jMenu4);
 
+        jMenu6.setText("Consultar Paquetes");
+
+        jMenuItem3.setText("Paquete de Espectaculos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem3);
+
+        jMenu3.add(jMenu6);
+
         Menu.add(jMenu3);
 
         jMenu2.setText("Modificar");
@@ -196,7 +228,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel)
+            .addComponent(Panel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -288,6 +320,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         this.Panel.add(rep);
         rep.show();
     }//GEN-LAST:event_Agregar_EspectaculoActionPerformed
+
+    private void AgregarFEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFEActionPerformed
+        Registrar_Funcion_a_Espectaculo fe = new  Registrar_Funcion_a_Espectaculo();
+        this.Panel.add(fe);
+        fe.show();
+    }//GEN-LAST:event_AgregarFEActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Todos_Los_Paquetes tp = new  Todos_Los_Paquetes();
+        this.Panel.add(tp);
+        tp.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
 
     public static void main(String args[]) {
@@ -318,6 +362,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AgregarFE;
     private javax.swing.JMenuItem Agregar_Espectaculo;
     private javax.swing.JMenuItem Artista;
     private javax.swing.JMenu Cliente;
@@ -335,9 +380,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenuItem jMenuModificarArtista;

@@ -17,9 +17,11 @@ import edu.innova.logica.servicios.ArtistaServicio;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
 import edu.innova.logica.servicios.EspectadorServicio;
+import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.ArtistaServicioImpl;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
+import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 
 /**
@@ -79,5 +81,9 @@ public class Fabrica {
     
     public PaqueteControlador getPaqueteControlador() {
         return new PaqueteControladorImpl().getInstance();
+    }
+    
+    public PaqueteServicio getPaqueteServicioImpl() {
+        return new PaqueteServicioImpl().getInstance();
     }
 }
