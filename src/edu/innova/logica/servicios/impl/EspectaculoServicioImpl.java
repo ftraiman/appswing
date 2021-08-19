@@ -28,6 +28,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ?";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
+    private final String espectaculoPorIdA = "SELECT * FROM espectaculos WHERE idUsuario = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -89,7 +90,22 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         throw new NoSuchElementException(String.format("Espectaculo con id %s no encontrado", idEspectaculo));
     }
     //==================== OBTENER ESPECTACULO POR ID ============//
-
+    
+    
+     //==================== OBTENER ESPECTACULO POR ID Arista============//
+    @Override
+    public Espectaculo getEspectaculoPorIdA(Long idArtista) throws SQLException {
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
+        sentencia.setLong(1, idArtista);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            return espectaculoMapper(rs);
+        }
+        throw new NoSuchElementException(String.format("Este Artista no tiene ESPECTACULO", idArtista));
+        
+    }
+    //==================== OBTENER ESPECTACULO POR ID Artista============//
+    
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
     @Override
     public List<Espectaculo> getTodosLosEspectaculos() throws SQLException {

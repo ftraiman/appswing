@@ -61,29 +61,7 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
         }
         this.Tabla_Espectaculo.setModel(tabla);
-        
-        
-        
-        
-        //Segunda Forma Mostrar
-       /* String matris[][] = new String[fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().size()][2];
-        int i = 0;
-    
-        for(i = 0 ; i< fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().size() ; i++){
-    
-    
-        matris[i][0]=fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getNombre();
-        matris[i][1]=fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getCosto().toString();
-
         }
-        
-       Tabla_Espectaculo.setModel(new javax.swing.table.DefaultTableModel(matris,new String [] {"Nombre", "Costo"}));
-          */
-        }
-
-
-        
-    
 
    
     @SuppressWarnings("unchecked")
@@ -94,8 +72,6 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
         Tabla_Espectaculo = new javax.swing.JTable();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Todos Los Espectaculos");
 
         Tabla_Espectaculo.setModel(new javax.swing.table.DefaultTableModel(
@@ -117,7 +93,7 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

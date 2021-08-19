@@ -27,6 +27,8 @@ public class Artista extends Usuario {
         this.linkUsuario = linkUsuario;
     }
 
+   
+
     public Artista(String descripcion, String biografia, String linkUsuario, Long id, String nombre, String apellido, Date fechaNacimiento) {
         super(id, nombre, apellido, fechaNacimiento);
         this.tipo = "artista";
@@ -36,7 +38,9 @@ public class Artista extends Usuario {
     }
     
     
-
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
     
     public String getDescripcion() {
         return descripcion;

@@ -4,14 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Paquetes.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/entidades/Paquete.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/impl/PaqueteServicioImpl.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Espectaculos.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/Fabrica.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/PaqueteServicio.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Registrar_Paquete.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/entidades/Artista.java</file>
             <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/GUI_Proyecto.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/impl/ArtistaServicioImpl.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/ArtistaServicio.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/controladores/impl/PaqueteControladorImpl.java</file>
         </group>
     </open-files>
 </project-private>
