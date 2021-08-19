@@ -328,9 +328,15 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarFEActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Todos_Los_Paquetes tp = new  Todos_Los_Paquetes();
-        this.Panel.add(tp);
-        tp.show();
+        Todos_Los_Paquetes tp;
+        try {
+            tp = new  Todos_Los_Paquetes();
+            this.Panel.add(tp);
+            tp.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
     
 

@@ -3,6 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.logica.Fabrica;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.Connection;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -12,7 +13,7 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
     Connection con = cn.getConexion();
     Fabrica fabrica = new Fabrica();
     
-    public Todos_Los_Paquetes() {
+    public Todos_Los_Paquetes() throws SQLException {
         initComponents();
         
      //Crear el modelo de la tabla
@@ -23,28 +24,28 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
         tabla.addColumn("Fecha Inicio");
         tabla.addColumn("Fecha Fin");
 
-        /*
+        
         //Crear las filas para la tabla
-        int n = fabrica.getPaqueteServicioImpl().size();
-        String fila[] = new String[10];//Limite de dos porque solo mostramos el nombre y el apellido
+        int n = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().size();
+        String fila[] = new String[4];//Limite de dos porque solo mostramos el nombre y el apellido
         for(int i=0; i<n; i++){//Iterar hasta tener todas las filas
             //Obtengo los datos
-            String nombre = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getNombre();
-            String costo = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getCosto().toString();
-            String URL = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getUrl();
-            String Duracion = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculos().get(i).getDuracion().toString();
+            String nombre = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().get(i).getNombre();
+            String desc = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().get(i).getDescripcion();
+            String FI = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().get(i).getFechaInicio().toString();
+            String FF = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().get(i).getFechaFin().toString();
             
 
             fila[0] = nombre;
-            fila[1] = costo;
-            fila[2] = URL;
-            fila[3] = Duracion;
+            fila[1] = desc;
+            fila[2] = FI;
+            fila[3] = FF;
           
             
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
         }
-        this.Tabla_Espectaculo.setModel(tabla);    
-     */   
+        this.TablaEspectaculos.setModel(tabla);    
+        
     }
 
  

@@ -13,6 +13,7 @@ import edu.innova.logica.servicios.PaqueteServicio;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,19 +87,17 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia = conexion.getConexion().prepareStatement(todosLosPaquetes);
             ResultSet rs = sentencia.executeQuery();
         while (rs.next()) {
-           //aquetes.add((Paquete) paqueteMapper(rs));
+           paquetes.add((Paquete) paqueteMapper(rs));
         }
         
         return paquetes;
     }
+    
+    private Paquete paqueteMapper(ResultSet rs) throws SQLException {
+        Date fechaInicio = rs.getTimestamp("fechaInicio");
+        BigDecimal descuento = HelperStrings.getBigDecimalValue(rs.getString("descuento"));
+        Date fechaFin = rs.getTimestamp("fechaFin");
+        return new Paquete(rs.getString("nombre"),rs.getString("descripcion"),fechaInicio, fechaFin ,descuento);
+    }
 }
-
-
-       //rivate Paquete paqueteMapper(ResultSet rs) throws SQLException {
-       //ate fechaInicio = rs.getTimestamp("fechaInicio");
-        //BigDecimal descuento = HelperStrings.getBigDecimalValue(rs.getString("descuento"));
-        //Date fechaFin = rs.getTimestamp("fechaFin");
-              
-
-       // return new Paquete(rs.getString("nombre"),rs.getString("descripcion"),fechaInicio, fechaFin ,descuento));
 

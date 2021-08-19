@@ -37,12 +37,10 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     private void validarNuevoPaquete(Paquete paquete) {
 
         HelperStrings.stringNoVacio(paquete.getNombre(), "nombre");
-        HelperFecha.validarFechaPosteriorALaActual(paquete.getFechaInicio(), "fecha de inicio");
-        HelperFecha.validarFechaPosteriorALaActual(paquete.getFechaFin(), "fecha de fin");
         if (paquete.getDescuento().compareTo(BigDecimal.ZERO) < 0 || paquete.getDescuento().compareTo(BigDecimal.valueOf(100)) > 0) {
             throw new IllegalArgumentException("Descuento inválido");
         }
-        if(paquete.getFechaInicio().compareTo(paquete.getFechaFin()) > 0) {
+        if(paquete.getFechaFin().compareTo(paquete.getFechaInicio()) < 0) {
             throw new InnovaModelException("La fecha de inicio es posterior a la fecha de fin");
         }
     }
