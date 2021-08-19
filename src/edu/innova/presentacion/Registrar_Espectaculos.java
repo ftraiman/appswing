@@ -38,14 +38,14 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         try {
             // Obtengo del Plataforma Servicio las plataformas
-            List<Artista> plat = fabrica.getArtistaServicioImpl().getTodosLosArtistas();
+            List<Artista> plat = fabrica.getUsuarioControlador().getTodosLosArtistas();
             // Creo un DefaultListModel que almacena los objetos Plataforma
             DefaultListModel<Artista> modelArtista = new DefaultListModel<>();
             // Le cargo al JList el modelEspectadores
             listArtista.setModel(modelArtista);
             // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
             plat.forEach(e -> modelArtista.addElement(e));
-        } catch (SQLException ex) {
+        } catch (InnovaModelException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
 

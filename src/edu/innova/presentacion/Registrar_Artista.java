@@ -6,9 +6,7 @@ import edu.innova.logica.entidades.Espectador;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
 public class Registrar_Artista extends javax.swing.JInternalFrame {
-
 
     public Registrar_Artista() {
         initComponents();
@@ -214,54 +212,54 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_descripcionActionPerformed
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-         Fabrica fabrica = new Fabrica();
-        
+        Fabrica fabrica = new Fabrica();
+
         String nombre = this.Nombretxt.getText();
         String apellido = this.Apellidotxt.getText();
         String nickname = this.Nicknametxt.getText();
         String email = this.Correotxt.getText();
-        String fn = this.Dia.getValue().toString()+"/"+this.Mes.getValue()+"/"+this.Año.getValue();
+        String fn = this.Dia.getValue().toString() + "/" + this.Mes.getValue() + "/" + this.Año.getValue();
         Date fecha = new Date(fn);
         String descripcion = this.descripcion.getText();
         String bio = this.biografia.getText();
         String link = this.link.getText();
-        
-       
-      if(nombre!=null && "".equals(nombre.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
-       }else if(apellido!=null && "".equals(apellido.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
-       }else if(nickname!=null && "".equals(nickname.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
-       }else if(email!=null && "".equals(email.trim())){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
-       }else if((Integer)this.Dia.getValue() != null && (Integer)this.Dia.getValue() <= 0 ){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Dia en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
-       }else if((Integer)this.Mes.getValue() != null && (Integer)this.Mes.getValue() <= 0 ){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Mes en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
-       }else if((Integer)this.Año.getValue() != null && (Integer)this.Año.getValue() <= 0 ){
-           JOptionPane.showMessageDialog(null, "No se ingreso el Año en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
-       }else if(descripcion!=null && "".equals(descripcion.trim())){
-           JOptionPane.showMessageDialog(null, "No se Ingreso la Descripcion.");
-       /*}else if(bio!=null && "".equals(bio.trim())){
+
+        if (nombre != null && "".equals(nombre.trim())) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
+        } else if (apellido != null && "".equals(apellido.trim())) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
+        } else if (nickname != null && "".equals(nickname.trim())) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
+        } else if (email != null && "".equals(email.trim())) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
+        } else if ((Integer) this.Dia.getValue() != null && (Integer) this.Dia.getValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Dia en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
+        } else if ((Integer) this.Mes.getValue() != null && (Integer) this.Mes.getValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Mes en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
+        } else if ((Integer) this.Año.getValue() != null && (Integer) this.Año.getValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "No se ingreso el Año en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
+        } else if (descripcion != null && "".equals(descripcion.trim())) {
+            JOptionPane.showMessageDialog(null, "No se Ingreso la Descripcion.");
+            /*}else if(bio!=null && "".equals(bio.trim())){
            JOptionPane.showMessageDialog(null, "No se Ingreso la Biografia.");
        }else if(link!=null && "".equals(link.trim())){
            JOptionPane.showMessageDialog(null, "No se Ingreso el Link.");*/
-       }else{
-         fabrica.getUsuarioControladorImpl().altaUsuario(new Artista(nickname,nombre,apellido,email,fecha,descripcion,bio,link));
-      
-      this.Nombretxt.setText("");
-      this.Apellidotxt.setText("");
-      this.Nicknametxt.setText("");
-      this.Correotxt.setText("");
-      this.Dia.setValue(0);
-      this.Mes.setValue(0);
-      this.Año.setValue(0);
-      this.descripcion.setText("");
-      this.biografia.setText("");
-      this.link.setText("");
-      
-       }
+        } else {
+            Artista artista = new Artista(descripcion, bio, link, "", nickname, nombre, apellido, email, fecha);
+            fabrica.getUsuarioControladorImpl().altaUsuario(artista);
+
+            this.Nombretxt.setText("");
+            this.Apellidotxt.setText("");
+            this.Nicknametxt.setText("");
+            this.Correotxt.setText("");
+            this.Dia.setValue(0);
+            this.Mes.setValue(0);
+            this.Año.setValue(0);
+            this.descripcion.setText("");
+            this.biografia.setText("");
+            this.link.setText("");
+
+        }
     }//GEN-LAST:event_AceptarActionPerformed
 
 

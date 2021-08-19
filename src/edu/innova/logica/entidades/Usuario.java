@@ -5,6 +5,8 @@ import java.util.Date;
 public class Usuario {
 
     protected Long id;
+    protected String clave;
+    protected String tipo;
     protected String nickname;
     protected String nombre;
     protected String apellido;
@@ -14,8 +16,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Usuario(Long id, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         this.id = id;
+        this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -23,11 +26,19 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Usuario(String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+        this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Usuario(Long id, String nombre, String apellido, Date fechaNacimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -78,6 +89,24 @@ public class Usuario {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
 
     @Override
     public String toString() {

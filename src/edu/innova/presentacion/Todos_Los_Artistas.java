@@ -20,12 +20,12 @@ public class Todos_Los_Artistas extends javax.swing.JInternalFrame {
         tabla.addColumn("Nombre"); tabla.addColumn("Apellido");
         
         //Crear las filas para la tabla
-        int n = fabrica.getArtistaServicioImpl().getTodosLosArtistas().size();
+        int n = fabrica.getUsuarioControlador().getTodosLosArtistas().size();
         String fila[] = new String[2];//Limite de dos porque solo mostramos el nombre y el apellido
         for(int i=0; i<n; i++){//Iterar hasta tener todas las filas
             //Obtengo los datos
-            String nombre = fabrica.getArtistaServicioImpl().getTodosLosArtistas().get(i).getNombre();
-            String apellido = fabrica.getArtistaServicioImpl().getTodosLosArtistas().get(i).getApellido();
+            String nombre = fabrica.getUsuarioControlador().getTodosLosArtistas().get(i).getNombre();
+            String apellido = fabrica.getUsuarioControlador().getTodosLosArtistas().get(i).getApellido();
             fila[0] = nombre;
             fila[1] = apellido;
             

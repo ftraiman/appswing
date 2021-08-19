@@ -310,11 +310,11 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
             String dia = this.spnDia.getValue().toString();
             String mes = this.spnMes.getValue().toString();
             String anio = this.spnAnio.getValue().toString();
-            
+
             // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
             // Se carga el objeto para ser actualizado
-            Artista artista = new Artista(descripcion, biografia, linkUsuario, id, nickname, nombre, apellido, email, fechaNacimiento);
+            Artista artista = new Artista(descripcion, biografia, linkUsuario, id, nombre, apellido, fechaNacimiento);
             // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
             fabrica.getUsuarioControlador().modificarUsuario(artista);
 
@@ -365,12 +365,11 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    
     private Long getLongValue(String id) {
         try {
             return Long.valueOf(id);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("id"); //To change body of generated methods, choose Tools | Templates.
-        }               
+        }
     }
 }

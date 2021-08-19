@@ -235,7 +235,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
             // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
             // Se carga el objeto para ser actualizado
-            Espectador espectador = new Espectador(id, nickname, nombre, apellido, email, fechaNacimiento);
+            Espectador espectador = new Espectador(id, nombre, apellido, fechaNacimiento);
             // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
             fabrica.getUsuarioControlador().modificarUsuario(espectador);
 

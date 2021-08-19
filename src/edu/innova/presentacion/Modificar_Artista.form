@@ -161,9 +161,6 @@
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Artistas Registrados"/>
-      </AccessibilityProperties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

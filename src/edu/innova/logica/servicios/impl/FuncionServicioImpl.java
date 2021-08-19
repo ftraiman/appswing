@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.innova.logica.servicios.impl;
 
 import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
-import edu.innova.logica.entidades.Plataforma;
-import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.FuncionServicio;
-import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.persistencia.ConexionDB;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,12 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import edu.innova.logica.servicios.EspectadorServicio;
 
-/**
- *
- * @author federico
- */
+import edu.innova.logica.servicios.UsuarioServicio;
+
 public class FuncionServicioImpl implements FuncionServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
@@ -45,7 +31,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     //OBTENER LA CONEXION A LA BASE DE DATOS
     private ConexionDB conexion = new ConexionDB();
 
-    private EspectadorServicio usuarioServicio = new EspectadorServicioImpl().getInstance();
+    private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 //    private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
 
     public FuncionServicioImpl() {//DEFAULT

@@ -11,19 +11,32 @@ public class Artista extends Usuario {
     public Artista() {
     }
 
-    public Artista(String descripcion, String biografia, String linkUsuario, Long id, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
-        super(id, nickname, nombre, apellido, email, fechaNacimiento);
+    public Artista(String descripcion, String biografia, String linkUsuario, Long id, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+        super(id, clave, nickname, nombre, apellido, email, fechaNacimiento);
+        this.tipo = "artista";
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.linkUsuario = linkUsuario;
     }
 
-    public Artista(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario) {
-        super(nickname, nombre, apellido, email, fechaNacimiento);
+    public Artista(String descripcion, String biografia, String linkUsuario, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+        super(clave, nickname, nombre, apellido, email, fechaNacimiento);
+        this.tipo = "artista";
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.linkUsuario = linkUsuario;
     }
+
+    public Artista(String descripcion, String biografia, String linkUsuario, Long id, String nombre, String apellido, Date fechaNacimiento) {
+        super(id, nombre, apellido, fechaNacimiento);
+        this.tipo = "artista";
+        this.descripcion = descripcion;
+        this.biografia = biografia;
+        this.linkUsuario = linkUsuario;
+    }
+    
+    
+
     
     public String getDescripcion() {
         return descripcion;

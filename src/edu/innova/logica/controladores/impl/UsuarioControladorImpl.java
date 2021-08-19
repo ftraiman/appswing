@@ -4,20 +4,13 @@ import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
-import edu.innova.logica.Fabrica;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
-import edu.innova.logica.servicios.ArtistaServicio;
-import edu.innova.logica.servicios.EspectadorServicio;
-import edu.innova.logica.servicios.impl.ArtistaServicioImpl;
-import edu.innova.logica.servicios.impl.EspectadorServicioImpl;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import edu.innova.logica.servicios.UsuarioServicio;
+import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class UsuarioControladorImpl implements UsuarioControlador {
@@ -35,36 +28,31 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         return instance;
     }
 
-    private ArtistaServicio artistaServicio = new ArtistaServicioImpl().getInstance();
-    private EspectadorServicio espectadorServicio = new EspectadorServicioImpl().getInstance();
+    private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 
     //=========================== Alta de usuario ============================//
     @Override
     public void altaUsuario(Usuario usuario) {
-        Fabrica fabrica = new Fabrica();
-        if (usuario instanceof Espectador) {
-            try {
+        try {
+            if (usuario instanceof Espectador) {
+
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
-                    fabrica.getEspectadorServicioImpl().altaUsuario(usuario);
+                    usuarioServicio.altaUsuario(usuario);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Espectador");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (usuario instanceof Artista) {
-            try {
+            } else if (usuario instanceof Artista) {
+
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
-                    fabrica.getArtistaServicioImpl().altaUsuario(usuario);
+                    usuarioServicio.altaUsuario(usuario);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(ex.getMessage(), ex.getCause());
         }
 //=========================== Alta de usuario ============================//
     }
@@ -75,11 +63,11 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             if (usuario instanceof Espectador) {
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
-                espectadorServicio.modificarUsuario(espectador);
+                usuarioServicio.modificarUsuario(espectador);
             } else if (usuario instanceof Artista) {
                 Artista artista = (Artista) usuario;
                 validarParametrosModificarArtista(artista);
-                espectadorServicio.modificarUsuario(artista);
+                usuarioServicio.modificarUsuario(artista);
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
@@ -89,7 +77,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     @Override
     public List<Espectador> getTodosLosEspectadores() {
         try {
-            return espectadorServicio.getTodosLosEspectadores();
+            return usuarioServicio.getTodosLosEspectadores();
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
@@ -98,8 +86,8 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     @Override
     public List<Artista> getTodosLosArtistas() {
         try {
-            return artistaServicio.getTodosLosArtistas();
-        } catch (SQLException ex) {
+            return usuarioServicio.getTodosLosArtistas();
+        } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
