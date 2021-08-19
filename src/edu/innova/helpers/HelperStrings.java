@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.innova.helpers;
 
 import edu.innova.exceptions.InnovaModelException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
 
-/**
- *
- * @author federico
- */
 public class HelperStrings {
 
     public static boolean stringNoVacio(String str, String nombreParametro) {
@@ -43,5 +36,18 @@ public class HelperStrings {
         } catch(NumberFormatException e) {
             throw new IllegalArgumentException(String.format("Número inválido para el parametro [%s]", nombreParametro)); //To change body of generated methods, choose Tools | Templates.
         }          
+    }
+    
+    public static boolean urlValidator(String url){
+        //Abre la url ingresada y si no es una url entra en el catch
+         try {
+            (new URL(url)).openStream().close();
+            return true;
+        } 
+        catch(IOException e) {
+              throw new InnovaModelException(String.format("El parametro [%s] no es un Enlace", url));
+            // nada muy importante
+        }
+        //return false; //Esto porque pide la mierda del IDE
     }
 }

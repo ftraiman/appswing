@@ -1,5 +1,7 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
 import java.util.Date;
@@ -73,9 +75,15 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Día:");
 
+        Dia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
         jLabel7.setText("Mes:");
 
+        Mes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
         jLabel8.setText("Año:");
+
+        Año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,43 +176,41 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        Fabrica fabrica = new Fabrica();
-
-        String nombre = this.Nombretxt.getText();
-        String apellido = this.Apellidotxt.getText();
-        String nickname = this.Nicknametxt.getText();
-        String email = this.Correotxt.getText();
-        String fn = this.Dia.getValue().toString() + "/" + this.Mes.getValue() + "/" + this.Año.getValue();
-        Date fecha = new Date(fn);
-
-        if (nombre != null && "".equals(nombre.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
-        } else if (apellido != null && "".equals(apellido.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
-        } else if (nickname != null && "".equals(nickname.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
-        } else if (email != null && "".equals(email.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
-        } else if ((Integer) this.Dia.getValue() != null && (Integer) this.Dia.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Dia en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
-        } else if ((Integer) this.Mes.getValue() != null && (Integer) this.Mes.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Mes en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
-        } else if ((Integer) this.Año.getValue() != null && (Integer) this.Año.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Año en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
-        } else {
-            //(String clave, String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento)
+        
+       try {
+            Fabrica fabrica = new Fabrica();
+            
+            //Datos de Espectador
+            String nombre = this.Nombretxt.getText();
+            String apellido = this.Apellidotxt.getText();
+            String nickname = this.Nicknametxt.getText();
+            String email = this.Correotxt.getText();
+            
+            //Datos Fecha
+            String fdia = this.Dia.getValue().toString();
+            String fmes = this.Mes.getValue().toString();
+            String fanio = this.Año.getValue().toString();
+            
+            //Convertimos la fecha para aa/mm/dd
+            Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
+            
             Espectador espectador = new Espectador("", nickname, nombre, apellido, email, fecha);
             fabrica.getUsuarioControladorImpl().altaUsuario(espectador);
-
-            this.Nombretxt.setText("");
-            this.Apellidotxt.setText("");
-            this.Nicknametxt.setText("");
-            this.Correotxt.setText("");
-            this.Dia.setValue(0);
-            this.Mes.setValue(0);
-            this.Año.setValue(0);
+          
+        } 
+        catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+            return;
         }
-
+        catch (InnovaModelException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            return;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
+            return;
+        }
+        this.dispose(); //Limpia todos los Campos de la ventana
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void NombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombretxtActionPerformed
