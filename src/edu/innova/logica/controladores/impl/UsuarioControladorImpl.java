@@ -17,8 +17,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
     private static UsuarioControladorImpl instance;
 
-    public UsuarioControladorImpl() {
-    }//Constructor por defecto
+    public UsuarioControladorImpl() {}//Constructor por defecto
 
     //Obtener la instancia
     public UsuarioControladorImpl getInstance() {
@@ -28,6 +27,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         return instance;
     }
 
+    //Obtener instancia de usuario
     private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 
     //=========================== Alta de usuario ============================//

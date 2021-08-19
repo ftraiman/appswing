@@ -5,11 +5,13 @@ import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import java.util.List;
 
-public interface UsuarioControlador  {
+public interface UsuarioControlador  { //Interfaz usuario
     
-    public abstract void altaUsuario(Usuario usuario);
     
-    void modificarUsuario(Usuario usuario);
+    public abstract void altaUsuario(Usuario usuario); //Alta Usuario
+    
+    public abstract void modificarUsuario(Usuario usuario); //Modificar Usuario
+    //void modificarUsuario(Usuario usuario); 
     
     List<Espectador> getTodosLosEspectadores();
 
