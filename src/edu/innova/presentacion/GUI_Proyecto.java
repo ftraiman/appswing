@@ -322,7 +322,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_Agregar_EspectaculoActionPerformed
 
     private void AgregarFEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFEActionPerformed
-        Registrar_Funcion_a_Espectaculo fe = new  Registrar_Funcion_a_Espectaculo();
+        Registrar_Funcion fe = new  Registrar_Funcion();
         this.Panel.add(fe);
         fe.show();
     }//GEN-LAST:event_AgregarFEActionPerformed

@@ -10,8 +10,8 @@ public interface UsuarioControlador  { //Interfaz usuario
     
     public abstract void altaUsuario(Usuario usuario); //Alta Usuario
     
-    public abstract void modificarUsuario(Usuario usuario); //Modificar Usuario
-    //void modificarUsuario(Usuario usuario); 
+    //En las interfaces de JAVA ya por defecto son publicos y abstracto
+    void modificarUsuario(Usuario usuario); 
     
     List<Espectador> getTodosLosEspectadores();
 
