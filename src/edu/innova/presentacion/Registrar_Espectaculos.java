@@ -1,5 +1,6 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
@@ -32,7 +33,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             listPlataforma.setModel(modelPlataforma);
             // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
             plat.forEach(e -> modelPlataforma.addElement(e));
-        } catch (SQLException ex) {
+        } catch (BaseDeDatosException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
 

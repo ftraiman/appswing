@@ -11,5 +11,7 @@ public interface EspectaculoServicio {
     List<Espectaculo> getTodosLosEspectaculos() throws SQLException;
     
     public Espectaculo getEspectaculoPorId(Long idEspectaculo) throws SQLException;
+    
+    List<Espectaculo> getTodosLosEspectaculosPorPlataforma(Long idPlataforma);
 
 }

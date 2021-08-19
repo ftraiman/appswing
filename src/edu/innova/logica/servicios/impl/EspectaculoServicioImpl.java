@@ -26,6 +26,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
+    private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ?";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
@@ -101,6 +102,20 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return espectaculos;
     }
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
+    
+    public List<Espectaculo> getTodosLosEspectaculosPorPlataforma(Long idPlataforma) {
+        try {
+            List<Espectaculo> espectaculos = new ArrayList<>();
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectaculosPorIdPlataforma);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapper(rs));
+            }
+            return espectaculos;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()),ex.getCause());
+        }
+    }
 
     private Espectaculo espectaculoMapper(ResultSet rs) throws SQLException {
 

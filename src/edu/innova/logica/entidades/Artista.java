@@ -64,7 +64,7 @@ public class Artista extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + " Artista{" + "descripcion=" + descripcion + ", biografia=" + biografia + ", linkUsuario=" + linkUsuario + '}';
+        return super.toString() + " (A)";
     }
 
 }

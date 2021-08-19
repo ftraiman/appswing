@@ -6,6 +6,7 @@ import java.util.List;
 public class Funcion {
 
     private Long id;
+    private String nombre;
     private Long idEspectaculo;
     private Date fechaInicio;
     private Date fechaRegistro;
@@ -16,6 +17,14 @@ public class Funcion {
 
     public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados) {
         this.id = id;
+        this.idEspectaculo = idEspectaculo;
+        this.fechaInicio = fechaInicio;
+        this.fechaRegistro = fechaRegistro;
+        this.artistasInvitados = artistasInvitados;
+    }
+
+    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados) {
+        this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
@@ -62,9 +71,17 @@ public class Funcion {
         this.artistasInvitados = artistasInvitados;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public String toString() {
-        return "Funcion{" + "id=" + id + ", idEspectaculo=" + idEspectaculo + ", fechaInicio=" + fechaInicio + ", fechaRegistro=" + fechaRegistro + ", artistasInvitados=" + artistasInvitados + '}';
+        return new StringBuilder().append(nombre).append(" (" + id + ")").toString();
     }
 
 }

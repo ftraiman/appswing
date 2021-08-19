@@ -9,13 +9,14 @@ import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class PlataformaControladorImpl implements PlataformaControlador{
     
-    private PlataformaServicio PlataformaServicio = new PlataformaServicioImpl().getInstance();
+    private PlataformaServicio plataformaServicio = new PlataformaServicioImpl().getInstance();
 
     private static PlataformaControladorImpl instance;
 
@@ -42,8 +43,10 @@ public class PlataformaControladorImpl implements PlataformaControlador{
         } catch (SQLException ex) {
             Logger.getLogger(PlataformaControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        
-        
+    }
+    
+    public List<Plataforma> getTodasLasPlataformas() {
+        return plataformaServicio.getTodasLasPlataformas();
     }
 
     private void validarNuevaPlataforma(Plataforma plataforma) {

@@ -1,6 +1,7 @@
 package edu.innova.logica.entidades;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Usuario {
 
@@ -110,7 +111,32 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "id=" + id + ", nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido;
+        return String.format("%s %s (%s)", nombre, apellido, id);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }

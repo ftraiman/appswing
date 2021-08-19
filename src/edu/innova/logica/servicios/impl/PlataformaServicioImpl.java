@@ -1,5 +1,6 @@
 package edu.innova.logica.servicios.impl;
 
+import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.persistencia.ConexionDB;
@@ -9,13 +10,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlataformaServicioImpl implements PlataformaServicio {
 
     private final String altaPlataforma = "INSERT INTO plataformas (nombre, descripcion, url) VALUES (?, ?, ?)";
     private final String plataformaPorId = "SELECT * FROM plataformas WHERE id = ?";
     private final String todasLasPlataformas = "SELECT * FROM plataformas";
-    
+
     private static PlataformaServicioImpl plataformaServicio;
 
     private ConexionDB conexion = new ConexionDB();
@@ -39,6 +42,7 @@ public class PlataformaServicioImpl implements PlataformaServicio {
         sentencia.executeUpdate();
     }
 
+    @Override
     public Plataforma getPlataformaPorId(Long idPlataforma) throws SQLException {
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(plataformaPorId);
         sentencia.setLong(1, idPlataforma);
@@ -48,14 +52,21 @@ public class PlataformaServicioImpl implements PlataformaServicio {
         }
         throw new NoSuchElementException(String.format("Plataforma con id %s no encontrado", idPlataforma));
     }
-    
-    public List<Plataforma> getTodasLasPlataformas() throws SQLException {
+
+    @Override
+    public List<Plataforma> getTodasLasPlataformas() {
         List<Plataforma> plataformas = new ArrayList<>();
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(todasLasPlataformas);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            plataformas.add(plataformaMapper(rs));
+        ResultSet rs;
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todasLasPlataformas);
+            rs = sentencia.executeQuery();
+            while (rs.next()) {
+                plataformas.add(plataformaMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
+
         return plataformas;
     }
 
