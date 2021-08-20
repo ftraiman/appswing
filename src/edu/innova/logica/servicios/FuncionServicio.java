@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FuncionServicio {
     
-    void altaFuncion(Long idEspectaculo, Funcion funcion) throws SQLException;
+    void altaFuncion(Long idEspectaculo, Funcion funcion);
     
     Funcion getFuncionPorId(Long idFuncion) throws SQLException;
     

@@ -68,7 +68,7 @@ public class Artista extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + " (A)";
+        return super.toString();
     }
 
 }

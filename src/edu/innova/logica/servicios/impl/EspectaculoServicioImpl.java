@@ -126,10 +126,12 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     }
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
     
+    @Override
     public List<Espectaculo> getTodosLosEspectaculosPorPlataforma(Long idPlataforma) {
         try {
             List<Espectaculo> espectaculos = new ArrayList<>();
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectaculosPorIdPlataforma);
+            sentencia.setLong(1, idPlataforma);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 espectaculos.add(espectaculoMapper(rs));

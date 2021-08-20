@@ -3,6 +3,7 @@ package edu.innova.logica.entidades;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Espectaculo {
 
@@ -22,7 +23,7 @@ public class Espectaculo {
     public Espectaculo() {
     }
 
-    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos,Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones) {
+    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones) {
         this.id = id;
         this.artista = artista;
         this.nombre = nombre;
@@ -37,7 +38,7 @@ public class Espectaculo {
         this.funciones = funciones;
     }
 
-    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos,Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
+    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -47,8 +48,6 @@ public class Espectaculo {
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -105,7 +104,7 @@ public class Espectaculo {
     public void setEspectadoresMinimos(Integer espectadoresMinimos) {
         this.espectadoresMinimos = espectadoresMinimos;
     }
-    
+
     public Integer getEspectadoresMaximos() {
         return espectadoresMaximos;
     }
@@ -148,7 +147,32 @@ public class Espectaculo {
 
     @Override
     public String toString() {
-       return "Espectaculo{" + "id=" + id + ", artista=" + artista + ", nombre=" + nombre + ", plataforma=" + plataforma + ", descripcion=" + descripcion + ", duracion=" + duracion + ", espectadoresMinimos=" + espectadoresMinimos +", espectadoresMaximos=" + espectadoresMaximos +", url=" + url + ", costo=" + costo + ", fechaRegistro=" + fechaRegistro + ", funciones=" + funciones + '}';
+        return String.format("%s", nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Espectaculo other = (Espectaculo) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
     

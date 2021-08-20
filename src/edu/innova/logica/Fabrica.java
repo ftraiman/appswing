@@ -1,10 +1,12 @@
 package edu.innova.logica;
 
 import edu.innova.logica.controladores.EspectaculoControlador;
+import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.controladores.PaqueteControlador;
 import edu.innova.logica.controladores.PlataformaControlador;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.controladores.impl.EspectaculosControladorImpl;
+import edu.innova.logica.controladores.impl.FuncionControladorImpl;
 import edu.innova.logica.controladores.impl.PlataformaControladorImpl;
 import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
@@ -60,5 +62,9 @@ public class Fabrica {
     
     public PaqueteServicio getPaqueteServicioImpl() {
         return new PaqueteServicioImpl().getInstance();
+    }
+    
+    public FuncionControlador getFuncionControlador() {
+        return new FuncionControladorImpl().getInstance();
     }
 }

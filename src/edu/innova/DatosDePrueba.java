@@ -1,16 +1,20 @@
 package edu.innova;
 
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.entidades.Usuario;
+import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 import java.sql.SQLException;
 import java.util.Date;
 import edu.innova.logica.servicios.UsuarioServicio;
+import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
+import java.math.BigDecimal;
 
 public class DatosDePrueba {
 
@@ -18,6 +22,7 @@ public class DatosDePrueba {
 
         UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
         PlataformaServicio plataformaServicio = new PlataformaServicioImpl().getInstance();
+        EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
 
         // Alta artistas 
         Artista jaimeRoss = new Artista("La descripcion de Jaime", "La biografia de Jaime", "www.jaime.com", "", "jaimeross", "Jaime", "Ross", "jaimito@gmail.com", new Date());
@@ -56,6 +61,16 @@ public class DatosDePrueba {
         plataformaServicio.altaPlataforma(twitter);
         Plataforma twitch = new Plataforma(Long.MIN_VALUE, "Twitch", "Descripcion de Twitch", "www.twitch.com");
         plataformaServicio.altaPlataforma(twitch);
+        
+        
+        Espectaculo espectaculoJaime = new Espectaculo("Jaime Ross online", "Jaime Ross nuevo disco", 90, 100, 1000, "www.superjaime.com", BigDecimal.valueOf(1000), new Date());
+        Plataforma facebook = plataformaServicio.getPlataformaPorNombre("Facebook");
+        espectaculoServicio.altaEspectaculo(jaimeParaModificar.getId(), facebook.getId(), espectaculoJaime);
+        
+        Plataforma twitch2 = plataformaServicio.getPlataformaPorNombre("twitch");
+        Artista shakiraYPique = (Artista) usuarioServicio.getUsuarioPorNickName("shakira");
+        Espectaculo espectaculoShakira = new Espectaculo("Shakira en twitch", "Shakira y Pique", 60, 120, 2000, "www.superpique.com", BigDecimal.valueOf(1001), new Date());
+        espectaculoServicio.altaEspectaculo(shakiraYPique.getId(), twitch2.getId(), espectaculoShakira);
     }
 
 }

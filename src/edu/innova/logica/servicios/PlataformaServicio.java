@@ -10,6 +10,8 @@ public interface PlataformaServicio {
     
     Plataforma getPlataformaPorId(Long idPlataforma) throws SQLException;
     
+    Plataforma getPlataformaPorNombre(String nombre);
+    
     List<Plataforma> getTodasLasPlataformas();
 
     public void altaPlataforma(String nombre, String descripcion, String url);

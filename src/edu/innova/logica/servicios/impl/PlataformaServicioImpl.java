@@ -10,13 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PlataformaServicioImpl implements PlataformaServicio {
 
     private final String altaPlataforma = "INSERT INTO plataformas (nombre, descripcion, url) VALUES (?, ?, ?)";
     private final String plataformaPorId = "SELECT * FROM plataformas WHERE id = ?";
+    private final String plataformaPorNombre = "SELECT * FROM plataformas WHERE nombre = ?";
     private final String todasLasPlataformas = "SELECT * FROM plataformas";
 
     private static PlataformaServicioImpl plataformaServicio;
@@ -51,6 +50,21 @@ public class PlataformaServicioImpl implements PlataformaServicio {
             return plataformaMapper(rs);
         }
         throw new NoSuchElementException(String.format("Plataforma con id %s no encontrado", idPlataforma));
+    }
+    
+    @Override
+    public Plataforma getPlataformaPorNombre(String nombre)  {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(plataformaPorNombre);
+            sentencia.setString(1, nombre);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return plataformaMapper(rs);
+            }
+            throw new NoSuchElementException(String.format("Plataforma con el nombre %s no encontrado", nombre));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
     }
 
     @Override

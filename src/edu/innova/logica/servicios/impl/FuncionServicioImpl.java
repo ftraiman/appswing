@@ -1,5 +1,8 @@
 package edu.innova.logica.servicios.impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import edu.innova.exceptions.BaseDeDatosException;
+import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.servicios.FuncionServicio;
@@ -13,16 +16,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import edu.innova.logica.servicios.UsuarioServicio;
+import java.sql.Statement;
 
 public class FuncionServicioImpl implements FuncionServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, fechaInicio, fechaRegistro) VALUES (?, ?, ?)";
+    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro) VALUES (?, ?, ?, ?)";
     private final String todosLasFunciones = "SELECT * FROM funciones";
     private final String funcionesPorIdEspectaculo = "SELECT * FROM funciones WHERE idEspectaculo = ?";
     private final String funcionPorId = "SELECT * FROM funciones WHERE id = ?";
     private final String agregarArtistaALaFuncion = "INSERT INTO artistas_funciones (idFuncion, idUsuario) VALUES (?, ?)";
     private final String artistaInvitadosEnFuncion = "SELECT * FROM artistas_funciones WHERE idFuncion = ?";
+    private final String agregarArtistasFunciones = "INSERT INTO artistas_funciones(idFuncion, idUsuario) VALUES (?, ?)";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -47,12 +52,31 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //==================== AlTA DE FUNCION =======================//
     @Override
-    public void altaFuncion(Long idEspectaculo, Funcion funcion) throws SQLException {
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaFunciones);
-        sentencia.setLong(1, idEspectaculo);
-        sentencia.setDate(2, new java.sql.Date(funcion.getFechaInicio().getTime()));
-        sentencia.setDate(3, new java.sql.Date(funcion.getFechaRegistro().getTime()));
-        sentencia.executeUpdate();
+    public void altaFuncion(Long idEspectaculo, Funcion funcion) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaFunciones, Statement.RETURN_GENERATED_KEYS);
+            sentencia.setLong(1, idEspectaculo);
+            sentencia.setString(2, funcion.getNombre());
+            sentencia.setDate(3, new java.sql.Date(funcion.getFechaInicio().getTime()));
+            sentencia.setDate(4, new java.sql.Date(funcion.getFechaRegistro().getTime()));
+            sentencia.executeUpdate();
+            
+            Integer newId = null;
+            ResultSet rs = sentencia.getGeneratedKeys();
+            if (rs.next()) {
+                newId = rs.getInt(1);
+            }
+            for (Artista artista : funcion.getArtistasInvitados()) {
+                sentencia = conexion.getConexion().prepareStatement(agregarArtistasFunciones);
+                sentencia.setLong(1, Long.valueOf(newId));
+                sentencia.setLong(2, artista.getId());
+                sentencia.executeUpdate();
+            }
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe una funcion con el nombre [%s]", funcion.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
     }
     //==================== AlTA DE FUNCION =======================//
 
@@ -116,7 +140,7 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
         return artistasInvitados;
     }
-    
+
     private Funcion funcionMapper(ResultSet rs) throws SQLException {
 
         Long idFuncion = rs.getLong("id");

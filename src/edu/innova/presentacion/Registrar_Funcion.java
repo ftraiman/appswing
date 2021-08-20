@@ -2,11 +2,9 @@ package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
-import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Plataforma;
 import java.util.ArrayList;
@@ -25,18 +23,17 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
     private Espectaculo espectaculoSeleccionado;
     private Set<Artista> artistasSeleccionados = new HashSet<>();
     private List<Artista> todosLosArtistas = new ArrayList<>();
+    boolean primerRender = true;
 
     private DefaultListModel<Artista> artistaModel = new DefaultListModel<>();
 
     public Registrar_Funcion() {
         initComponents();
         List<Plataforma> plataformas = fabrica.getPlataformaControlador().getTodasLasPlataformas();
+        fabrica.getUsuarioControlador().getTodosLosArtistas().forEach(artista -> cbArtistas.addItem(artista));
 
         plataformas.forEach(plataforma -> cbPlataforma.addItem(plataforma));
-        todosLosArtistas.forEach(artista -> cbArtistas.addItem(artista));
-
         lstArtistasInvitados.setModel(artistaModel);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -100,11 +97,11 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Hora");
 
-        spnHora.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        spnHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         jLabel7.setText("Minuto");
 
-        spnMinuto.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        spnMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -258,15 +255,17 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
         try {
             String nombre = this.txtNombre.getText();
 
-            Date fechaInicio = extraerFecha(spnDia.getValue(), spnMes.getValue(), spnAnio.getValue(), spnHora.getValue(), spnMinuto.getValue());
+            validarParametros();
 
-            List<Artista> artistasInvitados = new ArrayList<>();
+            Date fechaInicio = extraerFecha(spnDia.getValue(), spnMes.getValue(), spnAnio.getValue(), spnHora.getValue(), spnMinuto.getValue());
             Long idEspectaculo = espectaculoSeleccionado.getId();
             Date fechaDeRegistro = new Date();
+            List<Artista> artistasInvitados = new ArrayList<>(artistasSeleccionados);
 
             Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados);
-            
-            
+
+            fabrica.getFuncionControlador().altaFuncion(funcion, espectaculoSeleccionado);
+
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
             return;
@@ -277,7 +276,7 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        JOptionPane.showMessageDialog(rootPane, "El Paquete fue agregado correctamente");
+        JOptionPane.showMessageDialog(rootPane, "La Función se agregó correctamente");
         this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -289,7 +288,8 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
         plataformaSeleccionada = (Plataforma) cbPlataforma.getSelectedItem();
         List<Espectaculo> espectaculosParaPlataforma = fabrica.getEspectaculoControlador().getEspectaculosPorIdPlataforma(plataformaSeleccionada.getId());
         espectaculoSeleccionado = null;
-        cbEspectaculo.removeAll();
+        cbEspectaculo.removeAllItems();
+//        cbEspectaculo.removeAll();
         espectaculosParaPlataforma.forEach(espectaculo -> cbEspectaculo.addItem(espectaculo));
     }//GEN-LAST:event_cbPlataformaActionPerformed
 
@@ -298,15 +298,18 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbEspectaculoActionPerformed
 
     private void cbArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbArtistasActionPerformed
-        Artista artistaSeleccionado = (Artista) cbArtistas.getSelectedItem();
-        if (artistasSeleccionados.contains(artistaSeleccionado)) {
-            artistasSeleccionados.remove(artistaSeleccionado);
-        } else {
-            artistasSeleccionados.add(artistaSeleccionado);
-        }
-        artistaModel.removeAllElements();
-        artistasSeleccionados.forEach(artista -> artistaModel.addElement(artista));
+        if (!primerRender) {
 
+            Artista artistaSeleccionado = (Artista) cbArtistas.getSelectedItem();
+            if (artistasSeleccionados.contains(artistaSeleccionado)) {
+                artistasSeleccionados.remove(artistaSeleccionado);
+            } else {
+                artistasSeleccionados.add(artistaSeleccionado);
+            }
+            artistaModel.removeAllElements();
+            artistasSeleccionados.forEach(artista -> artistaModel.addElement(artista));
+        }
+        primerRender = false;
     }//GEN-LAST:event_cbArtistasActionPerformed
 
 
@@ -349,6 +352,13 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
     private Date extraerFecha(Object dia, Object mes, Object anio, Object hora, Object minuto) {
         return HelperFecha.parsearFecha(dia.toString(), mes.toString(), anio.toString(), hora.toString(), minuto.toString()
         );
+    }
+
+    private void validarParametros() {
+        if (espectaculoSeleccionado == null) {
+            throw new IllegalArgumentException("No hay seleccionado un Espectáculo");
+        }
+
     }
 
 }
