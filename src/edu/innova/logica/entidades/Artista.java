@@ -19,6 +19,16 @@ public class Artista extends Usuario {
         this.linkUsuario = linkUsuario;
     }
 
+    public Artista(String descripcion, String biografia, String linkUsuario, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+        super(clave, nickname, nombre, apellido, email, fechaNacimiento);
+        this.tipo = "artista";
+        this.descripcion = descripcion;
+        this.biografia = biografia;
+        this.linkUsuario = linkUsuario;
+    }
+
+   
+
     public Artista(String descripcion, String biografia, String linkUsuario, Long id, String nombre, String apellido, Date fechaNacimiento) {
         super(id, nombre, apellido, fechaNacimiento);
         this.tipo = "artista";
@@ -27,13 +37,9 @@ public class Artista extends Usuario {
         this.linkUsuario = linkUsuario;
     }
     
-    //Constructor que se usa en Registrar Artista
-    public Artista(String descripcion, String biografia, String linkUsuario, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
-        super(clave, nickname, nombre, apellido, email, fechaNacimiento);
-        this.tipo = "artista";
-        this.descripcion = descripcion;
-        this.biografia = biografia;
-        this.linkUsuario = linkUsuario;
+    
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
     
     public String getDescripcion() {
