@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.UsuarioServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
@@ -94,16 +96,21 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     
      //==================== OBTENER ESPECTACULO POR ID Arista============//
     @Override
-    public Espectaculo getEspectaculoPorIdA(Long idArtista) throws SQLException {
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
-        sentencia.setLong(1, idArtista);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            return espectaculoMapper(rs);
+    public List<Espectaculo> getEspectaculosPorIdArtista(Long idArtista) {
+        List<Espectaculo> espectaculos = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
+            sentencia.setLong(1, idArtista);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL %s", ex.getMessage())); 
         }
-        throw new NoSuchElementException(String.format("Este Artista no tiene ESPECTACULO", idArtista));
-        
+        return espectaculos;
     }
+    
     //==================== OBTENER ESPECTACULO POR ID Artista============//
     
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//

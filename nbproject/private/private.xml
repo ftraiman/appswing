@@ -3,10 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Paquetes.java</file>
-            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Registrar_Paquete.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/controladores/impl/UsuarioControladorImpl.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Espectaculos.java</file>
             <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/entidades/Artista.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/Fabrica.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/impl/EspectaculoServicioImpl.java</file>
             <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/GUI_Proyecto.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Paquetes.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/impl/UsuarioServicioImpl.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Registrar_Paquete.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Registrar_Funcion.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/servicios/EspectaculoServicio.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Espectadores.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/presentacion/Todos_Los_Artistas.java</file>
+            <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/controladores/UsuarioControlador.java</file>
             <file>file:/D:/GIT/appswing.git/src/edu/innova/logica/controladores/impl/PaqueteControladorImpl.java</file>
         </group>
     </open-files>

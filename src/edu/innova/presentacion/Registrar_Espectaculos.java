@@ -111,11 +111,19 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         jLabel4.setText("URL:");
 
+        txtNombre.setEditable(false);
+
+        txtDesc.setEditable(false);
+
+        txtURL.setEditable(false);
+
         jLabel5.setText("ID:");
 
         txtId.setText("id");
 
         jLabel6.setText("Nombre Artista: ");
+
+        txtNombreA.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jLabel7.setText("Artistas Registrados:");
@@ -144,7 +152,21 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Costo:");
 
+        Duracion.setToolTipText("En Minutos");
+        Duracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DuracionActionPerformed(evt);
+            }
+        });
+
         jLabel15.setText("Fecha:");
+
+        Fecha.setToolTipText("  Formato: (dd/mm/aa)");
+        Fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FechaActionPerformed(evt);
+            }
+        });
 
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,27 +190,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15))
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Nombre)
-                                    .addComponent(Duracion)
-                                    .addComponent(EspMin)
-                                    .addComponent(EspMax)
-                                    .addComponent(Costo)
-                                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Aceptar)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Aceptar)
                         .addGap(18, 18, 18)
                         .addComponent(Cancelar))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -228,7 +231,23 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                                 .addGap(74, 74, 74)
                                 .addComponent(jLabel1)
                                 .addGap(225, 225, 225)
-                                .addComponent(jLabel7)))
+                                .addComponent(jLabel7))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Nombre)
+                                    .addComponent(Duracion)
+                                    .addComponent(EspMin)
+                                    .addComponent(EspMax)
+                                    .addComponent(Costo)
+                                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(27, 27, 27))
         );
@@ -333,6 +352,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             String fecha = this.Fecha.getText();
 
             Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, new Date());
+            
+            this.txtIda.setText("");
+            this.txtId.setText("");
+            this.Nombre.setText("");
+            this.Duracion.setText("");
+            this.EspMin.setText("");
+            this.EspMax.setText("");
+            this.Costo.setText("");
+            this.Fecha.setText("");
 
             int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
 
@@ -355,6 +383,14 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FechaActionPerformed
+
+    private void DuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DuracionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
