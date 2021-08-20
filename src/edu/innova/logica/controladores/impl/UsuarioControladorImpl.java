@@ -27,35 +27,46 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         return instance;
     }
 
-    //Obtener instancia de usuario
+    //Obtener instancia de servicio usuario
     private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 
     //=========================== Alta de usuario ============================//
     @Override
     public void altaUsuario(Usuario usuario) {
         try {
-            if (usuario instanceof Espectador) {
-
+            if (usuario instanceof Espectador) { //Si el Usuario es un Espectador
+                
+                Espectador espectador = (Espectador) usuario;
+                validarParametrosEspectador(espectador); //Verificar que los datos no esten vacios o nulos
+                
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) {
-                    usuarioServicio.altaUsuario(usuario);
-                } else {
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    usuarioServicio.altaUsuario(usuario); //Llama a servicio y muetsra
+                    JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
+                } 
+                else { //Si no agrega muestra
                     JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Espectador");
                 }
-            } else if (usuario instanceof Artista) {
-
+            } 
+            else if (usuario instanceof Artista) { //Si el Usuario es un Artista
+                
+                Artista artista = (Artista) usuario;
+                validarParametrosArtista(artista); //Verificar que los datos no esten vacios o nulos
+                
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
                     usuarioServicio.altaUsuario(usuario);
-                } else {
+                    JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
+                } 
+                else {
                     JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
                 }
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(ex.getMessage(), ex.getCause());
         }
-//=========================== Alta de usuario ============================//
     }
+    //=========================== Alta de usuario ============================//
 
     @Override
     public void modificarUsuario(Usuario usuario) {
@@ -91,7 +102,8 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
-
+    
+    //=========================== Validar Datos ==============================//
     private void validarParametrosModificarEspectador(Espectador espectador) {
         HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
@@ -104,5 +116,26 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
         //TODO averiguar si hay que validar la biografia o la descripcion
     }
-
+    
+    private void validarParametrosEspectador(Espectador espectador) {
+        HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
+        HelperStrings.stringNoVacio(espectador.getNickname(), "nickname");
+        HelperStrings.stringNoVacio(espectador.getEmail(), "email");
+        HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
+    }
+    
+    private void validarParametrosArtista(Artista artista) {
+        HelperStrings.stringNoVacio(artista.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(artista.getApellido(), "apellido");
+        HelperStrings.stringNoVacio(artista.getNickname(), "nickname");
+        HelperStrings.stringNoVacio(artista.getEmail(), "email");
+        
+        HelperStrings.stringNoVacio(artista.getDescripcion(), "descripcion");
+        HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");
+        HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
+        HelperStrings.urlValidator(artista.getLinkUsuario());
+        HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
+    }
+    //=========================== Validar Datos ==============================//
 }

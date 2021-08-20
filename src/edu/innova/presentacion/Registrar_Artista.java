@@ -1,5 +1,7 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
@@ -67,6 +69,12 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         Cancelar.setText("Cancelar");
 
         SelecionarImagen.setText("Selecionar Imagen");
+
+        Dia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        Mes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        Año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
 
         jLabel6.setText("Día:");
 
@@ -212,54 +220,48 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_descripcionActionPerformed
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        Fabrica fabrica = new Fabrica();
 
-        String nombre = this.Nombretxt.getText();
-        String apellido = this.Apellidotxt.getText();
-        String nickname = this.Nicknametxt.getText();
-        String email = this.Correotxt.getText();
-        String fn = this.Dia.getValue().toString() + "/" + this.Mes.getValue() + "/" + this.Año.getValue();
-        Date fecha = new Date(fn);
-        String descripcion = this.descripcion.getText();
-        String bio = this.biografia.getText();
-        String link = this.link.getText();
+        try {
+           Fabrica fabrica = new Fabrica();
+        
+            //Datos de Usuario
+            String nombre = this.Nombretxt.getText();
+            String apellido = this.Apellidotxt.getText();
+            String nickname = this.Nicknametxt.getText();
+            String email = this.Correotxt.getText();
 
-        if (nombre != null && "".equals(nombre.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Nombre.");
-        } else if (apellido != null && "".equals(apellido.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Apellido.");
-        } else if (nickname != null && "".equals(nickname.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el NickName.");
-        } else if (email != null && "".equals(email.trim())) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Correo.");
-        } else if ((Integer) this.Dia.getValue() != null && (Integer) this.Dia.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Dia en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
-        } else if ((Integer) this.Mes.getValue() != null && (Integer) this.Mes.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Mes en la Fecha - Porfavor ingrese Fecha(dd/mm/aa). ");
-        } else if ((Integer) this.Año.getValue() != null && (Integer) this.Año.getValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "No se ingreso el Año en la Fecha - Porfavor ingrese Fecha(dd/mm/aa).  ");
-        } else if (descripcion != null && "".equals(descripcion.trim())) {
-            JOptionPane.showMessageDialog(null, "No se Ingreso la Descripcion.");
-            /*}else if(bio!=null && "".equals(bio.trim())){
-           JOptionPane.showMessageDialog(null, "No se Ingreso la Biografia.");
-       }else if(link!=null && "".equals(link.trim())){
-           JOptionPane.showMessageDialog(null, "No se Ingreso el Link.");*/
-        } else {
-            Artista artista = new Artista(descripcion, bio, link, "", nickname, nombre, apellido, email, fecha);
+            //Datos Especifico de Artista
+            String descripcion = this.descripcion.getText();
+            String bio = this.biografia.getText();
+            String link = this.link.getText();
+            
+            //Datos Fecha
+            String fdia = this.Dia.getValue().toString();
+            String fmes = this.Mes.getValue().toString();
+            String fanio = this.Año.getValue().toString();
+            
+            //Convertimos la fecha para aa/mm/dd
+            Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
+            
+            //Creamos el dato artista y lo mandamos al controlador
+            Artista artista = new Artista(descripcion,bio,link,"",nickname,nombre,apellido,email,fecha);
             fabrica.getUsuarioControladorImpl().altaUsuario(artista);
-
-            this.Nombretxt.setText("");
-            this.Apellidotxt.setText("");
-            this.Nicknametxt.setText("");
-            this.Correotxt.setText("");
-            this.Dia.setValue(0);
-            this.Mes.setValue(0);
-            this.Año.setValue(0);
-            this.descripcion.setText("");
-            this.biografia.setText("");
-            this.link.setText("");
-
+          
+        } 
+        catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+            return;
         }
+        catch (InnovaModelException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            return;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
+            return;
+        }
+        this.dispose(); //Limpia todos los Campos de la ventana
+       
     }//GEN-LAST:event_AceptarActionPerformed
 
 
