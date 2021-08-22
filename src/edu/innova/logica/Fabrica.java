@@ -11,9 +11,11 @@ import edu.innova.logica.controladores.impl.PlataformaControladorImpl;
 import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
 import edu.innova.logica.servicios.EspectaculoServicio;
+import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
+import edu.innova.logica.servicios.impl.FuncionServicioImpl;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 
@@ -66,5 +68,10 @@ public class Fabrica {
     
     public FuncionControlador getFuncionControlador() {
         return new FuncionControladorImpl().getInstance();
+    }
+    
+    public FuncionServicio getFuncionServicioImpl() {
+        FuncionServicio  cont = new FuncionServicioImpl();
+        return cont;
     }
 }

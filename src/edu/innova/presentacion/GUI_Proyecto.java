@@ -40,6 +40,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        Consulta_Funcion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuModificarArtista = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -144,6 +146,11 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu5.add(AgregarFE);
 
         jMenuItem5.setText(" Registro a Función de Espectáculo");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem5);
 
         Registro.add(jMenu5);
@@ -195,6 +202,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu6.add(jMenuItem3);
 
         jMenu3.add(jMenu6);
+
+        jMenu7.setText("Consultar Función");
+
+        Consulta_Funcion.setText("Función de Espectaculo");
+        Consulta_Funcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Consulta_FuncionActionPerformed(evt);
+            }
+        });
+        jMenu7.add(Consulta_Funcion);
+
+        jMenu3.add(jMenu7);
 
         Menu.add(jMenu3);
 
@@ -338,6 +357,21 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void Consulta_FuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consulta_FuncionActionPerformed
+        try {
+            Todas_Las_Funciones_Espectaculos tfe;
+            tfe = new Todas_Las_Funciones_Espectaculos();
+            this.Panel.add(tfe);
+            tfe.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Consulta_FuncionActionPerformed
     
 
     public static void main(String args[]) {
@@ -372,6 +406,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem Agregar_Espectaculo;
     private javax.swing.JMenuItem Artista;
     private javax.swing.JMenu Cliente;
+    private javax.swing.JMenuItem Consulta_Funcion;
     private javax.swing.JMenuItem Crear_Paquete;
     private javax.swing.JMenu Espectaculo;
     private javax.swing.JMenuItem EspectaculoC;
@@ -388,6 +423,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

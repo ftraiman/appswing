@@ -85,6 +85,7 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tabla_Espectaculo.setEnabled(false);
         jScrollPane1.setViewportView(Tabla_Espectaculo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

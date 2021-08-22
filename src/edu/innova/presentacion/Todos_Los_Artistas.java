@@ -63,8 +63,6 @@ public class Todos_Los_Artistas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Todos Los Artistas");
 
         DatosArtistas.setModel(new javax.swing.table.DefaultTableModel(
