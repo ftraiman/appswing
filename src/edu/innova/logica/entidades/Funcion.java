@@ -15,12 +15,13 @@ public class Funcion {
     public Funcion() {
     }
 
-    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados) {
+    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre) {
         this.id = id;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
+        this.nombre = nombre;
     }
 
     public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados) {
@@ -81,7 +82,7 @@ public class Funcion {
 
     @Override
     public String toString() {
-        return new StringBuilder().append(nombre).append(" (" + id + ")").toString();
+        return String.format("%s (%s)", nombre, id);
     }
 
 }

@@ -1,13 +1,14 @@
 package edu.innova.helpers;
 
 import edu.innova.exceptions.InnovaModelException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class HelperFecha {
-
+    
     public static Date parsearFecha(String dia, String mes, String anio) {
 
         try {
@@ -55,10 +56,15 @@ public class HelperFecha {
         }   
     }
     
-    public static void validarFechaPosteriorALaActual(Date fecha, String nombreParametro) {
+    public static Boolean validarFechaPosteriorALaActual(Date fecha, String nombreParametro) {
         if(fecha.compareTo(new Date()) < 0) {
             throw new InnovaModelException(String.format("La fecha ingresada [%s] es anterior a la fecha actual", nombreParametro));
         }   
+        return true;
+    }
+    
+    public static Boolean validarFechaPosteriorALaActualSinThrow(Date fecha) {
+        return fecha.compareTo(new Date()) > 0;
     }
     
     public static Date validarFecha(String fecha, String formato) {
@@ -68,7 +74,12 @@ public class HelperFecha {
         } catch (Exception e) {
             throw new IllegalArgumentException("Fecha invalida", e.getCause());
         }
-    } 
+    }
+    
+    public static String fechaToString(Date fecha, String patron) {
+        DateFormat dateFormat = new SimpleDateFormat(patron);  
+        return dateFormat.format(fecha);  
+    }
 
     public static void main(String[] args) {
         String dia = "30";

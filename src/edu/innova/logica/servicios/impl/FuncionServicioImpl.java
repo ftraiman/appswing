@@ -4,6 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.persistencia.ConexionDB;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import edu.innova.logica.servicios.UsuarioServicio;
+import java.math.BigDecimal;
 import java.sql.Statement;
 
 public class FuncionServicioImpl implements FuncionServicio {
@@ -28,6 +30,8 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String agregarArtistaALaFuncion = "INSERT INTO artistas_funciones (idFuncion, idUsuario) VALUES (?, ?)";
     private final String artistaInvitadosEnFuncion = "SELECT * FROM artistas_funciones WHERE idFuncion = ?";
     private final String agregarArtistasFunciones = "INSERT INTO artistas_funciones(idFuncion, idUsuario) VALUES (?, ?)";
+    private final String agregarEspectadorAFuncion = "INSERT INTO espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (?, ?, ?, ?)";
+    private final String todosLasFuncionesPorIdEspectador = "SELECT * FROM espectadores_funciones WHERE idUsuario = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -60,7 +64,7 @@ public class FuncionServicioImpl implements FuncionServicio {
             sentencia.setDate(3, new java.sql.Date(funcion.getFechaInicio().getTime()));
             sentencia.setDate(4, new java.sql.Date(funcion.getFechaRegistro().getTime()));
             sentencia.executeUpdate();
-            
+
             Integer newId = null;
             ResultSet rs = sentencia.getGeneratedKeys();
             if (rs.next()) {
@@ -109,23 +113,58 @@ public class FuncionServicioImpl implements FuncionServicio {
     //==================== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO=========//
     @Override
     public List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) throws SQLException {
-        List<Funcion> espectaculos = new ArrayList<>();
+        List<Funcion> funciones = new ArrayList<>();
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
         sentencia.setLong(1, idEspectaculo);
         ResultSet rs = sentencia.executeQuery();
         while (rs.next()) {
-            espectaculos.add(funcionMapper(rs));
+            funciones.add(funcionMapper(rs));
         }
-        return espectaculos;
+        return funciones;
     }
     //==================== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO=========//
 
+    @Override
     public void agregarArtistaInvitadoALaFuncion(Long idFuncion, List<Long> idUsuarios) throws SQLException {
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(agregarArtistaALaFuncion);
         for (Long idUsuario : idUsuarios) {
             sentencia.setLong(1, idFuncion);
             sentencia.setLong(2, idUsuario);
             sentencia.executeUpdate();
+        }
+    }
+
+    //==================== AlTA DE ESPECTADOR A FUNCION =======================//
+    @Override
+    public void altaEspectadorAFuncion(Funcion funcion, Espectador espectador, Date fechaRegistroEspectaculo, BigDecimal costo) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(agregarEspectadorAFuncion);
+            sentencia.setLong(1, funcion.getId());
+            sentencia.setLong(2, espectador.getId());
+            sentencia.setDate(3, new java.sql.Date(fechaRegistroEspectaculo.getTime()));
+            sentencia.setBigDecimal(4, costo);
+            sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("El Espectador ya se encuentra registrado a la Función", funcion.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+
+    @Override
+    public List<Funcion> getFuncionesPorIdEspectador(Espectador espectador) {
+        try {
+            List<Funcion> funciones = new ArrayList<>();
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLasFuncionesPorIdEspectador);
+            sentencia.setLong(1, espectador.getId());
+            System.err.println(sentencia);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(getFuncionPorId(rs.getLong("idFuncion")));
+            }
+            return funciones;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
     }
 
@@ -147,9 +186,10 @@ public class FuncionServicioImpl implements FuncionServicio {
         Long idEspectaculo = rs.getLong("idEspectaculo");
         Date fechaInicio = rs.getTimestamp("fechaInicio");
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
+        String nombre = rs.getString("nombre");
 
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
-        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados);
+        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre);
     }
 }

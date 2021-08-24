@@ -102,6 +102,10 @@ create table espectadores_funciones
 (
 	idFuncion int null,
 	idUsuario int null,
+	fechaRegistro timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+	costo decimal(19) null,
+	constraint espectadores_funciones_pk
+		unique (idFuncion, idUsuario),
 	constraint espectadores_funciones_funciones_id_fk
 		foreign key (idFuncion) references funciones (id),
 	constraint espectadores_funciones_usuarios_id_fk

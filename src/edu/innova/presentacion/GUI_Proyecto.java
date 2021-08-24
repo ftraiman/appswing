@@ -145,13 +145,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         });
         jMenu5.add(AgregarFE);
 
-        jMenuItem5.setText(" Registro a Función de Espectáculo");
+        jMenuItem5.setText("Registro a Función de Espectáculo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
         jMenu5.add(jMenuItem5);
+        jMenuItem5.getAccessibleContext().setAccessibleName("Registro a Función de Espectáculo");
 
         Registro.add(jMenu5);
 
@@ -359,7 +360,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        Registrar_espectador_a_Funcion rf = new Registrar_espectador_a_Funcion();
+        this.Panel.add(rf);
+        rf.show();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Consulta_FuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consulta_FuncionActionPerformed
