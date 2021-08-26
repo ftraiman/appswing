@@ -6,14 +6,10 @@ import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Plataforma;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 

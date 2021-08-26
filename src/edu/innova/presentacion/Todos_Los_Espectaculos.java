@@ -2,7 +2,6 @@ package edu.innova.presentacion;
 
 import edu.innova.logica.Fabrica;
 import edu.innova.persistencia.ConexionDB;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;

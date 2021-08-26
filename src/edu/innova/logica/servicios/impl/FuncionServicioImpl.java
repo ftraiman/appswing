@@ -19,6 +19,8 @@ import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.UsuarioServicio;
 import java.math.BigDecimal;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FuncionServicioImpl implements FuncionServicio {
 
@@ -32,6 +34,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String agregarArtistasFunciones = "INSERT INTO artistas_funciones(idFuncion, idUsuario) VALUES (?, ?)";
     private final String agregarEspectadorAFuncion = "INSERT INTO espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (?, ?, ?, ?)";
     private final String todosLasFuncionesPorIdEspectador = "SELECT * FROM espectadores_funciones WHERE idUsuario = ?";
+    private final String eliminarFuncionesDeEspectador = "DELETE FROM espectadores_funciones WHERE idUsuario = ? AND idFuncion = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -157,7 +160,6 @@ public class FuncionServicioImpl implements FuncionServicio {
             List<Funcion> funciones = new ArrayList<>();
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLasFuncionesPorIdEspectador);
             sentencia.setLong(1, espectador.getId());
-            System.err.println(sentencia);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 funciones.add(getFuncionPorId(rs.getLong("idFuncion")));
@@ -165,6 +167,21 @@ public class FuncionServicioImpl implements FuncionServicio {
             return funciones;
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+
+    @Override
+    public void eliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {
+        try {
+            validarParametrosEliminarFuncionesDelEspectador(funciones, espectador);
+            for (int i = 0; i < funciones.size(); i++) {
+                PreparedStatement sentencia = conexion.getConexion().prepareStatement(eliminarFuncionesDeEspectador);
+                sentencia.setLong(1, espectador.getId());
+                sentencia.setLong(2, funciones.get(i).getId());
+                sentencia.execute();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -191,5 +208,16 @@ public class FuncionServicioImpl implements FuncionServicio {
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
         return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre);
+    }
+
+    private void validarParametrosEliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {
+        for (int i = 0; i < funciones.size(); i++) {
+            if (funciones.get(i).getId() == null) {
+                throw new InnovaModelException("La Funcion a eliminar es invalida");
+            }
+        }
+        if (espectador.getId() == null) {
+            throw new InnovaModelException("La Espectador es invalido");
+        }
     }
 }

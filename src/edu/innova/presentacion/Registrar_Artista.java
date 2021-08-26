@@ -4,7 +4,6 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectador;
 import java.util.Date;
 import javax.swing.JOptionPane;
 

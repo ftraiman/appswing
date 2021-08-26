@@ -8,8 +8,6 @@ import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Plataforma;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -27,8 +25,8 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
     private Funcion funcionSeleccionada;
     private Espectador espectadorSeleccionado;
 
-    private List<Funcion> funcionesCanjeables;
-    private List<Funcion> funcionesParaCanjear;
+    private Set<Funcion> funcionesCanjeables = new HashSet<>();
+    private Set<Funcion> funcionesParaCanjear = new HashSet<>();
     private DefaultListModel<Funcion> funcionesCanjeablesModel = new DefaultListModel<>();
     private DefaultListModel<Funcion> funcionesParaCanjearModel = new DefaultListModel<>();
 
@@ -87,6 +85,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         lstFuncionesCanjeables = new javax.swing.JList<>();
         lblSeleccionarEspectador3 = new javax.swing.JLabel();
+        btnCanjearFuncion = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -292,62 +291,84 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lstFuncionesParaCanjear.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstFuncionesParaCanjearValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstFuncionesParaCanjear);
 
         lblSeleccionarEspectador1.setText("Funciones canjeables");
 
         lblSeleccionarEspectador2.setText(">");
 
+        lstFuncionesCanjeables.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstFuncionesCanjeablesValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstFuncionesCanjeables);
 
         lblSeleccionarEspectador3.setText("Funciones para canjear");
+
+        btnCanjearFuncion.setText("Canjear Función");
+        btnCanjearFuncion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCanjearFuncionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSeleccionarPlataforma)
-                                    .addComponent(lblEspectaculo)
-                                    .addComponent(lblSeleccionarFuncion)
-                                    .addComponent(lblSeleccionarEspectador))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbEspectaculo, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(cbPlataforma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbFunciones, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(cbEspectadores, 0, 200, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(btnEspectadorAFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13)
-                                .addComponent(lblSeleccionarEspectador2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSeleccionarEspectador1)
-                                .addGap(110, 110, 110)
-                                .addComponent(lblSeleccionarEspectador3)))))
-                .addContainerGap(595, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(346, 346, 346))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblSeleccionarPlataforma)
+                                            .addComponent(lblEspectaculo)
+                                            .addComponent(lblSeleccionarFuncion)
+                                            .addComponent(lblSeleccionarEspectador))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cbEspectaculo, 0, 200, Short.MAX_VALUE)
+                                            .addComponent(cbPlataforma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbFunciones, 0, 200, Short.MAX_VALUE)
+                                            .addComponent(cbEspectadores, 0, 200, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(btnEspectadorAFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(lblSeleccionarEspectador2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblSeleccionarEspectador1)
+                                        .addGap(110, 110, 110)
+                                        .addComponent(lblSeleccionarEspectador3))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(btnCanjearFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(595, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +416,9 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblSeleccionarEspectador2)
                         .addGap(45, 45, 45)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCanjearFuncion)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("Alta de Espectador a Función");
@@ -474,14 +497,54 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
     private void cbEspectadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEspectadoresActionPerformed
         funcionesCanjeablesModel.clear();
         espectadorSeleccionado = (Espectador) cbEspectadores.getSelectedItem();
-        funcionesCanjeables = fabrica.getFuncionControlador().getFuncionesPorIdEspectador(espectadorSeleccionado);
+        funcionesCanjeables = new HashSet<>(fabrica.getFuncionControlador().getFuncionesPorIdEspectador(espectadorSeleccionado));
         if (funcionesCanjeables != null && funcionesCanjeables.size() > 0) {
             funcionesCanjeables.forEach(funcion -> funcionesCanjeablesModel.addElement(funcion));
         }
     }//GEN-LAST:event_cbEspectadoresActionPerformed
 
+    private void lstFuncionesCanjeablesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstFuncionesCanjeablesValueChanged
+        Funcion funcionSeleccionada = lstFuncionesCanjeables.getSelectedValue();
+        if (funcionSeleccionada != null) {
+            funcionesParaCanjear.add(funcionSeleccionada);
+            funcionesParaCanjearModel.removeAllElements();
+            funcionesParaCanjear.forEach(funcion -> funcionesParaCanjearModel.addElement(funcion));
+            lstFuncionesParaCanjear.setModel(funcionesParaCanjearModel);
+           
+        }
+    }//GEN-LAST:event_lstFuncionesCanjeablesValueChanged
+
+    private void lstFuncionesParaCanjearValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstFuncionesParaCanjearValueChanged
+        Funcion funcionSeleccionada = lstFuncionesParaCanjear.getSelectedValue();
+        if (funcionSeleccionada != null)  {
+            funcionesParaCanjear.remove(funcionSeleccionada);
+            funcionesParaCanjearModel.removeAllElements();
+            funcionesParaCanjear.forEach(funcion -> funcionesParaCanjearModel.addElement(funcion));
+            lstFuncionesParaCanjear.setModel(funcionesParaCanjearModel);
+        }
+            
+    }//GEN-LAST:event_lstFuncionesParaCanjearValueChanged
+
+    private void btnCanjearFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanjearFuncionActionPerformed
+        try {
+            fabrica.getFuncionControlador().canjearFunciones(espectadorSeleccionado, funcionSeleccionada, funcionesParaCanjear);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+            return;
+        } catch (InnovaModelException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
+            return;
+        }
+        JOptionPane.showMessageDialog(rootPane, "El canje ocurrió correctamente");
+        this.dispose();
+        
+    }//GEN-LAST:event_btnCanjearFuncionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCanjearFuncion;
     private javax.swing.JButton btnEspectadorAFuncion;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<Espectaculo> cbEspectaculo;

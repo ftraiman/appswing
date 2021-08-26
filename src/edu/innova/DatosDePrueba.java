@@ -4,7 +4,6 @@ import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Plataforma;
-import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;

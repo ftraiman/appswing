@@ -11,8 +11,10 @@ import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.impl.FuncionServicioImpl;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class FuncionControladorImpl implements FuncionControlador {
 
@@ -57,6 +59,15 @@ public class FuncionControladorImpl implements FuncionControlador {
         }
     }
 
+    @Override
+    public void canjearFunciones(Espectador espectador, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear) {
+        validarCanjearFunciones(espectador, funcionSeleccionada, funcionesParaCanjear);
+        
+        funcionServicio.eliminarFuncionesDelEspectador(new ArrayList(funcionesParaCanjear), espectador);
+        funcionServicio.altaEspectadorAFuncion(funcionSeleccionada, espectador, new Date(), BigDecimal.ZERO);
+
+    }
+
     private void validarNuevaFuncion(Funcion funcion, Espectaculo espectaculo) {
         HelperStrings.stringNoVacio(funcion.getNombre(), "nombre");
         HelperFecha.validarFechaPosteriorALaActual(funcion.getFechaInicio(), "fecha de la funcion");
@@ -88,6 +99,24 @@ public class FuncionControladorImpl implements FuncionControlador {
             throw new InnovaModelException("El costo no puede ser negativo");
         }
         HelperFecha.validarFechaPosteriorALaActual(fechaRegistroEspectaculo, "Fecha de la función");
+    }
+
+    private void validarCanjearFunciones(Espectador espectador, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear) {
+        if (espectador == null) {
+            throw new InnovaModelException("La Espectador no es válido");
+        }
+        if (funcionSeleccionada == null) {
+            throw new InnovaModelException("La Función a canjear es nula");
+        }
+        if (funcionesParaCanjear == null || funcionesParaCanjear.isEmpty()) {
+            throw new InnovaModelException("No hay funciones canjeables");
+        }
+        if (funcionesParaCanjear.size() < 3) {
+            throw new InnovaModelException("Se necesitan al menos 3 funciones para canjear por otra");
+        }
+        if (funcionesParaCanjear.contains(funcionSeleccionada)) {
+            throw new InnovaModelException("La función que intentas adquirir no puede estar en la lista que quieres canjear");
+        }
     }
 
 }

@@ -5,7 +5,6 @@ import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
 import java.util.Date;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 public class Registrar_Espectador extends javax.swing.JInternalFrame {

@@ -4,8 +4,6 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectador;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

@@ -4,6 +4,7 @@ import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface FuncionServicio {
     void altaEspectadorAFuncion(Funcion funcion, Espectador espectador, Date fechaRegistroEspectaculo, BigDecimal costo);
     
     List<Funcion> getFuncionesPorIdEspectador(Espectador espectador);
+
+    public void eliminarFuncionesDelEspectador(ArrayList<Funcion> arrayList, Espectador espectador);
 }

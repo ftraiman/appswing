@@ -1,12 +1,8 @@
 package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
-import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
-import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Plataforma;
-import java.math.BigDecimal;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 
