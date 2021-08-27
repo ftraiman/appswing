@@ -5,7 +5,9 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
+import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
+import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,8 +17,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PaqueteServicioImpl implements PaqueteServicio {
 
@@ -24,11 +24,14 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento) VALUES (?, ?, ?, ?, ?)";
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
+    private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     private static PaqueteServicioImpl servicio;
 
     private ConexionDB conexion = new ConexionDB();
+
+    private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
 
     public PaqueteServicioImpl() {
     }
@@ -72,7 +75,6 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
-    
 
     public static void main(String[] args) {
         PaqueteServicioImpl psi = new PaqueteServicioImpl().getInstance();
@@ -81,23 +83,38 @@ public class PaqueteServicioImpl implements PaqueteServicio {
 
     @Override
     public List<Paquete> getTodosLosPaquetes() throws SQLException {
-          List<Paquete> paquetes = new ArrayList<>();
+        List<Paquete> paquetes = new ArrayList<>();
         PreparedStatement sentencia;
 
-            sentencia = conexion.getConexion().prepareStatement(todosLosPaquetes);
-            ResultSet rs = sentencia.executeQuery();
+        sentencia = conexion.getConexion().prepareStatement(todosLosPaquetes);
+        ResultSet rs = sentencia.executeQuery();
         while (rs.next()) {
-           paquetes.add((Paquete) paqueteMapper(rs));
+            paquetes.add((Paquete) paqueteMapper(rs));
         }
-        
+
         return paquetes;
     }
-    
+
     private Paquete paqueteMapper(ResultSet rs) throws SQLException {
         Date fechaInicio = rs.getTimestamp("fechaInicio");
         BigDecimal descuento = HelperStrings.getBigDecimalValue(rs.getString("descuento"));
         Date fechaFin = rs.getTimestamp("fechaFin");
-        return new Paquete(rs.getString("nombre"),rs.getString("descripcion"),fechaInicio, fechaFin ,descuento);
+        List<Espectaculo> espectaculosDelPaquete = getEspectaculosDelPaquete(rs.getLong("id"));
+        return new Paquete(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), fechaInicio, fechaFin, descuento, espectaculosDelPaquete);
+    }
+
+    private List<Espectaculo> getEspectaculosDelPaquete(Long idPaquete) {
+        List<Espectaculo> espectaculos = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculosEnPaquetes);
+            sentencia.setLong(1, idPaquete);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoServicio.getEspectaculoPorId(rs.getLong("idEspectaculo")));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return espectaculos;
     }
 }
-
