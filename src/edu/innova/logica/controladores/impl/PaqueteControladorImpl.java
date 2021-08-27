@@ -6,9 +6,14 @@ import edu.innova.helpers.HelperStrings;
 import java.math.BigDecimal;
 
 import edu.innova.logica.controladores.PaqueteControlador;
+import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
+import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class PaqueteControladorImpl implements PaqueteControlador {
 
@@ -39,8 +44,41 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         if (paquete.getDescuento().compareTo(BigDecimal.ZERO) < 0 || paquete.getDescuento().compareTo(BigDecimal.valueOf(100)) > 0) {
             throw new IllegalArgumentException("Descuento inválido");
         }
-        if(paquete.getFechaFin().compareTo(paquete.getFechaInicio()) < 0) {
+        if (paquete.getFechaFin().compareTo(paquete.getFechaInicio()) < 0) {
             throw new InnovaModelException("La fecha de inicio es posterior a la fecha de fin");
         }
     }
+
+    @Override
+    public List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas, Paquete paquetes) {
+        if (plataformas != null && paquetes != null) {
+
+            return paqueteServicio.getEspectaculosNOPaquete(paquetes.getId(), plataformas.getId());
+
+        } else {
+
+            return new ArrayList<Espectaculo>();
+
+        }
+
+    }
+
+    @Override
+    public void altaPaqueteEspectaculo(Long IdPaquete, Long IDEspectaculos) {
+        try {
+             int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectaculo al Paquete??", "Confirmar Espectaculo al Paquete", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos,IdPaquete);
+                  
+                    JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
+                } 
+                else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo al Paquete");
+                }
+            
+        } catch (BaseDeDatosException ex){
+            throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+    }
+
 }

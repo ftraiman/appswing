@@ -220,20 +220,7 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_DatosEspectaculosMouseClicked
 
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DatosEspectaculos;
     private javax.swing.JTable datosFuncion;

@@ -25,6 +25,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
+    private final String EspectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     private static PaqueteServicioImpl servicio;
@@ -111,6 +112,23 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 espectaculos.add(espectaculoServicio.getEspectaculoPorId(rs.getLong("idEspectaculo")));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return espectaculos;
+    }
+    
+    
+  public List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete , Long idPlataforma) {
+        List<Espectaculo> espectaculos = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(EspectaculosDeNOPaquetes);
+            sentencia.setLong(1, idPlataforma);
+            sentencia.setLong(2, idPaquete);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoServicio.getEspectaculoPorId(rs.getLong("id")));
             }
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));

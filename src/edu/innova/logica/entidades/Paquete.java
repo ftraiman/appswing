@@ -89,6 +89,12 @@ public class Paquete {
     public void setEspectaculos(List<Espectaculo> espectaculos) {
         this.espectaculos = espectaculos;
     }
+
+    @Override
+    public String toString() {
+        return  nombre;
+    }
+    
     
     
 
