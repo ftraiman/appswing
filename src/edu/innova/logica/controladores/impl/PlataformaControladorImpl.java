@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class PlataformaControladorImpl implements PlataformaControlador{
@@ -35,9 +36,16 @@ public class PlataformaControladorImpl implements PlataformaControlador{
         try {
             // valido que los datos de entrada sean validos
             validarNuevaPlataforma(plataforma);
-            // inserto en la db
-            fabrica.getPlataformaServicioImpl().altaPlataforma(plataforma);
             
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Plataforma?", "Confirmar Alta Plataforma", JOptionPane.YES_NO_OPTION);
+
+            if (i == JOptionPane.YES_OPTION) {
+                fabrica.getPlataformaServicioImpl().altaPlataforma(plataforma);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Plataforma");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se Agrego La Plataforma");
+            }
+
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         } catch (SQLException ex) {
@@ -50,12 +58,10 @@ public class PlataformaControladorImpl implements PlataformaControlador{
     }
 
     private void validarNuevaPlataforma(Plataforma plataforma) {
-        /*if (plataforma.getNombre() == null) {
-            throw new InnovaModelException("La plataforma es inválida");
-        }*/
-        
         HelperStrings.stringNoVacio(plataforma.getNombre(), "nombre");
-              
+        HelperStrings.stringNoVacio(plataforma.getDescripcion(), "descripcion");
+        HelperStrings.stringNoVacio(plataforma.getUrl(), "url");
+        HelperStrings.urlValidator(plataforma.getUrl());       
     }  
 }
     
