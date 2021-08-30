@@ -28,7 +28,7 @@ public class HelperStrings {
         try {
             return new BigDecimal(valor);
         } catch(Exception e) {
-            throw new IllegalArgumentException("Monto inválido"); //To change body of generated methods, choose Tools | Templates.
+            throw new IllegalArgumentException("Monto inválido, Ingrese un Descuento"); //To change body of generated methods, choose Tools | Templates.
         }          
     }
     
