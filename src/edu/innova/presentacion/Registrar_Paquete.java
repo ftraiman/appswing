@@ -46,8 +46,6 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Registrar Paquete");
 
         lblNombre.setText("Nombre");

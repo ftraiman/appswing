@@ -66,8 +66,6 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
         jArtistasInvitados2 = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Alta de Función a Espectáculo");
 
         lblSeleccionarPlataforma.setText("Seleccionar Plataforma");

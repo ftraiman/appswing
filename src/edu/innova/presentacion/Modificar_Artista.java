@@ -68,8 +68,6 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
         btn_Cancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Modificar Artista");
         setPreferredSize(new java.awt.Dimension(1200, 500));
 

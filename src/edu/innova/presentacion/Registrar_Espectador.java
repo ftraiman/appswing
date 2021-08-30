@@ -38,8 +38,6 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         Año = new javax.swing.JSpinner();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Registrar Espectador");
 
         jLabel1.setText("Nombre:");

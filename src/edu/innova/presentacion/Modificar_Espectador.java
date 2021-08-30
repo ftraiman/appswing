@@ -58,8 +58,6 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         btn_Cancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Modificar Espectador");
         setPreferredSize(new java.awt.Dimension(700, 500));
 

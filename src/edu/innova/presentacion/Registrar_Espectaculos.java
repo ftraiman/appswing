@@ -87,8 +87,6 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         Cancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Espectaculos");
 

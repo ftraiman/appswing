@@ -44,8 +44,6 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         link = new javax.swing.JTextField();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setTitle("Registrar Artista");
 
         jLabel1.setText("Nombre:");
