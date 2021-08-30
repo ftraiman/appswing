@@ -250,6 +250,17 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             //Creamos el dato artista y lo mandamos al controlador
             Artista artista = new Artista(descripcion,bio,link,"",nickname,nombre,apellido,email,fecha);
             fabrica.getUsuarioControladorImpl().altaUsuario(artista);
+            
+        this.Nombretxt.setText("");
+        this.Apellidotxt.setText("");
+        this.Nicknametxt.setText("");
+        this.Correotxt.setText("");
+        this.descripcion.setText("");
+        this.biografia.setText("");
+        this.link.setText("");
+        this.Dia.setValue(1);
+        this.Mes.setValue(1);
+        this.Año.setValue(1900);
           
         } 
         catch (IllegalArgumentException e) {
@@ -264,11 +275,21 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        //this.dispose(); //Limpia todos los Campos de la ventana 
+         
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-      this.dispose();
+        this.Nombretxt.setText("");
+        this.Apellidotxt.setText("");
+        this.Nicknametxt.setText("");
+        this.Correotxt.setText("");
+        this.descripcion.setText("");
+        this.biografia.setText("");
+        this.link.setText("");
+        this.Dia.setValue(1);
+        this.Mes.setValue(1);
+        this.Año.setValue(1900); 
+    // this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
 
