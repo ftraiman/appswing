@@ -66,6 +66,11 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         });
 
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         SelecionarImagen.setText("Selecionar Imagen");
 
@@ -259,9 +264,12 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        this.dispose(); //Limpia todos los Campos de la ventana
-       
+        //this.dispose(); //Limpia todos los Campos de la ventana 
     }//GEN-LAST:event_AceptarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

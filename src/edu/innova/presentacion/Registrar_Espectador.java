@@ -71,6 +71,11 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         });
 
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Día:");
 
@@ -209,12 +214,16 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        this.dispose(); //Limpia todos los Campos de la ventana
+        //this.dispose(); //Limpia todos los Campos de la ventana
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void NombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombretxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NombretxtActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

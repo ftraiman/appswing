@@ -72,13 +72,34 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     public void modificarUsuario(Usuario usuario) {
         try {
             if (usuario instanceof Espectador) {
+               
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
-                usuarioServicio.modificarUsuario(espectador);
+                
+                int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Espectador??", "Confirmar Cambios Espectador", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    usuarioServicio.modificarUsuario(espectador);
+                    JOptionPane.showMessageDialog(null, "El Espectador fue modificado correctamente");
+                } 
+                else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Espectador");
+                }
+
             } else if (usuario instanceof Artista) {
+                
                 Artista artista = (Artista) usuario;
                 validarParametrosModificarArtista(artista);
-                usuarioServicio.modificarUsuario(artista);
+                
+                
+                int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Artista??", "Confirmar Cambios Artista", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    usuarioServicio.modificarUsuario(artista);
+                    JOptionPane.showMessageDialog(null, "El Artista fue modificado correctamente");
+                } 
+                else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Artista");
+                }
+                
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
@@ -110,11 +131,15 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
     }
 
-    private void validarParametrosModificarArtista(Artista artista) {
+      private void validarParametrosModificarArtista(Artista artista) {
         HelperStrings.stringNoVacio(artista.getNombre(), "nombre");
         HelperStrings.stringNoVacio(artista.getApellido(), "apellido");
         HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
-        //TODO averiguar si hay que validar la biografia o la descripcion
+        
+        HelperStrings.stringNoVacio(artista.getDescripcion(), "descripcion");
+        HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");
+        HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
+        HelperStrings.urlValidator(artista.getLinkUsuario());
     }
     
     private void validarParametrosEspectador(Espectador espectador) {
@@ -122,14 +147,16 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
         HelperStrings.stringNoVacio(espectador.getNickname(), "nickname");
         HelperStrings.stringNoVacio(espectador.getEmail(), "email");
+        HelperStrings.ValidarEmail(espectador.getEmail());
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
     }
     
-    private void validarParametrosArtista(Artista artista) {
+      private void validarParametrosArtista(Artista artista) {
         HelperStrings.stringNoVacio(artista.getNombre(), "nombre");
         HelperStrings.stringNoVacio(artista.getApellido(), "apellido");
         HelperStrings.stringNoVacio(artista.getNickname(), "nickname");
         HelperStrings.stringNoVacio(artista.getEmail(), "email");
+        HelperStrings.ValidarEmail(artista.getEmail());
         
         HelperStrings.stringNoVacio(artista.getDescripcion(), "descripcion");
         HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");

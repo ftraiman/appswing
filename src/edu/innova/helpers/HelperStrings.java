@@ -4,6 +4,8 @@ import edu.innova.exceptions.InnovaModelException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HelperStrings {
 
@@ -49,5 +51,23 @@ public class HelperStrings {
             // nada muy importante
         }
         //return false; //Esto porque pide la mierda del IDE
+    }
+    
+     public static boolean ValidarEmail(String email){
+        
+        //Comprobamos el correo con Expresiones Regulares
+        //Para verificar que sea un correo hay que verificar que este "@" y ".dominio"
+        //Para ello se usa expresiones regulares para comparar cadenas de texto
+        //y encontrar alguna similitud entre ambas cadenas
+        
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        
+        Matcher mat = patron.matcher(email);        
+        
+        if(mat.find()) { //Si el email es correcto
+            return true;
+        }
+        throw new InnovaModelException(String.format("El parametro [%s] NO es un email!!!", email));
     }
 }
