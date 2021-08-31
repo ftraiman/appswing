@@ -80,9 +80,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         try {
             int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectaculo al Paquete??", "Confirmar Espectaculo al Paquete", JOptionPane.YES_NO_OPTION);
                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-               paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos,IdPaquete);
+                    paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos,IdPaquete);
 
-                   JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
+                    JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
                } 
                else { //Si no agrega muestra
                    JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo al Paquete");

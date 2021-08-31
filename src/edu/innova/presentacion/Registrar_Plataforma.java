@@ -116,11 +116,15 @@ public class Registrar_Plataforma extends javax.swing.JInternalFrame {
          try {
 
             String nombre = this.txtNombre.getText();
-            String descripcion = txtDesc.getText();
-            String url = txtURL.getText();
+            String descripcion = this.txtDesc.getText();
+            String url = this.txtURL.getText();
             
             Plataforma plataforma = new Plataforma(nombre,descripcion,url);
             fabrica.getPlataformaControlador().altaPlataforma(plataforma);
+            
+            this.txtNombre.setText("");
+            this.txtDesc.setText("");
+            this.txtURL.setText("");
             
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -132,7 +136,10 @@ public class Registrar_Plataforma extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.dispose();
+        //this.dispose();
+        this.txtNombre.setText("");
+        this.txtDesc.setText("");
+        this.txtURL.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

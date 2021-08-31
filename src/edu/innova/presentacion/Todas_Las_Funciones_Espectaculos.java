@@ -21,11 +21,11 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
     ConexionDB cn = new ConexionDB();
     Connection con = cn.getConexion();
     Fabrica fabrica = new Fabrica();
-    
+
     public Todas_Las_Funciones_Espectaculos() throws SQLException {
         initComponents();
-        
-         try {
+
+        try {
             // Obtengo del Plataforma Servicio las plataformas
             List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
             // Creo un DefaultListModel que almacena los objetos Plataforma
@@ -58,13 +58,10 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
         datosFuncion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Espectaculo(id)", "Fecha Inicio", "Fecha Registro"
             }
         ));
         datosFuncion.setEnabled(false);
@@ -81,13 +78,10 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
         DatosEspectaculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Costo", "URL", "Duracion", "Descripcion", "Fecha", "Plataforma(id)", "Espectadores Minimos", "Espectadores Maximos"
             }
         ));
         DatosEspectaculos.setEnabled(false);
@@ -150,68 +144,67 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void listPlataformaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlataformaMouseClicked
-        
-            int seleccionar = listPlataforma.getSelectedIndex();
 
-            DefaultTableModel tabla = new DefaultTableModel();
-            tabla.addColumn("ID");
-            tabla.addColumn("Nombre");
-            tabla.addColumn("Costo");
-            tabla.addColumn("URL");
-            tabla.addColumn("Duracion");
-            tabla.addColumn("Descripcion");
-            tabla.addColumn("Fecha");
-            tabla.addColumn("Plataforma(id)");
-            tabla.addColumn("Espectadores Minimos");
-            tabla.addColumn("Espectadores Maximos");
+        int seleccionar = listPlataforma.getSelectedIndex();
 
-            Long id = Long.parseLong(String.valueOf(listPlataforma.getModel().getElementAt(seleccionar).getId()));
-            
-            List<Espectaculo> espectaculos = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculosPorPlataforma(id);
-            for (Espectaculo espectaculo : espectaculos) {
-                String fila[] = new String[10];//Limite de dos porque solo mostramos el nombre y el apellido
+        DefaultTableModel tabla = new DefaultTableModel();
+        tabla.addColumn("ID");
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Costo");
+        tabla.addColumn("URL");
+        tabla.addColumn("Duracion");
+        tabla.addColumn("Descripcion");
+        tabla.addColumn("Fecha");
+        tabla.addColumn("Plataforma(id)");
+        tabla.addColumn("Espectadores Minimos");
+        tabla.addColumn("Espectadores Maximos");
 
-                fila[0] = espectaculo.getId().toString();
-                fila[1] = espectaculo.getNombre();
-                fila[2] = espectaculo.getCosto().toString();
-                fila[3] = espectaculo.getUrl();
-                fila[4] = espectaculo.getDuracion().toString();
-                fila[5] = espectaculo.getDescripcion();
-                fila[6] = espectaculo.getFechaRegistro().toString();
-                fila[7] = espectaculo.getPlataforma().toString();
-                fila[8] = espectaculo.getEspectadoresMinimos().toString();
-                fila[9] = espectaculo.getEspectadoresMaximos().toString();
+        Long id = Long.parseLong(String.valueOf(listPlataforma.getModel().getElementAt(seleccionar).getId()));
 
-                tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
-            }
-            this.DatosEspectaculos.setModel(tabla);
-        
+        List<Espectaculo> espectaculos = fabrica.getEspectaculoServicioImpl().getTodosLosEspectaculosPorPlataforma(id);
+        for (Espectaculo espectaculo : espectaculos) {
+            String fila[] = new String[10];//Limite de dos porque solo mostramos el nombre y el apellido
+
+            fila[0] = espectaculo.getId().toString();
+            fila[1] = espectaculo.getNombre();
+            fila[2] = espectaculo.getCosto().toString();
+            fila[3] = espectaculo.getUrl();
+            fila[4] = espectaculo.getDuracion().toString();
+            fila[5] = espectaculo.getDescripcion();
+            fila[6] = espectaculo.getFechaRegistro().toString();
+            fila[7] = espectaculo.getPlataforma().toString();
+            fila[8] = espectaculo.getEspectadoresMinimos().toString();
+            fila[9] = espectaculo.getEspectadoresMaximos().toString();
+
+            tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
+        }
+        this.DatosEspectaculos.setModel(tabla);
+
     }//GEN-LAST:event_listPlataformaMouseClicked
 
     private void DatosEspectaculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatosEspectaculosMouseClicked
-         try {
+        try {
             int seleccionar = DatosEspectaculos.rowAtPoint(evt.getPoint());
 
             DefaultTableModel tabla = new DefaultTableModel();
             tabla.addColumn("Espectaculo(id)");
             tabla.addColumn("Fecha Inicio");
             tabla.addColumn("Fecha Registro");
-         
 
             Long id = Long.parseLong(String.valueOf(DatosEspectaculos.getValueAt(seleccionar, 0)));
 
             List<Funcion> funciones = fabrica.getFuncionServicioImpl().getTodosLasFuncionesPorIdEspectaculo(id);
-            for(Funcion funcion : funciones){
+            for (Funcion funcion : funciones) {
                 String fila[] = new String[3];//Limite de dos porque solo mostramos el nombre y el apellido
 
                 fila[0] = funcion.getIdEspectaculo().toString();
                 fila[1] = funcion.getFechaInicio().toString();
                 fila[2] = funcion.getFechaRegistro().toString();
-          
+
                 tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
             }
 
-        this.datosFuncion.setModel(tabla);
+            this.datosFuncion.setModel(tabla);
 
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Espectaculo NO Posee Funciones!![%s]", x.getMessage()));
@@ -220,7 +213,7 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_DatosEspectaculosMouseClicked
 
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DatosEspectaculos;
     private javax.swing.JTable datosFuncion;

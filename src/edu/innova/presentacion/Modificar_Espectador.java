@@ -226,7 +226,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private void btnActualizarEspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEspectadorActionPerformed
         // Al presionar el boton actualizar, obtengo todos los datos del Usuario
         try {
-            
+
             Long id = getLongValue(this.txtId.getText());
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
@@ -244,6 +244,16 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
             // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
             fabrica.getUsuarioControlador().modificarUsuario(espectador);
 
+            this.txtId.setText("");
+            this.txtNombre.setText("");
+            this.txtApellido.setText("");
+            this.txtNickname.setText("");
+            this.txtEmail.setText("");
+
+            this.spnDia.setValue(1);
+            this.spnMes.setValue(1);
+            this.spnAnio.setValue(1900);
+
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
             return;
@@ -259,7 +269,16 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnActualizarEspectadorActionPerformed
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
-        this.dispose();
+        //this.dispose();
+        this.txtId.setText("");
+        this.txtNombre.setText("");
+        this.txtApellido.setText("");
+        this.txtNickname.setText("");
+        this.txtEmail.setText("");
+
+        this.spnDia.setValue(1);
+        this.spnMes.setValue(1);
+        this.spnAnio.setValue(1900);
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
 
@@ -291,9 +310,9 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
     private Long getLongValue(String id) {
         try {
             return Long.valueOf(id);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("id"); //To change body of generated methods, choose Tools | Templates.
-        }               
+        }
     }
 
 }

@@ -178,37 +178,42 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        
-       try {
+
+        try {
             Fabrica fabrica = new Fabrica();
-            
+
             //Datos de Espectador
             String nombre = this.Nombretxt.getText();
             String apellido = this.Apellidotxt.getText();
             String nickname = this.Nicknametxt.getText();
             String email = this.Correotxt.getText();
-            
+
             //Datos Fecha
             String fdia = this.Dia.getValue().toString();
             String fmes = this.Mes.getValue().toString();
             String fanio = this.Año.getValue().toString();
-            
+
             //Convertimos la fecha para aa/mm/dd
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
-            
+
             Espectador espectador = new Espectador("", nickname, nombre, apellido, email, fecha);
             fabrica.getUsuarioControladorImpl().altaUsuario(espectador);
-          
-        } 
-        catch (IllegalArgumentException e) {
+
+            this.Nombretxt.setText("");
+            this.Apellidotxt.setText("");
+            this.Nicknametxt.setText("");
+            this.Correotxt.setText("");
+            this.Dia.setValue(1);
+            this.Mes.setValue(1);
+            this.Año.setValue(1900);
+
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
             return;
-        }
-        catch (InnovaModelException e) {
+        } catch (InnovaModelException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
             return;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
@@ -220,7 +225,14 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NombretxtActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        this.dispose();
+        //this.dispose();
+        this.Nombretxt.setText("");
+        this.Apellidotxt.setText("");
+        this.Nicknametxt.setText("");
+        this.Correotxt.setText("");
+        this.Dia.setValue(1);
+        this.Mes.setValue(1);
+        this.Año.setValue(1900);
     }//GEN-LAST:event_CancelarActionPerformed
 
 

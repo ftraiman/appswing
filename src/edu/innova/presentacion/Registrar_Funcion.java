@@ -95,11 +95,11 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Hora");
 
-        spnHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        spnHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
         jLabel7.setText("Minuto");
 
-        spnMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        spnMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -263,6 +263,8 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
             Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados);
 
             fabrica.getFuncionControlador().altaFuncion(funcion, espectaculoSeleccionado);
+            
+            
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));

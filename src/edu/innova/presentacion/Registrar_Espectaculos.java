@@ -346,7 +346,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             String url = txtURL.getText();
 
             //Al pedo?
-            String fecha = this.Fecha.getText();
+            //String fecha = this.Fecha.getText();
 
             Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, new Date());
             
@@ -358,6 +358,12 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.EspMax.setText("");
             this.Costo.setText("");
             this.Fecha.setText("");
+            this.txtId.setText("");
+            this.txtNombre.setText("");
+            this.txtDesc.setText("");
+            this.txtURL.setText("");
+            this.txtIda.setText("");
+            this.txtNombreA.setText("");
 
             int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
 
@@ -378,7 +384,21 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        this.dispose();
+        //this.dispose();
+            this.txtIda.setText("");
+            this.txtId.setText("");
+            this.Nombre.setText("");
+            this.Duracion.setText("");
+            this.EspMin.setText("");
+            this.EspMax.setText("");
+            this.Costo.setText("");
+            this.Fecha.setText("");
+            this.txtId.setText("");
+            this.txtNombre.setText("");
+            this.txtDesc.setText("");
+            this.txtURL.setText("");
+            this.txtIda.setText("");
+            this.txtNombreA.setText("");
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
