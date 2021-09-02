@@ -9,6 +9,7 @@ import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class EspectaculosControladorImpl implements EspectaculoControlador {
 
@@ -27,11 +28,17 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
         try {
-            // valido que los datos de entrada sean validos
+            //Valido que los datos de entrada
             validarNuevoEspectaculo(idArtista, idPlataforma, espectaculo);
-            // inserto en la db
-            espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
-
+            
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo");
+            }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
@@ -43,17 +50,16 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     private void validarNuevoEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
-        if (idArtista == null) {
-            throw new InnovaModelException("El Artista es inválido");
-        }
-        if (idPlataforma == null) {
-            throw new InnovaModelException("La plataforma es inválida");
-        }
 
         HelperStrings.stringNoVacio(espectaculo.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(espectaculo.getDescripcion(), "descripcion");
+        HelperStrings.stringNoVacio(espectaculo.getUrl(), "url");
+        HelperStrings.urlValidator(espectaculo.getUrl());
+          
 
+        //Verificar que el costo no este vacio o menor a 0
         if (null == espectaculo.getCosto() || espectaculo.getCosto().compareTo(BigDecimal.ZERO) < 0) {
-            throw new InnovaModelException("El costo es inválido");
+            throw new InnovaModelException("El Costo es inválido!");
         }
 
     }

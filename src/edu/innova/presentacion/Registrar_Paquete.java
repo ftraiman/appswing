@@ -218,20 +218,6 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento);
 
             fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
-            
-            
-            
-            
-            
-            this.spnDiaInicio.setValue(1);
-            this.spnMesInicio.setValue(1); 
-            this.spnAnioInicio.setValue(2021);
-            this.spnDiaFin.setValue(1);
-            this.spnMesFin.setValue(1);
-            this.spnAnioFin.setValue(2021);
-            this.txtNombre.setText("");
-            this.txtDescripcion.setText("");
-            this.txtDescuento.setText("");
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -251,7 +237,6 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescuentoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        //this.dispose();
         this.spnDiaInicio.setValue(1);
         this.spnMesInicio.setValue(1); 
         this.spnAnioInicio.setValue(2021);

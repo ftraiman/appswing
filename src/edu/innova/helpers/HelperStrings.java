@@ -13,7 +13,7 @@ public class HelperStrings {
         if(null !=str && str.trim().length() > 0) {
             return true;
         }
-        throw new InnovaModelException(String.format("El parametro [%s] es vacío o nulo", nombreParametro));
+        throw new InnovaModelException(String.format("El parametro [%s] esta vacío", nombreParametro));
     }
     
     public static Long getLongValue(String id) {
@@ -28,7 +28,7 @@ public class HelperStrings {
         try {
             return new BigDecimal(valor);
         } catch(Exception e) {
-            throw new IllegalArgumentException("Monto inválido, Ingrese un Descuento"); //To change body of generated methods, choose Tools | Templates.
+            throw new IllegalArgumentException("Monto inválido!"); //To change body of generated methods, choose Tools | Templates.
         }          
     }
     
@@ -70,4 +70,5 @@ public class HelperStrings {
         }
         throw new InnovaModelException(String.format("El parametro [%s] NO es un email!!!", email));
     }
+     
 }
