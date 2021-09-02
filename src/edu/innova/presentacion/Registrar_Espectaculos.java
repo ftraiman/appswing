@@ -90,6 +90,11 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Registrar Espectaculos");
 
+        listPlataforma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listPlataformaMouseClicked(evt);
+            }
+        });
         listPlataforma.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listPlataformaValueChanged(evt);
@@ -127,6 +132,11 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         txtIda.setText("id");
 
+        listArtista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listArtistaMouseClicked(evt);
+            }
+        });
         listArtista.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listArtistaValueChanged(evt);
@@ -317,18 +327,17 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private void listPlataformaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPlataformaValueChanged
         // Al seleccionarse un Espectador del JList, se cargan en la pantalla sus datos
-        Plataforma plata = listPlataforma.getSelectedValue();
-        this.txtId.setText(String.valueOf(plata.getId()));
-        this.txtNombre.setText(plata.getNombre());
-        this.txtDesc.setText(plata.getDescripcion());
-        this.txtURL.setText(plata.getUrl());
-
+        //Plataforma plata = listPlataforma.getSelectedValue();
+        //this.txtId.setText(String.valueOf(plata.getId()));
+        //this.txtNombre.setText(plata.getNombre());
+        //this.txtDesc.setText(plata.getDescripcion());
+        //this.txtURL.setText(plata.getUrl());
     }//GEN-LAST:event_listPlataformaValueChanged
 
     private void listArtistaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listArtistaValueChanged
-        Artista a = listArtista.getSelectedValue();
-        this.txtIda.setText(String.valueOf(a.getId()));
-        this.txtNombreA.setText(a.getNombre());
+        //Artista a = listArtista.getSelectedValue();
+        //this.txtIda.setText(String.valueOf(a.getId()));
+        //this.txtNombreA.setText(a.getNombre());
     }//GEN-LAST:event_listArtistaValueChanged
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
@@ -399,6 +408,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.txtURL.setText("");
             this.txtIda.setText("");
             this.txtNombreA.setText("");
+            this.listArtista.clearSelection();
+            this.listPlataforma.clearSelection();
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
@@ -408,6 +419,25 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private void DuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuracionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DuracionActionPerformed
+
+    private void listArtistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listArtistaMouseClicked
+        // TODO add your handling code here:
+        Artista a = listArtista.getSelectedValue();
+        this.txtIda.setText(String.valueOf(a.getId()));
+        this.txtNombreA.setText(a.getNombre());
+    }//GEN-LAST:event_listArtistaMouseClicked
+
+    private void listPlataformaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlataformaMouseClicked
+        // TODO add your handling code here:
+        
+        Plataforma plata = listPlataforma.getSelectedValue();
+        this.txtId.setText(String.valueOf(plata.getId()));
+        this.txtNombre.setText(plata.getNombre());
+        this.txtDesc.setText(plata.getDescripcion());
+        this.txtURL.setText(plata.getUrl());
+        
+        
+    }//GEN-LAST:event_listPlataformaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

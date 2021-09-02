@@ -160,7 +160,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
 
         Long idPaquete = Long.parseLong(String.valueOf(listPaquete.getModel().getElementAt(indiceTablaPaquetes).getId()));
         Long idPlataforma = Long.parseLong(String.valueOf(listPlataforma.getModel().getElementAt(indiceTablaPlataforma).getId()));
-        
+
         List<Espectaculo> espectaculos = fabrica.getPaqueteServicioImpl().getEspectaculosNOPaquete(idPaquete, idPlataforma);
         System.out.println(espectaculos);
         for (Espectaculo espectaculo : espectaculos) {
