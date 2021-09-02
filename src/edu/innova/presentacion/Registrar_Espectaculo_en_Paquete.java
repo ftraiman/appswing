@@ -1,6 +1,7 @@
 package edu.innova.presentacion;
 
 import edu.innova.exceptions.BaseDeDatosException;
+import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
@@ -65,6 +66,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         listPlataforma = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableEspectaculos = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Agregar Espectaculo a Paquete");
@@ -97,6 +99,8 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         });
         jScrollPane3.setViewportView(tableEspectaculos);
 
+        jLabel3.setText("Espectaculos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,6 +124,10 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
                         .addContainerGap()
                         .addComponent(jScrollPane3)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +151,8 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
     //Este metodo se utiliza para cargar la informacion en la tala
     //(Basicamente es lo mismo que antes solo que en un metodo a parte para poder utilizarlo en varias partes)
     private void cargarTabla() {
+        
+        //Obtiene la posicion del obj en la tabla (del paquete y plataforma que queremos añadir)
         int indiceTablaPlataforma = listPlataforma.getSelectedIndex();
         int indiceTablaPaquetes = listPaquete.getSelectedIndex();
 
@@ -194,6 +204,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         Long id = Long.parseLong(String.valueOf(tableEspectaculos.getValueAt(seleccionar, 0)));
         Long idPaquete = Long.parseLong(String.valueOf(listPaquete.getModel().getElementAt(indiceTablaPaquetes).getId()));
 
+        //Llama al controlador e inserta en la bd
         fabrica.getPaqueteControlador().altaPaqueteEspectaculo(idPaquete, id);
 
         cargarTabla();//Llamar al metodo
@@ -204,6 +215,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -211,4 +223,33 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
     private javax.swing.JList<Plataforma> listPlataforma;
     private javax.swing.JTable tableEspectaculos;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarPaquete() throws SQLException{
+        // Obtengo de PlataformaServicio las plataformas
+        List<Paquete> pack = fabrica.getPaqueteControlador().getTodosLosPaquetes();
+
+        // Creo un DefaultListModel que almacena los objetos Plataforma
+        DefaultListModel<Paquete> modelPaquete = new DefaultListModel<>();
+
+        // Le cargo al JList el modelEspectadores
+        listPaquete.setModel(modelPaquete);
+
+        // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
+        pack.forEach(e -> modelPaquete.addElement(e));
+    }
+    
+    private void cargarPlataforma(){
+        // Obtengo de PlataformaServicio las plataformas
+        List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
+
+        // Creo un DefaultListModel que almacena los objetos Plataforma
+        DefaultListModel<Plataforma> modelPlataforma = new DefaultListModel<>();
+
+        // Le cargo al JList el modelPlataforma
+        listPlataforma.setModel(modelPlataforma);
+
+        // Relleno el modelPlataforma con todas las plataformas obtenidos del PlataformaServicio
+        plat.forEach(e -> modelPlataforma.addElement(e));
+    }
+
 }

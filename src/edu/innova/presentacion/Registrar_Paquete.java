@@ -69,7 +69,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
 
         spnMesInicio.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        spnAnioInicio.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
+        spnAnioInicio.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, 2100, 1));
 
         jLabel5.setText("Fecha Fin");
 
@@ -83,7 +83,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Año");
 
-        spnAnioFin.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
+        spnAnioFin.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, 2100, 1));
 
         jLabel9.setText("Descripción");
 
@@ -218,20 +218,6 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento);
 
             fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
-            
-            
-            
-            
-            
-            this.spnDiaInicio.setValue(1);
-            this.spnMesInicio.setValue(1); 
-            this.spnAnioInicio.setValue(2021);
-            this.spnDiaFin.setValue(1);
-            this.spnMesFin.setValue(1);
-            this.spnAnioFin.setValue(2021);
-            this.txtNombre.setText("");
-            this.txtDescripcion.setText("");
-            this.txtDescuento.setText("");
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -251,7 +237,6 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescuentoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        //this.dispose();
         this.spnDiaInicio.setValue(1);
         this.spnMesInicio.setValue(1); 
         this.spnAnioInicio.setValue(2021);

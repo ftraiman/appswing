@@ -2,6 +2,7 @@ package edu.innova.presentacion;
 
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
@@ -82,9 +84,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         EspMax = new javax.swing.JTextField();
         Costo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        Fecha = new javax.swing.JTextField();
         Aceptar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
+        spi_dia = new javax.swing.JSpinner();
+        jLabel16 = new javax.swing.JLabel();
+        spi_mes = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        spi_año = new javax.swing.JSpinner();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -166,13 +174,6 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Fecha:");
 
-        Fecha.setToolTipText("  Formato: (dd/mm/aa)");
-        Fecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FechaActionPerformed(evt);
-            }
-        });
-
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +187,20 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 CancelarActionPerformed(evt);
             }
         });
+
+        spi_dia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        jLabel16.setText("Dia");
+
+        spi_mes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        jLabel17.setText("Mes");
+
+        spi_año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
+
+        jLabel18.setText("Año");
+
+        jLabel19.setText("Minutos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -343,12 +358,30 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
 
         try {
+            
+            //Verifica que los campos no esten vacios (Lo hago aca para ser mas practico)
+            HelperStrings.stringNoVacio(this.txtIda.getText(),"ID Artista");
+            HelperStrings.stringNoVacio(this.txtId.getText(),"ID Plataforma");
+            HelperStrings.stringNoVacio(this.Duracion.getText(),"Duracion");
+            HelperStrings.stringNoVacio(this.EspMin.getText(),"Espectadores Minimos");
+            HelperStrings.stringNoVacio(this.EspMax.getText(),"Espectadores Maximos");
+            HelperStrings.stringNoVacio(this.Costo.getText(),"Descuento");
+            
+            //transforma la ID de string a Long
             Long idArtista = HelperStrings.getLongValue(this.txtIda.getText());
             Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText());
+           
+            //Datos basicos
             String nombre = this.Nombre.getText();
+            String descripcion = txtDesc.getText();
+            String url = txtURL.getText();
+            
+            //transforma de String a Integer
             Integer duracion = HelperStrings.getIntValue(this.Duracion.getText(), "duracion");
             Integer espectadoresMinimos = HelperStrings.getIntValue(this.EspMin.getText(), "espectadores mínimos");
             Integer espectadoresMaximos = HelperStrings.getIntValue(this.EspMax.getText(), "espectadores máximos");
+            
+            //transforma de String a BigDecimal
             BigDecimal costo = HelperStrings.getBigDecimalValue(this.Costo.getText());
 
             String descripcion = txtDesc.getText();
@@ -456,6 +489,10 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -468,6 +505,9 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<Artista> listArtista;
     private javax.swing.JList<Plataforma> listPlataforma;
+    private javax.swing.JSpinner spi_año;
+    private javax.swing.JSpinner spi_dia;
+    private javax.swing.JSpinner spi_mes;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JLabel txtId;
     private javax.swing.JLabel txtIda;
