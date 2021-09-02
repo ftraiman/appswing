@@ -28,6 +28,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro) VALUES (?, ?, ?, ?)";
     private final String todosLasFunciones = "SELECT * FROM funciones";
     private final String funcionesPorIdEspectaculo = "SELECT * FROM funciones WHERE idEspectaculo = ?";
+    private final String funcionesPorIdUsuario = "SELECT * FROM funciones AS FF, espectadores_funciones AS EF WHERE FF.id = EF.idFuncion AND EF.idUsuario = ?";
     private final String funcionPorId = "SELECT * FROM funciones WHERE id = ?";
     private final String agregarArtistaALaFuncion = "INSERT INTO artistas_funciones (idFuncion, idUsuario) VALUES (?, ?)";
     private final String artistaInvitadosEnFuncion = "SELECT * FROM artistas_funciones WHERE idFuncion = ?";
@@ -126,6 +127,20 @@ public class FuncionServicioImpl implements FuncionServicio {
         return funciones;
     }
     //==================== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO=========//
+    
+    //==================== OBTENER TODOS LAS FUNCIONES POR ID USUARIO =========//
+    @Override
+    public List<Funcion> getTodosLasFuncionesPorIdUsuario(Long IdUsuario) throws SQLException {
+        List<Funcion> funciones = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdUsuario);
+        sentencia.setLong(1, IdUsuario);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            funciones.add(funcionMapper(rs));
+        }
+        return funciones;
+    }
+    //==================== OBTENER TODOS LAS FUNCIONES POR ID USUARIO =========//
 
     @Override
     public void agregarArtistaInvitadoALaFuncion(Long idFuncion, List<Long> idUsuarios) throws SQLException {

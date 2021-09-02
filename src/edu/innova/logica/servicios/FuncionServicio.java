@@ -17,6 +17,8 @@ public interface FuncionServicio {
     List<Funcion> getTodosLasFunciones() throws SQLException;
     
     List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) throws SQLException;
+    //Obtener todas las funciones de la base de datos de un usuario espesifico
+    List<Funcion> getTodosLasFuncionesPorIdUsuario(Long IdUsuario) throws SQLException;
     
     void agregarArtistaInvitadoALaFuncion(Long idFuncion, List<Long> idUsuarios) throws SQLException;   
     
