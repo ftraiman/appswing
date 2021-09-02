@@ -11,6 +11,7 @@ import edu.innova.logica.entidades.Paquete;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -65,14 +66,25 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     }
 
     @Override
-    public List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas, Paquete paquetes) {
-        if (plataformas != null && paquetes != null) {
-            return paqueteServicio.getEspectaculosNOPaquete(paquetes.getId(), plataformas.getId());
+    public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete) {
+        if (idPlataforma != null && idPaquete != null) {
+            return paqueteServicio.getEspectaculosNOPaquete(idPaquete, idPlataforma);
 
         } else {
             return new ArrayList<Espectaculo>();
         }
 
+    }
+    
+    //Retorna una lista de todos los Paquetes
+    @Override
+    public List<Paquete> getTodosLosPaquetes() throws SQLException {
+        try {
+            return paqueteServicio.getTodosLosPaquetes();
+        } 
+        catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
+        }
     }
 
     @Override
@@ -81,7 +93,6 @@ public class PaqueteControladorImpl implements PaqueteControlador {
             int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectaculo al Paquete??", "Confirmar Espectaculo al Paquete", JOptionPane.YES_NO_OPTION);
                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
                     paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos,IdPaquete);
-
                     JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
                } 
                else { //Si no agrega muestra
@@ -93,4 +104,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         }
     }
 
+   /* @Override
+    public List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas, Paquete paquetes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    */
 }

@@ -69,7 +69,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
 
         spnMesInicio.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        spnAnioInicio.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
+        spnAnioInicio.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, 2100, 1));
 
         jLabel5.setText("Fecha Fin");
 
@@ -83,7 +83,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Año");
 
-        spnAnioFin.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
+        spnAnioFin.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, 2100, 1));
 
         jLabel9.setText("Descripción");
 
