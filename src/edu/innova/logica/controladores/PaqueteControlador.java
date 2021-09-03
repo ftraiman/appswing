@@ -17,4 +17,7 @@ public interface PaqueteControlador {
     public List<Paquete> getTodosLosPaquetes() throws SQLException ;
 
     public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete);
+    
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException;
+    
 }

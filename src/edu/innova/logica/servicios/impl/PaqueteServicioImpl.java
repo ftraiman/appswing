@@ -24,6 +24,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?)";
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
+    private final String todosLosPaquetesPorIdEspectaculos = "SELECT * FROM paquetes p, paquetes_espectaculos pe WHERE p.id = pe.idPaquete AND pe.idEspectaculo = ?";
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
     private final String EspectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
@@ -136,4 +137,22 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         }
         return espectaculos;
     }
+
+    @Override
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
+         List<Paquete> paquetes = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosPaquetesPorIdEspectaculos);
+            sentencia.setLong(1, id);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                paquetes.add((Paquete) paqueteMapper(rs));
+
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return paquetes;
+    }
 }
+
