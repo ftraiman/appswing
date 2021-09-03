@@ -21,7 +21,7 @@ import java.util.List;
 public class PaqueteServicioImpl implements PaqueteServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento) VALUES (?, ?, ?, ?, ?)";
+    private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?)";
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
@@ -54,6 +54,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia.setDate(3, new java.sql.Date(paquete.getFechaInicio().getTime()));
             sentencia.setDate(4, new java.sql.Date(paquete.getFechaFin().getTime()));
             sentencia.setBigDecimal(5, paquete.getDescuento());
+            sentencia.setDate(6, new java.sql.Date((new Date()).getTime()));
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
             throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", paquete.getNombre()));
