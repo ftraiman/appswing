@@ -15,6 +15,6 @@ public interface EspectaculoServicio {
     
     List<Espectaculo> getTodosLosEspectaculosPorPlataforma(Long idPlataforma);
     
-    public List<Espectaculo> getEspectaculosPorIdArtista(Long idArtista) ;
+    public List<Espectaculo> getEspectaculosPorIdArtista(Long idArtista);
 
 }

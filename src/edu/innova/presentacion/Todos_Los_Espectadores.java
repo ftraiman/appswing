@@ -2,7 +2,6 @@ package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Fabrica;
-import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.Connection;
@@ -13,43 +12,37 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
-    
+
     ConexionDB cn = new ConexionDB();
     Connection con = cn.getConexion();
     Fabrica fabrica = new Fabrica();
 
     public Todos_Los_Espectadores() throws SQLException {
         initComponents();
-        //Crear el modelo de la tabla
+        //Crear el modelo de la tabla y agregar sus columnas
         DefaultTableModel tabla = new DefaultTableModel();
-        //Defino las columnas que quiero
-        tabla.addColumn("Id del Espectador"); 
+        tabla.addColumn("Id de espectador");
         tabla.addColumn("Nombre");
-        tabla.addColumn("Apellido"); 
+        tabla.addColumn("Apellido");
         tabla.addColumn("Nickname");
-        tabla.addColumn("Email"); 
-        tabla.addColumn("Fecha de nacimiento");	
-        
-        //Crear las filas para la tabla
+        tabla.addColumn("E-mail");
+        tabla.addColumn("Fecha de nacimiento");
+        //Obtiene la cantidad de espectadores
         int n = fabrica.getUsuarioControlador().getTodosLosEspectadores().size();
-        String fila[] = new String[6];//Limite de dos porque solo mostramos el nombre y el apellido
-        for(int i=0; i<n; i++){//Iterar hasta tener todas las filas
-            //Obtengo los datos
+        String fila[] = new String[6];
+        for (int i = 0; i < n; i++) {//Rellenar la tabla con la informacion del espectador
             fila[0] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getId().toString();
             fila[1] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getNombre();
             fila[2] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getApellido();
             fila[3] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getNickname();
             fila[4] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getEmail();
             fila[5] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getFechaNacimiento().toString();
-            
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
         }
+        //Setear el modelo en la tabla de espectadores
         this.jTable_Espectador.setModel(tabla);
-   
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -58,9 +51,9 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Espectador = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table_funciones_registradas = new javax.swing.JTable();
-        lb_funciones_registradas = new javax.swing.JLabel();
-        lb_espectadores = new javax.swing.JLabel();
+        tableFuncion = new javax.swing.JTable();
+        lbFuncion = new javax.swing.JLabel();
+        lbEspectador = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Todos los Espectadores");
@@ -84,19 +77,19 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable_Espectador);
 
-        table_funciones_registradas.setModel(new javax.swing.table.DefaultTableModel(
+        tableFuncion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id de Funcion", "Nombre", "Fecha de Registro", "Fecha de Inicio", "Id de Especulo"
+                "Id de funcion", "Nombre", "Fecha de registro", "Fecha de inicio", "Id de espectaculo"
             }
         ));
-        jScrollPane2.setViewportView(table_funciones_registradas);
+        jScrollPane2.setViewportView(tableFuncion);
 
-        lb_funciones_registradas.setText("Funciones registradas:");
+        lbFuncion.setText("Funciones del espectador: ");
 
-        lb_espectadores.setText("Espectadores:");
+        lbEspectador.setText("Espectadores:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,75 +98,65 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_funciones_registradas)
-                            .addComponent(lb_espectadores))
+                            .addComponent(lbFuncion)
+                            .addComponent(lbEspectador))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lb_espectadores)
+                .addContainerGap()
+                .addComponent(lbEspectador)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(lb_funciones_registradas)
+                .addComponent(lbFuncion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Evento MauseClick 
     private void jTable_EspectadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_EspectadorMouseClicked
+        // TODO add your handling code here:
         try {
-            //Obtiene el indice de la tabla
-            int indiceEspectador = jTable_Espectador.rowAtPoint(evt.getPoint());
-
-            //Crear el modelo de la tabla
+            //Obtener el indice de la tabla de espectadores
+            int indiceEspectador = this.jTable_Espectador.rowAtPoint(evt.getPoint());
+            //Crear el modelo de la tabla y agregar sus columnas
             DefaultTableModel tabla = new DefaultTableModel();
-            
-            //Cargar las columnas
-            tabla.addColumn("Id de Funcion");
+            tabla.addColumn("Id de funcion");
             tabla.addColumn("Nombre");
-            tabla.addColumn("Fecha de Registro");
-            tabla.addColumn("Fecha de Inicio");
-            tabla.addColumn("Id de Especulo");            
-            
-            Long id = Long.parseLong(String.valueOf(jTable_Espectador.getValueAt(indiceEspectador, 0)));
-
-            List<Funcion> funciones = fabrica.getFuncionServicioImpl().getFuncionPorIdUsuario(id);
+            tabla.addColumn("Fecha de registro");
+            tabla.addColumn("Fecha de inicio");
+            tabla.addColumn("Id de espectaculo");
+            //Obtener la id del espectador con el indice de la tabla
+            Long id = Long.parseLong(String.valueOf(this.jTable_Espectador.getValueAt(indiceEspectador, 0)));
+            //Obtener de la fabrica la lista de funciones de ese espectador
+            List<Funcion> funciones = fabrica.getFuncionServicioImpl().getTodosLasFuncionesPorIdUsuario(id);
             for (Funcion funcion : funciones) {
-                String fila[] = new String[5];//Limite de dos porque solo mostramos el nombre y el apellido
-
+                //Rellenar la tabla con la informacion de la funcion
+                String fila[] = new String[5];
                 fila[0] = funcion.getId().toString();
                 fila[1] = funcion.getNombre();
                 fila[2] = funcion.getFechaRegistro().toString();
                 fila[3] = funcion.getFechaInicio().toString();
-                fila[4] = funcion.getIdEspectaculo().toString();                
-
+                fila[4] = funcion.getIdEspectaculo().toString();
                 tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
-
             }
-
-            this.table_funciones_registradas.setModel(tabla);
-
+            //Setear el modelo de la tabla
+            this.tableFuncion.setModel(tabla);
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Artista No Posee Espectaculos!![%s]", x.getMessage()));
         } catch (SQLException ex) {
             Logger.getLogger(Todos_Los_Espectadores.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
     }//GEN-LAST:event_jTable_EspectadorMouseClicked
 
 
@@ -181,8 +164,8 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_Espectador;
-    private javax.swing.JLabel lb_espectadores;
-    private javax.swing.JLabel lb_funciones_registradas;
-    private javax.swing.JTable table_funciones_registradas;
+    private javax.swing.JLabel lbEspectador;
+    private javax.swing.JLabel lbFuncion;
+    private javax.swing.JTable tableFuncion;
     // End of variables declaration//GEN-END:variables
 }

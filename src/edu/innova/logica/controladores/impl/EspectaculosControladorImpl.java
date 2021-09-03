@@ -8,6 +8,7 @@ import edu.innova.logica.controladores.EspectaculoControlador;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -30,13 +31,12 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         try {
             //Valido que los datos de entrada
             validarNuevoEspectaculo(idArtista, idPlataforma, espectaculo);
-            
+
             int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
             if (i == JOptionPane.YES_OPTION) {
                 espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
                 JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
-            } 
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo");
             }
         } catch (BaseDeDatosException ex) {
@@ -48,14 +48,18 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public List<Espectaculo> getEspectaculosPorIdPlataforma(Long idPlataforma) {
         return espectaculoServicio.getTodosLosEspectaculosPorPlataforma(idPlataforma);
     }
-
+    
+    @Override
+    public List<Espectaculo> getTodosLosEspectaculos() throws SQLException {
+        return espectaculoServicio.getTodosLosEspectaculos();
+    }
+    
     private void validarNuevoEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
 
         HelperStrings.stringNoVacio(espectaculo.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectaculo.getDescripcion(), "descripcion");
         HelperStrings.stringNoVacio(espectaculo.getUrl(), "url");
         HelperStrings.urlValidator(espectaculo.getUrl());
-          
 
         //Verificar que el costo no este vacio o menor a 0
         if (null == espectaculo.getCosto() || espectaculo.getCosto().compareTo(BigDecimal.ZERO) < 0) {

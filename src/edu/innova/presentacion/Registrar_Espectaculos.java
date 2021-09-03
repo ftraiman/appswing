@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
+//Prueba
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
@@ -23,28 +24,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         initComponents();
 
         try {
-            // Obtengo del Plataforma Servicio las plataformas
-            List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
-            // Creo un DefaultListModel que almacena los objetos Plataforma
-            DefaultListModel<Plataforma> modelPlataforma = new DefaultListModel<>();
-            // Le cargo al JList el modelEspectadores
-            listPlataforma.setModel(modelPlataforma);
-            // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
-            plat.forEach(e -> modelPlataforma.addElement(e));
-        } catch (BaseDeDatosException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
-        }
-
-        try {
-            // Obtengo del Plataforma Servicio las plataformas
-            List<Artista> plat = fabrica.getUsuarioControlador().getTodosLosArtistas();
-            // Creo un DefaultListModel que almacena los objetos Plataforma
-            DefaultListModel<Artista> modelArtista = new DefaultListModel<>();
-            // Le cargo al JList el modelEspectadores
-            listArtista.setModel(modelArtista);
-            // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
-            plat.forEach(e -> modelArtista.addElement(e));
-        } catch (InnovaModelException ex) {
+            
+            //Carga la plataforma en un jList
+            cargarPlataforma();
+            
+            //Carga los artistas en un jList
+            cargarArtista();
+            
+        } 
+        catch (BaseDeDatosException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
 
@@ -111,7 +99,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(listPlataforma);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jLabel1.setText("Plataforma Registradas:");
+        jLabel1.setText("Plataforma Registradas");
 
         jLabel2.setText("Nombre Plataforma:");
 
@@ -134,7 +122,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         txtNombreA.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jLabel7.setText("Artistas Registrados:");
+        jLabel7.setText("Artistas Registrados");
 
         jLabel8.setText("ID Artista:");
 
@@ -153,7 +141,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(listArtista);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jLabel9.setText("Ingresar Datos Espectaculo:");
+        jLabel9.setText("Ingresar Datos Espectaculo");
 
         jLabel10.setText("Nombre: ");
 
@@ -207,70 +195,91 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15))
-                                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Nombre)
-                                    .addComponent(Duracion)
-                                    .addComponent(EspMin)
-                                    .addComponent(EspMax)
-                                    .addComponent(Costo)
-                                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtURL)
-                                    .addComponent(txtDesc)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Costo, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel13)
+                                                    .addComponent(jLabel12)
+                                                    .addComponent(jLabel14)
+                                                    .addComponent(jLabel10))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(35, 35, 35)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(EspMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(EspMax, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtIda))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel5))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtId))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jLabel1)
-                                .addGap(225, 225, 225)
-                                .addComponent(jLabel7)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(27, 27, 27))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Aceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Cancelar)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtURL)
+                                                .addComponent(txtDesc)
+                                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel11))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spi_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Duracion))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spi_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spi_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel19)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtIda)
+                                        .addComponent(txtNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(104, 104, 104)
+                                    .addComponent(jLabel7))))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -280,16 +289,16 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtId)
                     .addComponent(jLabel8)
-                    .addComponent(txtIda))
+                    .addComponent(txtIda)
+                    .addComponent(txtId))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -304,16 +313,32 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(Duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel10)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(spi_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel15)
+                                .addComponent(spi_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17)
+                                .addComponent(spi_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel18))
+                            .addGap(19, 19, 19)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(Duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel19))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -322,19 +347,11 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(EspMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Aceptar)
-                    .addComponent(Cancelar))
-                .addGap(21, 21, 21))
+                    .addComponent(Cancelar)
+                    .addComponent(Aceptar))
+                .addContainerGap())
         );
 
         pack();
@@ -356,7 +373,6 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listArtistaValueChanged
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-
         try {
             
             //Verifica que los campos no esten vacios (Lo hago aca para ser mas practico)
@@ -384,70 +400,73 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             //transforma de String a BigDecimal
             BigDecimal costo = HelperStrings.getBigDecimalValue(this.Costo.getText());
 
-            String descripcion = txtDesc.getText();
-            String url = txtURL.getText();
-
-            //Al pedo?
-            //String fecha = this.Fecha.getText();
-
-            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, new Date());
+            //Datos Fecha
+            String fdia = this.spi_dia.getValue().toString();
+            String fmes = this.spi_mes.getValue().toString();
+            String fanio = this.spi_año.getValue().toString();
+            Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio); //Convertimos la fecha para aa/mm/dd
             
-            this.txtIda.setText("");
-            this.txtId.setText("");
+            //Creamos el objeto espectaculo
+            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha);
+            
+            //Y mandamos al controlador a verificar datos
+            fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
+            
+            //Limpiar Espectaculo
             this.Nombre.setText("");
             this.Duracion.setText("");
             this.EspMin.setText("");
             this.EspMax.setText("");
             this.Costo.setText("");
-            this.Fecha.setText("");
+
+            //Limpiar Fecha
+            this.spi_dia.setValue(1);
+            this.spi_mes.setValue(1);
+            this.spi_año.setValue(1900);
+            
+            //Limpiar Listas
+            this.listArtista.clearSelection();
+            this.listPlataforma.clearSelection();
             this.txtId.setText("");
             this.txtNombre.setText("");
             this.txtDesc.setText("");
             this.txtURL.setText("");
-            this.txtIda.setText("");
-            this.txtNombreA.setText("");
 
-            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
-
-            if (i == JOptionPane.YES_OPTION) {
-                fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
-                JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo");
-                this.dispose();
-            }
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+            JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
         } catch (InnovaModelException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Error de capa lógica [%s]", ex.getMessage()));
+            JOptionPane.showMessageDialog(rootPane, String.format("%s", ex.getMessage()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error inesperado", ex.getMessage()));
         }
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        //this.dispose();
-            this.txtIda.setText("");
-            this.txtId.setText("");
-            this.Nombre.setText("");
-            this.Duracion.setText("");
-            this.EspMin.setText("");
-            this.EspMax.setText("");
-            this.Costo.setText("");
-            this.Fecha.setText("");
-            this.txtId.setText("");
-            this.txtNombre.setText("");
-            this.txtDesc.setText("");
-            this.txtURL.setText("");
-            this.txtIda.setText("");
-            this.txtNombreA.setText("");
-            this.listArtista.clearSelection();
-            this.listPlataforma.clearSelection();
-    }//GEN-LAST:event_CancelarActionPerformed
 
-    private void FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FechaActionPerformed
+        
+        //Limpiar Espectaculo
+        this.Nombre.setText("");
+        this.Duracion.setText("");
+        this.EspMin.setText("");
+        this.EspMax.setText("");
+        this.Costo.setText("");
+        
+        //Limpiar Fecha
+        this.spi_dia.setValue(1);
+        this.spi_mes.setValue(1);
+        this.spi_año.setValue(1900);
+        
+        //Limpiar Listas
+        this.listArtista.clearSelection();
+        this.listPlataforma.clearSelection();
+        this.txtId.setText("");
+        this.txtNombre.setText("");
+        this.txtDesc.setText("");
+        this.txtURL.setText("");
+        this.txtIda.setText("");
+        this.txtNombreA.setText(""); 
+        
+    }//GEN-LAST:event_CancelarActionPerformed
 
     private void DuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuracionActionPerformed
         // TODO add your handling code here:
@@ -457,19 +476,16 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Artista a = listArtista.getSelectedValue();
         this.txtIda.setText(String.valueOf(a.getId()));
-        this.txtNombreA.setText(a.getNombre());
+        this.txtNombreA.setText(a.getNombre());      
     }//GEN-LAST:event_listArtistaMouseClicked
 
     private void listPlataformaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlataformaMouseClicked
         // TODO add your handling code here:
-        
         Plataforma plata = listPlataforma.getSelectedValue();
         this.txtId.setText(String.valueOf(plata.getId()));
         this.txtNombre.setText(plata.getNombre());
         this.txtDesc.setText(plata.getDescripcion());
         this.txtURL.setText(plata.getUrl());
-        
-        
     }//GEN-LAST:event_listPlataformaMouseClicked
 
 
@@ -480,7 +496,6 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Duracion;
     private javax.swing.JTextField EspMax;
     private javax.swing.JTextField EspMin;
-    private javax.swing.JTextField Fecha;
     private javax.swing.JTextField Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -516,7 +531,32 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
 
-    private void validarFecha(String fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void cargarPlataforma(){
+        // Obtengo de PlataformaServicio las plataformas
+        List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
+
+        // Creo un DefaultListModel que almacena los objetos Plataforma
+        DefaultListModel<Plataforma> modelPlataforma = new DefaultListModel<>();
+
+        // Le cargo al JList el modelPlataforma
+        listPlataforma.setModel(modelPlataforma);
+
+        // Relleno el modelPlataforma con todas las plataformas obtenidos del PlataformaServicio
+        plat.forEach(e -> modelPlataforma.addElement(e));
     }
+    
+    private void cargarArtista(){
+        // Obtengo del ArtistaServicio las plataformas
+        List<Artista> art = fabrica.getUsuarioControlador().getTodosLosArtistas();
+        
+        // Creo un DefaultListModel que almacena los objetos Artista
+        DefaultListModel<Artista> modelArtista = new DefaultListModel<>();
+        
+        // Le cargo al JList el modelArtista
+        listArtista.setModel(modelArtista);
+        
+        // Relleno el modelArtista con todos los artistas obtenidos del ArtistaServicio
+        art.forEach(e -> modelArtista.addElement(e));
+    }
+    
 }

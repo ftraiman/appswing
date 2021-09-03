@@ -26,12 +26,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="476" max="32767" attributes="0"/>
-                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="663" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lb_funciones_registradas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lb_espectadores" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbFuncion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbEspectador" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -43,14 +43,14 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="lb_espectadores" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
-              <Component id="lb_funciones_registradas" min="-2" max="-2" attributes="0"/>
+              <Component id="lbEspectador" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="183" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="188" max="-2" attributes="0"/>
+              <Component id="lbFuncion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="276" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -89,27 +89,27 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="table_funciones_registradas">
+        <Component class="javax.swing.JTable" name="tableFuncion">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="0">
-                <Column editable="true" title="Id de Funcion" type="java.lang.Object"/>
+                <Column editable="true" title="Id de funcion" type="java.lang.Object"/>
                 <Column editable="true" title="Nombre" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha de Registro" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha de Inicio" type="java.lang.Object"/>
-                <Column editable="true" title="Id de Especulo" type="java.lang.Object"/>
+                <Column editable="true" title="Fecha de registro" type="java.lang.Object"/>
+                <Column editable="true" title="Fecha de inicio" type="java.lang.Object"/>
+                <Column editable="true" title="Id de espectaculo" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lb_funciones_registradas">
+    <Component class="javax.swing.JLabel" name="lbFuncion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Funciones registradas:"/>
+        <Property name="text" type="java.lang.String" value="Funciones del espectador: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lb_espectadores">
+    <Component class="javax.swing.JLabel" name="lbEspectador">
       <Properties>
         <Property name="text" type="java.lang.String" value="Espectadores:"/>
       </Properties>
