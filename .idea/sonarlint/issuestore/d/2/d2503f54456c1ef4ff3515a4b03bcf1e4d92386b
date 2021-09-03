@@ -1,0 +1,11 @@
+
+3
+java:S2129"Remove this "Long" constructor(É‰Þ
+
+A
+java:S1874",Remove this use of "Long"; it is deprecated.(É‰Þ
+
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ïÀ”øÿÿÿÿÿ
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·š†‡
+b
+java:S1223"LRename this method to prevent any misunderstanding or make it a constructor.(Á¯¦þ
