@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
+//Prueba
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
