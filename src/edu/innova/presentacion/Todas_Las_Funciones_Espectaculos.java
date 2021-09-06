@@ -9,6 +9,7 @@ import edu.innova.logica.entidades.Plataforma;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +62,7 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
             },
             new String [] {
-                "Espectaculo(id)", "Fecha Inicio", "Fecha Registro"
+                "Espectaculo(id)", "Nombre", "Fecha Inicio", "Fecha Registro"
             }
         ));
         datosFuncion.setEnabled(false);
@@ -171,7 +172,8 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
             fila[3] = espectaculo.getUrl();
             fila[4] = espectaculo.getDuracion().toString();
             fila[5] = espectaculo.getDescripcion();
-            fila[6] = espectaculo.getFechaRegistro().toString();
+            SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+            fila[6] = dateform.format(espectaculo.getFechaRegistro());
             fila[7] = espectaculo.getPlataforma().toString();
             fila[8] = espectaculo.getEspectadoresMinimos().toString();
             fila[9] = espectaculo.getEspectadoresMaximos().toString();
@@ -188,6 +190,7 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
             DefaultTableModel tabla = new DefaultTableModel();
             tabla.addColumn("Espectaculo(id)");
+            tabla.addColumn("Nombre");
             tabla.addColumn("Fecha Inicio");
             tabla.addColumn("Fecha Registro");
 
@@ -195,11 +198,13 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
             List<Funcion> funciones = fabrica.getFuncionServicioImpl().getTodosLasFuncionesPorIdEspectaculo(id);
             for (Funcion funcion : funciones) {
-                String fila[] = new String[3];//Limite de dos porque solo mostramos el nombre y el apellido
+                String fila[] = new String[4];//Limite de dos porque solo mostramos el nombre y el apellido
 
                 fila[0] = funcion.getIdEspectaculo().toString();
-                fila[1] = funcion.getFechaInicio().toString();
-                fila[2] = funcion.getFechaRegistro().toString();
+                fila[1] = funcion.getNombre();
+                SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+                fila[2] = dateform.format(funcion.getFechaInicio());
+                fila[3] = dateform.format(funcion.getFechaRegistro());
 
                 tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
             }

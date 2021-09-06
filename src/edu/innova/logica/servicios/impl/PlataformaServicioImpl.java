@@ -1,6 +1,8 @@
 package edu.innova.logica.servicios.impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
+import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.persistencia.ConexionDB;
@@ -33,12 +35,15 @@ public class PlataformaServicioImpl implements PlataformaServicio {
     }
 
     public void altaPlataforma(Plataforma plataforma) throws SQLException {
-
+        try{
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaPlataforma);
         sentencia.setString(1, plataforma.getNombre());
         sentencia.setString(2, plataforma.getDescripcion());
         sentencia.setString(3, plataforma.getUrl());
         sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe esta Plataforma [%s]", plataforma.getNombre()));
+        }
     }
 
     @Override
