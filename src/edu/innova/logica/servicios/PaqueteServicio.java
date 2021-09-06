@@ -14,5 +14,7 @@ public interface PaqueteServicio {
     List<Paquete> getTodosLosPaquetes() throws SQLException;
     
      public List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete , Long idPlataforma);
+     
+      public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException ;
         
 }

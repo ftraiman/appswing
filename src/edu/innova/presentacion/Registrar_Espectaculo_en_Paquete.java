@@ -18,27 +18,40 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
 
     private Fabrica fabrica = new Fabrica();
 
-    public Registrar_Espectaculo_en_Paquete() throws SQLException {
+    public Registrar_Espectaculo_en_Paquete() {
         initComponents();
 
         try {
-            
-            //Carga las plataformas en el jlist
-            cargarPlataforma();
-            
-            //Carga los paquetes en el jlist
-            cargarPaquete(); 
-            
-        } 
-        catch (BaseDeDatosException ex) {
+            // Obtengo del Plataforma Servicio las plataformas
+            List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
+            // Creo un DefaultListModel que almacena los objetos Plataforma
+            DefaultListModel<Plataforma> modelPlataforma = new DefaultListModel<>();
+            // Le cargo al JList el modelEspectadores
+            listPlataforma.setModel(modelPlataforma);
+            // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
+            plat.forEach(e -> modelPlataforma.addElement(e));
+        } catch (BaseDeDatosException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
-        catch (InnovaModelException e){
-             JOptionPane.showMessageDialog(null, e);
-        }
-        catch (SQLException ex) {
+
+        try {
+            // Obtengo del Plataforma Servicio las plataformas
+            List<Paquete> pack;
+            try {
+                pack = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes();
+                // Creo un DefaultListModel que almacena los objetos Plataforma
+                DefaultListModel<Paquete> modelPaquete = new DefaultListModel<>();
+                // Le cargo al JList el modelEspectadores
+                listPaquete.setModel(modelPaquete);
+                // Relleno el modelEspectadores con todos los espectadores obtenidos del EspectadorServicio
+                pack.forEach(e -> modelPaquete.addElement(e));
+            } catch (SQLException ex) {
                 Logger.getLogger(Registrar_Espectaculo_en_Paquete.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (BaseDeDatosException ex) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -127,9 +140,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(2, 2, 2)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -137,15 +148,14 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Este metodo se utiliza para cargar la informacion en la tabla
+    //Este metodo se utiliza para cargar la informacion en la tala
     //(Basicamente es lo mismo que antes solo que en un metodo a parte para poder utilizarlo en varias partes)
     private void cargarTabla() {
         
         //Obtiene la posicion del obj en la tabla (del paquete y plataforma que queremos añadir)
         int indiceTablaPlataforma = listPlataforma.getSelectedIndex();
         int indiceTablaPaquetes = listPaquete.getSelectedIndex();
-        
-        //Carga los datos de la tabla Espectaculo (las columnas)
+
         DefaultTableModel tabla = new DefaultTableModel();
         tabla.addColumn("ID");
         tabla.addColumn("Nombre");
@@ -157,21 +167,12 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         tabla.addColumn("Plataforma(id)");
         tabla.addColumn("Espectadores Minimos");
         tabla.addColumn("Espectadores Maximos");
-         
-        //Verifica que se haya seleccionado el paquete
-        if(listPaquete.getSelectedValue() == null){
-             throw new InnovaModelException("Debe primero seleccionar un paquete!");
-        }
-        
-        //Obtiene la IdPaquete e IdPlataforma de la lista que seleccione
-        Long idPaquete =  listPaquete.getSelectedValue().getId();
-        Long idPlataforma = listPlataforma.getSelectedValue().getId();
-     
-        //Obtiene los espectaculos que no estan en ese paquete seleccionado (Desde el Controlador)
-        List<Espectaculo> espectaculos = fabrica.getPaqueteControlador().getEspectaculoNOPaquete(idPlataforma, idPaquete);
-        //System.out.println(espectaculos);
-        
-        //Rellena la tabla con la lista de espectaculo
+
+        Long idPaquete = Long.parseLong(String.valueOf(listPaquete.getModel().getElementAt(indiceTablaPaquetes).getId()));
+        Long idPlataforma = Long.parseLong(String.valueOf(listPlataforma.getModel().getElementAt(indiceTablaPlataforma).getId()));
+
+        List<Espectaculo> espectaculos = fabrica.getPaqueteServicioImpl().getEspectaculosNOPaquete(idPaquete, idPlataforma);
+        System.out.println(espectaculos);
         for (Espectaculo espectaculo : espectaculos) {
             String fila[] = new String[10];//Limite de dos porque solo mostramos el nombre y el apellido
 
@@ -189,21 +190,11 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
         }
         this.tableEspectaculos.setModel(tabla);
-        
     }
 
+
     private void listPlataformaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlataformaMouseClicked
-        try {
-           cargarTabla();         
-        } 
-        catch (BaseDeDatosException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Error: ", ex.getMessage()));
-        }
-        catch (InnovaModelException e){
-          JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
-          this.listPlataforma.clearSelection();
-        }
-        
+        cargarTabla();//Llamar al metodo
     }//GEN-LAST:event_listPlataformaMouseClicked
 
     private void tableEspectaculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEspectaculosMouseClicked
@@ -217,8 +208,7 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         fabrica.getPaqueteControlador().altaPaqueteEspectaculo(idPaquete, id);
 
         cargarTabla();//Llamar al metodo
-        this.listPlataforma.clearSelection();
-        this.listPaquete.clearSelection();
+
     }//GEN-LAST:event_tableEspectaculosMouseClicked
 
 

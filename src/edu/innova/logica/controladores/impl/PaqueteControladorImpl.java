@@ -109,4 +109,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     */
+
+    @Override
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
+        return paqueteServicio.getPaquetePorIdEspectaculo(id);
+    }
 }

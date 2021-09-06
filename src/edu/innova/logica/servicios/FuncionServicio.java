@@ -25,6 +25,8 @@ public interface FuncionServicio {
     void altaEspectadorAFuncion(Funcion funcion, Espectador espectador, Date fechaRegistroEspectaculo, BigDecimal costo);
     
     List<Funcion> getFuncionesPorIdEspectador(Espectador espectador);
+    
+    List<Funcion> getFuncionPorIdUsuario(Long idFuncion)  throws SQLException;
 
     public void eliminarFuncionesDelEspectador(ArrayList<Funcion> arrayList, Espectador espectador);
 }

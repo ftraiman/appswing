@@ -336,13 +336,9 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void Agregar_EspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_EspectaculoActionPerformed
-        try {
-            Registrar_Espectaculo_en_Paquete rep = new Registrar_Espectaculo_en_Paquete();
-            this.Panel.add(rep);
-            rep.show();
-        } catch (SQLException ex) {
-            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Registrar_Espectaculo_en_Paquete rep = new Registrar_Espectaculo_en_Paquete();
+        this.Panel.add(rep);
+        rep.show();
     }//GEN-LAST:event_Agregar_EspectaculoActionPerformed
 
     private void AgregarFEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFEActionPerformed

@@ -7,6 +7,7 @@ create table paquetes
 	descripcion varchar(255) null,
 	fechaInicio date null,
 	descuento decimal(10,2) null,
+        fechaRegistro datetime       null,
 	constraint paquetes_nombre_uindex
 		unique (nombre)
 );
