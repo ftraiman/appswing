@@ -37,6 +37,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String agregarEspectadorAFuncion = "INSERT INTO espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (?, ?, ?, ?)";
     private final String todosLasFuncionesPorIdEspectador = "SELECT * FROM espectadores_funciones WHERE idUsuario = ?";
     private final String eliminarFuncionesDeEspectador = "DELETE FROM espectadores_funciones WHERE idUsuario = ? AND idFuncion = ?";
+    private final String cantRegistradosParaFuncion = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -104,7 +105,7 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //==================== OBTENER FUNCION POR ID DE USUSARIO ============//
     @Override
-    public List<Funcion> getFuncionPorIdUsuario(Long idFuncion) throws SQLException{
+    public List<Funcion> getFuncionPorIdUsuario(Long idFuncion) throws SQLException {
         List<Funcion> funciones = new ArrayList<>();
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorIdUsuario);
         sentencia.setLong(1, idFuncion);
@@ -115,7 +116,7 @@ public class FuncionServicioImpl implements FuncionServicio {
         return funciones;
     }
     //==================== OBTENER FUNCION POR ID DE USUARIO ============//
-    
+
     //==================== OBTENER TODOS LAS FUNCIONES=========//
     @Override
     public List<Funcion> getTodosLasFunciones() throws SQLException {
@@ -142,7 +143,7 @@ public class FuncionServicioImpl implements FuncionServicio {
         return funciones;
     }
     //==================== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO=========//
-    
+
     //==================== OBTENER TODOS LAS FUNCIONES POR ID USUARIO =========//
     @Override
     public List<Funcion> getTodosLasFuncionesPorIdUsuario(Long IdUsuario) throws SQLException {
@@ -215,6 +216,21 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
     }
 
+    @Override
+    public Integer getCantidadRegistrados(Long idFuncion) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(cantRegistradosParaFuncion);
+            sentencia.setLong(1, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("cnt");
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+        return 0;
+    }
+
     private List<Artista> getArtistasInvitadosAFuncion(Long idFuncion) throws SQLException {
         List<Artista> artistasInvitados = new ArrayList<>();
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(artistaInvitadosEnFuncion);
@@ -250,4 +266,5 @@ public class FuncionServicioImpl implements FuncionServicio {
             throw new InnovaModelException("La Espectador es invalido");
         }
     }
+
 }

@@ -82,14 +82,18 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
-    public Espectaculo getEspectaculoPorId(Long idEspectaculo) throws SQLException {
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
-        sentencia.setLong(1, idEspectaculo);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            return espectaculoMapper(rs);
+    public Espectaculo getEspectaculoPorId(Long idEspectaculo) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
+            sentencia.setLong(1, idEspectaculo);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return espectaculoMapper(rs);
+            }
+            throw new NoSuchElementException(String.format("Espectaculo con id %s no encontrado", idEspectaculo));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
-        throw new NoSuchElementException(String.format("Espectaculo con id %s no encontrado", idEspectaculo));
     }
     //==================== OBTENER ESPECTACULO POR ID ============//
     

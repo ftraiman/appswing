@@ -29,4 +29,6 @@ public interface FuncionServicio {
     List<Funcion> getFuncionPorIdUsuario(Long idFuncion)  throws SQLException;
 
     public void eliminarFuncionesDelEspectador(ArrayList<Funcion> arrayList, Espectador espectador);
+
+    public Integer getCantidadRegistrados(Long id);
 }
