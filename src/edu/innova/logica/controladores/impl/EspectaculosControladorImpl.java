@@ -59,7 +59,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         HelperStrings.stringNoVacio(espectaculo.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectaculo.getDescripcion(), "descripcion");
         HelperStrings.stringNoVacio(espectaculo.getUrl(), "url");
-        HelperStrings.urlValidator(espectaculo.getUrl());
+        //HelperStrings.urlValidator(espectaculo.getUrl());
 
         //Verificar que el costo no este vacio o menor a 0
         if (null == espectaculo.getCosto() || espectaculo.getCosto().compareTo(BigDecimal.ZERO) < 0) {

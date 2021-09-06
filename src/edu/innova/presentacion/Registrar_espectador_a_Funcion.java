@@ -94,7 +94,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
 
         setClosable(true);
-        setTitle("Alta de Función a Espectáculo");
+        setTitle("Registro a Función a Espectáculo");
 
         lblSeleccionarPlataforma.setText("Seleccionar Plataforma");
 
@@ -142,6 +142,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(220, 220));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -226,7 +227,8 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        panel1.setBackground(new java.awt.Color(51, 51, 51));
+        panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -433,7 +435,6 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
             return;
         }
         JOptionPane.showMessageDialog(rootPane, "El Espectador se agregó correctamente a la Función");
-        this.dispose();
     }//GEN-LAST:event_btnEspectadorAFuncionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -528,7 +529,6 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
             return;
         }
         JOptionPane.showMessageDialog(rootPane, "El canje ocurrió correctamente");
-        this.dispose();
         
     }//GEN-LAST:event_btnCanjearFuncionActionPerformed
 
