@@ -39,7 +39,7 @@ public class Registrar_Plataforma extends javax.swing.JInternalFrame {
         jLabel3.setText("URL:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
-        jLabel5.setText("Ingresar Datos Plataforma:");
+        jLabel5.setText("Ingresar Datos Plataforma");
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

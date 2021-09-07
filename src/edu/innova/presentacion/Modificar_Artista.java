@@ -91,7 +91,7 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
 
         txtNickname.setEditable(false);
 
-        btnActualizarArtista.setText("Actualizar Espectador");
+        btnActualizarArtista.setText("Actualizar");
         btnActualizarArtista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarArtistaActionPerformed(evt);

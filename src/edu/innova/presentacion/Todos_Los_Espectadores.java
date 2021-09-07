@@ -6,6 +6,7 @@ import edu.innova.logica.entidades.Funcion;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,9 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
             fila[2] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getApellido();
             fila[3] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getNickname();
             fila[4] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getEmail();
-            fila[5] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getFechaNacimiento().toString();
+            
+            SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+            fila[5] = dateform.format(fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getFechaNacimiento());
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
         }
         //Setear el modelo en la tabla de espectadores

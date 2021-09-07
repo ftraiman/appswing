@@ -7,6 +7,7 @@ import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.persistencia.ConexionDB;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +42,10 @@ public class Todos_Los_Artistas extends javax.swing.JInternalFrame {
             fila[1] = artista.getNombre();
             fila[2] = artista.getApellido();
             fila[3] = artista.getNickname();
-            fila[4] = artista.getFechaNacimiento().toString();
+            
+            SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+            fila[4] = dateform.format(artista.getFechaNacimiento());
+            
             fila[5] = artista.getEmail();
             fila[6] = artista.getBiografia();
             fila[7] = artista.getDescripcion();

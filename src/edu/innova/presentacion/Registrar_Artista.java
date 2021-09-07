@@ -85,7 +85,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         jLabel8.setText("Año:");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("Ingrese los Datos de Artista:");
+        jLabel9.setText("Ingrese los Datos de Artista");
 
         jLabel10.setText("Descripcion:");
 

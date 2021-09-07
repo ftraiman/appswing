@@ -81,7 +81,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
         txtNickname.setEditable(false);
 
-        btnActualizarEspectador.setText("Actualizar Espectador");
+        btnActualizarEspectador.setText("Actualizar");
         btnActualizarEspectador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEspectadorActionPerformed(evt);
