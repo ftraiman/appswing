@@ -48,12 +48,12 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public List<Espectaculo> getEspectaculosPorIdPlataforma(Long idPlataforma) {
         return espectaculoServicio.getTodosLosEspectaculosPorPlataforma(idPlataforma);
     }
-    
+
     @Override
     public List<Espectaculo> getTodosLosEspectaculos() throws SQLException {
         return espectaculoServicio.getTodosLosEspectaculos();
     }
-    
+
     private void validarNuevoEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
 
         HelperStrings.stringNoVacio(espectaculo.getNombre(), "nombre");
@@ -66,5 +66,14 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
             throw new InnovaModelException("El Costo es inválido!");
         }
 
+        //Verificar que haya seleccionado un artista
+        if (null == idArtista) {
+            throw new InnovaModelException("No se Selecciono un Artista!");
+        }
+
+        //Verificar que haya seleccionado una plataforma
+        if (null == idPlataforma) {
+            throw new InnovaModelException("No se Selecciono una Plataforma!");
+        }
     }
 }

@@ -24,15 +24,14 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         initComponents();
 
         try {
-            
+
             //Carga la plataforma en un jList
             cargarPlataforma();
-            
+
             //Carga los artistas en un jList
             cargarArtista();
-            
-        } 
-        catch (BaseDeDatosException ex) {
+
+        } catch (BaseDeDatosException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error SQL [%s]", ex.getMessage()));
         }
 
@@ -374,28 +373,29 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         try {
-            
+
             //Verifica que los campos no esten vacios (Lo hago aca para ser mas practico)
-            HelperStrings.stringNoVacio(this.txtIda.getText(),"ID Artista");
-            HelperStrings.stringNoVacio(this.txtId.getText(),"ID Plataforma");
-            HelperStrings.stringNoVacio(this.Duracion.getText(),"Duracion");
-            HelperStrings.stringNoVacio(this.EspMin.getText(),"Espectadores Minimos");
-            HelperStrings.stringNoVacio(this.EspMax.getText(),"Espectadores Maximos");
-            HelperStrings.stringNoVacio(this.Costo.getText(),"Descuento");
-            
+            //HelperStrings.stringNoVacio(this.txtIda.getText(), "ID Artista");
+            //HelperStrings.stringNoVacio(this.txtId.getText(), "ID Plataforma");
+            HelperStrings.stringNoVacio(this.Duracion.getText(), "Duracion");
+            HelperStrings.stringNoVacio(this.EspMin.getText(), "Espectadores Minimos");
+            HelperStrings.stringNoVacio(this.EspMax.getText(), "Espectadores Maximos");
+            HelperStrings.stringNoVacio(this.Costo.getText(), "Descuento");
+
             //transforma la ID de string a Long
-            Long idArtista = HelperStrings.getLongValue(this.txtIda.getText());
-            Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText());
-           
+            Long idArtista = HelperStrings.getLongValue(this.txtIda.getText(),"IdArtista");
+            Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText(),"IdPlataforma");
+
             //Datos basicos
             String nombre = this.Nombre.getText();
             String descripcion = txtDesc.getText();
             String url = txtURL.getText();
-            
+
             //transforma de String a Integer
             Integer duracion = HelperStrings.getIntValue(this.Duracion.getText(), "duracion");
             Integer espectadoresMinimos = HelperStrings.getIntValue(this.EspMin.getText(), "espectadores mínimos");
             Integer espectadoresMaximos = HelperStrings.getIntValue(this.EspMax.getText(), "espectadores máximos");
+            validarCantidadEspectadores();
             
             //transforma de String a BigDecimal
             BigDecimal costo = HelperStrings.getBigDecimalValue(this.Costo.getText());
@@ -405,15 +405,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             String fmes = this.spi_mes.getValue().toString();
             String fanio = this.spi_año.getValue().toString();
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio); //Convertimos la fecha para aa/mm/dd
-            
+
             //Creamos el objeto espectaculo
             Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha);
-            
+
             //Y mandamos al controlador a verificar datos
             fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
-            
+
             //Limpiar Espectaculo
-            this.Nombre.setText("");
+            /* this.Nombre.setText("");
             this.Duracion.setText("");
             this.EspMin.setText("");
             this.EspMax.setText("");
@@ -423,7 +423,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.spi_dia.setValue(1);
             this.spi_mes.setValue(1);
             this.spi_año.setValue(1900);
-            
+
             //Limpiar Listas
             this.listArtista.clearSelection();
             this.listPlataforma.clearSelection();
@@ -431,7 +431,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.txtNombre.setText("");
             this.txtDesc.setText("");
             this.txtURL.setText("");
-
+             */
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
         } catch (InnovaModelException ex) {
@@ -443,19 +443,18 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
 
-        
         //Limpiar Espectaculo
         this.Nombre.setText("");
         this.Duracion.setText("");
         this.EspMin.setText("");
         this.EspMax.setText("");
         this.Costo.setText("");
-        
+
         //Limpiar Fecha
         this.spi_dia.setValue(1);
         this.spi_mes.setValue(1);
         this.spi_año.setValue(1900);
-        
+
         //Limpiar Listas
         this.listArtista.clearSelection();
         this.listPlataforma.clearSelection();
@@ -464,8 +463,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         this.txtDesc.setText("");
         this.txtURL.setText("");
         this.txtIda.setText("");
-        this.txtNombreA.setText(""); 
-        
+        this.txtNombreA.setText("");
+
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void DuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuracionActionPerformed
@@ -476,7 +475,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Artista a = listArtista.getSelectedValue();
         this.txtIda.setText(String.valueOf(a.getId()));
-        this.txtNombreA.setText(a.getNombre());      
+        this.txtNombreA.setText(a.getNombre());
     }//GEN-LAST:event_listArtistaMouseClicked
 
     private void listPlataformaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlataformaMouseClicked
@@ -531,7 +530,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarPlataforma(){
+    private void cargarPlataforma() {
         // Obtengo de PlataformaServicio las plataformas
         List<Plataforma> plat = fabrica.getPlataformaServicioImpl().getTodasLasPlataformas();
 
@@ -544,19 +543,29 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         // Relleno el modelPlataforma con todas las plataformas obtenidos del PlataformaServicio
         plat.forEach(e -> modelPlataforma.addElement(e));
     }
-    
-    private void cargarArtista(){
+
+    private void cargarArtista() {
         // Obtengo del ArtistaServicio las plataformas
         List<Artista> art = fabrica.getUsuarioControlador().getTodosLosArtistas();
-        
+
         // Creo un DefaultListModel que almacena los objetos Artista
         DefaultListModel<Artista> modelArtista = new DefaultListModel<>();
-        
+
         // Le cargo al JList el modelArtista
         listArtista.setModel(modelArtista);
-        
+
         // Relleno el modelArtista con todos los artistas obtenidos del ArtistaServicio
         art.forEach(e -> modelArtista.addElement(e));
     }
-    
+
+    private void validarCantidadEspectadores() {
+        Integer espectadoresMinimos = HelperStrings.getIntValue(this.EspMin.getText(), "espectadores mínimos");
+        Integer espectadoresMaximos = HelperStrings.getIntValue(this.EspMax.getText(), "espectadores máximos");
+
+        //Verificar que los espMin no sea mayor a espMax
+        if (espectadoresMinimos > espectadoresMaximos) {
+            throw new InnovaModelException("Los Espectadores Minimos no puede superar a los Espectadores Maximos");
+        }
+
+    }
 }

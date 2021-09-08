@@ -24,6 +24,14 @@ public class HelperStrings {
         }          
     }
     
+    public static Long getLongValue(String id,String nombre) {
+        try {
+            return Long.valueOf(id);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("El parametro [%s] esta vacío", nombre)); //To change body of generated methods, choose Tools | Templates.
+        }          
+    }
+    
     public static BigDecimal getBigDecimalValue(String valor) {
         try {
             return new BigDecimal(valor);
