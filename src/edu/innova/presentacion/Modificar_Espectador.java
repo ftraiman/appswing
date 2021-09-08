@@ -4,9 +4,12 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -56,6 +59,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         lblNombre1 = new javax.swing.JLabel();
         txtId = new javax.swing.JLabel();
         btn_Cancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Modificar Espectador");
@@ -80,6 +84,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         lblNickname.setText("Nickname");
 
         txtNickname.setEditable(false);
+        txtNickname.setEnabled(false);
 
         btnActualizarEspectador.setText("Actualizar");
         btnActualizarEspectador.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +96,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         lblEmail.setText("Email");
 
         txtEmail.setEditable(false);
+        txtEmail.setEnabled(false);
 
         jLabel1.setText("Fecha Nacimiento");
 
@@ -104,7 +110,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
         spnMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        spnAnio.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, null, 1));
+        spnAnio.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
 
         lblNombre1.setText("ID");
 
@@ -114,6 +120,13 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
         btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CancelarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ver Espectadores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -157,7 +170,9 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnActualizarEspectador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,10 +211,11 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
                         .addComponent(spnDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(spnMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizarEspectador)
-                    .addComponent(btn_Cancelar))
+                    .addComponent(btn_Cancelar)
+                    .addComponent(jButton1))
                 .addGap(25, 25, 25))
         );
 
@@ -252,7 +268,7 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
             this.spnDia.setValue(1);
             this.spnMes.setValue(1);
-            this.spnAnio.setValue(1900);
+            this.spnAnio.setValue(2021);
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -278,13 +294,26 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
         this.spnDia.setValue(1);
         this.spnMes.setValue(1);
-        this.spnAnio.setValue(1900);
+        this.spnAnio.setValue(2021);
     }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Todos_Los_Espectadores te = new Todos_Los_Espectadores();
+            GUI_Proyecto.Panel.add(te);
+            te.toFront();
+            te.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificar_Artista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarEspectador;
     private javax.swing.JButton btn_Cancelar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

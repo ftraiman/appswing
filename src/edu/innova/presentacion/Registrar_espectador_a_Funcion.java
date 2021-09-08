@@ -8,10 +8,13 @@ import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Plataforma;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -87,6 +90,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
         lblSeleccionarEspectador3 = new javax.swing.JLabel();
         btnCanjearFuncion = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -318,6 +322,13 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Ver Espectador a Funcion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,6 +375,8 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
                         .addGap(152, 152, 152)
                         .addComponent(btnCanjearFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -412,7 +425,8 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
                         .addGap(81, 81, 81)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCanjearFuncion)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(jButton1))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -535,6 +549,18 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnCanjearFuncionActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Todos_Los_Espectadores te = new Todos_Los_Espectadores();
+            GUI_Proyecto.Panel.add(te);
+            te.toFront();
+            te.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificar_Artista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanjearFuncion;
     private javax.swing.JButton btnEspectadorAFuncion;
@@ -543,6 +569,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Espectador> cbEspectadores;
     private javax.swing.JComboBox<Funcion> cbFunciones;
     private javax.swing.JComboBox<Plataforma> cbPlataforma;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JLabel jLabel1;

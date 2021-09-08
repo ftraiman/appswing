@@ -4,7 +4,10 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Registrar_Artista extends javax.swing.JInternalFrame {
@@ -42,6 +45,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         descripcion = new javax.swing.JTextField();
         biografia = new javax.swing.JTextField();
         link = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Registrar Artista");
@@ -76,7 +80,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
 
         Mes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        Año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
+        Año.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
 
         jLabel6.setText("Día:");
 
@@ -99,6 +103,13 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Ver Artista");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,6 +118,8 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Aceptar)
                         .addGap(10, 10, 10)
                         .addComponent(Cancelar))
@@ -210,7 +223,8 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Aceptar)
-                    .addComponent(Cancelar))
+                    .addComponent(Cancelar)
+                    .addComponent(jButton1))
                 .addGap(28, 28, 28))
         );
 
@@ -258,7 +272,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         this.link.setText("");
         this.Dia.setValue(1);
         this.Mes.setValue(1);
-        this.Año.setValue(1900);
+        this.Año.setValue(2021);
           
         } 
         catch (IllegalArgumentException e) {
@@ -286,9 +300,21 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
         this.link.setText("");
         this.Dia.setValue(1);
         this.Mes.setValue(1);
-        this.Año.setValue(1900); 
+        this.Año.setValue(2021); 
     // this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Todos_Los_Artistas ta = new Todos_Los_Artistas();
+            GUI_Proyecto.Panel.add(ta);
+            ta.toFront();
+            ta.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificar_Artista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -304,6 +330,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
     private javax.swing.JButton SelecionarImagen;
     private javax.swing.JTextField biografia;
     private javax.swing.JTextField descripcion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

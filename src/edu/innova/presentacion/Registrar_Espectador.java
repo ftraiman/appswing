@@ -4,7 +4,10 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectador;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Registrar_Espectador extends javax.swing.JInternalFrame {
@@ -36,6 +39,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         Mes = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         Año = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Registrar Espectador");
@@ -87,6 +91,13 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
         Año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
 
+        jButton1.setText("Ver Espectadores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,6 +141,8 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(Aceptar)
                         .addGap(18, 18, 18)
                         .addComponent(Cancelar)))
@@ -170,7 +183,8 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Aceptar)
-                    .addComponent(Cancelar))
+                    .addComponent(Cancelar)
+                    .addComponent(jButton1))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -205,7 +219,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             this.Correotxt.setText("");
             this.Dia.setValue(1);
             this.Mes.setValue(1);
-            this.Año.setValue(1900);
+            this.Año.setValue(2021);
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -232,8 +246,20 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         this.Correotxt.setText("");
         this.Dia.setValue(1);
         this.Mes.setValue(1);
-        this.Año.setValue(1900);
+        this.Año.setValue(2021);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Todos_Los_Espectadores te = new Todos_Los_Espectadores();
+            GUI_Proyecto.Panel.add(te);
+            te.toFront();
+            te.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificar_Artista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,6 +273,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Nicknametxt;
     private javax.swing.JTextField Nombretxt;
     private javax.swing.JButton SelecionarImagen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -9,8 +9,11 @@ import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Plataforma;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -80,6 +83,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         spi_año = new javax.swing.JSpinner();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -107,10 +111,13 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         jLabel4.setText("URL:");
 
         txtNombre.setEditable(false);
+        txtNombre.setEnabled(false);
 
         txtDesc.setEditable(false);
+        txtDesc.setEnabled(false);
 
         txtURL.setEditable(false);
+        txtURL.setEnabled(false);
 
         jLabel5.setText("ID:");
 
@@ -119,6 +126,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         jLabel6.setText("Nombre Artista: ");
 
         txtNombreA.setEditable(false);
+        txtNombreA.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jLabel7.setText("Artistas Registrados");
@@ -183,11 +191,18 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Mes");
 
-        spi_año.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
+        spi_año.setModel(new javax.swing.SpinnerNumberModel(2021, 2021, null, 1));
 
         jLabel18.setText("Año");
 
         jLabel19.setText("Minutos");
+
+        jButton1.setText("Ver Espectaculos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,6 +291,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                         .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -349,7 +366,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
-                    .addComponent(Aceptar))
+                    .addComponent(Aceptar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -413,7 +431,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
 
             //Limpiar Espectaculo
-            /* this.Nombre.setText("");
+            this.Nombre.setText("");
             this.Duracion.setText("");
             this.EspMin.setText("");
             this.EspMax.setText("");
@@ -422,7 +440,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             //Limpiar Fecha
             this.spi_dia.setValue(1);
             this.spi_mes.setValue(1);
-            this.spi_año.setValue(1900);
+            this.spi_año.setValue(2021);
 
             //Limpiar Listas
             this.listArtista.clearSelection();
@@ -431,7 +449,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.txtNombre.setText("");
             this.txtDesc.setText("");
             this.txtURL.setText("");
-             */
+             
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
         } catch (InnovaModelException ex) {
@@ -453,7 +471,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         //Limpiar Fecha
         this.spi_dia.setValue(1);
         this.spi_mes.setValue(1);
-        this.spi_año.setValue(1900);
+        this.spi_año.setValue(2021);
 
         //Limpiar Listas
         this.listArtista.clearSelection();
@@ -487,6 +505,18 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         this.txtURL.setText(plata.getUrl());
     }//GEN-LAST:event_listPlataformaMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Todos_Los_Espectaculos te = new Todos_Los_Espectaculos();
+            GUI_Proyecto.Panel.add(te);
+            te.toFront();
+            te.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Modificar_Artista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
@@ -496,6 +526,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField EspMax;
     private javax.swing.JTextField EspMin;
     private javax.swing.JTextField Nombre;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

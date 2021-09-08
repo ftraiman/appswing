@@ -38,7 +38,7 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
             fila[2] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getApellido();
             fila[3] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getNickname();
             fila[4] = fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getEmail();
-            
+
             SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
             fila[5] = dateform.format(fabrica.getUsuarioControlador().getTodosLosEspectadores().get(i).getFechaNacimiento());
             tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
@@ -57,6 +57,9 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
         tableFuncion = new javax.swing.JTable();
         lbFuncion = new javax.swing.JLabel();
         lbEspectador = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Todos los Espectadores");
@@ -97,6 +100,27 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
         lbEspectador.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         lbEspectador.setText("Espectadores:");
 
+        jButton1.setText("Registrar Espectador");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Modificar Espectador");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Registrar Funcion a Espectador");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,21 +131,33 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbEspectador)
-                            .addComponent(lbFuncion))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lbFuncion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbEspectador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbEspectador)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbEspectador))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(lbFuncion)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbFuncion)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -166,8 +202,35 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTable_EspectadorMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Registrar_Espectador re = new Registrar_Espectador();
+        GUI_Proyecto.Panel.add(re);
+        re.toFront();
+        re.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Modificar_Espectador me = new Modificar_Espectador();
+        GUI_Proyecto.Panel.add(me);
+        me.toFront();
+        me.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Registrar_espectador_a_Funcion ref = new Registrar_espectador_a_Funcion();
+        GUI_Proyecto.Panel.add(ref);
+        ref.toFront();
+        ref.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_Espectador;

@@ -152,7 +152,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem5);
-        jMenuItem5.getAccessibleContext().setAccessibleName("Registro a Función de Espectáculo");
 
         Registro.add(jMenu5);
 
@@ -415,7 +414,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem EspectaculoC;
     private javax.swing.JMenuItem Espectador;
     private javax.swing.JMenuBar Menu;
-    private javax.swing.JDesktopPane Panel;
+    public static javax.swing.JDesktopPane Panel;
     private javax.swing.JMenu Paquete;
     private javax.swing.JMenu Plataforma;
     private javax.swing.JMenuItem Plataforma1;
