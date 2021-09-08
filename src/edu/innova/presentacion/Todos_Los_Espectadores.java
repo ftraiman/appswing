@@ -88,10 +88,13 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
                 "Id de funcion", "Nombre", "Fecha de registro", "Fecha de inicio", "Id de espectaculo"
             }
         ));
+        tableFuncion.setEnabled(false);
         jScrollPane2.setViewportView(tableFuncion);
 
+        lbFuncion.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         lbFuncion.setText("Funciones del espectador: ");
 
+        lbEspectador.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         lbEspectador.setText("Espectadores:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,8 +108,8 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbFuncion)
-                            .addComponent(lbEspectador))
+                            .addComponent(lbEspectador)
+                            .addComponent(lbFuncion))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -116,12 +119,12 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(lbEspectador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(lbFuncion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -148,8 +151,9 @@ public class Todos_Los_Espectadores extends javax.swing.JInternalFrame {
                 String fila[] = new String[5];
                 fila[0] = funcion.getId().toString();
                 fila[1] = funcion.getNombre();
-                fila[2] = funcion.getFechaRegistro().toString();
-                fila[3] = funcion.getFechaInicio().toString();
+                SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+                fila[2] = dateform.format(funcion.getFechaRegistro());
+                fila[3] = dateform.format(funcion.getFechaInicio());
                 fila[4] = funcion.getIdEspectaculo().toString();
                 tabla.addRow(fila);//Se agrega la fila al modelo de la tabla
             }
