@@ -409,9 +409,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void Aceptar_Rechazar_EspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aceptar_Rechazar_EspectaculoActionPerformed
-        Aceptar_rechazar_espectaculo are  = new Aceptar_rechazar_espectaculo();
-        this.Panel.add(are);
-        are.show();
+        try {
+            Aceptar_rechazar_espectaculo are  = new Aceptar_rechazar_espectaculo();
+            this.Panel.add(are);
+            are.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Aceptar_Rechazar_EspectaculoActionPerformed
     
 
