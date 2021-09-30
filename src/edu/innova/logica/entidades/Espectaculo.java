@@ -19,11 +19,13 @@ public class Espectaculo {
     private BigDecimal costo;
     private Date fechaRegistro;
     private List<Funcion> funciones;
+    private String estado;
+    private Long idCategoria;
 
     public Espectaculo() {
     }
 
-    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones) {
+    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones,Long idCategoria, String estado) {
         this.id = id;
         this.artista = artista;
         this.nombre = nombre;
@@ -36,6 +38,8 @@ public class Espectaculo {
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
         this.funciones = funciones;
+        this.idCategoria = idCategoria;
+        this.estado = estado;
     }
 
     public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
@@ -49,12 +53,33 @@ public class Espectaculo {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.espectadoresMinimos = espectadoredMinimos;
+        this.espectadoresMaximos = espectadoresMaximos;
+        this.url = url;
+        this.costo = costo;
+        this.fechaRegistro = fechaRegistro;
+        this.idCategoria = idCategoria;
+        this.estado = estado;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Artista getArtista() {
@@ -144,6 +169,14 @@ public class Espectaculo {
     public void setFunciones(List<Funcion> funciones) {
         this.funciones = funciones;
     }
+    
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
 
     @Override
     public String toString() {
@@ -174,7 +207,5 @@ public class Espectaculo {
         }
         return true;
     }
-    
-    
 
 }

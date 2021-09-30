@@ -21,9 +21,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Registro = new javax.swing.JMenu();
         Cliente = new javax.swing.JMenu();
         Artista = new javax.swing.JMenuItem();
-        Artista_Web = new javax.swing.JMenuItem();
         Espectador = new javax.swing.JMenuItem();
-        Espectador_Web = new javax.swing.JMenuItem();
         Espectaculo = new javax.swing.JMenu();
         EspectaculoC = new javax.swing.JMenuItem();
         Aceptar_Rechazar_Espectaculo = new javax.swing.JMenuItem();
@@ -86,14 +84,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         });
         Cliente.add(Artista);
 
-        Artista_Web.setText("Artista Web");
-        Artista_Web.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Artista_WebActionPerformed(evt);
-            }
-        });
-        Cliente.add(Artista_Web);
-
         Espectador.setText("Espectador");
         Espectador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,14 +91,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         Cliente.add(Espectador);
-
-        Espectador_Web.setText("Espectador Web");
-        Espectador_Web.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Espectador_WebActionPerformed(evt);
-            }
-        });
-        Cliente.add(Espectador_Web);
 
         Registro.add(Cliente);
 
@@ -333,9 +315,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_ArtistasActionPerformed
 
     private void EspectaculoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EspectaculoCActionPerformed
-        Registrar_Espectaculos re = new Registrar_Espectaculos();
-        this.Panel.add(re);
-        re.show();
+        try {
+            Registrar_Espectaculos re = new Registrar_Espectaculos();
+            this.Panel.add(re);
+            re.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_EspectaculoCActionPerformed
 
      private void jMenuModificarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificarArtistaActionPerformed
@@ -427,14 +413,6 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         this.Panel.add(are);
         are.show();
     }//GEN-LAST:event_Aceptar_Rechazar_EspectaculoActionPerformed
-
-    private void Espectador_WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Espectador_WebActionPerformed
-        
-    }//GEN-LAST:event_Espectador_WebActionPerformed
-
-    private void Artista_WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Artista_WebActionPerformed
-        
-    }//GEN-LAST:event_Artista_WebActionPerformed
     
 
     public static void main(String args[]) {
@@ -469,14 +447,12 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem AgregarFE;
     private javax.swing.JMenuItem Agregar_Espectaculo;
     private javax.swing.JMenuItem Artista;
-    private javax.swing.JMenuItem Artista_Web;
     private javax.swing.JMenu Cliente;
     private javax.swing.JMenuItem Consulta_Funcion;
     private javax.swing.JMenuItem Crear_Paquete;
     private javax.swing.JMenu Espectaculo;
     private javax.swing.JMenuItem EspectaculoC;
     private javax.swing.JMenuItem Espectador;
-    private javax.swing.JMenuItem Espectador_Web;
     private javax.swing.JMenuBar Menu;
     public static javax.swing.JDesktopPane Panel;
     private javax.swing.JMenu Paquete;

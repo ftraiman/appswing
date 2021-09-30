@@ -4,6 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Funcion;
 import edu.innova.logica.entidades.Plataforma;
@@ -26,11 +27,14 @@ import java.util.logging.Logger;
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String altaCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ?";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
     private final String espectaculoPorIdA = "SELECT * FROM espectaculos WHERE idUsuario = ?";
+    private final String todasLasCategorias = "SELECT * FROM categorias";
+    private final String todosLosEspectaculosIngresados = "SELECT * FROM espectaculos WHERE estado = 'Ingresado'";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -70,15 +74,35 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             sentencia.setLong(8, idPlataforma);
             sentencia.setInt(9, espectaculo.getEspectadoresMinimos());
             sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
+            sentencia.setLong(11, espectaculo.getIdCategoria());
+            sentencia.setString(12, espectaculo.getEstado());
+            
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
-            throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]",espectaculo.getNombre()));
+            throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", espectaculo.getNombre()));
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
 
     }
     //==================== AlTA DE ESPECTACULO ===================//
+
+    //==================== AlTA DE CATEGORIA ===================//
+    @Override
+    public void altaCategoria(String nombre) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(altaCategoria);
+            sentencia.setString(1, nombre);
+            sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe una Categoria con el nombre [%s]", nombre));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+
+    }
+    //==================== AlTA DE CATEGORIA ===================//
 
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
@@ -96,9 +120,8 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //==================== OBTENER ESPECTACULO POR ID ============//
-    
-    
-     //==================== OBTENER ESPECTACULO POR ID Arista============//
+
+    //==================== OBTENER ESPECTACULO POR ID Arista============//
     @Override
     public List<Espectaculo> getEspectaculosPorIdArtista(Long idArtista) {
         List<Espectaculo> espectaculos = new ArrayList<>();
@@ -110,11 +133,11 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
                 espectaculos.add(espectaculoMapper(rs));
             }
         } catch (SQLException ex) {
-            throw new BaseDeDatosException(String.format("Error SQL %s", ex.getMessage())); 
+            throw new BaseDeDatosException(String.format("Error SQL %s", ex.getMessage()));
         }
         return espectaculos;
     }
-    
+
     //==================== OBTENER ESPECTACULO POR ID Artista============//
     
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
@@ -129,7 +152,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return espectaculos;
     }
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
-    
+
     @Override
     public List<Espectaculo> getTodosLosEspectaculosPorPlataforma(Long idPlataforma) {
         try {
@@ -142,10 +165,49 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             }
             return espectaculos;
         } catch (SQLException ex) {
-            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()),ex.getCause());
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
     }
+    
+    //==================== OBTENER TODOS LOS ESPECTACULOS "INGRESADO"=========//
 
+    @Override
+    public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException{
+        try {
+            List<Espectaculo> espectaculos = new ArrayList<>();
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectaculosIngresados);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapper(rs));
+            }
+            return espectaculos;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    
+    //==================== OBTENER TODAS LAS CATEGORIAS=======================//
+
+    @Override
+    public List<Categoria> getTodasLasCategorias() {
+        List<Categoria> categorias = new ArrayList<>();
+        ResultSet rs;
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todasLasCategorias);
+            rs = sentencia.executeQuery();
+            while (rs.next()) {
+                categorias.add(categoriaMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+
+        return categorias;
+    }
+    
+   //==================== OBTENER TODAS LAS CATEGORIAS=======================//
+    
+    
     private Espectaculo espectaculoMapper(ResultSet rs) throws SQLException {
 
         Long id = rs.getLong("id");
@@ -159,10 +221,21 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         Artista artista = (Artista) usuarioServicio.getUsuarioPorId(rs.getLong("idUsuario"));
         Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
+        Long idCategoria = rs.getLong("idCategoria");
+        String estado = rs.getString("estado");
 
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
 
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones);
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones,idCategoria,estado);
+    }
+    
+    
+    private Categoria categoriaMapper(ResultSet rs) throws SQLException {
+
+        Long id = rs.getLong("id");
+        String nombre = rs.getString("nombre");
+
+        return new Categoria(id, nombre);
     }
 
 }

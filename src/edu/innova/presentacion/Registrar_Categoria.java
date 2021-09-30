@@ -1,12 +1,17 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.InnovaModelException;
+import edu.innova.logica.Fabrica;
+import javax.swing.JOptionPane;
+
 public class Registrar_Categoria extends javax.swing.JInternalFrame {
+
+    private Fabrica fabrica = new Fabrica();
 
     public Registrar_Categoria() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,11 +76,24 @@ public class Registrar_Categoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String nombre = this.Nombre_Categoria.getText();
+            fabrica.getEspectaculoControlador().altaCategoria(nombre);
+            this.Nombre_Categoria.setText("");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+            return;
+        } catch (InnovaModelException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
+            return;
+        }
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        this.Nombre_Categoria.setText("");        
+        this.Nombre_Categoria.setText("");
     }//GEN-LAST:event_CancelarActionPerformed
 
 

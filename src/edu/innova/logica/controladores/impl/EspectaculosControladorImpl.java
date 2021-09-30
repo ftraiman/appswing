@@ -5,6 +5,7 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.controladores.EspectaculoControlador;
+import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import java.math.BigDecimal;
@@ -45,6 +46,25 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
+    public void altaCategoria(String Nombre) {
+        try {
+            //Valido que los datos de entrada
+            //validarNuevoEspectaculo(idArtista, idPlataforma, espectaculo);
+
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Categoria?", "Confirmar Alta Categoria", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                // espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
+                espectaculoServicio.altaCategoria(Nombre);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Categoria");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se Agrego La categoria");
+            }
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+    }
+
+    @Override
     public List<Espectaculo> getEspectaculosPorIdPlataforma(Long idPlataforma) {
         return espectaculoServicio.getTodosLosEspectaculosPorPlataforma(idPlataforma);
     }
@@ -75,5 +95,15 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         if (null == idPlataforma) {
             throw new InnovaModelException("No se Selecciono una Plataforma!");
         }
+    }
+
+    @Override
+    public List<Categoria> getTodasLasCategorias() throws SQLException{
+        return espectaculoServicio.getTodasLasCategorias();
+    }
+
+    @Override
+    public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException {
+        return espectaculoServicio.getTodosLosEspectaculosIngresados();
     }
 }

@@ -281,11 +281,15 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Tabla_EspectaculoMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Registrar_Espectaculos re = new Registrar_Espectaculos();
+        try {
+            Registrar_Espectaculos re = new Registrar_Espectaculos();
             GUI_Proyecto.Panel.add(re);
             re.toFront();
             re.setVisible(true);
             this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Todos_Los_Espectaculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

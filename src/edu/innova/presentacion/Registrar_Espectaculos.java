@@ -6,6 +6,7 @@ import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Plataforma;
 import java.math.BigDecimal;
@@ -23,10 +24,13 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
 
-    public Registrar_Espectaculos() {
+    public Registrar_Espectaculos() throws SQLException {
         initComponents();
 
         try {
+
+            List<Categoria> categorias = fabrica.getEspectaculoControlador().getTodasLasCategorias();
+            categorias.forEach(categoria -> SelecciondeCategoria.addItem(categoria));
 
             //Carga la plataforma en un jList
             cargarPlataforma();
@@ -84,6 +88,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        SelecciondeCategoria = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setResizable(true);
@@ -204,6 +210,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        jLabel20.setText("Selecionar Categoria:");
+
+        SelecciondeCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelecciondeCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,7 +266,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                                                 .addComponent(txtURL)
                                                 .addComponent(txtDesc)
                                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,16 +294,18 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel6)
-                                        .addComponent(jLabel8))
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel20))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtIda)
-                                        .addComponent(txtNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(SelecciondeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(104, 104, 104)
                                     .addComponent(jLabel7))))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
@@ -325,11 +342,18 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(SelecciondeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -401,8 +425,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             HelperStrings.stringNoVacio(this.Costo.getText(), "Descuento");
 
             //transforma la ID de string a Long
-            Long idArtista = HelperStrings.getLongValue(this.txtIda.getText(),"IdArtista");
-            Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText(),"IdPlataforma");
+            Long idArtista = HelperStrings.getLongValue(this.txtIda.getText(), "IdArtista");
+            Long idPlataforma = HelperStrings.getLongValue(this.txtId.getText(), "IdPlataforma");
 
             //Datos basicos
             String nombre = this.Nombre.getText();
@@ -414,7 +438,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             Integer espectadoresMinimos = HelperStrings.getIntValue(this.EspMin.getText(), "espectadores mínimos");
             Integer espectadoresMaximos = HelperStrings.getIntValue(this.EspMax.getText(), "espectadores máximos");
             validarCantidadEspectadores();
-            
+
             //transforma de String a BigDecimal
             BigDecimal costo = HelperStrings.getBigDecimalValue(this.Costo.getText());
 
@@ -424,9 +448,10 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             String fanio = this.spi_año.getValue().toString();
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio); //Convertimos la fecha para aa/mm/dd
 
+            Categoria CategoriaID = (Categoria) SelecciondeCategoria.getSelectedItem();
+            Long idc = CategoriaID.getId();
             //Creamos el objeto espectaculo
-            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha);
-
+            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado");
             //Y mandamos al controlador a verificar datos
             fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
 
@@ -449,7 +474,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.txtNombre.setText("");
             this.txtDesc.setText("");
             this.txtURL.setText("");
-             
+
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
         } catch (InnovaModelException ex) {
@@ -517,6 +542,10 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void SelecciondeCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecciondeCategoriaActionPerformed
+
+    }//GEN-LAST:event_SelecciondeCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
@@ -526,6 +555,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField EspMax;
     private javax.swing.JTextField EspMin;
     private javax.swing.JTextField Nombre;
+    private javax.swing.JComboBox<Categoria> SelecciondeCategoria;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -539,6 +569,7 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
