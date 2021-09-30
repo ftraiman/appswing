@@ -21,9 +21,12 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         Registro = new javax.swing.JMenu();
         Cliente = new javax.swing.JMenu();
         Artista = new javax.swing.JMenuItem();
+        Artista_Web = new javax.swing.JMenuItem();
         Espectador = new javax.swing.JMenuItem();
+        Espectador_Web = new javax.swing.JMenuItem();
         Espectaculo = new javax.swing.JMenu();
         EspectaculoC = new javax.swing.JMenuItem();
+        Aceptar_Rechazar_Espectaculo = new javax.swing.JMenuItem();
         Plataforma = new javax.swing.JMenu();
         Plataforma1 = new javax.swing.JMenuItem();
         Paquete = new javax.swing.JMenu();
@@ -32,6 +35,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         AgregarFE = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -81,6 +86,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         });
         Cliente.add(Artista);
 
+        Artista_Web.setText("Artista Web");
+        Artista_Web.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Artista_WebActionPerformed(evt);
+            }
+        });
+        Cliente.add(Artista_Web);
+
         Espectador.setText("Espectador");
         Espectador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +101,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         Cliente.add(Espectador);
+
+        Espectador_Web.setText("Espectador Web");
+        Espectador_Web.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Espectador_WebActionPerformed(evt);
+            }
+        });
+        Cliente.add(Espectador_Web);
 
         Registro.add(Cliente);
 
@@ -100,6 +121,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         Espectaculo.add(EspectaculoC);
+
+        Aceptar_Rechazar_Espectaculo.setText("Aceptar / Rechazar Espectaculo");
+        Aceptar_Rechazar_Espectaculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Aceptar_Rechazar_EspectaculoActionPerformed(evt);
+            }
+        });
+        Espectaculo.add(Aceptar_Rechazar_Espectaculo);
 
         Registro.add(Espectaculo);
 
@@ -154,6 +183,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu5.add(jMenuItem5);
 
         Registro.add(jMenu5);
+
+        jMenu8.setText("Categoria");
+
+        jMenuItem6.setText("Alta Categoria");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem6);
+
+        Registro.add(jMenu8);
 
         Menu.add(Registro);
 
@@ -374,6 +415,26 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Consulta_FuncionActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Registrar_Categoria rc = new Registrar_Categoria();
+        this.Panel.add(rc);
+        rc.show();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void Aceptar_Rechazar_EspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aceptar_Rechazar_EspectaculoActionPerformed
+        Aceptar_rechazar_espectaculo are  = new Aceptar_rechazar_espectaculo();
+        this.Panel.add(are);
+        are.show();
+    }//GEN-LAST:event_Aceptar_Rechazar_EspectaculoActionPerformed
+
+    private void Espectador_WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Espectador_WebActionPerformed
+        
+    }//GEN-LAST:event_Espectador_WebActionPerformed
+
+    private void Artista_WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Artista_WebActionPerformed
+        
+    }//GEN-LAST:event_Artista_WebActionPerformed
     
 
     public static void main(String args[]) {
@@ -404,15 +465,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Aceptar_Rechazar_Espectaculo;
     private javax.swing.JMenuItem AgregarFE;
     private javax.swing.JMenuItem Agregar_Espectaculo;
     private javax.swing.JMenuItem Artista;
+    private javax.swing.JMenuItem Artista_Web;
     private javax.swing.JMenu Cliente;
     private javax.swing.JMenuItem Consulta_Funcion;
     private javax.swing.JMenuItem Crear_Paquete;
     private javax.swing.JMenu Espectaculo;
     private javax.swing.JMenuItem EspectaculoC;
     private javax.swing.JMenuItem Espectador;
+    private javax.swing.JMenuItem Espectador_Web;
     private javax.swing.JMenuBar Menu;
     public static javax.swing.JDesktopPane Panel;
     private javax.swing.JMenu Paquete;
@@ -426,11 +490,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenuItem jMenuModificarArtista;
