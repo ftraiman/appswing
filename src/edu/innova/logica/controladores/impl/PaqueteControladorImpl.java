@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import edu.innova.logica.controladores.PaqueteControlador;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
-import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 import java.sql.SQLException;

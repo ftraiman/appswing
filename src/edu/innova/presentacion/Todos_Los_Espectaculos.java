@@ -182,11 +182,13 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
         tabla.addColumn("Plataforma");
         tabla.addColumn("Espectadores Minimos");
         tabla.addColumn("Espectadores Maximos");
+        tabla.addColumn("Categoria");
+        tabla.addColumn("Estado");
 
         //Hacemos una lista de Espectaculos por Id plataforma
         List<Espectaculo> espectaculos = fabrica.getEspectaculoControlador().getEspectaculosPorIdPlataforma(plataformaSeleccionada.getId());
         for (Espectaculo espectaculo : espectaculos) {
-            String fila[] = new String[11];//Limite de dos porque solo mostramos el nombre y el apellido
+            String fila[] = new String[13];//Limite de dos porque solo mostramos el nombre y el apellido
 
             fila[0] = espectaculo.getId().toString();
             fila[1] = espectaculo.getNombre();
@@ -202,6 +204,8 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             fila[8] = espectaculo.getPlataforma().toString();
             fila[9] = espectaculo.getEspectadoresMinimos().toString();
             fila[10] = espectaculo.getEspectadoresMaximos().toString();
+            fila[11] = espectaculo.getIdCategoria().toString();
+            fila[12] = espectaculo.getEstado();
             tabla.addRow(fila); //Se agrega la fila al modelo de la tabla
         }
         this.Tabla_Espectaculo.setModel(tabla);

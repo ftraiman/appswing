@@ -89,7 +89,7 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Artista", "Precio"
+                "Nombre", "Artista", "Precio", "Categoria", "Estado"
             }
         ));
         TablaEspectaculosDelPaquete.setEnabled(false);
@@ -161,12 +161,17 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
             tablaEspectaculosModel.addColumn("Nombre");
             tablaEspectaculosModel.addColumn("Artista");
             tablaEspectaculosModel.addColumn("Precio");
+            tablaEspectaculosModel.addColumn("Categoria");
+            tablaEspectaculosModel.addColumn("Estado");
 
-            String fila[] = new String[3];
+            String fila[] = new String[5];
             paqueteSeleccionado.getEspectaculos().stream().forEach(espectaculo -> {
                 fila[0] = espectaculo.getNombre();
                 fila[1] = espectaculo.getArtista().toString();
                 fila[2] = espectaculo.getCosto().toString();
+                fila[3] = espectaculo.getIdCategoria().toString();
+                fila[4] = espectaculo.getEstado();
+                
                 tablaEspectaculosModel.addRow(fila);
             });
             TablaEspectaculosDelPaquete.setModel(tablaEspectaculosModel);

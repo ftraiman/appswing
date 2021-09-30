@@ -1,6 +1,5 @@
 package edu.innova.logica.servicios;
 
-import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
 import java.sql.SQLException;
@@ -19,9 +18,13 @@ public interface EspectaculoServicio {
     public List<Espectaculo> getEspectaculosPorIdArtista(Long idArtista);
 
     public void altaCategoria(String nombre);
-    
+
     public List<Categoria> getTodasLasCategorias();
+
+    public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException;
+
+    public void aceptarEspectaculo(Long id);
     
-     public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException;
+    public void rechazarEspectaculo(Long id);
 
 }

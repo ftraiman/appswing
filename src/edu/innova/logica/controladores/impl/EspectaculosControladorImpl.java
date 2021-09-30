@@ -98,7 +98,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public List<Categoria> getTodasLasCategorias() throws SQLException{
+    public List<Categoria> getTodasLasCategorias() throws SQLException {
         return espectaculoServicio.getTodasLasCategorias();
     }
 
@@ -106,4 +106,24 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException {
         return espectaculoServicio.getTodosLosEspectaculosIngresados();
     }
+
+    @Override
+    public void aceptarEspectaculo(Long id) throws SQLException {
+        try {
+            int i = JOptionPane.showConfirmDialog(null, "Desea Aceptar este Espectaculo??", "Aceptar Espectaculo", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                espectaculoServicio.aceptarEspectaculo(id);
+                JOptionPane.showMessageDialog(null, "Espectaculo Aceptado");
+            } else { //Si no agrega muestra
+                espectaculoServicio.rechazarEspectaculo(id);
+                JOptionPane.showMessageDialog(null, "Espectaculo Rechazado");
+            }
+
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
+        }
+    }
+
+    
+
 }
