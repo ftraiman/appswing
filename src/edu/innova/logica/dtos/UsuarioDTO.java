@@ -1,4 +1,4 @@
-package edu.innova.logica.DTOs;
+package edu.innova.logica.dtos;
 
 import java.util.Date;
 

@@ -3,7 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
-import edu.innova.logica.DTOs.UsuarioDTO;
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.Fabrica;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Artista;
