@@ -24,6 +24,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String todosLosEspectadores = "SELECT * FROM usuarios WHERE tipo = 'espectador'";
     private final String todosLosArtistas = "SELECT * FROM usuarios e JOIN datos_artistas da ON e.nickname = da.nickname WHERE tipo = 'artista'";
     private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String nuevoUsuarioWeb = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento,clave, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String nuevoDatosArtista = "INSERT INTO datos_artistas (nickname, descripcion, biografia, linkUsuario) VALUES (?, ?, ?, ?)";
     private final String modificarUsuario = "UPDATE usuarios SET nombre = ?, apellido = ?, fechaNacimiento = ? WHERE id = ?";
     private final String modificarDatosArtista = "UPDATE datos_artistas SET descripcion = ?, biografia = ?, linkUsuario= ? WHERE nickname = ?";
@@ -147,7 +148,38 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
     }
-    //============================= ALTA ESPECTADOR =============================//
+    //============================= ALTA USUARIO=============================//
+    
+    //============================= ALTA Usuario WEB =============================//
+    @Override
+    public void altaUsuarioWeb(Usuario usuario) {
+
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoUsuarioWeb);
+            sentencia.setString(1, usuario.getNickname());
+            sentencia.setString(2, usuario.getNombre());
+            sentencia.setString(3, usuario.getApellido());
+            sentencia.setString(4, usuario.getEmail());
+            sentencia.setDate(5, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
+            sentencia.setString(6, usuario.getClave());
+            sentencia.setString(7, usuario.getTipo());
+            sentencia.executeUpdate();
+            if (usuario instanceof Artista) {
+                Artista artista = (Artista) usuario;
+                sentencia = conexion.getConexion().prepareStatement(nuevoDatosArtista);
+                sentencia.setString(1, artista.getNickname());
+                sentencia.setString(2, artista.getDescripcion());
+                sentencia.setString(3, artista.getBiografia());
+                sentencia.setString(4, artista.getLinkUsuario());
+                sentencia.executeUpdate();
+            }
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe un usuario Web con el nickname [%s]", usuario.getNickname()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    //============================= ALTA USUARIO WEB =============================//
 
     //============================ MODIFICAR Usuario =========================//
     @Override

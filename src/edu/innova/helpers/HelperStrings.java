@@ -79,4 +79,11 @@ public class HelperStrings {
         throw new InnovaModelException(String.format("El parametro [%s] NO es un email!!!", email));
     }
      
+    public static boolean ValidarPass(String pass,String PassC){
+            if(pass.compareTo(PassC)==0){
+                 return true;
+            }else{
+                throw new InnovaModelException(String.format("Las Password no son IGUALES"));
+            }
+     }
 }

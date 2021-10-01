@@ -9,6 +9,8 @@ public interface UsuarioServicio {
 
     void altaUsuario(Usuario usuario);
     
+    void altaUsuarioWeb(Usuario usuario);
+    
     void modificarUsuario(Usuario usuario);
     
     List<Espectador> getTodosLosEspectadores();

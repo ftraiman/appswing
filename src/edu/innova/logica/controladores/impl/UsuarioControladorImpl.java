@@ -67,6 +67,44 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
     }
     //=========================== Alta de usuario ============================//
+    
+    //=========================== Alta de usuario WEB============================//
+    @Override
+    public void altaUsuarioWeb(Usuario usuario) {
+        try {
+            if (usuario instanceof Espectador) { //Si el Usuario es un Espectador
+                
+                Espectador espectador = (Espectador) usuario;
+                validarParametrosEspectadorWeb(espectador); //Verificar que los datos no esten vacios o nulos
+                
+                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    usuarioServicio.altaUsuarioWeb(usuario); //Llama a servicio y muetsra
+                    JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
+                } 
+                else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Espectador");
+                }
+            } 
+            else if (usuario instanceof Artista) { //Si el Usuario es un Artista
+                
+                Artista artista = (Artista) usuario;
+                validarParametrosArtistaWeb(artista); //Verificar que los datos no esten vacios o nulos
+                
+                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) {
+                    usuarioServicio.altaUsuarioWeb(usuario);
+                    JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
+                }
+            }
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //=========================== Alta de usuario WEB============================//
 
     @Override
     public void modificarUsuario(Usuario usuario) {
@@ -157,6 +195,31 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(artista.getNickname(), "nickname");
         HelperStrings.stringNoVacio(artista.getEmail(), "email");
         HelperStrings.ValidarEmail(artista.getEmail());
+        
+        HelperStrings.stringNoVacio(artista.getDescripcion(), "descripcion");
+        HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");
+        HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
+        HelperStrings.urlValidator(artista.getLinkUsuario());
+        HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
+    }
+      
+    private void validarParametrosEspectadorWeb(Espectador espectador) {
+        HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
+        HelperStrings.stringNoVacio(espectador.getNickname(), "nickname");
+        HelperStrings.stringNoVacio(espectador.getEmail(), "email");
+        HelperStrings.ValidarEmail(espectador.getEmail());
+        HelperStrings.stringNoVacio(espectador.getClave(), "clave");
+        HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
+    }
+    
+      private void validarParametrosArtistaWeb(Artista artista) {
+        HelperStrings.stringNoVacio(artista.getNombre(), "nombre");
+        HelperStrings.stringNoVacio(artista.getApellido(), "apellido");
+        HelperStrings.stringNoVacio(artista.getNickname(), "nickname");
+        HelperStrings.stringNoVacio(artista.getEmail(), "email");
+        HelperStrings.ValidarEmail(artista.getEmail());
+        HelperStrings.stringNoVacio(artista.getClave(), "clave");
         
         HelperStrings.stringNoVacio(artista.getDescripcion(), "descripcion");
         HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");

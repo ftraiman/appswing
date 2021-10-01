@@ -2,7 +2,10 @@ package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
+import edu.innova.helpers.HelperStrings;
+import edu.innova.logica.DTOs.DTO_Usuarios;
 import edu.innova.logica.Fabrica;
+import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Espectador;
 import java.sql.SQLException;
 import java.util.Date;
@@ -53,18 +56,20 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         CorreoWeb = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        Dia1 = new javax.swing.JSpinner();
+        DiaWeb = new javax.swing.JSpinner();
         jLabel16 = new javax.swing.JLabel();
-        Mes1 = new javax.swing.JSpinner();
+        MesWeb = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
-        Año1 = new javax.swing.JSpinner();
+        AñoWeb = new javax.swing.JSpinner();
         SelecionarImagen1 = new javax.swing.JButton();
         AceptarWeb = new javax.swing.JButton();
         CancelarWeb = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        ContraseñaWeb = new javax.swing.JTextField();
-        ConfirmarContraseñaWeb = new javax.swing.JTextField();
+        ContraseñaWeb = new javax.swing.JPasswordField();
+        ConfirmarContraseñaWeb = new javax.swing.JPasswordField();
+        showPass = new javax.swing.JCheckBox();
+        showCPass = new javax.swing.JCheckBox();
 
         setClosable(true);
         setTitle("Ingresar los Datos de Espectador:");
@@ -77,6 +82,8 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jPanel2.setBackground(new java.awt.Color(0, 255, 0));
 
         jLabel1.setText("Nombre:");
 
@@ -204,7 +211,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                     .addComponent(Año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(SelecionarImagen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Aceptar)
                     .addComponent(Cancelar))
@@ -212,6 +219,8 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Registrar Espectador", jPanel2);
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel10.setText("Nombre:");
 
@@ -231,15 +240,15 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Día:");
 
-        Dia1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        DiaWeb.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
         jLabel16.setText("Mes:");
 
-        Mes1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        MesWeb.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
         jLabel17.setText("Año:");
 
-        Año1.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
+        AñoWeb.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2021, 1));
 
         SelecionarImagen1.setText("Selecionar Imagen");
 
@@ -261,65 +270,85 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
         jLabel19.setText("Confirmar Contraseña:");
 
+        showPass.setText("Mostrar Pass");
+        showPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPassActionPerformed(evt);
+            }
+        });
+
+        showCPass.setText("Mostrar Confirm Pass");
+        showCPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCPassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ApellidoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(NombreWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(NicknameWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CorreoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel19))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Dia1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel16)
-                                .addGap(2, 2, 2)
-                                .addComponent(Mes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel17)
-                                .addGap(4, 4, 4)
-                                .addComponent(Año1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 23, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ConfirmarContraseñaWeb, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ContraseñaWeb))))))
-                .addGap(12, 12, 12))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SelecionarImagen1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(AceptarWeb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CancelarWeb)
                 .addGap(16, 16, 16))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ApellidoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(NombreWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(NicknameWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CorreoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(SelecionarImagen1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel19))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DiaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel16)
+                                .addGap(2, 2, 2)
+                                .addComponent(MesWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel17)
+                                .addGap(4, 4, 4)
+                                .addComponent(AñoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(showPass)
+                                    .addComponent(ContraseñaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ConfirmarContraseñaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(showCPass))))
+                        .addGap(0, 23, Short.MAX_VALUE)))
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,26 +373,33 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
-                    .addComponent(Dia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DiaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(Mes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MesWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(Año1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AñoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(ContraseñaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(3, 3, 3)
+                .addComponent(showPass)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(ConfirmarContraseñaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(SelecionarImagen1)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(showCPass))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(SelecionarImagen1)))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelarWeb)
                     .addComponent(AceptarWeb))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Espectador Web", jPanel1);
@@ -421,13 +457,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             Espectador espectador = new Espectador("", nickname, nombre, apellido, email, fecha);
             fabrica.getUsuarioControladorImpl().altaUsuario(espectador);
 
-            this.Nombretxt.setText("");
-            this.Apellidotxt.setText("");
-            this.Nicknametxt.setText("");
-            this.Correotxt.setText("");
-            this.Dia.setValue(1);
-            this.Mes.setValue(1);
-            this.Año.setValue(2021);
+            LimpiarCampos();
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -439,22 +469,15 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        //this.dispose(); //Limpia todos los Campos de la ventana
+
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void NombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombretxtActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_NombretxtActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        //this.dispose();
-        this.Nombretxt.setText("");
-        this.Apellidotxt.setText("");
-        this.Nicknametxt.setText("");
-        this.Correotxt.setText("");
-        this.Dia.setValue(1);
-        this.Mes.setValue(1);
-        this.Año.setValue(2021);
+        LimpiarCampos();
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -474,12 +497,62 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NombreWebActionPerformed
 
     private void AceptarWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarWebActionPerformed
-        // TODO add your handling code here:
+        try {
+            Fabrica fabrica = new Fabrica();
+
+            //Datos de Espectador
+            String nombre = this.NombreWeb.getText();
+            String apellido = this.ApellidoWeb.getText();
+            String nickname = this.NicknameWeb.getText();
+            String email = this.CorreoWeb.getText();
+            String clave = this.ContraseñaWeb.getText();
+            String claveConfirm = this.ConfirmarContraseñaWeb.getText();
+
+            //Datos Fecha
+            String fdia = this.Dia.getValue().toString();
+            String fmes = this.Mes.getValue().toString();
+            String fanio = this.Año.getValue().toString();
+
+            //Convertimos la fecha para aa/mm/dd
+            Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
+
+            if (HelperStrings.ValidarPass(clave, claveConfirm)) {
+                String claveHash = getHash(clave.getBytes(), "SHA-512");
+                Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha);
+                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
+                DTO_Usuarios DTO_espectador = new DTO_Usuarios("espectador",nickname,nombre,apellido,email,fecha);
+            }
+
+            LimpiarCamposWeb();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
+        } catch (InnovaModelException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
+        }
     }//GEN-LAST:event_AceptarWebActionPerformed
 
     private void CancelarWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarWebActionPerformed
-        // TODO add your handling code here:
+        LimpiarCamposWeb();
     }//GEN-LAST:event_CancelarWebActionPerformed
+
+    private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
+        if (showPass.isSelected()) {
+            ContraseñaWeb.setEchoChar((char) 0);
+        } else {
+            ContraseñaWeb.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showPassActionPerformed
+
+    private void showCPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCPassActionPerformed
+        if (showCPass.isSelected()) {
+            ConfirmarContraseñaWeb.setEchoChar((char) 0);
+        } else {
+            ConfirmarContraseñaWeb.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showCPassActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -488,17 +561,17 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JTextField ApellidoWeb;
     private javax.swing.JTextField Apellidotxt;
     private javax.swing.JSpinner Año;
-    private javax.swing.JSpinner Año1;
+    private javax.swing.JSpinner AñoWeb;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton CancelarWeb;
-    private javax.swing.JTextField ConfirmarContraseñaWeb;
-    private javax.swing.JTextField ContraseñaWeb;
+    private javax.swing.JPasswordField ConfirmarContraseñaWeb;
+    private javax.swing.JPasswordField ContraseñaWeb;
     private javax.swing.JTextField CorreoWeb;
     private javax.swing.JTextField Correotxt;
     private javax.swing.JSpinner Dia;
-    private javax.swing.JSpinner Dia1;
+    private javax.swing.JSpinner DiaWeb;
     private javax.swing.JSpinner Mes;
-    private javax.swing.JSpinner Mes1;
+    private javax.swing.JSpinner MesWeb;
     private javax.swing.JTextField NicknameWeb;
     private javax.swing.JTextField Nicknametxt;
     private javax.swing.JTextField NombreWeb;
@@ -528,6 +601,29 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JCheckBox showCPass;
+    private javax.swing.JCheckBox showPass;
     // End of variables declaration//GEN-END:variables
 
+    private void LimpiarCampos() {
+        this.Nombretxt.setText("");
+        this.Apellidotxt.setText("");
+        this.Nicknametxt.setText("");
+        this.Correotxt.setText("");
+        this.Dia.setValue(1);
+        this.Mes.setValue(1);
+        this.Año.setValue(1900);
+    }
+
+    private void LimpiarCamposWeb() {
+        this.NombreWeb.setText("");
+        this.ApellidoWeb.setText("");
+        this.NicknameWeb.setText("");
+        this.CorreoWeb.setText("");
+        this.DiaWeb.setValue(1);
+        this.MesWeb.setValue(1);
+        this.AñoWeb.setValue(1900);
+        this.ContraseñaWeb.setText("");
+        this.ConfirmarContraseñaWeb.setText("");
+    }
 }

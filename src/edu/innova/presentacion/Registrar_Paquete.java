@@ -246,6 +246,8 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento);
 
             fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
+            
+           LimpiarCampos();
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -265,15 +267,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescuentoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.spnDiaInicio.setValue(1);
-        this.spnMesInicio.setValue(1); 
-        this.spnAnioInicio.setValue(2021);
-        this.spnDiaFin.setValue(1);
-        this.spnMesFin.setValue(1);
-        this.spnAnioFin.setValue(2021);
-        this.txtNombre.setText("");
-        this.txtDescripcion.setText("");
-        this.txtDescuento.setText("");
+       LimpiarCampos();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -338,4 +332,15 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
         return HelperFecha.parsearFecha(dia.toString(), mes.toString(), anio.toString());
     }
 
+    private void LimpiarCampos(){
+        this.spnDiaInicio.setValue(1);
+        this.spnMesInicio.setValue(1); 
+        this.spnAnioInicio.setValue(2021);
+        this.spnDiaFin.setValue(1);
+        this.spnMesFin.setValue(1);
+        this.spnAnioFin.setValue(2021);
+        this.txtNombre.setText("");
+        this.txtDescripcion.setText("");
+        this.txtDescuento.setText("");
+    }
 }
