@@ -2,7 +2,7 @@ package edu.innova.logica.DTOs;
 
 import java.util.Date;
 
-public class DTO_Usuarios {
+public class UsuarioDTO {
 
     private Long id;
     private String tipo;
@@ -17,10 +17,10 @@ public class DTO_Usuarios {
     private String linkUsuario;
 
    
-    public DTO_Usuarios() {  
+    public UsuarioDTO() {  
     }
     
-    public DTO_Usuarios(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario) {
+    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario) {
         this.tipo = tipo;
         this.nickname = nickname;
         this.nombre = nombre;
@@ -32,7 +32,7 @@ public class DTO_Usuarios {
         this.linkUsuario = linkUsuario;
     }
 
-    public DTO_Usuarios(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         this.tipo = tipo;
         this.nickname = nickname;
         this.nombre = nombre;

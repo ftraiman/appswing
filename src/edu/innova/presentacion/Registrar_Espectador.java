@@ -3,7 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
-import edu.innova.logica.DTOs.DTO_Usuarios;
+import edu.innova.logica.DTOs.UsuarioDTO;
 import edu.innova.logica.Fabrica;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Espectador;
@@ -520,7 +520,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                 String claveHash = getHash(clave.getBytes(), "SHA-512");
                 Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha);
                 fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
-                DTO_Usuarios DTO_espectador = new DTO_Usuarios("espectador",nickname,nombre,apellido,email,fecha);
+                UsuarioDTO espectadorDTO = new UsuarioDTO("espectador",nickname,nombre,apellido,email,fecha);
             }
 
             LimpiarCamposWeb();
