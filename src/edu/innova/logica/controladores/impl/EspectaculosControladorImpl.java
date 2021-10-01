@@ -124,6 +124,9 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         }
     }
 
-    
+    @Override
+    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException {
+        return espectaculoServicio.getCategoriaPorIdEspectaculo(idEspectaculo);
+    }
 
 }

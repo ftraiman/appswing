@@ -1,7 +1,9 @@
 package edu.innova.presentacion;
 
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
+import edu.innova.logica.entidades.Categoria;
 import javax.swing.JOptionPane;
 
 public class Registrar_Categoria extends javax.swing.JInternalFrame {
@@ -78,6 +80,8 @@ public class Registrar_Categoria extends javax.swing.JInternalFrame {
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         try {
             String nombre = this.Nombre_Categoria.getText();
+            Categoria cat = new Categoria(nombre);
+             HelperStrings.stringNoVacio(cat.getNombre(), "nombre");
             fabrica.getEspectaculoControlador().altaCategoria(nombre);
             this.Nombre_Categoria.setText("");
         } catch (IllegalArgumentException e) {

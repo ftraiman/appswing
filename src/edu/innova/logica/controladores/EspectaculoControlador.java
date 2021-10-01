@@ -21,4 +21,5 @@ public interface EspectaculoControlador {
 
     public void aceptarEspectaculo(Long id) throws SQLException;
     
+    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
 }

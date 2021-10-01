@@ -26,5 +26,7 @@ public interface EspectaculoServicio {
     public void aceptarEspectaculo(Long id);
     
     public void rechazarEspectaculo(Long id);
+    
+    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
 
 }

@@ -35,6 +35,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String todosLosEspectaculosIngresados = "SELECT * FROM espectaculos WHERE estado = 'Ingresado'";
     private final String aceptarEspectaculo = "UPDATE espectaculos SET estado = 'Aceptado' WHERE espectaculos.id = ?";
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
+    private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -120,6 +121,25 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //==================== OBTENER ESPECTACULO POR ID ============//
+    
+     //==================== OBTENER CATEGORIA POR ID ============//
+    @Override
+    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException{
+        try {
+            List<Categoria> categorias = new ArrayList<>();
+            ResultSet rs;
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(categoriasPorIdEspectaculo);
+            sentencia.setLong(1, idEspectaculo);
+            rs = sentencia.executeQuery();
+            while (rs.next()) {
+                categorias.add(categoriaMapper(rs));
+            }
+            return categorias;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    //==================== OBTENER CATEGORIA POR ID ============//
 
     //==================== OBTENER ESPECTACULO POR ID Arista============//
     @Override
@@ -139,6 +159,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     }
 
     //==================== OBTENER ESPECTACULO POR ID Artista============//
+    
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
     @Override
     public List<Espectaculo> getTodosLosEspectaculos() throws SQLException {
