@@ -1,6 +1,7 @@
 package edu.innova.logica.dtos;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class UsuarioDTO {
 
@@ -11,6 +12,7 @@ public class UsuarioDTO {
     private String apellido;
     private String email;
     private Date fechaNacimiento;
+    //TODO Agregar el campo nombre de foto
 
     private String descripcion;
     private String biografia;
@@ -80,6 +82,36 @@ public class UsuarioDTO {
 
     public String getLinkUsuario() {
         return linkUsuario;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s %s %s %s %s %s", tipo, nombre, apellido, nickname, email, fechaNacimiento, linkUsuario, biografia, descripcion);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioDTO other = (UsuarioDTO) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     
