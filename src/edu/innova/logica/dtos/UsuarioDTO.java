@@ -13,6 +13,7 @@ public class UsuarioDTO {
     private String email;
     private Date fechaNacimiento;
     //TODO Agregar el campo nombre de foto
+    private String imagen;
 
     private String descripcion;
     private String biografia;
