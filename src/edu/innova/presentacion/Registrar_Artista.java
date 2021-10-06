@@ -3,7 +3,6 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
-import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.Fabrica;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Artista;
@@ -96,8 +95,6 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
-
         jLabel13.setText("Nombre:");
 
         jLabel14.setText("Apellido:");
@@ -185,18 +182,10 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel14))
-                                .addGap(68, 68, 68)
+                                .addGap(80, 80, 80)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ApellidoWeb)
                                     .addComponent(NombreWeb)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(59, 59, 59)
-                                .addComponent(NicknameWeb))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CorreoWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -224,7 +213,15 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                                                 .addComponent(ConfirmarContraseñaWeb))
                                             .addComponent(showPass)
                                             .addComponent(showCPass))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(NicknameWeb)
+                                    .addComponent(CorreoWeb, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))))
                         .addGap(25, 25, 25))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(SelecionarImagen1)
@@ -330,8 +327,6 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Registrar Artista Web", jPanel2);
 
-        jPanel1.setBackground(new java.awt.Color(51, 255, 0));
-
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Apellido:");
@@ -389,24 +384,17 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Correotxt))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Nombretxt)
-                            .addComponent(Nicknametxt)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Apellidotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 15, Short.MAX_VALUE)))))
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Correotxt, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(Nicknametxt)
+                    .addComponent(Nombretxt)
+                    .addComponent(Apellidotxt, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -444,7 +432,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(SelecionarImagen)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Aceptar)
@@ -580,10 +568,12 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
 
             if (HelperStrings.ValidarPass(clave, claveConfirm)) {
                 //Creamos el dato artista y lo mandamos al controlador
-                String claveHash = getHash(clave.getBytes(),"SHA-512"); 
+                String claveHash = getHash(clave.getBytes(), "SHA-512");
+
                 Artista artista = new Artista(descripcion, bio, link, claveHash, nickname, nombre, apellido, email, fecha);
+                
+                //Creamos el Artista con la nueva pass hasheada
                 fabrica.getUsuarioControladorImpl().altaUsuarioWeb(artista);
-                UsuarioDTO artistaDTO = new UsuarioDTO("artista",nickname,nombre,apellido,email,fecha,descripcion,bio,link);
             }
 
             LimpiarCamposWeb();

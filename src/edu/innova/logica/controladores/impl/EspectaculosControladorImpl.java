@@ -46,15 +46,12 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public void altaCategoria(String Nombre) {
+    public void altaCategoria(Categoria cat) {
         try {
-            //Valido que los datos de entrada
-            //validarNuevoEspectaculo(idArtista, idPlataforma, espectaculo);
 
             int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Categoria?", "Confirmar Alta Categoria", JOptionPane.YES_NO_OPTION);
             if (i == JOptionPane.YES_OPTION) {
-                // espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
-                espectaculoServicio.altaCategoria(Nombre);
+                espectaculoServicio.altaCategoria(cat.getNombre());
                 JOptionPane.showMessageDialog(null, "Se agrego correctamente La Categoria");
             } else {
                 JOptionPane.showMessageDialog(null, "No se Agrego La categoria");

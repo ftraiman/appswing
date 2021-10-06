@@ -21,11 +21,13 @@ public class Espectaculo {
     private List<Funcion> funciones;
     private String estado;
     private Long idCategoria;
-
+    private String imagen;
+        
     public Espectaculo() {
     }
+    
 
-    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones,Long idCategoria, String estado) {
+    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones,Long idCategoria, String estado, String imagen) {
         this.id = id;
         this.artista = artista;
         this.nombre = nombre;
@@ -40,6 +42,7 @@ public class Espectaculo {
         this.funciones = funciones;
         this.idCategoria = idCategoria;
         this.estado = estado;
+        this.imagen = imagen;
     }
 
     public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
@@ -52,8 +55,9 @@ public class Espectaculo {
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
     }
-
-    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado) {
+    
+    //Alta de Espectaculo
+    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado,String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -64,6 +68,15 @@ public class Espectaculo {
         this.fechaRegistro = fechaRegistro;
         this.idCategoria = idCategoria;
         this.estado = estado;
+        this.imagen = imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagen() {
+        return imagen;
     }
 
     public Long getId() {

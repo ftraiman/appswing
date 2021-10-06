@@ -13,7 +13,7 @@ public interface EspectaculoControlador {
 
     public List<Espectaculo> getTodosLosEspectaculos() throws SQLException;
 
-    public void altaCategoria(String Nombre);
+    public void altaCategoria(Categoria cat);
 
     public List<Categoria> getTodasLasCategorias() throws SQLException;
 

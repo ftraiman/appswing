@@ -13,16 +13,18 @@ public class Paquete {
     private Date fechaFin;
     private BigDecimal descuento;
     private List<Espectaculo> espectaculos;
-
-    public Paquete(String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento) {
+    private String imagen;
+    
+    public Paquete(String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento,String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descuento = descuento;
+        this.imagen = imagen;
     }
 
-    public Paquete(Long id, String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento, List<Espectaculo> espectaculos) {
+    public Paquete(Long id, String nombre, String descripcion, Date fechaInicio, Date fechaFin, BigDecimal descuento, List<Espectaculo> espectaculos,String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,9 +32,16 @@ public class Paquete {
         this.fechaFin = fechaFin;
         this.descuento = descuento;
         this.espectaculos = espectaculos;
+        this.imagen = imagen;
     }
-    
-    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
     
     public Long getId() {
         return id;

@@ -2,8 +2,6 @@ package edu.innova.presentacion;
 
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.persistencia.ConexionDB;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -11,20 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
 
-    ConexionDB cn = new ConexionDB();
-    Connection con = cn.getConexion();
     Fabrica fabrica = new Fabrica();
-    
-   
+
     public Aceptar_rechazar_espectaculo() throws SQLException {
         initComponents();
-        
+
+        //Carga los datos de la tabla
         cargarDatos();
-        
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -83,10 +76,11 @@ public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargarDatos(){
+    private void cargarDatos() {
         try {
             //Crear el modelo de la tabla
             DefaultTableModel tabla = new DefaultTableModel();
+
             //Defino las columnas que quiero
             tabla.addColumn("Id");
             tabla.addColumn("Nombre");
@@ -101,21 +95,21 @@ public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
             tabla.addColumn("Espectadores Maximos");
             tabla.addColumn("ID Categoria");
             tabla.addColumn("Estado");
-            
+
             List<Espectaculo> espectaculos = fabrica.getEspectaculoControlador().getTodosLosEspectaculosIngresados();
             for (Espectaculo espectaculo : espectaculos) {
                 String fila[] = new String[13];//Limite de dos porque solo mostramos el nombre y el apellido
-                
+
                 fila[0] = espectaculo.getId().toString();
                 fila[1] = espectaculo.getNombre();
                 fila[2] = espectaculo.getCosto().toString();
                 fila[3] = espectaculo.getUrl();
                 fila[4] = espectaculo.getDuracion().toString();
                 fila[5] = espectaculo.getDescripcion();
-                
+
                 SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
                 fila[6] = dateform.format(espectaculo.getFechaRegistro());
-                
+
                 fila[7] = espectaculo.getArtista().toString();
                 fila[8] = espectaculo.getPlataforma().toString();
                 fila[9] = espectaculo.getEspectadoresMinimos().toString();
@@ -128,23 +122,25 @@ public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Aceptar_rechazar_espectaculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
-    
-    
+
+
     private void Espectaculos_IngresadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Espectaculos_IngresadosMouseClicked
         try {
             int seleccionar = Espectaculos_Ingresados.rowAtPoint(evt.getPoint());
             Long id = Long.parseLong(String.valueOf(Espectaculos_Ingresados.getValueAt(seleccionar, 0)));
-            
+
+            //Colocamos aceptar/rechazar espectaculo
             fabrica.getEspectaculoControlador().aceptarEspectaculo(id);
-            
+
+            //Actualiza la tabla
             cargarDatos();
         } catch (SQLException ex) {
             Logger.getLogger(Aceptar_rechazar_espectaculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
+
+
     }//GEN-LAST:event_Espectaculos_IngresadosMouseClicked
 
 

@@ -243,7 +243,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             Date fechaInicio = extraerFecha(this.spnDiaInicio.getValue(), this.spnMesInicio.getValue(), this.spnAnioInicio.getValue());
             Date fechaFin = extraerFecha(this.spnDiaFin.getValue(), this.spnMesFin.getValue(), this.spnAnioFin.getValue());
 
-            Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento);
+            Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento,"imagen");
 
             fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
             

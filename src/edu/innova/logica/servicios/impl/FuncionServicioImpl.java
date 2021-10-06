@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class FuncionServicioImpl implements FuncionServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro) VALUES (?, ?, ?, ?)";
+    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro,imagen) VALUES (?, ?, ?, ?, ?)";
     private final String todosLasFunciones = "SELECT * FROM funciones";
     private final String funcionesPorIdEspectaculo = "SELECT * FROM funciones WHERE idEspectaculo = ?";
     private final String funcionesPorIdUsuario = "SELECT * FROM funciones AS FF, espectadores_funciones AS EF WHERE FF.id = EF.idFuncion AND EF.idUsuario = ?";
@@ -69,6 +69,7 @@ public class FuncionServicioImpl implements FuncionServicio {
             sentencia.setString(2, funcion.getNombre());
             sentencia.setDate(3, new java.sql.Date(funcion.getFechaInicio().getTime()));
             sentencia.setDate(4, new java.sql.Date(funcion.getFechaRegistro().getTime()));
+            sentencia.setString(5, funcion.getImagen());
             sentencia.executeUpdate();
 
             Integer newId = null;
@@ -250,10 +251,11 @@ public class FuncionServicioImpl implements FuncionServicio {
         Date fechaInicio = rs.getTimestamp("fechaInicio");
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         String nombre = rs.getString("nombre");
-
+        String imagen = rs.getString("imagen");
+        
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
-        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre);
+        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre,imagen);
     }
 
     private void validarParametrosEliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {

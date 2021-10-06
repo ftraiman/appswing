@@ -12,25 +12,36 @@ public class Funcion {
     private Date fechaInicio;
     private Date fechaRegistro;
     private List<Artista> artistasInvitados;
-
+    private String imagen;
+    
     public Funcion() {
     }
 
-    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre) {
+    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre,String imagen) {
         this.id = id;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
         this.nombre = nombre;
+        this.imagen = imagen;
     }
 
-    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados) {
+    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados,String imagen) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
+        this.imagen = imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagen() {
+        return imagen;
     }
 
     public Long getId() {

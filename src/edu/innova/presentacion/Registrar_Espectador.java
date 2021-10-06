@@ -83,8 +83,6 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 255, 0));
-
         jLabel1.setText("Nombre:");
 
         Nombretxt.addActionListener(new java.awt.event.ActionListener() {
@@ -219,8 +217,6 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Registrar Espectador", jPanel2);
-
-        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel10.setText("Nombre:");
 
@@ -410,16 +406,14 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(461, 461, 461)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(461, 461, 461)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,12 +509,14 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
             //Convertimos la fecha para aa/mm/dd
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
-
+            
             if (HelperStrings.ValidarPass(clave, claveConfirm)) {
                 String claveHash = getHash(clave.getBytes(), "SHA-512");
+                
                 Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha);
-                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
-                UsuarioDTO espectadorDTO = new UsuarioDTO("espectador",nickname,nombre,apellido,email,fecha);
+                
+                //Creamos el Artista con la nueva pass hasheada
+                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);                
             }
 
             LimpiarCamposWeb();

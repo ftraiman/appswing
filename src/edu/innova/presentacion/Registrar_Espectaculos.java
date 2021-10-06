@@ -450,8 +450,10 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
             Categoria CategoriaID = (Categoria) SelecciondeCategoria.getSelectedItem();
             Long idc = CategoriaID.getId();
+            
             //Creamos el objeto espectaculo
-            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado");
+            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado","imagen");
+            
             //Y mandamos al controlador a verificar datos
             fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
 

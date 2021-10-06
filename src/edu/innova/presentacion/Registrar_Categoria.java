@@ -81,8 +81,14 @@ public class Registrar_Categoria extends javax.swing.JInternalFrame {
         try {
             String nombre = this.Nombre_Categoria.getText();
             Categoria cat = new Categoria(nombre);
-             HelperStrings.stringNoVacio(cat.getNombre(), "nombre");
-            fabrica.getEspectaculoControlador().altaCategoria(nombre);
+            
+            //Verificamos que no este vacio el campo
+            HelperStrings.stringNoVacio(cat.getNombre(), "nombre");
+            
+            
+            fabrica.getEspectaculoControlador().altaCategoria(cat);
+            
+            //Dejar todo limpito
             this.Nombre_Categoria.setText("");
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));

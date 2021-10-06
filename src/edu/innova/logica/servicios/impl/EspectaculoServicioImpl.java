@@ -25,7 +25,7 @@ import edu.innova.logica.servicios.UsuarioServicio;
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado,imagen) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String altaCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ?";
@@ -77,6 +77,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
             sentencia.setLong(11, espectaculo.getIdCategoria());
             sentencia.setString(12, espectaculo.getEstado());
+            sentencia.setString(13, espectaculo.getImagen());
 
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
@@ -239,10 +240,11 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
         Long idCategoria = rs.getLong("idCategoria");
         String estado = rs.getString("estado");
-
+        String imagen = rs.getString("imagen");
+         
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
 
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado);
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado,imagen);
     }
 
     private Categoria categoriaMapper(ResultSet rs) throws SQLException {

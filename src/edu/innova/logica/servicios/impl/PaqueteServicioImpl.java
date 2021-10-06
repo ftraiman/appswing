@@ -21,7 +21,7 @@ import java.util.List;
 public class PaqueteServicioImpl implements PaqueteServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String altaPaquete = "INSERT INTO paquetes (nombre, descripcion, fechaInicio, fechaFin, descuento, fechaRegistro,imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String altaEspectaculoPaquete = "INSERT INTO paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (?, ?)";
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
     private final String todosLosPaquetesPorIdEspectaculos = "SELECT * FROM paquetes p, paquetes_espectaculos pe WHERE p.id = pe.idPaquete AND pe.idEspectaculo = ?";
@@ -56,6 +56,8 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia.setDate(4, new java.sql.Date(paquete.getFechaFin().getTime()));
             sentencia.setBigDecimal(5, paquete.getDescuento());
             sentencia.setDate(6, new java.sql.Date((new Date()).getTime()));
+            sentencia.setString(7, paquete.getImagen());
+            
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
             throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", paquete.getNombre()));
@@ -103,7 +105,8 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         BigDecimal descuento = HelperStrings.getBigDecimalValue(rs.getString("descuento"));
         Date fechaFin = rs.getTimestamp("fechaFin");
         List<Espectaculo> espectaculosDelPaquete = getEspectaculosDelPaquete(rs.getLong("id"));
-        return new Paquete(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), fechaInicio, fechaFin, descuento, espectaculosDelPaquete);
+        String imagen = rs.getString("imagen");
+        return new Paquete(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), fechaInicio, fechaFin, descuento, espectaculosDelPaquete,imagen);
     }
 
     private List<Espectaculo> getEspectaculosDelPaquete(Long idPaquete) {
