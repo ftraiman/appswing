@@ -226,16 +226,30 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     Usuario crearUsuarioDTO(UsuarioDTO usuario){
         if("artista".equals(usuario.getTipo())){
            return crearArtistaConDTO(usuario);
-        }
+        }else{
         return crearEspectadorConDTO(usuario);
+        }
     }
     
     Artista crearArtistaConDTO(UsuarioDTO usuario) {
-        return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), "clave", usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
     }
 
     Espectador crearEspectadorConDTO(UsuarioDTO usuario) {
-        return new Espectador("clave", usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
     }
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
+    
+    //========================= MODIFICAR USUARIO CON DTO =====================//
+    void modificarUsuarioDTO(UsuarioDTO usuario) {
+        if ("artista".equals(usuario.getTipo())) {
+            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+            usuarioServicio.modificarUsuario(artista);
+        } else if ("espectador".equals(usuario.getTipo())) {
+            Espectador espectador = new Espectador(usuario.getId(),usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+            usuarioServicio.modificarUsuario(espectador);
+        }
+    }
+    //========================= MODIFICAR USUARIO CON DTO =====================//
 }
+

@@ -6,6 +6,7 @@ import java.util.Objects;
 public class UsuarioDTO {
 
     private Long id;
+    private String clave;
     private String tipo;
     private String nickname;
     private String nombre;
@@ -23,8 +24,9 @@ public class UsuarioDTO {
     public UsuarioDTO() {  
     }
     
-    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario) {
+    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave) {
         this.tipo = tipo;
+        this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,8 +37,9 @@ public class UsuarioDTO {
         this.linkUsuario = linkUsuario;
     }
 
-    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento,String clave) {
         this.tipo = tipo;
+        this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -53,6 +56,22 @@ public class UsuarioDTO {
         return tipo;
     }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
     public String getNickname() {
         return nickname;
     }

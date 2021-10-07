@@ -34,4 +34,6 @@ public class DtoControladorImpl implements DtoControlador{
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
     }
+    
+    
 }

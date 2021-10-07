@@ -63,13 +63,13 @@ public class DtoServicioImpl implements DtoServicio {
     //========================= MAPPERS DE DTO USUARIOS =======================//
     private UsuarioDTO DtoArtistaMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO artista = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"));
+        UsuarioDTO artista = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"),null);
         return artista;
     }
 
     private UsuarioDTO DtoEspectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO espectador = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento);
+        UsuarioDTO espectador = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento,null);
         return espectador;
     }
     //========================= MAPPERS DE DTO USUARIOS =======================//
