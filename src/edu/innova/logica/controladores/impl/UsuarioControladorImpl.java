@@ -223,7 +223,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //=========================== Validar Datos ==============================//
 
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
-    Usuario crearUsuarioDTO(UsuarioDTO usuario){
+    public Usuario crearUsuarioDTO(UsuarioDTO usuario){
         if("artista".equals(usuario.getTipo())){
            return crearArtistaConDTO(usuario);
         }else{

@@ -1,5 +1,6 @@
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
@@ -18,5 +19,7 @@ public interface UsuarioControlador  { //Interfaz usuario
     List<Espectador> getTodosLosEspectadores();
 
     List<Artista> getTodosLosArtistas();
+    
+    Usuario crearUsuarioDTO(UsuarioDTO usuario);
     
 }
