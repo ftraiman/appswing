@@ -23,8 +23,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String usuarioPorNickname = "SELECT id, u.nickname, nombre, apellido, email, fechaNacimiento, clave, tipo, descripcion, biografia, linkUsuario FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE u.nickname = ?";
     private final String todosLosEspectadores = "SELECT * FROM usuarios WHERE tipo = 'espectador'";
     private final String todosLosArtistas = "SELECT * FROM usuarios e JOIN datos_artistas da ON e.nickname = da.nickname WHERE tipo = 'artista'";
-    private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String nuevoUsuarioWeb = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento,clave, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String nuevoUsuarioWeb = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento,clave, tipo, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String nuevoDatosArtista = "INSERT INTO datos_artistas (nickname, descripcion, biografia, linkUsuario) VALUES (?, ?, ?, ?)";
     private final String modificarUsuario = "UPDATE usuarios SET nombre = ?, apellido = ?, fechaNacimiento = ? WHERE id = ?";
     private final String modificarDatosArtista = "UPDATE datos_artistas SET descripcion = ?, biografia = ?, linkUsuario= ? WHERE nickname = ?";
@@ -132,6 +132,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             sentencia.setString(4, usuario.getEmail());
             sentencia.setDate(5, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
             sentencia.setString(6, usuario.getTipo());
+            sentencia.setString(7, usuario.getImagen());
             sentencia.executeUpdate();
             if (usuario instanceof Artista) {
                 Artista artista = (Artista) usuario;
@@ -163,6 +164,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             sentencia.setDate(5, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
             sentencia.setString(6, usuario.getClave());
             sentencia.setString(7, usuario.getTipo());
+            sentencia.setString(8, usuario.getImagen());
             sentencia.executeUpdate();
             if (usuario instanceof Artista) {
                 Artista artista = (Artista) usuario;
@@ -213,7 +215,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private Espectador espectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
         return new Espectador(rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
-                rs.getString("apellido"), rs.getString("email"), fechaNacimiento);
+                rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
 
     }
     //========================= DEVUELVE EL Artista =======================//
@@ -221,7 +223,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private Artista artistaMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
         Artista artista = new Artista(rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
-                rs.getString("apellido"), rs.getString("email"), fechaNacimiento);
+                rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
         return artista;
     }
 }

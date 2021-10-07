@@ -20,6 +20,6 @@ public interface UsuarioControlador  { //Interfaz usuario
 
     List<Artista> getTodosLosArtistas();
     
-    Usuario crearUsuarioDTO(UsuarioDTO usuario);
+    void crearUsuarioDTO(UsuarioDTO usuario);
     
 }

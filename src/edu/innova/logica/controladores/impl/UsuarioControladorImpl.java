@@ -4,6 +4,7 @@ import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
+import edu.innova.logica.Constantes;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -223,33 +224,43 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //=========================== Validar Datos ==============================//
 
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
-    public Usuario crearUsuarioDTO(UsuarioDTO usuario){
-        if("artista".equals(usuario.getTipo())){
-           return crearArtistaConDTO(usuario);
-        }else{
-        return crearEspectadorConDTO(usuario);
+    @Override
+    public void crearUsuarioDTO(UsuarioDTO usuarioDTO) {
+        Usuario usuario = null;
+        if (Constantes.ARTISTA.equals(usuarioDTO.getTipo())) {
+            usuario = crearArtistaConDTO(usuarioDTO);
+        } else if(Constantes.ESPECTADOR.equals(usuarioDTO.getTipo())){
+            usuario = crearEspectadorConDTO(usuarioDTO);
+        } else {
+            throw new InnovaModelException(String.format("Tipo de usuario [%s]", usuarioDTO.getTipo()));
         }
+        if (usuario != null) {
+            usuarioServicio.altaUsuario(usuario);
+        }        
     }
-    
+
     Artista crearArtistaConDTO(UsuarioDTO usuario) {
-        return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(),
+                usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
     }
 
     Espectador crearEspectadorConDTO(UsuarioDTO usuario) {
-        return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), 
+                usuario.getFechaNacimiento(), usuario.getImagen());
     }
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
-    
+
     //========================= MODIFICAR USUARIO CON DTO =====================//
     void modificarUsuarioDTO(UsuarioDTO usuario) {
-        if ("artista".equals(usuario.getTipo())) {
-            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        if (Constantes.ARTISTA.equals(usuario.getTipo())) {
+            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(), 
+                    usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
             usuarioServicio.modificarUsuario(artista);
-        } else if ("espectador".equals(usuario.getTipo())) {
-            Espectador espectador = new Espectador(usuario.getId(),usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento());
+        } else if (Constantes.ESPECTADOR.equals(usuario.getTipo())) {
+            Espectador espectador = new Espectador(usuario.getId(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
+                    usuario.getFechaNacimiento(), usuario.getImagen());
             usuarioServicio.modificarUsuario(espectador);
         }
     }
     //========================= MODIFICAR USUARIO CON DTO =====================//
 }
-
