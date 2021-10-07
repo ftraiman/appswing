@@ -59,6 +59,8 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return servicio;
     }
 
+   
+    
     //==================== AlTA DE ESPECTACULO ===================//
     @Override
     public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {

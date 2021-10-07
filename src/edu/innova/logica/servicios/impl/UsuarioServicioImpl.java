@@ -20,7 +20,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private final String usuarioPorId = "SELECT * FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE id = ?";
-    private final String usuarioPorNickname = "SELECT id, u.nickname, nombre, apellido, email, fechaNacimiento, clave, tipo, descripcion, biografia, linkUsuario FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE u.nickname = ?";
+    private final String usuarioPorNickname = "SELECT id, u.nickname, nombre, apellido, email, fechaNacimiento, clave, tipo, descripcion, biografia, linkUsuario, imagen FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE u.nickname = ?";
     private final String todosLosEspectadores = "SELECT * FROM usuarios WHERE tipo = 'espectador'";
     private final String todosLosArtistas = "SELECT * FROM usuarios e JOIN datos_artistas da ON e.nickname = da.nickname WHERE tipo = 'artista'";
     private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
