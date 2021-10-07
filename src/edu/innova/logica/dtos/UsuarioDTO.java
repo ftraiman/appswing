@@ -24,8 +24,9 @@ public class UsuarioDTO {
     public UsuarioDTO() {  
     }
     
-    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave) {
+    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave, String imagen) {
         this.tipo = tipo;
+        this.imagen = imagen;
         this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;

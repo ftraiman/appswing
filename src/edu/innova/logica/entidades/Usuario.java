@@ -13,11 +13,12 @@ public class Usuario {
     protected String apellido;
     protected String email;
     protected Date fechaNacimiento;
+    protected String imagen;
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Usuario(Long id, String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String imagen) {
         this.id = id;
         this.clave = clave;
         this.nickname = nickname;
@@ -25,15 +26,17 @@ public class Usuario {
         this.apellido = apellido;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
+        this.imagen = imagen;
     }
 
-    public Usuario(String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Usuario(String clave, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String imagen) {
         this.clave = clave;
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
+        this.imagen = imagen;
     }
 
     public Usuario(Long id, String nombre, String apellido, Date fechaNacimiento) {
@@ -106,8 +109,14 @@ public class Usuario {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     @Override
     public String toString() {

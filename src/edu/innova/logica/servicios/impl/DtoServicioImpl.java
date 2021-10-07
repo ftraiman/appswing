@@ -14,7 +14,7 @@ public class DtoServicioImpl implements DtoServicio {
 
 //INSTANCIA DE LA CLASE
     private static DtoServicioImpl servicioDto;
-
+    
     private ConexionDB conexion = new ConexionDB();//OBTENER LA CONEXION A LA BASE DE DATOS   
 
     public DtoServicioImpl() {//DEFAULT
@@ -34,10 +34,8 @@ public class DtoServicioImpl implements DtoServicio {
 
 //====================== CONSULTAS PARA LA BASE DE DATOS =====================//
     //======================= BUSCAR Usuario PARA DTO =========================//
-    
     //TODO insert de nuevo espectador o artista
     //TODO update de espectador o artista
-    
     @Override
     public UsuarioDTO getUsuarioDto(String nickname, String email, String clave) {
         try {
@@ -63,13 +61,13 @@ public class DtoServicioImpl implements DtoServicio {
     //========================= MAPPERS DE DTO USUARIOS =======================//
     private UsuarioDTO DtoArtistaMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO artista = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"),null);
+        UsuarioDTO artista = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
         return artista;
     }
-
+    
     private UsuarioDTO DtoEspectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO espectador = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento,null);
+        UsuarioDTO espectador = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, null);
         return espectador;
     }
     //========================= MAPPERS DE DTO USUARIOS =======================//
