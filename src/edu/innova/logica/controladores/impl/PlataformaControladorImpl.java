@@ -14,9 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+public class PlataformaControladorImpl implements PlataformaControlador {
 
-public class PlataformaControladorImpl implements PlataformaControlador{
-    
     private PlataformaServicio plataformaServicio = new PlataformaServicioImpl().getInstance();
 
     private static PlataformaControladorImpl instance;
@@ -28,7 +27,7 @@ public class PlataformaControladorImpl implements PlataformaControlador{
         }
         return instance;
     }
-    
+
     @Override
     public void altaPlataforma(Plataforma plataforma) {
 
@@ -36,23 +35,15 @@ public class PlataformaControladorImpl implements PlataformaControlador{
         try {
             // valido que los datos de entrada sean validos
             validarNuevaPlataforma(plataforma);
-            
-            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Plataforma?", "Confirmar Alta Plataforma", JOptionPane.YES_NO_OPTION);
-
-            if (i == JOptionPane.YES_OPTION) {
-                fabrica.getPlataformaServicioImpl().altaPlataforma(plataforma);
-                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Plataforma");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se Agrego La Plataforma");
-            }
+            fabrica.getPlataformaServicioImpl().altaPlataforma(plataforma);
 
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         } catch (SQLException ex) {
             Logger.getLogger(PlataformaControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
+
     public List<Plataforma> getTodasLasPlataformas() {
         return plataformaServicio.getTodasLasPlataformas();
     }
@@ -61,9 +52,6 @@ public class PlataformaControladorImpl implements PlataformaControlador{
         HelperStrings.stringNoVacio(plataforma.getNombre(), "nombre");
         HelperStrings.stringNoVacio(plataforma.getDescripcion(), "descripcion");
         HelperStrings.stringNoVacio(plataforma.getUrl(), "url");
-        HelperStrings.urlValidator(plataforma.getUrl());       
-    }  
+        HelperStrings.urlValidator(plataforma.getUrl());
+    }
 }
-    
-    
-  

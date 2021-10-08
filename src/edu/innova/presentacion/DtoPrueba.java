@@ -86,7 +86,7 @@ Fabrica fabrica = new Fabrica();
             String pass = this.passtxt.getText();
             String nickname = this.nicknametxt.getText();
             
-            System.out.println(fabrica.getDtoControlador().getUsuarioDto(nickname, email, pass));
+            System.out.println(fabrica.getUsuarioControlador().getUsuarioDto(nickname, email, pass));
             
     }//GEN-LAST:event_jButton1ActionPerformed
 

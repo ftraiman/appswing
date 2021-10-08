@@ -20,6 +20,8 @@ public interface EspectaculoControlador {
     public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException;
 
     public void aceptarEspectaculo(Long id) throws SQLException;
-    
+
+    public void rechazarEspectaculo(Long id) throws SQLException;
+
     public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
 }

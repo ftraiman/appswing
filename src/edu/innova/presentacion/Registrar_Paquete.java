@@ -238,16 +238,23 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             String nombre = this.txtNombre.getText();
             String descripcion = this.txtDescripcion.getText();
             BigDecimal descuento = HelperStrings.getBigDecimalValue(this.txtDescuento.getText());
-            
+
             //extraerFecha ya parsea la fecha con los valores que le pasamos
             Date fechaInicio = extraerFecha(this.spnDiaInicio.getValue(), this.spnMesInicio.getValue(), this.spnAnioInicio.getValue());
             Date fechaFin = extraerFecha(this.spnDiaFin.getValue(), this.spnMesFin.getValue(), this.spnAnioFin.getValue());
 
-            Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento,"imagen");
+            Paquete nuevoPaquete = new Paquete(nombre, descripcion, fechaInicio, fechaFin, descuento, "imagen");
 
-            fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
-            
-           LimpiarCampos();
+            //Preguntar y mandar al controlador
+            int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Paquete??", "Confirmar Paquete", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                fabrica.getPaqueteControlador().altaPaquete(nuevoPaquete);
+                JOptionPane.showMessageDialog(null, "El Paquete fue ingresado correctamente");
+            } else { //Si no agrega muestra
+                JOptionPane.showMessageDialog(null, "No se Agrego el Paquete");
+            }
+
+            LimpiarCampos();
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -259,7 +266,7 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
             return;
         }
-        
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescuentoActionPerformed
@@ -267,12 +274,12 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescuentoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       LimpiarCampos();
+        LimpiarCampos();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Todos_Los_Paquetes tp = new  Todos_Los_Paquetes();
+            Todos_Los_Paquetes tp = new Todos_Los_Paquetes();
             GUI_Proyecto.Panel.add(tp);
             tp.toFront();
             tp.setVisible(true);
@@ -283,11 +290,11 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Registrar_Espectaculo_en_Paquete rep = new  Registrar_Espectaculo_en_Paquete();
-            GUI_Proyecto.Panel.add(rep);
-            rep.toFront();
-            rep.setVisible(true);
-            this.dispose();
+        Registrar_Espectaculo_en_Paquete rep = new Registrar_Espectaculo_en_Paquete();
+        GUI_Proyecto.Panel.add(rep);
+        rep.toFront();
+        rep.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -332,9 +339,9 @@ public class Registrar_Paquete extends javax.swing.JInternalFrame {
         return HelperFecha.parsearFecha(dia.toString(), mes.toString(), anio.toString());
     }
 
-    private void LimpiarCampos(){
+    private void LimpiarCampos() {
         this.spnDiaInicio.setValue(1);
-        this.spnMesInicio.setValue(1); 
+        this.spnMesInicio.setValue(1);
         this.spnAnioInicio.setValue(2021);
         this.spnDiaFin.setValue(1);
         this.spnMesFin.setValue(1);

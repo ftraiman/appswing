@@ -439,6 +439,7 @@ public class Registrar_espectador_a_Funcion extends javax.swing.JInternalFrame {
         try {
 
             validarParametros();
+            //Mandar al controlador
             fabrica.getFuncionControlador().altaEspectadorAFuncion(funcionSeleccionada, espectadorSeleccionado, new Date(), espectaculoSeleccionado.getCosto());
 
         } catch (IllegalArgumentException e) {

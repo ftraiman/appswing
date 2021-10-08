@@ -3,9 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
-import static edu.innova.logica.Constantes.ALGORITMO;
 import edu.innova.logica.Fabrica;
-import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Artista;
 import java.sql.SQLException;
 import java.util.Date;
@@ -629,7 +627,16 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
 
             //Creamos el dato artista y lo mandamos al controlador
             Artista artista = new Artista(descripcion, bio, link, null, nickname, nombre, apellido, email, fecha, null);
-            fabrica.getUsuarioControladorImpl().altaUsuario(artista);
+
+            //Preguntar si desea confirmar el alta de artista
+            int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                fabrica.getUsuarioControladorImpl().altaUsuario(artista);
+                JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
+            }
 
             LimpiarCampos();
 

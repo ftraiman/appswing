@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
-    
+
     private Categoria categoriaSeleccionado;
 
     public Registrar_Espectaculos() throws SQLException {
@@ -457,8 +457,15 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             //Creamos el objeto espectaculo
             Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado", "imagen");
 
-            //Y mandamos al controlador a verificar datos
-            fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                //Y mandamos al controlador a verificar datos
+                fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "No se Agrego el Espectáculo");
+            }
 
             //Limpiar Espectaculo
             this.Nombre.setText("");

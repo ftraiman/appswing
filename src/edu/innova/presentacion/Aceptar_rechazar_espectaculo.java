@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
@@ -132,7 +133,14 @@ public class Aceptar_rechazar_espectaculo extends javax.swing.JInternalFrame {
             Long id = Long.parseLong(String.valueOf(Espectaculos_Ingresados.getValueAt(seleccionar, 0)));
 
             //Colocamos aceptar/rechazar espectaculo
-            fabrica.getEspectaculoControlador().aceptarEspectaculo(id);
+            int i = JOptionPane.showConfirmDialog(null, "Desea Aceptar este Espectaculo??", "Aceptar Espectaculo", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                fabrica.getEspectaculoControlador().aceptarEspectaculo(id);
+                JOptionPane.showMessageDialog(null, "Espectaculo Aceptado");
+            } else { //Si no agrega muestra
+                 fabrica.getEspectaculoControlador().rechazarEspectaculo(id);
+                JOptionPane.showMessageDialog(null, "Espectaculo Rechazado");
+            }
 
             //Actualiza la tabla
             cargarDatos();

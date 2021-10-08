@@ -35,6 +35,15 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //Obtener instancia de servicio usuario
     private final UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 
+    @Override
+    public UsuarioDTO getUsuarioDto(String nickname, String email, String clave) {
+        try {
+            return usuarioServicio.getUsuarioDto(nickname, email, clave);
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
+        }
+    }
+
     //=========================== Alta de usuario ============================//
     @Override
     public void altaUsuario(Usuario usuario) {
@@ -43,28 +52,13 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosEspectador(espectador); //Verificar que los datos no esten vacios o nulos
-
-                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-
-                    usuarioServicio.altaUsuario(usuario); //Llama a servicio y muetsra
-                    JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
-                } else { //Si no agrega muestra
-                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Espectador");
-                }
+                usuarioServicio.altaUsuario(usuario); //Llama a servicio y muetsra
             } else if (usuario instanceof Artista) { //Si el Usuario es un Artista
 
                 Artista artista = (Artista) usuario;
                 validarParametrosArtista(artista); //Verificar que los datos no esten vacios o nulos
+                usuarioServicio.altaUsuario(usuario);
 
-                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) {
-
-                    usuarioServicio.altaUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
-                }
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(ex.getMessage(), ex.getCause());
@@ -81,10 +75,10 @@ public class UsuarioControladorImpl implements UsuarioControlador {
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosEspectadorWeb(espectador); //Verificar que los datos no esten vacios o nulos
 
-                //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                //=========== CAMBIA LA PASSWORD POR UNA HASH =============//
                 String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
                 usuario.setClave(claveHash);
-                //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                //=========== CAMBIA LA PASSWORD POR UNA HASH =============//
 
                 usuarioServicio.altaUsuarioWeb(usuario); //Llama a servicio y muetsra
 
@@ -93,13 +87,12 @@ public class UsuarioControladorImpl implements UsuarioControlador {
                 Artista artista = (Artista) usuario;
                 validarParametrosArtistaWeb(artista); //Verificar que los datos no esten vacios o nulos
 
-                //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                //=========== CAMBIA LA PASSWORD POR UNA HASH =============//
                 String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
                 usuario.setClave(claveHash);
-                //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                //=========== CAMBIA LA PASSWORD POR UNA HASH =============//
 
                 usuarioServicio.altaUsuarioWeb(usuario);
-
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(ex.getMessage(), ex.getCause());
@@ -114,28 +107,13 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
-
-                int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Espectador??", "Confirmar Cambios Espectador", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                    usuarioServicio.modificarUsuario(espectador);
-                    JOptionPane.showMessageDialog(null, "El Espectador fue modificado correctamente");
-                } else { //Si no agrega muestra
-                    JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Espectador");
-                }
+                usuarioServicio.modificarUsuario(espectador);
 
             } else if (usuario instanceof Artista) {
 
                 Artista artista = (Artista) usuario;
                 validarParametrosModificarArtista(artista);
-
-                int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Artista??", "Confirmar Cambios Artista", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                    usuarioServicio.modificarUsuario(artista);
-                    JOptionPane.showMessageDialog(null, "El Artista fue modificado correctamente");
-                } else { //Si no agrega muestra
-                    JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Artista");
-                }
-
+                usuarioServicio.modificarUsuario(artista);
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));

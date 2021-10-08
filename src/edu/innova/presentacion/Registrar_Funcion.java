@@ -285,7 +285,8 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
             List<Artista> artistasInvitados = new ArrayList<>(artistasSeleccionados);
 
             Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados, "imagen");
-
+            
+            //Mandar al controlador
             fabrica.getFuncionControlador().altaFuncion(funcion, espectaculoSeleccionado);
 
         } catch (IllegalArgumentException e) {

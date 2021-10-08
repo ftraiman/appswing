@@ -32,18 +32,13 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         try {
             //Valido que los datos de entrada
             validarNuevoEspectaculo(idArtista, idPlataforma, espectaculo);
+            espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
 
-            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este Espectaculo?", "Confirmar Alta Espectaculo", JOptionPane.YES_NO_OPTION);
-            if (i == JOptionPane.YES_OPTION) {
-                espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
-                JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se Agrego el Espectáculo");
-            }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+
     //============================= ALTA CATEGORIA ===========================//
     @Override
     public void altaCategoria(Categoria cat) {
@@ -101,15 +96,16 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public void aceptarEspectaculo(Long id) throws SQLException {
         try {
-            int i = JOptionPane.showConfirmDialog(null, "Desea Aceptar este Espectaculo??", "Aceptar Espectaculo", JOptionPane.YES_NO_OPTION);
-            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                espectaculoServicio.aceptarEspectaculo(id);
-                JOptionPane.showMessageDialog(null, "Espectaculo Aceptado");
-            } else { //Si no agrega muestra
-                espectaculoServicio.rechazarEspectaculo(id);
-                JOptionPane.showMessageDialog(null, "Espectaculo Rechazado");
-            }
-
+            espectaculoServicio.aceptarEspectaculo(id);
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
+        }
+    }
+    
+    @Override
+    public void rechazarEspectaculo(Long id) throws SQLException {
+        try {
+            espectaculoServicio.rechazarEspectaculo(id);
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }

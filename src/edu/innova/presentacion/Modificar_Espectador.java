@@ -246,8 +246,8 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
             Long id = getLongValue(this.txtId.getText());
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
-            String nickname = this.txtNickname.getText();
-            String email = this.txtEmail.getText();
+            //String nickname = this.txtNickname.getText();
+            //String email = this.txtEmail.getText();
 
             String dia = this.spnDia.getValue().toString();
             String mes = this.spnMes.getValue().toString();
@@ -255,10 +255,18 @@ public class Modificar_Espectador extends javax.swing.JInternalFrame {
 
             // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
+            
             // Se carga el objeto para ser actualizado
             Espectador espectador = new Espectador(id, nombre, apellido, fechaNacimiento);
-            // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
-            fabrica.getUsuarioControlador().modificarUsuario(espectador);
+
+            int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Espectador??", "Confirmar Cambios Espectador", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
+                fabrica.getUsuarioControlador().modificarUsuario(espectador);
+                JOptionPane.showMessageDialog(null, "El Espectador fue modificado correctamente");
+            } else { //Si no agrega muestra
+                JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Espectador");
+            }
 
             this.txtId.setText("");
             this.txtNombre.setText("");

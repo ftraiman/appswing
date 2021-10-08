@@ -32,14 +32,7 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public void altaPaquete(Paquete paquete) {
         try {
             validarNuevoPaquete(paquete);
-
-            int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Paquete??", "Confirmar Paquete", JOptionPane.YES_NO_OPTION);
-            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                paqueteServicio.altaPaquete(paquete);
-                JOptionPane.showMessageDialog(null, "El Paquete fue ingresado correctamente");
-            } else { //Si no agrega muestra
-                JOptionPane.showMessageDialog(null, "No se Agrego el Paquete");
-            }
+            paqueteServicio.altaPaquete(paquete);
 
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));

@@ -6,20 +6,21 @@ import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import java.util.List;
 
-public interface UsuarioControlador  { //Interfaz usuario
-   
-    
+public interface UsuarioControlador { //Interfaz usuario
+
+    public UsuarioDTO getUsuarioDto(String nickname, String email, String clave);
+
     void altaUsuario(Usuario usuario); //Alta Usuario
-    
+
     void altaUsuarioWeb(Usuario usuario); //Alta Usuario
-    
+
     //En las interfaces de JAVA ya por defecto son publicos y abstracto
-    void modificarUsuario(Usuario usuario); 
-    
+    void modificarUsuario(Usuario usuario);
+
     List<Espectador> getTodosLosEspectadores();
 
     List<Artista> getTodosLosArtistas();
-    
+
     void crearUsuarioDTO(UsuarioDTO usuario);
-    
+
 }

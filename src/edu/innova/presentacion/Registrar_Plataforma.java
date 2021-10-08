@@ -8,16 +8,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Registrar_Plataforma extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
- 
+
     public Registrar_Plataforma() {
         initComponents();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,19 +125,26 @@ public class Registrar_Plataforma extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
+        try {
 
             String nombre = this.txtNombre.getText();
             String descripcion = this.txtDesc.getText();
             String url = this.txtURL.getText();
-            
-            Plataforma plataforma = new Plataforma(nombre,descripcion,url);
-            fabrica.getPlataformaControlador().altaPlataforma(plataforma);
-            
+
+            Plataforma plataforma = new Plataforma(nombre, descripcion, url);
+
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Plataforma?", "Confirmar Alta Plataforma", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                fabrica.getPlataformaControlador().altaPlataforma(plataforma);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Plataforma");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se Agrego La Plataforma");
+            }
+
             this.txtNombre.setText("");
             this.txtDesc.setText("");
             this.txtURL.setText("");
-            
+
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
         } catch (InnovaModelException ex) {

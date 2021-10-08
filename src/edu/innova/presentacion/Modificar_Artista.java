@@ -346,8 +346,8 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
             Long id = getLongValue(this.txtId.getText());
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
-            String nickname = this.txtNickname.getText();
-            String email = this.txtEmail.getText();
+            //String nickname = this.txtNickname.getText();
+            //String email = this.txtEmail.getText();
             String descripcion = this.textAreaDescripcion.getText();
             String biografia = this.textAreaBiografia.getText();
             String linkUsuario = this.txtLinkUsuario.getText();
@@ -358,10 +358,21 @@ public class Modificar_Artista extends javax.swing.JInternalFrame {
 
             // Parseo de fecha por los parametros anio, mes y dia. Si no es valido entonces lanza eexception IllegalArgumentException
             Date fechaNacimiento = HelperFecha.parsearFecha(dia, mes, anio);
+
             // Se carga el objeto para ser actualizado
             Artista artista = new Artista(descripcion, biografia, linkUsuario, id, nombre, apellido, fechaNacimiento);
-            // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
-            fabrica.getUsuarioControlador().modificarUsuario(artista);
+
+            int i = JOptionPane.showConfirmDialog(null, "Desea Modificar este Artista??", "Confirmar Cambios Artista", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                
+                // Se llama EspectadorServicio al metodo modificarUsuario que hace el update 
+                fabrica.getUsuarioControlador().modificarUsuario(artista);
+                
+                JOptionPane.showMessageDialog(null, "El Artista fue modificado correctamente");
+            } 
+            else { //Si no agrega muestra
+                JOptionPane.showMessageDialog(null, "No se Modifico el Usuario Artista");
+            }
 
             this.txtId.setText("");
             this.txtNombre.setText("");

@@ -1,23 +1,23 @@
 package edu.innova.logica;
 
-import edu.innova.logica.controladores.DtoControlador;
+
 import edu.innova.logica.controladores.EspectaculoControlador;
 import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.controladores.PaqueteControlador;
 import edu.innova.logica.controladores.PlataformaControlador;
 import edu.innova.logica.controladores.UsuarioControlador;
-import edu.innova.logica.controladores.impl.DtoControladorImpl;
+
 import edu.innova.logica.controladores.impl.EspectaculosControladorImpl;
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
 import edu.innova.logica.controladores.impl.PlataformaControladorImpl;
 import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
-import edu.innova.logica.servicios.DtoServicio;
+
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
-import edu.innova.logica.servicios.impl.DtoServicioImpl;
+
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import edu.innova.logica.servicios.impl.FuncionServicioImpl;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
@@ -79,12 +79,4 @@ public class Fabrica {
         return cont;
     }
     
-     public DtoControlador getDtoControlador() {
-        return new DtoControladorImpl().getInstance();
-    }
-    
-    public DtoServicio getDtoServicioImpl() {
-        DtoServicio  cont = new DtoServicioImpl();
-        return cont;
-    }
 }
