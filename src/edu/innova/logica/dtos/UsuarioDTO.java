@@ -24,7 +24,8 @@ public class UsuarioDTO {
     public UsuarioDTO() {  
     }
     
-    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave, String imagen) {
+    public UsuarioDTO(Long id, String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave, String imagen) {
+        this.id = id;
         this.tipo = tipo;
         this.imagen = imagen;
         this.clave = clave;
@@ -38,7 +39,8 @@ public class UsuarioDTO {
         this.linkUsuario = linkUsuario;
     }
 
-    public UsuarioDTO(String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento,String clave) {
+    public UsuarioDTO(Long id, String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento,String clave) {
+        this.id = id;
         this.tipo = tipo;
         this.clave = clave;
         this.nickname = nickname;

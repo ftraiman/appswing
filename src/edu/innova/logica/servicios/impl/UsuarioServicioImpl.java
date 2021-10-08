@@ -264,13 +264,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
      //========================= MAPPERS DE DTO USUARIOS =======================//
     private UsuarioDTO DtoArtistaMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO artista = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
+        UsuarioDTO artista = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
         return artista;
     }
     
     private UsuarioDTO DtoEspectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO espectador = new UsuarioDTO(rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, null);
+        UsuarioDTO espectador = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
         return espectador;
     }
     //========================= MAPPERS DE DTO USUARIOS =======================//

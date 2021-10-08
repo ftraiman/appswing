@@ -82,8 +82,8 @@ public class DatosDePrueba {
         espectaculoShakira.setIdCategoria(Long.valueOf(1));
         espectaculoServicio.altaEspectaculo(shakiraYPique.getId(), twitch2.getId(), espectaculoShakira);
         
-        UsuarioDTO espectadorWeb = new UsuarioDTO(Constantes.ESPECTADOR, "mario", "Mario", "Balotelli", "marito@hagocagadas.com", new Date(), null, null, null, "clave", "mario.jpg");
-        UsuarioDTO artistaWeb    = new UsuarioDTO(Constantes.ARTISTA, "elvis", "Elvis", "Presley", "elvis@fenomeno.com", new Date(), "El rey del rock", "Una gran biografia", "https://es.wikipedia.org/wiki/Elvis_Presley", "clave", "elvis.jpg");
+        UsuarioDTO espectadorWeb = new UsuarioDTO(null, Constantes.ESPECTADOR, "mario", "Mario", "Balotelli", "marito@hagocagadas.com", new Date(), null, null, null, "clave", "mario.jpg");
+        UsuarioDTO artistaWeb    = new UsuarioDTO(null, Constantes.ARTISTA, "elvis", "Elvis", "Presley", "elvis@fenomeno.com", new Date(), "El rey del rock", "Una gran biografia", "https://es.wikipedia.org/wiki/Elvis_Presley", "clave", "elvis.jpg");
         usuarioControlador.crearUsuarioDTO(espectadorWeb);
         usuarioControlador.crearUsuarioDTO(artistaWeb);
     }
