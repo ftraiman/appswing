@@ -38,28 +38,22 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
                 espectaculoServicio.altaEspectaculo(idArtista, idPlataforma, espectaculo);
                 JOptionPane.showMessageDialog(null, "Se agrego correctamente el Espectáculo");
             } else {
-                JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo");
+                JOptionPane.showMessageDialog(null, "No se Agrego el Espectáculo");
             }
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
-
+    //============================= ALTA CATEGORIA ===========================//
     @Override
     public void altaCategoria(Categoria cat) {
         try {
-
-            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Categoria?", "Confirmar Alta Categoria", JOptionPane.YES_NO_OPTION);
-            if (i == JOptionPane.YES_OPTION) {
-                espectaculoServicio.altaCategoria(cat.getNombre());
-                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Categoria");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se Agrego La categoria");
-            }
+            espectaculoServicio.altaCategoria(cat.getNombre());
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+    //============================= ALTA CATEGORIA ===========================//
 
     @Override
     public List<Espectaculo> getEspectaculosPorIdPlataforma(Long idPlataforma) {

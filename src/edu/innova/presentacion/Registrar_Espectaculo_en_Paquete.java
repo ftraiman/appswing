@@ -207,20 +207,28 @@ public class Registrar_Espectaculo_en_Paquete extends javax.swing.JInternalFrame
         Long id = Long.parseLong(String.valueOf(tableEspectaculos.getValueAt(seleccionar, 0)));
         Long idPaquete = Long.parseLong(String.valueOf(listPaquete.getModel().getElementAt(indiceTablaPaquetes).getId()));
 
-        //Llama al controlador e inserta en la bd
-        fabrica.getPaqueteControlador().altaPaqueteEspectaculo(idPaquete, id);
+        //========== CONFIRMAR EL REGISTRO DEL PAQUETE-ESPECTACULO ===========//
+        int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectaculo al Paquete??", "Confirmar Espectaculo al Paquete", JOptionPane.YES_NO_OPTION);
+        if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+            fabrica.getPaqueteControlador().altaPaqueteEspectaculo(idPaquete, id);
+            JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
+        } else { //Si no agrega muestra
+            JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo al Paquete");
+        }
 
         cargarTabla();//Llamar al metodo
         this.listPlataforma.clearSelection();
         this.listPaquete.clearSelection();
+        //========== CONFIRMAR EL REGISTRO DEL PAQUETE-ESPECTACULO ===========//
+
     }//GEN-LAST:event_tableEspectaculosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Registrar_Paquete rp = new  Registrar_Paquete();
-            GUI_Proyecto.Panel.add(rp);
-            rp.toFront();
-            rp.setVisible(true);
-            this.dispose();
+        Registrar_Paquete rp = new Registrar_Paquete();
+        GUI_Proyecto.Panel.add(rp);
+        rp.toFront();
+        rp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

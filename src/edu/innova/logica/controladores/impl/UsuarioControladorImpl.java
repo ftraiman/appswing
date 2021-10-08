@@ -31,7 +31,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     }
 
     //Obtener instancia de servicio usuario
-    private UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
+    private final UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
 
     //=========================== Alta de usuario ============================//
     @Override
@@ -225,37 +225,45 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
     @Override
-    public void crearUsuarioDTO(UsuarioDTO usuarioDTO) {
-        Usuario usuario = null;
+    public void crearUsuarioDTO(UsuarioDTO usuarioDTO) {//INGRESAR EL USUARIO DTO EN LA BD
+        Usuario usuario = null;//INSTANCIAR EL USER
+        //SI ES ARTISTA
         if (Constantes.ARTISTA.equals(usuarioDTO.getTipo())) {
             usuario = crearArtistaConDTO(usuarioDTO);
-        } else if(Constantes.ESPECTADOR.equals(usuarioDTO.getTipo())){
+            //SI ES ESPECTADOR
+        } else if (Constantes.ESPECTADOR.equals(usuarioDTO.getTipo())) {
             usuario = crearEspectadorConDTO(usuarioDTO);
+            //SI HAY ERROR
         } else {
             throw new InnovaModelException(String.format("Tipo de usuario [%s]", usuarioDTO.getTipo()));
         }
+        //SI NO HAY PROBLEMAS Y SE CREO EL USUARIO SE LE DA ALTA
         if (usuario != null) {
             usuarioServicio.altaUsuario(usuario);
-        }        
+        }
     }
 
+    //CREAR UN ARTISTA CON UN DTO
     Artista crearArtistaConDTO(UsuarioDTO usuario) {
         return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(),
                 usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
     }
 
+    //CREAR UN ESPECTADOR CON UN DTO
     Espectador crearEspectadorConDTO(UsuarioDTO usuario) {
-        return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), 
+        return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
                 usuario.getFechaNacimiento(), usuario.getImagen());
     }
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
 
     //========================= MODIFICAR USUARIO CON DTO =====================//
-    void modificarUsuarioDTO(UsuarioDTO usuario) {
+    void modificarUsuarioDTO(UsuarioDTO usuario) { //MODIFICAR EL USUARIO CON UN DTO
+        //SI ES UN ARTISTA
         if (Constantes.ARTISTA.equals(usuario.getTipo())) {
-            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(), 
+            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(),
                     usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
             usuarioServicio.modificarUsuario(artista);
+            //SI ES UN ESPECTADOR
         } else if (Constantes.ESPECTADOR.equals(usuario.getTipo())) {
             Espectador espectador = new Espectador(usuario.getId(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
                     usuario.getFechaNacimiento(), usuario.getImagen());

@@ -32,16 +32,15 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public void altaPaquete(Paquete paquete) {
         try {
             validarNuevoPaquete(paquete);
-            
+
             int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Paquete??", "Confirmar Paquete", JOptionPane.YES_NO_OPTION);
-                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                    paqueteServicio.altaPaquete(paquete);
-                    JOptionPane.showMessageDialog(null, "El Paquete fue ingresado correctamente");
-                } 
-                else { //Si no agrega muestra
-                    JOptionPane.showMessageDialog(null, "No se Agrego el Paquete");
-                }
-                
+            if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                paqueteServicio.altaPaquete(paquete);
+                JOptionPane.showMessageDialog(null, "El Paquete fue ingresado correctamente");
+            } else { //Si no agrega muestra
+                JOptionPane.showMessageDialog(null, "No se Agrego el Paquete");
+            }
+
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
@@ -52,12 +51,12 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         HelperStrings.stringNoVacio(paquete.getNombre(), "nombre");
         HelperStrings.stringNoVacio(paquete.getNombre(), "descripcion");
         HelperStrings.stringNoVacio(paquete.getNombre(), "descuento");
-        
+
         //Verifica que el descuento sea de 0 a 90
         if (paquete.getDescuento().compareTo(BigDecimal.ZERO) < 0 || paquete.getDescuento().compareTo(BigDecimal.valueOf(90)) > 0) {
             throw new IllegalArgumentException("Descuento inválido, el descuento debe ser de 0 a 90");
         }
-        
+
         //Verifica que la Fecha Fin no sea mayor a Fecha Inicio
         if (paquete.getFechaFin().compareTo(paquete.getFechaInicio()) < 0) {
             throw new InnovaModelException("La fecha de inicio es posterior a la fecha de fin");
@@ -74,41 +73,34 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         }
 
     }
-    
+
     //Retorna una lista de todos los Paquetes
     @Override
     public List<Paquete> getTodosLosPaquetes() throws SQLException {
         try {
             return paqueteServicio.getTodosLosPaquetes();
-        } 
-        catch (BaseDeDatosException ex) {
+        } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
     }
 
+    //======================== ALTA DE PAQUETE-ESPECTACULO ===================//
     @Override
     public void altaPaqueteEspectaculo(Long IdPaquete, Long IDEspectaculos) {
         try {
-            int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectaculo al Paquete??", "Confirmar Espectaculo al Paquete", JOptionPane.YES_NO_OPTION);
-               if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
-                    paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos,IdPaquete);
-                    JOptionPane.showMessageDialog(null, "El Espectaculo fue ingresado correctamente al Paquete");
-               } 
-               else { //Si no agrega muestra
-                   JOptionPane.showMessageDialog(null, "No se Agrego el Espectaculo al Paquete");
-               }
-            
-        } catch (BaseDeDatosException ex){
+            paqueteServicio.agregarEspectaculoAlPaquete(IDEspectaculos, IdPaquete);
+
+        } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+    //======================== ALTA DE PAQUETE-ESPECTACULO ===================//
 
-   /* @Override
+    /* @Override
     public List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas, Paquete paquetes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    */
-
+     */
     @Override
     public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
         return paqueteServicio.getPaquetePorIdEspectaculo(id);

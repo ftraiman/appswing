@@ -448,20 +448,17 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             //Convertimos la fecha para aa/mm/dd
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
 
-            Espectador espectador = new Espectador("", nickname, nombre, apellido, email, fecha);
+            Espectador espectador = new Espectador(null, nickname, nombre, apellido, email, fecha, null);
             fabrica.getUsuarioControladorImpl().altaUsuario(espectador);
 
             LimpiarCampos();
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
-            return;
         } catch (InnovaModelException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
-            return;
         }
 
     }//GEN-LAST:event_AceptarActionPerformed
@@ -513,7 +510,7 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
             if (HelperStrings.ValidarPass(clave, claveConfirm)) {
                 String claveHash = getHash(clave.getBytes(), "SHA-512");
                 
-                Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha);
+                Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha, null);
                 
                 //Creamos el Artista con la nueva pass hasheada
                 fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);                

@@ -17,12 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 
 //Prueba
 public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private Fabrica fabrica = new Fabrica();
+    
+    private Categoria categoriaSeleccionado;
 
     public Registrar_Espectaculos() throws SQLException {
         initComponents();
@@ -415,6 +416,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         try {
+            //VALIDA SI HAY PARAMATROS EN EL CB DE CATEGORIA
+            validarParametrosCategoria();
 
             //Verifica que los campos no esten vacios (Lo hago aca para ser mas practico)
             //HelperStrings.stringNoVacio(this.txtIda.getText(), "ID Artista");
@@ -450,10 +453,10 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
 
             Categoria CategoriaID = (Categoria) SelecciondeCategoria.getSelectedItem();
             Long idc = CategoriaID.getId();
-            
+
             //Creamos el objeto espectaculo
-            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado","imagen");
-            
+            Espectaculo espectaculo = new Espectaculo(nombre, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fecha, idc, "Ingresado", "imagen");
+
             //Y mandamos al controlador a verificar datos
             fabrica.getEspectaculoControlador().altaEspectaculo(idArtista, idPlataforma, espectaculo);
 
@@ -477,10 +480,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
             this.txtDesc.setText("");
             this.txtURL.setText("");
 
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | InnovaModelException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("%s", e.getMessage()));
-        } catch (InnovaModelException ex) {
-            JOptionPane.showMessageDialog(rootPane, String.format("%s", ex.getMessage()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error inesperado", ex.getMessage()));
         }
@@ -545,7 +546,8 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SelecciondeCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecciondeCategoriaActionPerformed
-
+        //AL SELECCIONAR UNA CATEGORIA SE ASIGNA ESE VALOR A categoriaSeleccionada
+        categoriaSeleccionado = (Categoria) SelecciondeCategoria.getSelectedItem();
     }//GEN-LAST:event_SelecciondeCategoriaActionPerformed
 
 
@@ -632,4 +634,12 @@ public class Registrar_Espectaculos extends javax.swing.JInternalFrame {
         }
 
     }
+
+    //=============== VERIFICA SI SE SELECCIONO UNA CATEGORIA ================//
+    private void validarParametrosCategoria() {
+        if (categoriaSeleccionado == null) {
+            throw new IllegalArgumentException("No hay seleccionado una CATEGORIA");
+        }
+    }
+    //=============== VERIFICA SI SE SELECCIONO UNA CATEGORIA ================//
 }

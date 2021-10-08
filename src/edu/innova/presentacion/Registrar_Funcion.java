@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 
 public class Registrar_Funcion extends javax.swing.JInternalFrame {
 
-    private Fabrica fabrica = new Fabrica();
+    private final Fabrica fabrica = new Fabrica();
 
     private Plataforma plataformaSeleccionada;
     private Espectaculo espectaculoSeleccionado;
@@ -284,11 +284,9 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
             Date fechaDeRegistro = new Date();
             List<Artista> artistasInvitados = new ArrayList<>(artistasSeleccionados);
 
-            Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados,"imagen");
+            Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados, "imagen");
 
             fabrica.getFuncionControlador().altaFuncion(funcion, espectaculoSeleccionado);
-            
-            
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
@@ -310,10 +308,10 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
 
     private void cbPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlataformaActionPerformed
         plataformaSeleccionada = (Plataforma) cbPlataforma.getSelectedItem();
+        //CAMBIE LA CONSULTA PARA QUE MUESTRE SOLO LOS ESPECTACULOS ACEPTADOS 
         List<Espectaculo> espectaculosParaPlataforma = fabrica.getEspectaculoControlador().getEspectaculosPorIdPlataforma(plataformaSeleccionada.getId());
         espectaculoSeleccionado = null;
         cbEspectaculo.removeAllItems();
-//        cbEspectaculo.removeAll();
         espectaculosParaPlataforma.forEach(espectaculo -> cbEspectaculo.addItem(espectaculo));
     }//GEN-LAST:event_cbPlataformaActionPerformed
 
@@ -338,7 +336,7 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Todas_Las_Funciones_Espectaculos tfe = new  Todas_Las_Funciones_Espectaculos();
+            Todas_Las_Funciones_Espectaculos tfe = new Todas_Las_Funciones_Espectaculos();
             GUI_Proyecto.Panel.add(tfe);
             tfe.toFront();
             tfe.setVisible(true);

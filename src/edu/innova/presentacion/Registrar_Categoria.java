@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Registrar_Categoria extends javax.swing.JInternalFrame {
 
-    private Fabrica fabrica = new Fabrica();
+    private final Fabrica fabrica = new Fabrica();
 
     public Registrar_Categoria() {
         initComponents();
@@ -81,24 +81,28 @@ public class Registrar_Categoria extends javax.swing.JInternalFrame {
         try {
             String nombre = this.Nombre_Categoria.getText();
             Categoria cat = new Categoria(nombre);
-            
+
             //Verificamos que no este vacio el campo
             HelperStrings.stringNoVacio(cat.getNombre(), "nombre");
-            
-            
-            fabrica.getEspectaculoControlador().altaCategoria(cat);
-            
+
+            //================= AGREAGR O NO LA CATEGORIA ====================//
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Categoria?", "Confirmar Alta Categoria", JOptionPane.YES_NO_OPTION);
+            if (i == JOptionPane.YES_OPTION) {
+                fabrica.getEspectaculoControlador().altaCategoria(cat);
+                JOptionPane.showMessageDialog(null, "Se agrego correctamente La Categoria");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se Agrego La categoria");
+            }
+            //================= AGREAGR O NO LA CATEGORIA ====================//
+
             //Dejar todo limpito
             this.Nombre_Categoria.setText("");
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error argumento inválido [%s]", e.getMessage()));
-            return;
         } catch (InnovaModelException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, String.format("Error desconocido [%s]", e.getMessage()));
-            return;
         }
     }//GEN-LAST:event_AceptarActionPerformed
 

@@ -570,7 +570,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                 //Creamos el dato artista y lo mandamos al controlador
                 String claveHash = getHash(clave.getBytes(), "SHA-512");
 
-                Artista artista = new Artista(descripcion, bio, link, claveHash, nickname, nombre, apellido, email, fecha);
+                Artista artista = new Artista(descripcion, bio, link, claveHash, nickname, nombre, apellido, email, fecha, null);
                 
                 //Creamos el Artista con la nueva pass hasheada
                 fabrica.getUsuarioControladorImpl().altaUsuarioWeb(artista);
@@ -620,7 +620,7 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
 
             //Creamos el dato artista y lo mandamos al controlador
-            Artista artista = new Artista(descripcion, bio, link, "", nickname, nombre, apellido, email, fecha);
+            Artista artista = new Artista(descripcion, bio, link, null, nickname, nombre, apellido, email, fecha, null);
             fabrica.getUsuarioControladorImpl().altaUsuario(artista);
 
             LimpiarCampos();

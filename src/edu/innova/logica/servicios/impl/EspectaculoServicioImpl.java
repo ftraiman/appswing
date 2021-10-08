@@ -28,7 +28,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado,imagen) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String altaCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
-    private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ?";
+    private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ? AND estado = 'Aceptado'";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
     private final String espectaculoPorIdA = "SELECT * FROM espectaculos WHERE idUsuario = ?";
     private final String todasLasCategorias = "SELECT * FROM categorias";
