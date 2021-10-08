@@ -571,9 +571,17 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
                 //Creamos el dato artista y lo mandamos al controlador
 
                 Artista artista = new Artista(descripcion, bio, link, clave, nickname, nombre, apellido, email, fecha, null);
-                
+
                 //Creamos el Artista con la nueva pass hasheada
-                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(artista);
+                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+
+                    fabrica.getUsuarioControladorImpl().altaUsuarioWeb(artista);
+
+                    JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
+                } else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Artista");
+                }
             }
 
             LimpiarCamposWeb();

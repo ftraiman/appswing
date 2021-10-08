@@ -513,7 +513,16 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
                 Espectador espectador = new Espectador(clave, nickname, nombre, apellido, email, fecha, null);
 
                 //Creamos el Artista con la nueva pass hasheada
-                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
+                int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    
+                    fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
+
+                    JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
+                } else { //Si no agrega muestra
+                    JOptionPane.showMessageDialog(null, "No se Agrego el Usuario Espectador");
+                }
+
             }
 
             LimpiarCamposWeb();
