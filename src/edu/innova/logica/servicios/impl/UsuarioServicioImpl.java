@@ -23,7 +23,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String usuarioPorNickname = "SELECT id, u.nickname, nombre, apellido, email, fechaNacimiento, clave, tipo, descripcion, biografia, linkUsuario, imagen FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE u.nickname = ?";
     private final String todosLosEspectadores = "SELECT * FROM usuarios WHERE tipo = 'espectador'";
     private final String todosLosArtistas = "SELECT * FROM usuarios e JOIN datos_artistas da ON e.nickname = da.nickname WHERE tipo = 'artista'";
-    private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String nuevoUsuario = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento, tipo, imagen, clave) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String nuevoUsuarioWeb = "INSERT INTO usuarios (nickname, nombre, apellido, email, fechaNacimiento,clave, tipo, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String nuevoDatosArtista = "INSERT INTO datos_artistas (nickname, descripcion, biografia, linkUsuario) VALUES (?, ?, ?, ?)";
     private final String modificarUsuario = "UPDATE usuarios SET nombre = ?, apellido = ?, fechaNacimiento = ? WHERE id = ?";
@@ -133,6 +133,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             sentencia.setDate(5, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
             sentencia.setString(6, usuario.getTipo());
             sentencia.setString(7, usuario.getImagen());
+            sentencia.setString(8, usuario.getClave());
             sentencia.executeUpdate();
             if (usuario instanceof Artista) {
                 Artista artista = (Artista) usuario;

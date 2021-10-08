@@ -18,22 +18,36 @@ public class ConexionDB {
     private static Connection conexion;
     private static Properties prop = new Properties();
     
+    static {
+        Properties properties = new Properties();
+        properties.setProperty("DB_URL", "jdbc:mysql://localhost/coronatickets");
+        properties.setProperty("USER", "root");
+        properties.setProperty("PASS", "");
+        prop = properties;
+    }
+    
     public ConexionDB() {
         try {
             if (conexion == null || conexion.isClosed()) {
-                String path = System.getProperty("user.dir");
-                InputStream stream = new FileInputStream(path + File.separator + "params.txt");
-                prop.load(stream);
+                Class.forName("com.mysql.jdbc.Driver");
+//                String path = System.getProperty("user.dir");
+//                InputStream stream = new FileInputStream(path + File.separator + "params.txt");
+//                prop.load(stream);
                 conexion = DriverManager.getConnection(prop.getProperty("DB_URL"), prop.getProperty("USER"), prop.getProperty("PASS"));
+                 
+//                conexion = DriverManager.getConnection("jdbc:mysql://localhost/coronatickets", "root", "");
                 System.err.println("Conexion exitosa a la DB");
             }
         } catch (CommunicationsException e) {
             throw new BaseDeDatosException(String.format("Error al conectar a la DB [%s]", e.getMessage()));
         } catch (SQLException e) {
             throw new BaseDeDatosException(e.getMessage());
-        } catch (IOException ex) {
-            throw new BaseDeDatosException("Error al encontrar el archivo de configuracion");
+        } catch (ClassNotFoundException e) {
+            throw new BaseDeDatosException(e.getMessage());
         }
+//        catch (IOException ex) {
+//            throw new BaseDeDatosException("Error al encontrar el archivo de configuracion");
+//        }
     }
     
     public Connection getConexion() {
