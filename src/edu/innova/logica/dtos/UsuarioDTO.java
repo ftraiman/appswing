@@ -47,14 +47,13 @@ public class UsuarioDTO {
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
     }
-    
 
     public Long getId() {
         return id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getClave() {
@@ -65,6 +64,54 @@ public class UsuarioDTO {
         this.clave = clave;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -72,38 +119,33 @@ public class UsuarioDTO {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getBiografia() {
         return biografia;
     }
 
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
     public String getLinkUsuario() {
         return linkUsuario;
     }
+
+    public void setLinkUsuario(String linkUsuario) {
+        this.linkUsuario = linkUsuario;
+    }
+    
+
+   
     
     @Override
     public String toString() {
