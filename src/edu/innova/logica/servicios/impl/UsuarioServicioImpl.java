@@ -181,7 +181,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 sentencia.executeUpdate();
             }
         } catch (MySQLIntegrityConstraintViolationException ex) {
-            throw new InnovaModelException(String.format("Ya existe un usuario Web con el nickname [%s]", usuario.getNickname()));
+            throw new InnovaModelException(String.format("Ya existe un usuario Web con el nickname o el e-mail [%s-%s]", usuario.getNickname(), usuario.getEmail()));
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
