@@ -3,6 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
+import static edu.innova.logica.Constantes.ALGORITMO;
 import edu.innova.logica.Fabrica;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.entidades.Artista;
@@ -568,9 +569,8 @@ public class Registrar_Artista extends javax.swing.JInternalFrame {
 
             if (HelperStrings.ValidarPass(clave, claveConfirm)) {
                 //Creamos el dato artista y lo mandamos al controlador
-                String claveHash = getHash(clave.getBytes(), "SHA-512");
 
-                Artista artista = new Artista(descripcion, bio, link, claveHash, nickname, nombre, apellido, email, fecha, null);
+                Artista artista = new Artista(descripcion, bio, link, clave, nickname, nombre, apellido, email, fecha, null);
                 
                 //Creamos el Artista con la nueva pass hasheada
                 fabrica.getUsuarioControladorImpl().altaUsuarioWeb(artista);

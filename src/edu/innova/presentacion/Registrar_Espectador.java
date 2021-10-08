@@ -3,6 +3,7 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
+import static edu.innova.logica.Constantes.ALGORITMO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.Fabrica;
 import static edu.innova.logica.Hash.getHash;
@@ -506,14 +507,13 @@ public class Registrar_Espectador extends javax.swing.JInternalFrame {
 
             //Convertimos la fecha para aa/mm/dd
             Date fecha = HelperFecha.parsearFecha(fdia, fmes, fanio);
-            
+
             if (HelperStrings.ValidarPass(clave, claveConfirm)) {
-                String claveHash = getHash(clave.getBytes(), "SHA-512");
-                
-                Espectador espectador = new Espectador(claveHash, nickname, nombre, apellido, email, fecha, null);
-                
+
+                Espectador espectador = new Espectador(clave, nickname, nombre, apellido, email, fecha, null);
+
                 //Creamos el Artista con la nueva pass hasheada
-                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);                
+                fabrica.getUsuarioControladorImpl().altaUsuarioWeb(espectador);
             }
 
             LimpiarCamposWeb();

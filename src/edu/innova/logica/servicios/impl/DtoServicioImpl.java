@@ -1,6 +1,8 @@
 package edu.innova.logica.servicios.impl;
 
 import edu.innova.exceptions.BaseDeDatosException;
+import static edu.innova.logica.Constantes.ALGORITMO;
+import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.servicios.DtoServicio;
 import edu.innova.persistencia.ConexionDB;
@@ -39,10 +41,13 @@ public class DtoServicioImpl implements DtoServicio {
     @Override
     public UsuarioDTO getUsuarioDto(String nickname, String email, String clave) {
         try {
+            //CAMBIA LA CLAVE INGRESADA POR LA HASH CORRESPONDIENTE
+            String claveHash = getHash(clave.getBytes(), ALGORITMO);
+            
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(BuscarUsuarioParaDto);
             sentencia.setString(1, nickname);
             sentencia.setString(2, email);
-            sentencia.setString(3, clave);
+            sentencia.setString(3, claveHash);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 if (rs.getString("tipo").equals("espectador")) {

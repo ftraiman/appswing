@@ -5,6 +5,8 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Constantes;
+import static edu.innova.logica.Constantes.ALGORITMO;
+import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -44,6 +46,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    
                     usuarioServicio.altaUsuario(usuario); //Llama a servicio y muetsra
                     JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
                 } else { //Si no agrega muestra
@@ -56,6 +59,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
+                    
                     usuarioServicio.altaUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
                 } else {
@@ -79,6 +83,11 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Espectador??", "Confirmar Usuario Espectador", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) { //Si confirma el alta
+                    //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                    String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
+                    usuario.setClave(claveHash);
+                    //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+
                     usuarioServicio.altaUsuarioWeb(usuario); //Llama a servicio y muetsra
                     JOptionPane.showMessageDialog(null, "El Espectador fue ingresado correctamente");
                 } else { //Si no agrega muestra
@@ -91,6 +100,12 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
                 int i = JOptionPane.showConfirmDialog(null, "Desea Registrar este Artista??", "Confirmar Usuario Artista", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
+
+                    //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+                    String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
+                    usuario.setClave(claveHash);
+                    //=========== CAMBA LA PASSWORD POR UNA HASH =============//
+
                     usuarioServicio.altaUsuarioWeb(usuario);
                     JOptionPane.showMessageDialog(null, "El Artista fue ingresado correctamente");
                 } else {
@@ -239,7 +254,8 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
         //SI NO HAY PROBLEMAS Y SE CREO EL USUARIO SE LE DA ALTA
         if (usuario != null) {
-            usuarioServicio.altaUsuario(usuario);
+            altaUsuarioWeb(usuario);
+            //usuarioServicio.altaUsuario(usuario);
         }
     }
 
