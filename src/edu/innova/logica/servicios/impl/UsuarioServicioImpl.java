@@ -31,9 +31,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String nuevoDatosArtista = "INSERT INTO datos_artistas (nickname, descripcion, biografia, linkUsuario) VALUES (?, ?, ?, ?)";
     private final String modificarUsuario = "UPDATE usuarios SET nombre = ?, apellido = ?, fechaNacimiento = ? WHERE id = ?";
     private final String modificarDatosArtista = "UPDATE datos_artistas SET descripcion = ?, biografia = ?, linkUsuario= ? WHERE nickname = ?";
-    private final String BuscarUsuarioParaDto = "SELECT * FROM usuarios U LEFT JOIN datos_artistas DA ON U.nickname = DA.nickname WHERE (U.nickname = ? OR U.email = ?) AND U.clave = ?";
+    private final String buscarUsuarioParaDto = "SELECT * FROM usuarios U LEFT JOIN datos_artistas DA ON U.nickname = DA.nickname WHERE (U.nickname = ? OR U.email = ?) AND U.clave = ?";
+    private final String nuevoUsuarioSeguido = "INSERT INTO usuarios_seguidores (idUsuarioSeguidor, idUsuarioSeguido) VALUES (?, ?)";
+    private final String usuariosQueSigue = "SELECT * FROM usuarios_seguidores JOIN usuarios u on u.id = usuarios_seguidores.idUsuarioSeguido WHERE idUsuarioSeguidor = ?";
+    private final String usuariosQueLoSiguen = "SELECT * FROM usuarios_seguidores JOIN usuarios u on u.id = usuarios_seguidores.idUsuarioSeguido WHERE idUsuarioSeguido = ?";
+    private final String dejarDeSeguirUsuario = "DELETE FROM usuarios_seguidores WHERE idUsuarioSeguidor = ? AND idUsuarioSeguido = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-
     //INSTANCIA DE LA CLASE
     private static UsuarioServicioImpl servicioUsuario;
 
@@ -231,9 +234,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
         return artista;
     }
-    
-    
-     //======================= BUSCAR Usuario PARA DTO =========================//
+
+    //======================= BUSCAR Usuario PARA DTO =========================//
     //TODO insert de nuevo espectador o artista
     //TODO update de espectador o artista
     @Override
@@ -241,17 +243,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         try {
             //CAMBIA LA CLAVE INGRESADA POR LA HASH CORRESPONDIENTE
             String claveHash = getHash(clave.getBytes(), ALGORITMO);
-            
-            PreparedStatement sentencia = conexion.getConexion().prepareStatement(BuscarUsuarioParaDto);
+
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(buscarUsuarioParaDto);
             sentencia.setString(1, nickname);
             sentencia.setString(2, email);
             sentencia.setString(3, claveHash);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 if (rs.getString("tipo").equals("espectador")) {
-                    return DtoEspectadorMapper(rs);
+                    return dtoEspectadorMapper(rs);
                 } else if (rs.getString("tipo").equals("artista")) {
-                    return DtoArtistaMapper(rs);
+                    return dtoArtistaMapper(rs);
                 }
             }
             return null;
@@ -259,20 +261,78 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
         }
     }
+
+    @Override
+    public void seguirUsuario(Long idUsuarioSeguidor, Long idUsuarioSeguido) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(nuevoUsuarioSeguido);
+            sentencia.setLong(1, idUsuarioSeguidor);
+            sentencia.setLong(2, idUsuarioSeguido);
+            sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya esta siguiendo seguido");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+
+    }
+
+    @Override
+    public List<UsuarioDTO> usuariosQueSigue(Long idUsuarioSeguidor) {
+        List<UsuarioDTO> usuarios = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(usuariosQueSigue);
+            sentencia.setLong(1, idUsuarioSeguidor);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                usuarios.add(dtoEspectadorMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+        return usuarios;
+    }
+
+    @Override
+    public List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido) {
+        List<UsuarioDTO> usuarios = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(usuariosQueLoSiguen);
+            sentencia.setLong(1, idUsuarioSeguido);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                usuarios.add(dtoEspectadorMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+        return usuarios;
+    }
+
+    public void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(dejarDeSeguirUsuario);
+            sentencia.setLong(1, idUsuarioSeguidor);
+            sentencia.setLong(2, idUsuarioSeguido);
+            sentencia.executeUpdate();
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+
     //======================= BUSCAR Usuario PARA DTO =========================//
-    
-     //========================= MAPPERS DE DTO USUARIOS =======================//
-    private UsuarioDTO DtoArtistaMapper(ResultSet rs) throws SQLException {
+    //========================= MAPPERS DE DTO USUARIOS =======================//
+    private UsuarioDTO dtoArtistaMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
         UsuarioDTO artista = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
         return artista;
     }
-    
-    private UsuarioDTO DtoEspectadorMapper(ResultSet rs) throws SQLException {
+
+    private UsuarioDTO dtoEspectadorMapper(ResultSet rs) throws SQLException {
         Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO espectador = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
+        UsuarioDTO espectador = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, null, null, null, null, rs.getString("imagen"));
         return espectador;
     }
     //========================= MAPPERS DE DTO USUARIOS =======================//
-    
+
 }

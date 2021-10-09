@@ -23,4 +23,12 @@ public interface UsuarioServicio {
     Usuario getUsuarioPorId(Long id);
     
     Usuario getUsuarioPorNickName(String nickname);
+    
+    void seguirUsuario(Long idUsuarioSeguidor, Long idUsuarioSeguido);
+    
+    List<UsuarioDTO> usuariosQueSigue(Long idUsuarioSeguidor);
+    
+    List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido);
+    
+    void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido);
 }

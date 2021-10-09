@@ -225,15 +225,58 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             //usuarioServicio.altaUsuario(usuario);
         }
     }
+    
+    @Override
+    public void seguirUsuario(Long idUsuarioSeguidor, Long idUsuarioSeguido) {
+        if (idUsuarioSeguido == null || idUsuarioSeguidor == null) {
+            throw new InnovaModelException(String.format("Datos de ingreso invalidos [%s] [%s]", idUsuarioSeguidor, idUsuarioSeguido));
+        }
+        usuarioServicio.seguirUsuario(idUsuarioSeguidor, idUsuarioSeguido);
+    }
+    
+    @Override
+    public List<UsuarioDTO> usuariosQueSigue(Long idUsuarioSeguidor) {
+        if (idUsuarioSeguidor == null) {
+            throw new InnovaModelException("idUsuario inválido");
+        }
+        try {
+            return usuarioServicio.usuariosQueSigue(idUsuarioSeguidor);
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
+        }
+    }
+    
+    @Override
+    public List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido) {
+        if (idUsuarioSeguido == null) {
+            throw new InnovaModelException("idUsuario inválido");
+        }
+        try {
+            return usuarioServicio.usuariosQueLoSiguen(idUsuarioSeguido);
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
+        }
+    }
 
+    public void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido) {
+        if (idUsuarioSeguido == null || idUsuarioSeguidor == null) {
+            throw new InnovaModelException("Parametros invalidos");
+        }
+        try {
+            usuarioServicio.dejarDeSeguir(idUsuarioSeguidor, idUsuarioSeguido);
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
+        }
+        
+    }
     //CREAR UN ARTISTA CON UN DTO
-    Artista crearArtistaConDTO(UsuarioDTO usuario) {
+    private Artista crearArtistaConDTO(UsuarioDTO usuario) {
         return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(),
                 usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
     }
 
     //CREAR UN ESPECTADOR CON UN DTO
-    Espectador crearEspectadorConDTO(UsuarioDTO usuario) {
+    private Espectador crearEspectadorConDTO(UsuarioDTO usuario) {
         return new Espectador(usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
                 usuario.getFechaNacimiento(), usuario.getImagen());
     }
