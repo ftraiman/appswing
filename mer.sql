@@ -166,10 +166,14 @@ charset=utf8mb4;
 
 create table usuarios_seguidores
 (
-	idUsuario int not null,
-	idSeguidor int not null,
+	idUsuarioSeguido int not null,
+	idUsuarioSeguidor int not null,
+	constraint usuarios_seguidores_pk
+		unique (idUsuarioSeguido, idUsuarioSeguidor),
 	constraint usuario_id_fk
-		foreign key (idUsuario) references usuarios (id)
+		foreign key (idUsuarioSeguido) references usuarios (id),
+	constraint usuarios_seguidores_usuarios_id_fk
+		foreign key (idUsuarioSeguidor) references usuarios (id)
 )
 charset=utf8mb4;
 
