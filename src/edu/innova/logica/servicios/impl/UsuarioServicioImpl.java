@@ -36,7 +36,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String buscarUsuarioParaDto = "SELECT * FROM usuarios U LEFT JOIN datos_artistas DA ON U.nickname = DA.nickname WHERE (U.nickname = ? OR U.email = ?) AND U.clave = ?";
     private final String nuevoUsuarioSeguido = "INSERT INTO usuarios_seguidores (idUsuarioSeguidor, idUsuarioSeguido) VALUES (?, ?)";
     private final String usuariosQueSigue = "SELECT * FROM usuarios_seguidores JOIN usuarios u on u.id = usuarios_seguidores.idUsuarioSeguido WHERE idUsuarioSeguidor = ?";
-    private final String usuariosQueLoSiguen = "SELECT * FROM usuarios_seguidores JOIN usuarios u on u.id = usuarios_seguidores.idUsuarioSeguido WHERE idUsuarioSeguido = ?";
+    private final String usuariosQueLoSiguen = "SELECT * FROM usuarios_seguidores us JOIN usuarios u on u.id = us.idUsuarioSeguidor WHERE idUsuarioSeguido = ?";
     private final String dejarDeSeguirUsuario = "DELETE FROM usuarios_seguidores WHERE idUsuarioSeguidor = ? AND idUsuarioSeguido = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     //INSTANCIA DE LA CLASE
