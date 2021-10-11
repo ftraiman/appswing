@@ -1,5 +1,6 @@
 package edu.innova.logica.servicios;
 
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import java.math.BigDecimal;
@@ -31,4 +32,6 @@ public interface FuncionServicio {
     public void eliminarFuncionesDelEspectador(ArrayList<Funcion> arrayList, Espectador espectador);
 
     public Integer getCantidadRegistrados(Long id);
+    
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
 }

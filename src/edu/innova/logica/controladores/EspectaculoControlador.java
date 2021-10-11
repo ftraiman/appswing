@@ -1,5 +1,6 @@
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
 import java.sql.SQLException;
@@ -24,4 +25,14 @@ public interface EspectaculoControlador {
     public void rechazarEspectaculo(Long id) throws SQLException;
 
     public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
+    
+    public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
+    
+    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) throws SQLException;
+    
+    public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
+    
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException;
+    
+    
 }

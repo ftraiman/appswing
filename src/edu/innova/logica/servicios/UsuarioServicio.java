@@ -8,27 +8,29 @@ import java.util.List;
 
 public interface UsuarioServicio {
 
-    public UsuarioDTO getUsuarioDto(String nickname,String email,String clave);
-   
+    public UsuarioDTO getUsuarioDto(String nickname, String email, String clave);
+
     void altaUsuario(Usuario usuario);
-    
+
     void altaUsuarioWeb(Usuario usuario);
-    
+
     void modificarUsuario(Usuario usuario);
-    
+
     List<Espectador> getTodosLosEspectadores();
-    
+
     List<Artista> getTodosLosArtistas();
-    
+
     Usuario getUsuarioPorId(Long id);
-    
+
     Usuario getUsuarioPorNickName(String nickname);
-    
+
     void seguirUsuario(Long idUsuarioSeguidor, Long idUsuarioSeguido);
-    
+
     List<UsuarioDTO> usuariosQueSigue(Long idUsuarioSeguidor);
-    
+
     List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido);
-    
+
     void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido);
+
+    public List<UsuarioDTO> getTodosLosUsuarioDTO();
 }

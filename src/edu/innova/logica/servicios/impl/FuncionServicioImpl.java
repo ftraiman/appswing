@@ -3,6 +3,7 @@ package edu.innova.logica.servicios.impl;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -268,5 +269,35 @@ public class FuncionServicioImpl implements FuncionServicio {
             throw new InnovaModelException("La Espectador es invalido");
         }
     }
+    
+     //========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
+    @Override
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException {
+        List<FuncionDTO> funciones = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
+        sentencia.setLong(1, idEspectaculo);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            funciones.add(funcionMapperDTO(rs));
+        }
+        return funciones;
+    }
+    //=========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
+    
+    //========================== MAPPER FUNCION DTO ==========================//
+    private FuncionDTO funcionMapperDTO(ResultSet rs) throws SQLException {
+
+        Long idFuncion = rs.getLong("id");
+        Long idEspectaculo = rs.getLong("idEspectaculo");
+        Date fechaInicio = rs.getTimestamp("fechaInicio");
+        Date fechaRegistro = rs.getTimestamp("fechaRegistro");
+        String nombre = rs.getString("nombre");
+        String imagen = rs.getString("imagen");
+        
+        List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);   
+
+        return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen);
+    }
+    //========================== MAPPER FUNCION DTO ==========================//
 
 }

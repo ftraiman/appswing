@@ -5,6 +5,7 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.controladores.FuncionControlador;
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -13,6 +14,7 @@ import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import edu.innova.logica.servicios.impl.FuncionServicioImpl;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,9 +36,8 @@ public class FuncionControladorImpl implements FuncionControlador {
     }
 
     private FuncionServicio funcionServicio = new FuncionServicioImpl().getInstance();
-    
+
     private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
-    
 
     @Override
     public void altaFuncion(Funcion funcion, Espectaculo espectaculo) {
@@ -67,7 +68,7 @@ public class FuncionControladorImpl implements FuncionControlador {
     @Override
     public void canjearFunciones(Espectador espectador, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear) {
         validarCanjearFunciones(espectador, funcionSeleccionada, funcionesParaCanjear);
-        
+
         funcionServicio.eliminarFuncionesDelEspectador(new ArrayList(funcionesParaCanjear), espectador);
         funcionServicio.altaEspectadorAFuncion(funcionSeleccionada, espectador, new Date(), BigDecimal.ZERO);
 
@@ -104,7 +105,7 @@ public class FuncionControladorImpl implements FuncionControlador {
             throw new InnovaModelException("El costo no puede ser negativo");
         }
         HelperFecha.validarFechaPosteriorALaActual(fechaRegistroEspectaculo, "Fecha de la función");
-        
+
         validarMaximaCantidadDeEspectadoresAFuncion(funcion);
     }
 
@@ -126,16 +127,30 @@ public class FuncionControladorImpl implements FuncionControlador {
         }
         validarMaximaCantidadDeEspectadoresAFuncion(funcionSeleccionada);
     }
-    
+
     private void validarMaximaCantidadDeEspectadoresAFuncion(Funcion funcion) {
         //Cantidad de espectadores a la funcion
         Espectaculo espectaculo = espectaculoServicio.getEspectaculoPorId(funcion.getIdEspectaculo());
         Integer cantMaximaDelEspectaculo = espectaculo.getEspectadoresMaximos();
         //Cantidad maxima de espectadores de la funcion
         Integer cantRegistradosAlEspectaculo = funcionServicio.getCantidadRegistrados(funcion.getId());
-        if(cantRegistradosAlEspectaculo >= cantMaximaDelEspectaculo) {
+        if (cantRegistradosAlEspectaculo >= cantMaximaDelEspectaculo) {
             throw new InnovaModelException("Se llego al maximo de espectadores para esta Funcion");
         }
     }
+
+    //================= OBTENER FUNCIONES POR ESPECTACULO DTO ================//
+    @Override
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException {
+        if (idEspectaculo == null) {
+            throw new InnovaModelException("El ESPECTACULO es INVÁLIDO!!");
+        }
+        try {
+            return funcionServicio.getFuncionesPorIdEspectaculoDTO(idEspectaculo);
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(e.getMessage(), e.getCause());
+        }
+    }
+    //================= OBTENER FUNCIONES POR ESPECTACULO DTO ================//
 
 }

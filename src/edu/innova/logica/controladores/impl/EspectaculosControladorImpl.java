@@ -5,17 +5,17 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.controladores.EspectaculoControlador;
+import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class EspectaculosControladorImpl implements EspectaculoControlador {
 
-    private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
+    private final EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
 
     private static EspectaculosControladorImpl instance;
 
@@ -101,7 +101,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
     }
-    
+
     @Override
     public void rechazarEspectaculo(Long id) throws SQLException {
         try {
@@ -114,6 +114,34 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException {
         return espectaculoServicio.getCategoriaPorIdEspectaculo(idEspectaculo);
+    }
+
+    //====================== ALTA ESPECTACULO DTO ============================//
+    @Override
+    public void altaEspectaculoDTO(EspectaculoDTO espectaculo) {
+        Long idArtista = espectaculo.getArtista().getId();
+        Long idPlataforma = espectaculo.getPlataforma().getId();
+        Espectaculo espc = new Espectaculo(espectaculo.getNombre(), espectaculo.getDescripcion(), espectaculo.getDuracion(), espectaculo.getEspectadoresMinimos(), espectaculo.getEspectadoresMaximos(), espectaculo.getUrl(), espectaculo.getCosto(), espectaculo.getFechaRegistro(), espectaculo.getIdCategoria(), espectaculo.getEstado(), espectaculo.getImagen());
+
+        validarNuevoEspectaculo(idArtista, idPlataforma, espc);
+
+        altaEspectaculo(idArtista, idPlataforma, espc);
+    }
+    //====================== ALTA ESPECTACULO DTO ============================//
+
+    @Override
+    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) throws SQLException{
+        return espectaculoServicio.getEspectaculoPorIdDTO(idEspectaculo);
+    }
+
+    @Override
+    public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException {
+        return espectaculoServicio.getTodosLosEspectaculosDTO();
+    }
+
+    @Override
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException {
+        return espectaculoServicio.getTodosLosEspectaculosPorArtistaDTO(idArtista);
     }
 
 }

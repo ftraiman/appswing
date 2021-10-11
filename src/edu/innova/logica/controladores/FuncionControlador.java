@@ -1,10 +1,12 @@
 package edu.innova.logica.controladores;
 
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -20,5 +22,7 @@ public interface FuncionControlador { //Interfaz de Funcion
     List<Funcion> getFuncionesPorIdEspectador(Espectador espectador);
 
     void canjearFunciones(Espectador espectadorSeleccionado, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear);
+    
+public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
 
 }

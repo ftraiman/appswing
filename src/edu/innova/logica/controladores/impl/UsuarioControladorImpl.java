@@ -15,7 +15,6 @@ import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class UsuarioControladorImpl implements UsuarioControlador {
 
@@ -104,12 +103,16 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     public void modificarUsuario(Usuario usuario) {
         try {
             if (usuario instanceof Espectador) {
-
+                String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
+                usuario.setClave(claveHash);
+                
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
                 usuarioServicio.modificarUsuario(espectador);
 
             } else if (usuario instanceof Artista) {
+                String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
+                usuario.setClave(claveHash);
 
                 Artista artista = (Artista) usuario;
                 validarParametrosModificarArtista(artista);
@@ -297,4 +300,9 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
     }
     //========================= MODIFICAR USUARIO CON DTO =====================//
+    
+    //============================= GET USUARIO DTO ==========================//
+    
+    //============================= GET USUARIO DTO ==========================//
+    
 }

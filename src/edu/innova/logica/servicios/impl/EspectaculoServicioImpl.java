@@ -3,6 +3,8 @@ package edu.innova.logica.servicios.impl;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.logica.dtos.EspectaculoDTO;
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
@@ -36,6 +38,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String aceptarEspectaculo = "UPDATE espectaculos SET estado = 'Aceptado' WHERE espectaculos.id = ?";
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
     private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
+    //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -59,8 +62,6 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return servicio;
     }
 
-   
-    
     //==================== AlTA DE ESPECTACULO ===================//
     @Override
     public void altaEspectaculo(Long idArtista, Long idPlataforma, Espectaculo espectaculo) {
@@ -110,7 +111,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
-    public Espectaculo getEspectaculoPorId(Long idEspectaculo) {
+    public Espectaculo getEspectaculoPorId(Long idEspectaculo) throws SQLException {
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
             sentencia.setLong(1, idEspectaculo);
@@ -124,10 +125,10 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //==================== OBTENER ESPECTACULO POR ID ============//
-    
-     //==================== OBTENER CATEGORIA POR ID ============//
+
+    //==================== OBTENER CATEGORIA POR ID ============//
     @Override
-    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException{
+    public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException {
         try {
             List<Categoria> categorias = new ArrayList<>();
             ResultSet rs;
@@ -162,7 +163,6 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     }
 
     //==================== OBTENER ESPECTACULO POR ID Artista============//
-    
     //==================== OBTENER TODOS LOS ESPECTACULOS=========//
     @Override
     public List<Espectaculo> getTodosLosEspectaculos() throws SQLException {
@@ -243,10 +243,10 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Long idCategoria = rs.getLong("idCategoria");
         String estado = rs.getString("estado");
         String imagen = rs.getString("imagen");
-         
+
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
 
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado,imagen);
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado, imagen);
     }
 
     private Categoria categoriaMapper(ResultSet rs) throws SQLException {
@@ -275,7 +275,6 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     //====================== RECHAZAR ESPECTACULO =============================== 
     @Override
     public void rechazarEspectaculo(Long id) {
-
         PreparedStatement sentencia;
         try {
             sentencia = conexion.getConexion().prepareStatement(rechazarEspectaculo);
@@ -285,6 +284,76 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
         }
     }
-    //====================== RECHAZAR ESPECTACULO ===============================
+    //====================== RECHAZAR ESPECTACULO ==============================
+
+    //==================== OBTENER ESPECTACULO POR ID ============//
+    @Override
+    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) throws SQLException {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
+            sentencia.setLong(1, idEspectaculo);
+            ResultSet rs = sentencia.executeQuery();            
+                while (rs.next()) {
+                    return espectaculoMapperDTO(rs);
+                }
+            return null;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //==================== OBTENER ESPECTACULO POR ID ============//
+
+    //===================== OBTENER ESPECTACULOS DTO ==========================//
+    @Override
+    public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException {
+        List<EspectaculoDTO> espectaculos = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectaculos);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            espectaculos.add(espectaculoMapperDTO(rs));
+        }
+        return espectaculos;
+    }
+    //===================== OBTENER ESPECTACULOS DTO ==========================//
+
+    //=============== OBTENER ESPECTACULOS POR ID ARTISTA DTO ================//
+    @Override
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException {
+
+        List<EspectaculoDTO> espectaculos = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
+        sentencia.setLong(1, idArtista);
+
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            espectaculos.add(espectaculoMapperDTO(rs));
+        }
+        return espectaculos;
+    }
+    //=============== OBTENER ESPECTACULOS POR ID ARTISTA DTO ================//
+
+    //======================= MAPPER ESPECTACULO DTO =========================//
+    private EspectaculoDTO espectaculoMapperDTO(ResultSet rs) throws SQLException {
+
+        Long id = rs.getLong("id");
+        String nombre = rs.getString("nombre");
+        String descripcion = rs.getString("descripcion");
+        Integer duracion = rs.getInt("duracion");
+        Integer espectadoresMinimos = rs.getInt("espectadoresMinimos");
+        Integer espectadoresMaximos = rs.getInt("espectadoresMaximos");
+        String url = rs.getString("url");
+        BigDecimal costo = rs.getBigDecimal("costo");
+        Date fechaRegistro = rs.getTimestamp("fechaRegistro");
+        Artista artista = (Artista) usuarioServicio.getUsuarioPorId(rs.getLong("idUsuario"));
+        Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
+        Long idCategoria = rs.getLong("idCategoria");
+        String estado = rs.getString("estado");
+        String imagen = rs.getString("imagen");
+
+        List<FuncionDTO> funciones = funcionServicio.getFuncionesPorIdEspectaculoDTO(id);
+
+        return new EspectaculoDTO(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, estado, idCategoria, imagen);
+    }
+    //======================= MAPPER ESPECTACULO DTO =========================//
 
 }
