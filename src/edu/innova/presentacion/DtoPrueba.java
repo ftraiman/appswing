@@ -123,12 +123,7 @@ public class DtoPrueba extends javax.swing.JFrame {
             System.out.println(fabrica.getUsuarioControlador().getUsuarioDTOPorId(id));
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Espectaculo NO Encontrado [%s]", x.getMessage()));
-        } catch (SQLException ex) {
-            Logger.getLogger(DtoPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

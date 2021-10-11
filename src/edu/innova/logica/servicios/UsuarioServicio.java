@@ -35,6 +35,6 @@ public interface UsuarioServicio {
 
     public List<UsuarioDTO> getTodosLosUsuarioDTO();
     
-    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException;
+    public UsuarioDTO getUsuarioDTOPorId(Long id);
 }
 

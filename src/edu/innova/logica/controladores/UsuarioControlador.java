@@ -34,5 +34,5 @@ public interface UsuarioControlador { //Interfaz usuario
     
     List<UsuarioDTO> getTodosLosUsuarioDTO();
     
-    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException;
+    public UsuarioDTO getUsuarioDTOPorId(Long id);
 }

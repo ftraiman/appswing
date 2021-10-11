@@ -366,7 +366,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //============================= GET USUARIO DTO ==========================//
     @Override
-    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException{
+    public UsuarioDTO getUsuarioDTOPorId(Long id){
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(usuarioPorId);
             sentencia.setLong(1, id);

@@ -14,7 +14,6 @@ import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UsuarioControladorImpl implements UsuarioControlador {
@@ -106,7 +105,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             if (usuario instanceof Espectador) {
                 String claveHash = getHash(usuario.getClave().getBytes(), ALGORITMO);
                 usuario.setClave(claveHash);
-                
+
                 Espectador espectador = (Espectador) usuario;
                 validarParametrosModificarEspectador(espectador);
                 usuarioServicio.modificarUsuario(espectador);
@@ -229,7 +228,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             //usuarioServicio.altaUsuario(usuario);
         }
     }
-    
+
     @Override
     public void seguirUsuario(Long idUsuarioSeguidor, Long idUsuarioSeguido) {
         if (idUsuarioSeguido == null || idUsuarioSeguidor == null) {
@@ -237,7 +236,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
         usuarioServicio.seguirUsuario(idUsuarioSeguidor, idUsuarioSeguido);
     }
-    
+
     @Override
     public List<UsuarioDTO> usuariosQueSigue(Long idUsuarioSeguidor) {
         if (idUsuarioSeguidor == null) {
@@ -249,7 +248,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
         }
     }
-    
+
     @Override
     public List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido) {
         if (idUsuarioSeguido == null) {
@@ -272,11 +271,12 @@ public class UsuarioControladorImpl implements UsuarioControlador {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
         }
     }
-    
+
     @Override
     public List<UsuarioDTO> getTodosLosUsuarioDTO() {
         return usuarioServicio.getTodosLosUsuarioDTO();
     }
+
     //CREAR UN ARTISTA CON UN DTO
     private Artista crearArtistaConDTO(UsuarioDTO usuario) {
         return new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getClave(), usuario.getNickname(),
@@ -305,11 +305,15 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
     }
     //========================= MODIFICAR USUARIO CON DTO =====================//
-    
+
     //============================= GET USUARIO DTO ==========================//
     @Override
-    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException {
-        return  usuarioServicio.getUsuarioDTOPorId(id);
+    public UsuarioDTO getUsuarioDTOPorId(Long id) {
+        try {
+            return usuarioServicio.getUsuarioDTOPorId(id);
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
+        }
     }
     //============================= GET USUARIO DTO ==========================//
 }
