@@ -92,6 +92,7 @@ public class DatosDePrueba {
 //        System.err.print(usuarioControlador.usuariosQueLoSiguen(Long.valueOf(2)));
 //        usuarioControlador.dejarDeSeguir(Long.valueOf(1), Long.valueOf(2));
 //        System.err.print(usuarioControlador.usuariosQueSigue(Long.valueOf(1)));
+//        System.err.println(usuarioControlador.getTodosLosUsuarioDTO());
 
     }
 

@@ -30,4 +30,6 @@ public interface UsuarioControlador { //Interfaz usuario
     List<UsuarioDTO> usuariosQueLoSiguen(Long idUsuarioSeguido);
 
     void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido);
+    
+    List<UsuarioDTO> getTodosLosUsuarioDTO();
 }

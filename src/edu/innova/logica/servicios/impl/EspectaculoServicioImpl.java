@@ -111,7 +111,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
-    public Espectaculo getEspectaculoPorId(Long idEspectaculo) throws SQLException {
+    public Espectaculo getEspectaculoPorId(Long idEspectaculo) {
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
             sentencia.setLong(1, idEspectaculo);

@@ -3,8 +3,8 @@ package edu.innova.logica.servicios.impl;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
+import edu.innova.logica.Constantes;
 import static edu.innova.logica.Constantes.ALGORITMO;
-import static edu.innova.logica.Constantes.ARTISTA;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -23,7 +23,7 @@ import edu.innova.logica.servicios.UsuarioServicio;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String todosLosUsuariosDTO = "SELECT * FROM usuarios";
+    private final String todosLosUsuariosDTO = "SELECT * FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname";
     private final String datosArtistasDTO = "SELECT * FROM datos_artistas DA, usuarios U WHERE U.nickname = DA.nickname AND U.nickname = ?";
     private final String usuarioPorId = "SELECT * FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE id = ?";
     private final String usuarioPorNickname = "SELECT id, u.nickname, nombre, apellido, email, fechaNacimiento, clave, tipo, descripcion, biografia, linkUsuario, imagen FROM usuarios u LEFT JOIN datos_artistas da ON u.nickname = da.nickname WHERE u.nickname = ?";
@@ -347,19 +347,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString("tipo").equals(ARTISTA)) {
-                    UsuarioDTO artista = dtoArtistaMapper(rs);
-                    PreparedStatement datosArtista = conexion.getConexion().prepareStatement(datosArtistasDTO);
-                    datosArtista.setString(1, artista.getNickname());
-                    ResultSet rsDatosArtista = datosArtista.executeQuery();
-                    
-                    artista.setDescripcion(rsDatosArtista.getString("descripcion"));                    
-                    artista.setBiografia(rsDatosArtista.getString("biografia"));                    
-                    artista.setLinkUsuario(rsDatosArtista.getString("linkUsuario"));
-                    
-                    usuarios.add(artista);
-                }                
-                usuarios.add(dtoEspectadorMapper(rs));
+                switch (rs.getString("tipo")) {
+                    case Constantes.ARTISTA:
+                        usuarios.add(dtoArtistaMapper(rs));
+                        break;
+                    case Constantes.ESPECTADOR:
+                        usuarios.add(dtoEspectadorMapper(rs));
+                        break;
+                    default:
+                        throw new IllegalArgumentException(String.format("El tipo de usuario es inválido [%s]", rs.getString("tipo")));
+                }
             }
         } catch (SQLException e) {
             throw new BaseDeDatosException(e.getMessage(), e.getCause());

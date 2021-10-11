@@ -270,7 +270,11 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         } catch (BaseDeDatosException e) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
         }
-        
+    }
+    
+    @Override
+    public List<UsuarioDTO> getTodosLosUsuarioDTO() {
+        return usuarioServicio.getTodosLosUsuarioDTO();
     }
     //CREAR UN ARTISTA CON UN DTO
     private Artista crearArtistaConDTO(UsuarioDTO usuario) {
