@@ -4,7 +4,6 @@ import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface UsuarioControlador { //Interfaz usuario
@@ -35,4 +34,6 @@ public interface UsuarioControlador { //Interfaz usuario
     List<UsuarioDTO> getTodosLosUsuarioDTO();
     
     public UsuarioDTO getUsuarioDTOPorId(Long id);
+    
+    public void modificarUsuarioDTO(UsuarioDTO usuario);
 }

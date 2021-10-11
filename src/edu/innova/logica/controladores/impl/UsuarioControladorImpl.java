@@ -291,18 +291,9 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //===================== CREAR USUARIO A PARTIR DE UN DTO =================//
 
     //========================= MODIFICAR USUARIO CON DTO =====================//
-    void modificarUsuarioDTO(UsuarioDTO usuario) { //MODIFICAR EL USUARIO CON UN DTO
-        //SI ES UN ARTISTA
-        if (Constantes.ARTISTA.equals(usuario.getTipo())) {
-            Artista artista = new Artista(usuario.getDescripcion(), usuario.getBiografia(), usuario.getLinkUsuario(), usuario.getId(), usuario.getClave(),
-                    usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getImagen());
-            usuarioServicio.modificarUsuario(artista);
-            //SI ES UN ESPECTADOR
-        } else if (Constantes.ESPECTADOR.equals(usuario.getTipo())) {
-            Espectador espectador = new Espectador(usuario.getId(), usuario.getClave(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(),
-                    usuario.getFechaNacimiento(), usuario.getImagen());
-            usuarioServicio.modificarUsuario(espectador);
-        }
+    @Override
+    public void modificarUsuarioDTO(UsuarioDTO usuario) { //MODIFICAR EL USUARIO CON UN DTO
+       usuarioServicio.modificarUsuarioDTO(usuario);
     }
     //========================= MODIFICAR USUARIO CON DTO =====================//
 

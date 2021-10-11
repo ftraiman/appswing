@@ -36,5 +36,7 @@ public interface UsuarioServicio {
     public List<UsuarioDTO> getTodosLosUsuarioDTO();
     
     public UsuarioDTO getUsuarioDTOPorId(Long id);
+    
+     public void modificarUsuarioDTO(UsuarioDTO usuario);
 }
 

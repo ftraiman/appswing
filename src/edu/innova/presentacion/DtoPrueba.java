@@ -3,7 +3,9 @@ package edu.innova.presentacion;
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Fabrica;
+import edu.innova.logica.dtos.UsuarioDTO;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -73,7 +75,7 @@ public class DtoPrueba extends javax.swing.JFrame {
                                     .addComponent(emailtxt)
                                     .addComponent(passtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(idEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 75, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,12 +120,9 @@ public class DtoPrueba extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Long id = Long.parseLong(this.idEspectaculo.getText());
-            System.out.println(fabrica.getUsuarioControlador().getUsuarioDTOPorId(id));
-        } catch (InnovaModelException x) {
-            JOptionPane.showMessageDialog(rootPane, String.format("Espectaculo NO Encontrado [%s]", x.getMessage()));
-        }
+        Long a = Long.parseLong("2");
+        UsuarioDTO usu = new UsuarioDTO(a,"artista","shakira","shakira","XDDD","shakira@gmail.com",new Date(),"palabras","principio","es la 1","anasheee","imagen");
+        fabrica.getUsuarioControlador().modificarUsuarioDTO(usu);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

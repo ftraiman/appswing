@@ -5,6 +5,8 @@ import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Constantes;
 import static edu.innova.logica.Constantes.ALGORITMO;
+import static edu.innova.logica.Constantes.ARTISTA;
+import static edu.innova.logica.Constantes.ESPECTADOR;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -384,4 +386,32 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
     }
     //============================= GET USUARIO DTO ==========================//
+    
+     //============================ DTO MODIFICAR Usuario =========================//
+    @Override
+    public void modificarUsuarioDTO(UsuarioDTO usuario) {
+        //System.out.println("ACAANOOOO");
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(modificarUsuario);
+            sentencia.setString(1, usuario.getNombre());
+            sentencia.setString(2, usuario.getApellido());
+            sentencia.setDate(3, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
+            sentencia.setLong(4, usuario.getId());
+            sentencia.executeUpdate();
+            if (usuario.getTipo().equals(ARTISTA)){
+            System.out.println("version 2.0");
+                sentencia = conexion.getConexion().prepareStatement(modificarDatosArtista);
+                sentencia.setString(1, usuario.getDescripcion());
+                sentencia.setString(2, usuario.getBiografia());
+                sentencia.setString(3, usuario.getLinkUsuario());
+                sentencia.setString(4, usuario.getNickname());
+                sentencia.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //============================ DTO MODIFICAR ESPECTADOR =========================//
+    
 }
