@@ -14,6 +14,7 @@ import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UsuarioControladorImpl implements UsuarioControlador {
@@ -306,7 +307,9 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //========================= MODIFICAR USUARIO CON DTO =====================//
     
     //============================= GET USUARIO DTO ==========================//
-    
+    @Override
+    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException {
+        return  usuarioServicio.getUsuarioDTOPorId(id);
+    }
     //============================= GET USUARIO DTO ==========================//
-    
 }

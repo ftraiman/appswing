@@ -4,6 +4,7 @@ import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UsuarioServicio {
@@ -33,4 +34,7 @@ public interface UsuarioServicio {
     void dejarDeSeguir(Long idUsuarioSeguidor, Long idUsuarioSeguido);
 
     public List<UsuarioDTO> getTodosLosUsuarioDTO();
+    
+    public UsuarioDTO getUsuarioDTOPorId(Long id) throws SQLException;
 }
+

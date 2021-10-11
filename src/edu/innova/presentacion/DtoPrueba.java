@@ -120,11 +120,9 @@ public class DtoPrueba extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             Long id = Long.parseLong(this.idEspectaculo.getText());
-            System.out.println(fabrica.getEspectaculoControlador().getTodosLosEspectaculosPorArtistaDTO(id));
+            System.out.println(fabrica.getUsuarioControlador().getUsuarioDTOPorId(id));
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Espectaculo NO Encontrado [%s]", x.getMessage()));
-        } catch (SQLException ex) {
-            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
         
 
