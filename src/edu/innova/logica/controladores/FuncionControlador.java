@@ -23,6 +23,10 @@ public interface FuncionControlador { //Interfaz de Funcion
 
     void canjearFunciones(Espectador espectadorSeleccionado, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear);
     
-public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
+    
+    public void altaFuncionDTO(FuncionDTO funcion);
+    
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion);
 
 }

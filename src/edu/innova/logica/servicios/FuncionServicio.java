@@ -34,4 +34,8 @@ public interface FuncionServicio {
     public Integer getCantidadRegistrados(Long id);
     
     public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
+    
+    public void altaFuncionDTO(FuncionDTO funcion);
+    
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion);
 }

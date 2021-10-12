@@ -153,4 +153,18 @@ public class FuncionControladorImpl implements FuncionControlador {
     }
     //================= OBTENER FUNCIONES POR ESPECTACULO DTO ================//
 
+    //==================== AlTA DE FUNCION DTO=======================//
+    @Override
+    public void altaFuncionDTO(FuncionDTO funcion) {
+        funcionServicio.altaFuncionDTO(funcion);
+    }
+    //==================== AlTA DE FUNCION DTO=======================//
+    
+    //==================== CONSULTA DE FUNCION DTO=======================//
+    @Override
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion){
+        return funcionServicio.getFuncionDTOPorId(idFuncion);
+    }
+    //==================== CONSULTA DE FUNCION DTO=======================//
+    
 }

@@ -1,8 +1,5 @@
 package edu.innova.logica.dtos;
 
-import edu.innova.logica.entidades.Artista;
-import edu.innova.logica.entidades.Espectaculo;
-import edu.innova.logica.entidades.Plataforma;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -12,9 +9,9 @@ public class EspectaculoDTO {
 
     //============================ ATRIBUTOS =================================//
     private Long id;
-    private Artista artista;
+    private Long idArtista;
     private String nombre;
-    private Plataforma plataforma;
+    private Long idPlataforma;
     private String descripcion;
     private Integer duracion;
     private Integer espectadoresMinimos;
@@ -32,11 +29,11 @@ public class EspectaculoDTO {
     public EspectaculoDTO() {
     }
 
-    public EspectaculoDTO(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoresMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<FuncionDTO> funciones, String estado, Long idCategoria, String imagen) {
+    public EspectaculoDTO(Long id, Long idArtista, String nombre, Long idPlataforma, String descripcion, Integer duracion, Integer espectadoresMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<FuncionDTO> funciones, String estado, Long idCategoria, String imagen) {
         this.id = id;
-        this.artista = artista;
+        this.idArtista = idArtista;
         this.nombre = nombre;
-        this.plataforma = plataforma;
+        this.idPlataforma = idPlataforma;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.espectadoresMinimos = espectadoresMinimos;
@@ -47,6 +44,22 @@ public class EspectaculoDTO {
         this.funciones = funciones;
         this.estado = estado;
         this.idCategoria = idCategoria;
+        this.imagen = imagen;
+    }
+    
+    public EspectaculoDTO(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado,String imagen,Long idArtista, Long idPlataforma) {
+        this.nombre = nombre;
+        this.idArtista = idArtista;
+        this.idPlataforma = idPlataforma;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.espectadoresMinimos = espectadoredMinimos;
+        this.espectadoresMaximos = espectadoresMaximos;
+        this.url = url;
+        this.costo = costo;
+        this.fechaRegistro = fechaRegistro;
+        this.idCategoria = idCategoria;
+        this.estado = estado;
         this.imagen = imagen;
     }
     //============================ CONSTRUCTURES =============================//
@@ -60,12 +73,12 @@ public class EspectaculoDTO {
         this.id = id;
     }
 
-    public Artista getArtista() {
-        return artista;
+    public Long getIdArtista() {
+        return idArtista;
     }
 
-    public void setArtista(Artista artista) {
-        this.artista = artista;
+    public void setIdArtista(Long idArtista) {
+        this.idArtista = idArtista;
     }
 
     public String getNombre() {
@@ -76,12 +89,12 @@ public class EspectaculoDTO {
         this.nombre = nombre;
     }
 
-    public Plataforma getPlataforma() {
-        return plataforma;
+    public Long getIdPlataforma() {
+        return idPlataforma;
     }
 
-    public void setPlataforma(Plataforma plataforma) {
-        this.plataforma = plataforma;
+    public void setIdPlataforma(Long idPlataforma) {
+        this.idPlataforma = idPlataforma;
     }
 
     public String getDescripcion() {
@@ -172,7 +185,7 @@ public class EspectaculoDTO {
         this.imagen = imagen;
     }
     //======================== GETTER & SETTER ===============================//
-    
+
     @Override
     public String toString() {
         return String.format("%s %s", nombre, funciones);

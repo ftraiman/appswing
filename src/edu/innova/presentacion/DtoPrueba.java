@@ -1,14 +1,11 @@
 package edu.innova.presentacion;
 
-import edu.innova.exceptions.BaseDeDatosException;
-import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Fabrica;
-import edu.innova.logica.dtos.UsuarioDTO;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
+
 
 public class DtoPrueba extends javax.swing.JFrame {
 
@@ -120,9 +117,16 @@ public class DtoPrueba extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Long a = Long.parseLong("2");
-        UsuarioDTO usu = new UsuarioDTO(a,"artista","shakira","shakira","XDDD","shakira@gmail.com",new Date(),"palabras","principio","es la 1","anasheee","imagen");
-        fabrica.getUsuarioControlador().modificarUsuarioDTO(usu);
+        
+        try {
+            Long id  = Long.parseLong(this.idEspectaculo.getText());
+            System.out.println(fabrica.getEspectaculoControlador().getEspectaculoPorIdDTO(id));
+        } catch (SQLException ex) {
+            Logger.getLogger(DtoPrueba.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

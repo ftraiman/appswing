@@ -119,8 +119,8 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     //====================== ALTA ESPECTACULO DTO ============================//
     @Override
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo) {
-        Long idArtista = espectaculo.getArtista().getId();
-        Long idPlataforma = espectaculo.getPlataforma().getId();
+        Long idArtista = espectaculo.getIdArtista();
+        Long idPlataforma = espectaculo.getIdPlataforma();
         Espectaculo espc = new Espectaculo(espectaculo.getNombre(), espectaculo.getDescripcion(), espectaculo.getDuracion(), espectaculo.getEspectadoresMinimos(), espectaculo.getEspectadoresMaximos(), espectaculo.getUrl(), espectaculo.getCosto(), espectaculo.getFechaRegistro(), espectaculo.getIdCategoria(), espectaculo.getEstado(), espectaculo.getImagen());
 
         validarNuevoEspectaculo(idArtista, idPlataforma, espc);
@@ -142,6 +142,11 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException {
         return espectaculoServicio.getTodosLosEspectaculosPorArtistaDTO(idArtista);
+    }
+    
+    @Override
+    public void AltaEspectaculoDTO(EspectaculoDTO espectaculo){
+        espectaculoServicio.altaEspectaculoDTO(espectaculo);
     }
 
 }

@@ -344,16 +344,49 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         String url = rs.getString("url");
         BigDecimal costo = rs.getBigDecimal("costo");
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
-        Artista artista = (Artista) usuarioServicio.getUsuarioPorId(rs.getLong("idUsuario"));
-        Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
+        Long idArtista = rs.getLong("idUsuario");
+        Long idPlataforma = rs.getLong("idPlataforma");
+        //Artista artista = (Artista) usuarioServicio.getUsuarioPorId(rs.getLong("idUsuario"));
+        //Plataforma plataforma = plataformaServicio.getPlataformaPorId(rs.getLong("idPlataforma"));
         Long idCategoria = rs.getLong("idCategoria");
         String estado = rs.getString("estado");
         String imagen = rs.getString("imagen");
 
         List<FuncionDTO> funciones = funcionServicio.getFuncionesPorIdEspectaculoDTO(id);
 
-        return new EspectaculoDTO(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, estado, idCategoria, imagen);
+        return new EspectaculoDTO(id, idArtista, nombre, idPlataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, estado, idCategoria, imagen);
     }
     //======================= MAPPER ESPECTACULO DTO =========================//
+    
+    //==================== AlTA DE ESPECTACULO DTO ===================//
+    @Override
+    public void altaEspectaculoDTO(EspectaculoDTO espectaculo) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(altaEspectaculo);
+            sentencia.setString(1, espectaculo.getNombre());
+            sentencia.setBigDecimal(2, espectaculo.getCosto());
+            sentencia.setString(3, espectaculo.getUrl());
+            sentencia.setInt(4, espectaculo.getDuracion());
+            sentencia.setString(5, espectaculo.getDescripcion());
+            sentencia.setDate(6, new java.sql.Date(espectaculo.getFechaRegistro().getTime()));
+            sentencia.setLong(7, espectaculo.getIdArtista());
+            sentencia.setLong(8, espectaculo.getIdPlataforma());
+            sentencia.setInt(9, espectaculo.getEspectadoresMinimos());
+            sentencia.setInt(10, espectaculo.getEspectadoresMaximos());
+            sentencia.setLong(11, espectaculo.getIdCategoria());
+            sentencia.setString(12, espectaculo.getEstado());
+            sentencia.setString(13, espectaculo.getImagen());
+
+            sentencia.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", espectaculo.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+
+    }
+    //==================== AlTA DE ESPECTACULO DTO ===================//
+    
 
 }

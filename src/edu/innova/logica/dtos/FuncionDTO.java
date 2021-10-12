@@ -30,6 +30,15 @@ public class FuncionDTO {
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
     }
+    
+    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen) {
+        this.nombre = nombre;
+        this.idEspectaculo = idEspectaculo;
+        this.fechaInicio = fechaInicio;
+        this.fechaRegistro = fechaRegistro;
+        this.artistasInvitados = artistasInvitados;
+        this.imagen = imagen;
+    }
     //============================ CONSTRUCTURES =============================//
 
     //======================== GETTER & SETTER ===============================//

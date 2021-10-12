@@ -300,4 +300,51 @@ public class FuncionServicioImpl implements FuncionServicio {
     }
     //========================== MAPPER FUNCION DTO ==========================//
 
+    //==================== AlTA DE FUNCION DTO=======================//
+    @Override
+    public void altaFuncionDTO(FuncionDTO funcion) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaFunciones, Statement.RETURN_GENERATED_KEYS);
+            sentencia.setLong(1, funcion.getIdEspectaculo());
+            sentencia.setString(2, funcion.getNombre());
+            sentencia.setDate(3, new java.sql.Date(funcion.getFechaInicio().getTime()));
+            sentencia.setDate(4, new java.sql.Date(funcion.getFechaRegistro().getTime()));
+            sentencia.setString(5, funcion.getImagen());
+            sentencia.executeUpdate();
+
+            Integer newId = null;
+            ResultSet rs = sentencia.getGeneratedKeys();
+            if (rs.next()) {
+                newId = rs.getInt(1);
+            }
+            for (Artista artista : funcion.getArtistasInvitados()) {
+                sentencia = conexion.getConexion().prepareStatement(agregarArtistasFunciones);
+                sentencia.setLong(1, Long.valueOf(newId));
+                sentencia.setLong(2, artista.getId());
+                sentencia.executeUpdate();
+            }
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException(String.format("Ya existe una funcion con el nombre [%s]", funcion.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    //==================== AlTA DE FUNCION DTO=======================//
+    
+    //==================== OBTENER FUNCION DTO POR ID ============//
+    @Override
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion){
+        try{
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorId);
+        sentencia.setLong(1, idFuncion);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            return funcionMapperDTO(rs);
+        }
+        return null;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //==================== OBTENER FUNCION DTO POR ID ============//
 }

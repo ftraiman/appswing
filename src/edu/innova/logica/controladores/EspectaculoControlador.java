@@ -34,5 +34,5 @@ public interface EspectaculoControlador {
     
     public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException;
     
-    
+    public void AltaEspectaculoDTO(EspectaculoDTO espectaculo);
 }
