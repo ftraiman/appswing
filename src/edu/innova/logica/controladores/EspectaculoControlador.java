@@ -1,5 +1,6 @@
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.dtos.CategoriaDTO;
 import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
@@ -34,5 +35,7 @@ public interface EspectaculoControlador {
     
     public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException;
     
+    List<CategoriaDTO> getTodasLasCategoriasDTO();
+
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo);
 }

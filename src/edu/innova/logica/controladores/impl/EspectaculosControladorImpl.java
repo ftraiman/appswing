@@ -5,13 +5,16 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.controladores.EspectaculoControlador;
+import edu.innova.logica.dtos.CategoriaDTO;
 import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EspectaculosControladorImpl implements EspectaculoControlador {
 
@@ -87,6 +90,15 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public List<Categoria> getTodasLasCategorias() throws SQLException {
         return espectaculoServicio.getTodasLasCategorias();
     }
+    
+    @Override
+    public List<CategoriaDTO> getTodasLasCategoriasDTO() {
+        List<Categoria> categorias = espectaculoServicio.getTodasLasCategorias();
+        if (categorias!= null ) {
+            return espectaculoServicio.getTodasLasCategorias().stream().map(this::categoriaDTOMapper).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
 
     @Override
     public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException {
@@ -147,6 +159,9 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo){
         espectaculoServicio.altaEspectaculoDTO(espectaculo);
+        
+    public CategoriaDTO categoriaDTOMapper(Categoria categoria) {
+        return new CategoriaDTO(categoria.getId(), categoria.getNombre());
     }
 
 }

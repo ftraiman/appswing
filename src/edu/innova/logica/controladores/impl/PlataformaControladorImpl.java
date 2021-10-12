@@ -5,6 +5,7 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.controladores.PlataformaControlador;
+import edu.innova.logica.dtos.PlataformaDTO;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 public class PlataformaControladorImpl implements PlataformaControlador {
@@ -44,8 +46,18 @@ public class PlataformaControladorImpl implements PlataformaControlador {
         }
     }
 
+    @Override
     public List<Plataforma> getTodasLasPlataformas() {
         return plataformaServicio.getTodasLasPlataformas();
+    }
+    
+    @Override
+    public List<PlataformaDTO> getTodasLasPlataformasDTO() {
+        return plataformaServicio.getTodasLasPlataformas().stream().map(this::plataformaDtoMapper).collect(Collectors.toList());
+    }
+    
+    private PlataformaDTO plataformaDtoMapper(Plataforma plataforma) {
+        return new PlataformaDTO(plataforma.getNombre(), plataforma.getDescripcion(), plataforma.getUrl());
     }
 
     private void validarNuevaPlataforma(Plataforma plataforma) {
