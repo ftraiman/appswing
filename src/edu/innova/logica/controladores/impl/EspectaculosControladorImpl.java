@@ -159,7 +159,8 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo){
         espectaculoServicio.altaEspectaculoDTO(espectaculo);
-        
+    }
+    
     public CategoriaDTO categoriaDTOMapper(Categoria categoria) {
         return new CategoriaDTO(categoria.getId(), categoria.getNombre());
     }
