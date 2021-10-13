@@ -57,7 +57,7 @@ public class PlataformaControladorImpl implements PlataformaControlador {
     }
     
     private PlataformaDTO plataformaDtoMapper(Plataforma plataforma) {
-        return new PlataformaDTO(plataforma.getNombre(), plataforma.getDescripcion(), plataforma.getUrl());
+        return new PlataformaDTO(plataforma.getId(), plataforma.getNombre(), plataforma.getDescripcion(), plataforma.getUrl());
     }
 
     private void validarNuevaPlataforma(Plataforma plataforma) {

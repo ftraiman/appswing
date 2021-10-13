@@ -11,6 +11,7 @@ public class PlataformaDTO extends Plataforma {
         super(nombre, descripcion, url);
     }
     
-    
-
+    public PlataformaDTO(Long id, String nombre, String descripcion, String url) {
+        super(id, nombre, descripcion, url);
+    }
 }
