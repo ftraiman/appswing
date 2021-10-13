@@ -120,7 +120,7 @@ public class DtoPrueba extends javax.swing.JFrame {
         
         try {
             Long id  = Long.parseLong(this.idEspectaculo.getText());
-            System.out.println(fabrica.getEspectaculoControlador().getEspectaculoPorIdDTO(id));
+            System.out.println(fabrica.getFuncionControlador().getArtistasInvitadosAFuncionDTO(id));
         } catch (SQLException ex) {
             Logger.getLogger(DtoPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }

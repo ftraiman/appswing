@@ -4,6 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.dtos.FuncionDTO;
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -253,10 +254,10 @@ public class FuncionServicioImpl implements FuncionServicio {
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
-        
+
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
-        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre,imagen);
+        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre, imagen);
     }
 
     private void validarParametrosEliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {
@@ -269,8 +270,8 @@ public class FuncionServicioImpl implements FuncionServicio {
             throw new InnovaModelException("La Espectador es invalido");
         }
     }
-    
-     //========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
+
+    //========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
     @Override
     public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException {
         List<FuncionDTO> funciones = new ArrayList<>();
@@ -283,7 +284,7 @@ public class FuncionServicioImpl implements FuncionServicio {
         return funciones;
     }
     //=========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
-    
+
     //========================== MAPPER FUNCION DTO ==========================//
     private FuncionDTO funcionMapperDTO(ResultSet rs) throws SQLException {
 
@@ -293,8 +294,8 @@ public class FuncionServicioImpl implements FuncionServicio {
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
-        
-        List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);   
+
+        List<UsuarioDTO> artistasInvitados = getArtistasInvitadosAFuncionDTO(idFuncion);
 
         return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen);
     }
@@ -317,7 +318,7 @@ public class FuncionServicioImpl implements FuncionServicio {
             if (rs.next()) {
                 newId = rs.getInt(1);
             }
-            for (Artista artista : funcion.getArtistasInvitados()) {
+            for (UsuarioDTO artista : funcion.getArtistasInvitados()) {
                 sentencia = conexion.getConexion().prepareStatement(agregarArtistasFunciones);
                 sentencia.setLong(1, Long.valueOf(newId));
                 sentencia.setLong(2, artista.getId());
@@ -330,21 +331,33 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
     }
     //==================== AlTA DE FUNCION DTO=======================//
-    
+
     //==================== OBTENER FUNCION DTO POR ID ============//
     @Override
-    public FuncionDTO getFuncionDTOPorId(Long idFuncion){
-        try{
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorId);
-        sentencia.setLong(1, idFuncion);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            return funcionMapperDTO(rs);
-        }
-        return null;
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorId);
+            sentencia.setLong(1, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return funcionMapperDTO(rs);
+            }
+            return null;
         } catch (SQLException ex) {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
         }
     }
     //==================== OBTENER FUNCION DTO POR ID ============//
+    @Override
+     public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException {
+        List<UsuarioDTO> artistasInvitados = new ArrayList<>();
+        PreparedStatement sentencia = conexion.getConexion().prepareStatement(artistaInvitadosEnFuncion);
+        sentencia.setLong(1, idFuncion);
+        ResultSet rs = sentencia.executeQuery();
+        while (rs.next()) {
+            UsuarioDTO artistaInvitado = usuarioServicio.getUsuarioDTOPorId(rs.getLong("idUsuario"));
+            artistasInvitados.add(artistaInvitado);
+        }
+        return artistasInvitados;
+    }
 }

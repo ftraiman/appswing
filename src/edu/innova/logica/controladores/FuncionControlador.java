@@ -2,6 +2,7 @@ package edu.innova.logica.controladores;
 
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
 import edu.innova.logica.dtos.FuncionDTO;
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -29,4 +30,5 @@ public interface FuncionControlador { //Interfaz de Funcion
     
     public FuncionDTO getFuncionDTOPorId(Long idFuncion);
 
+    public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException;
 }

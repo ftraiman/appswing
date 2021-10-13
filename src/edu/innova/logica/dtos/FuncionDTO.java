@@ -1,6 +1,5 @@
 package edu.innova.logica.dtos;
 
-import edu.innova.logica.entidades.Artista;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +12,7 @@ public class FuncionDTO {
     private Long idEspectaculo;
     private Date fechaInicio;
     private Date fechaRegistro;
-    private List<Artista> artistasInvitados;
+    private List<UsuarioDTO> artistasInvitados;
     private String imagen;
     //============================ ATRIBUTOS =================================//
 
@@ -21,7 +20,7 @@ public class FuncionDTO {
     public FuncionDTO() {
     }
 
-    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen) {
+    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
@@ -31,7 +30,7 @@ public class FuncionDTO {
         this.imagen = imagen;
     }
     
-    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen) {
+    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -82,11 +81,11 @@ public class FuncionDTO {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public List<Artista> getArtistasInvitados() {
+    public List<UsuarioDTO> getArtistasInvitados() {
         return artistasInvitados;
     }
 
-    public void setArtistasInvitados(List<Artista> artistasInvitados) {
+    public void setArtistasInvitados(List<UsuarioDTO> artistasInvitados) {
         this.artistasInvitados = artistasInvitados;
     }
 

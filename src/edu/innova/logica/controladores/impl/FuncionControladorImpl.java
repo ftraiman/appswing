@@ -6,6 +6,7 @@ import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.dtos.FuncionDTO;
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -166,5 +167,11 @@ public class FuncionControladorImpl implements FuncionControlador {
         return funcionServicio.getFuncionDTOPorId(idFuncion);
     }
     //==================== CONSULTA DE FUNCION DTO=======================//
+
+    @Override
+    public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException {
+        return funcionServicio.getArtistasInvitadosAFuncionDTO(idFuncion);
+    }
+    
     
 }
