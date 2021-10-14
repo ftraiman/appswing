@@ -152,7 +152,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException {
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) {
         return espectaculoServicio.getTodosLosEspectaculosPorArtistaDTO(idArtista);
     }
     

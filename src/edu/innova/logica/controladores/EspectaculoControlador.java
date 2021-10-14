@@ -33,7 +33,7 @@ public interface EspectaculoControlador {
     
     public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
     
-    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException;
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista);
     
     List<CategoriaDTO> getTodasLasCategoriasDTO();
 

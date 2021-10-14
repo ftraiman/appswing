@@ -157,13 +157,18 @@ public class FuncionControladorImpl implements FuncionControlador {
     //==================== AlTA DE FUNCION DTO=======================//
     @Override
     public void altaFuncionDTO(FuncionDTO funcion) {
-        funcionServicio.altaFuncionDTO(funcion);
+        Espectaculo espectaculo = new Espectaculo();
+        espectaculo.setId(funcion.getIdEspectaculo());
+        
+        Funcion nuevaFuncion = new Funcion(funcion.getNombre(), funcion.getIdEspectaculo(), funcion.getFechaInicio(), funcion.getFechaRegistro(),
+                 new ArrayList<>(), funcion.getImagen());
+        this.altaFuncion(nuevaFuncion, espectaculo);
     }
     //==================== AlTA DE FUNCION DTO=======================//
-    
+
     //==================== CONSULTA DE FUNCION DTO=======================//
     @Override
-    public FuncionDTO getFuncionDTOPorId(Long idFuncion){
+    public FuncionDTO getFuncionDTOPorId(Long idFuncion) {
         return funcionServicio.getFuncionDTOPorId(idFuncion);
     }
     //==================== CONSULTA DE FUNCION DTO=======================//
@@ -172,6 +177,5 @@ public class FuncionControladorImpl implements FuncionControlador {
     public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException {
         return funcionServicio.getArtistasInvitadosAFuncionDTO(idFuncion);
     }
-    
-    
+
 }

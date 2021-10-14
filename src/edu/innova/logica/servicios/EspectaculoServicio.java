@@ -30,10 +30,9 @@ public interface EspectaculoServicio {
 
     public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
 
-
     public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo)throws SQLException;
     
-    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException;
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista);
 
     public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
     

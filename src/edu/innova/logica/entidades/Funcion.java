@@ -1,5 +1,6 @@
 package edu.innova.logica.entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,13 +12,13 @@ public class Funcion {
     private Long idEspectaculo;
     private Date fechaInicio;
     private Date fechaRegistro;
-    private List<Artista> artistasInvitados;
+    private List<Artista> artistasInvitados = new ArrayList<>();
     private String imagen;
-    
+
     public Funcion() {
     }
 
-    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre,String imagen) {
+    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre, String imagen) {
         this.id = id;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -27,7 +28,7 @@ public class Funcion {
         this.imagen = imagen;
     }
 
-    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados,String imagen) {
+    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -121,7 +122,5 @@ public class Funcion {
         }
         return true;
     }
-    
-    
 
 }

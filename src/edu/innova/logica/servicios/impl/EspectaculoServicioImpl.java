@@ -292,10 +292,10 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorId);
             sentencia.setLong(1, idEspectaculo);
-            ResultSet rs = sentencia.executeQuery();            
-                while (rs.next()) {
-                    return espectaculoMapperDTO(rs);
-                }
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return espectaculoMapperDTO(rs);
+            }
             return null;
         } catch (SQLException ex) {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
@@ -318,17 +318,20 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //=============== OBTENER ESPECTACULOS POR ID ARTISTA DTO ================//
     @Override
-    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) throws SQLException {
+    public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) {
+        try {
+            List<EspectaculoDTO> espectaculos = new ArrayList<>();
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
+            sentencia.setLong(1, idArtista);
 
-        List<EspectaculoDTO> espectaculos = new ArrayList<>();
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorIdA);
-        sentencia.setLong(1, idArtista);
-
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            espectaculos.add(espectaculoMapperDTO(rs));
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapperDTO(rs));
+            }
+            return espectaculos;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
-        return espectaculos;
     }
     //=============== OBTENER ESPECTACULOS POR ID ARTISTA DTO ================//
 
@@ -357,7 +360,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return new EspectaculoDTO(id, idArtista, nombre, idPlataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, estado, idCategoria, imagen);
     }
     //======================= MAPPER ESPECTACULO DTO =========================//
-    
+
     //==================== AlTA DE ESPECTACULO DTO ===================//
     @Override
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo) {
@@ -387,6 +390,5 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     }
     //==================== AlTA DE ESPECTACULO DTO ===================//
-    
 
 }

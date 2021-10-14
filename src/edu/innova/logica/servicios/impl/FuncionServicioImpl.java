@@ -303,6 +303,7 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //==================== AlTA DE FUNCION DTO=======================//
     @Override
+    @Deprecated
     public void altaFuncionDTO(FuncionDTO funcion) {
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaFunciones, Statement.RETURN_GENERATED_KEYS);
