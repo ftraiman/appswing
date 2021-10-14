@@ -38,4 +38,6 @@ public interface EspectaculoControlador {
     List<CategoriaDTO> getTodasLasCategoriasDTO();
 
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo);
+    
+    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
 }

@@ -1,5 +1,6 @@
 package edu.innova.logica.controladores;
 
+import edu.innova.logica.dtos.PaqueteDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
 import java.sql.SQLException;
@@ -18,5 +19,9 @@ public interface PaqueteControlador {
     public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete);
     
     public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException;
+    
+     public void altaPaqueteDTO(PaqueteDTO paquete);
+     
+     public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos);
     
 }

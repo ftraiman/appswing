@@ -6,6 +6,7 @@ import edu.innova.helpers.HelperStrings;
 import java.math.BigDecimal;
 
 import edu.innova.logica.controladores.PaqueteControlador;
+import edu.innova.logica.dtos.PaqueteDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
 import edu.innova.logica.servicios.PaqueteServicio;
@@ -13,7 +14,7 @@ import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
 
 public class PaqueteControladorImpl implements PaqueteControlador {
 
@@ -98,4 +99,19 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
         return paqueteServicio.getPaquetePorIdEspectaculo(id);
     }
+    
+    //======================== ALTA DE PAQUETE-DTO ===========================//
+    @Override
+    public void altaPaqueteDTO(PaqueteDTO paquete) {
+       Paquete Nuevopaquete = new Paquete(paquete.getNombre(),paquete.getDescripcion(),paquete.getFechaInicio(),paquete.getFechaFin(),paquete.getDescuento(),paquete.getImagen());
+      this.altaPaquete(Nuevopaquete);  
+    }
+    //======================== ALTA DE PAQUETE-DTO ===========================//
+    
+    //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
+    @Override
+    public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos) {
+        this.altaPaqueteEspectaculo(IdPaquete, IDEspectaculos);
+    }
+    //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
 }

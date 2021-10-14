@@ -165,4 +165,10 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
         return new CategoriaDTO(categoria.getId(), categoria.getNombre());
     }
 
+    @Override
+    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria) {
+          return espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
+    }
+
+    
 }

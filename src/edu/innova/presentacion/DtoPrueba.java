@@ -45,6 +45,12 @@ public class DtoPrueba extends javax.swing.JFrame {
 
         jLabel3.setText("pass");
 
+        idEspectaculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idEspectaculoActionPerformed(evt);
+            }
+        });
+
         jButton2.setText("jButton2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,9 +117,26 @@ public class DtoPrueba extends javax.swing.JFrame {
         String email = this.emailtxt.getText();
         String pass = this.passtxt.getText();
         String nickname = this.nicknametxt.getText();
-
-        System.out.println(fabrica.getUsuarioControlador().getUsuarioDto(nickname, email, pass));
-
+        
+        Long a, b;
+        
+        
+        //System.out.println(fabrica.getUsuarioControlador().getUsuarioDto(nickname, email, pass));
+        if("".equals(email)){
+            a = Long.parseLong("0");
+        }else{
+            a = Long.parseLong(email);
+        }
+        
+        if("".equals(pass)){
+            b = Long.parseLong("0");
+        }else{
+            b = Long.parseLong(pass);
+        }
+        
+        System.out.println(fabrica.getEspectaculoControlador().buscarEspectaculosDTO(a, b));
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -128,6 +151,10 @@ public class DtoPrueba extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void idEspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEspectaculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idEspectaculoActionPerformed
 
     public static void main(String args[]) {
 

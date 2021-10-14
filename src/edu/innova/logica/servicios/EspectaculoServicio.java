@@ -37,5 +37,7 @@ public interface EspectaculoServicio {
     public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
     
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
+    
+    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
 
 }

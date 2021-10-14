@@ -38,6 +38,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String aceptarEspectaculo = "UPDATE espectaculos SET estado = 'Aceptado' WHERE espectaculos.id = ?";
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
     private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
+    private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE (E.idCategoria = ? OR E.idPlataforma = ?) OR (E.idCategoria = ? AND E.idPlataforma = ?)";
     //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
@@ -391,4 +392,24 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     }
     //==================== AlTA DE ESPECTACULO DTO ===================//
 
+    //==================== OBTENER ESPECTACULO DTO ============//
+    @Override
+    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria) {
+        try {
+            List<Espectaculo> espectaculos = new ArrayList<>();
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(buscarEspectaculoDTO);
+            sentencia.setLong(1, idCategoria);
+            sentencia.setLong(2, idPlataforma);
+            sentencia.setLong(3, idCategoria);
+            sentencia.setLong(4, idPlataforma);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapper(rs));
+            }
+            return espectaculos;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    //==================== OBTENER ESPECTACULO DTO ============//
 }
