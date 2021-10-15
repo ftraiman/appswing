@@ -29,7 +29,7 @@ public interface EspectaculoControlador {
     
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
     
-    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) throws SQLException;
+    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo);
     
     public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
     

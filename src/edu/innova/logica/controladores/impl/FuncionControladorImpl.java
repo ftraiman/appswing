@@ -7,6 +7,7 @@ import edu.innova.helpers.HelperStrings;
 import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
+import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Funcion;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FuncionControladorImpl implements FuncionControlador {
 
@@ -159,9 +161,13 @@ public class FuncionControladorImpl implements FuncionControlador {
     public void altaFuncionDTO(FuncionDTO funcion) {
         Espectaculo espectaculo = new Espectaculo();
         espectaculo.setId(funcion.getIdEspectaculo());
-        
+        List<Artista> artistasInvitados = funcion.getArtistasInvitados().stream().map(usuarioDto -> {
+            Artista artista = new Artista();
+            artista.setId(usuarioDto.getId());
+            return artista;
+        }).collect(Collectors.toList());
         Funcion nuevaFuncion = new Funcion(funcion.getNombre(), funcion.getIdEspectaculo(), funcion.getFechaInicio(), funcion.getFechaRegistro(),
-                 new ArrayList<>(), funcion.getImagen());
+                artistasInvitados, funcion.getImagen());
         this.altaFuncion(nuevaFuncion, espectaculo);
     }
     //==================== AlTA DE FUNCION DTO=======================//

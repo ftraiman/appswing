@@ -142,7 +142,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     //====================== ALTA ESPECTACULO DTO ============================//
 
     @Override
-    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) throws SQLException{
+    public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo) {
         return espectaculoServicio.getEspectaculoPorIdDTO(idEspectaculo);
     }
 
