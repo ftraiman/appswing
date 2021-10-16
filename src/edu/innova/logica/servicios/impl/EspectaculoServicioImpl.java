@@ -38,7 +38,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String aceptarEspectaculo = "UPDATE espectaculos SET estado = 'Aceptado' WHERE espectaculos.id = ?";
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
     private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
-    private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE (E.idCategoria = ? OR E.idPlataforma = ?) OR (E.idCategoria = ? AND E.idPlataforma = ?)";
+    private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE EXISTS(SELECT * FROM funciones F WHERE ((E.idPlataforma = ? OR E.idCategoria = ?) OR (E.idPlataforma = ? AND E.idCategoria = ?)) AND E.id = F.idEspectaculo AND E.estado = 'Aceptado')";
     //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
