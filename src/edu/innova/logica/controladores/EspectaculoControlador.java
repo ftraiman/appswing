@@ -40,4 +40,6 @@ public interface EspectaculoControlador {
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo);
 
     public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria);
+    
+    List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete);
 }

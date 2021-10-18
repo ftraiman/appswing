@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.UsuarioServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
@@ -42,6 +44,8 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String buscarEspectaculoDTOCategoria = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.estado = 'Aceptado'";
     private final String buscarEspectaculoDTOPlataforma = "SELECT * FROM espectaculos e WHERE e.idPlataforma = ? AND e.estado = 'Aceptado'";
     private final String buscarEspectaculoDTOCategoriaPlataforma = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.idPlataforma = ? AND e.estado = 'Aceptado'";
+    private final String espectaculosNoIncluidosEnPaquete = "SELECT e.* FROM espectaculos e LEFT JOIN paquetes_espectaculos pe on e.id = pe.idEspectaculo WHERE idUsuario = ? AND e.estado = 'aceptado' AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id\n"
+            + "AND pe.idPaquete = ?)";
 
     //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
@@ -319,6 +323,25 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         return espectaculos;
     }
     //===================== OBTENER ESPECTACULOS DTO ==========================//
+
+    @Override
+    public List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete) {
+        List<EspectaculoDTO> espectaculos = new ArrayList<>();
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(espectaculosNoIncluidosEnPaquete);
+            sentencia.setLong(1, idArtista);
+            sentencia.setLong(2, idPaquete);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapperDTO(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+
+        return espectaculos;
+    }
 
     //=============== OBTENER ESPECTACULOS POR ID ARTISTA DTO ================//
     @Override

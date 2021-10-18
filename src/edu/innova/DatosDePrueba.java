@@ -115,6 +115,9 @@ public class DatosDePrueba {
 
 //        List<PaqueteDTO> paquetesDTOPoridUsuario =paqueteControlador.getPaquetesDTOPorIdArtista(Long.valueOf(2));
 //        System.err.println(paquetesDTOPoridUsuario);
+
+//           List<EspectaculoDTO> espectaculos = espectaculoServicio.getEspectaculosDTONoIncluidosEnPaquete(Long.valueOf(2), Long.valueOf(3));
+//           System.err.println(espectaculos);
     }
 
 }

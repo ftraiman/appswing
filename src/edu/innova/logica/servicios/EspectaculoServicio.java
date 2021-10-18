@@ -39,5 +39,7 @@ public interface EspectaculoServicio {
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
     
     public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
+    
+    List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete);
 
 }
