@@ -23,5 +23,7 @@ public interface PaqueteControlador {
      public void altaPaqueteDTO(PaqueteDTO paquete);
      
      public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos);
+     
+     List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista);
     
 }

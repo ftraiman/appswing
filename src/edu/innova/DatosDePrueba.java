@@ -1,21 +1,27 @@
 package edu.innova;
 
 import edu.innova.logica.Constantes;
+import edu.innova.logica.controladores.PaqueteControlador;
 import edu.innova.logica.controladores.UsuarioControlador;
+import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
 import edu.innova.logica.dtos.EspectaculoDTO;
+import edu.innova.logica.dtos.PaqueteDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
+import edu.innova.logica.entidades.Paquete;
 import edu.innova.logica.entidades.Plataforma;
 import edu.innova.logica.servicios.EspectaculoServicio;
+import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
 import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 import java.sql.SQLException;
 import java.util.Date;
 import edu.innova.logica.servicios.UsuarioServicio;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
+import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
 import java.math.BigDecimal;
@@ -29,6 +35,8 @@ public class DatosDePrueba {
         PlataformaServicio plataformaServicio = new PlataformaServicioImpl().getInstance();
         EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
         UsuarioControlador usuarioControlador = new UsuarioControladorImpl().getInstance();
+        PaqueteServicio paqueteServicio = new PaqueteServicioImpl().getInstance();
+        PaqueteControlador paqueteControlador = new PaqueteControladorImpl().getInstance();
 
 //
 //        // Alta artistas 
@@ -101,6 +109,13 @@ public class DatosDePrueba {
 //        Long idCategoria = null;
 //        List<EspectaculoDTO> espectaculos = espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
 //        System.err.println(espectaculos);
+
+//        List<Paquete> paquetesPoridUsuario =paqueteServicio.getPaquetesPorIdArtista(Long.valueOf(2));
+//        System.err.println(paquetesPoridUsuario);
+
+
+        List<PaqueteDTO> paquetesDTOPoridUsuario =paqueteControlador.getPaquetesDTOPorIdArtista(Long.valueOf(2));
+        System.err.println(paquetesDTOPoridUsuario);
     }
 
 }

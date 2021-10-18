@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PaqueteServicioImpl implements PaqueteServicio {
 
@@ -26,9 +28,10 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String todosLosPaquetes = "SELECT * FROM paquetes";
     private final String todosLosPaquetesPorIdEspectaculos = "SELECT * FROM paquetes p, paquetes_espectaculos pe WHERE p.id = pe.idPaquete AND pe.idEspectaculo = ?";
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
-    private final String EspectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
-    //====================== CONSULTAS PARA LA BASE DE DATOS =================//
+    private final String espectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
+    private final String espectaculosPorIdArtista = "SELECT DISTINCT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN espectaculos e on pe.idEspectaculo = e.id WHERE e.idUsuario = ?";
 
+    //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
 
     private ConexionDB conexion = new ConexionDB();
@@ -57,7 +60,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia.setBigDecimal(5, paquete.getDescuento());
             sentencia.setDate(6, new java.sql.Date((new Date()).getTime()));
             sentencia.setString(7, paquete.getImagen());
-            
+
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
             throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", paquete.getNombre()));
@@ -97,6 +100,28 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             paquetes.add((Paquete) paqueteMapper(rs));
         }
 
+        paquetes.forEach(paquete -> paquete.setEspectaculos(getEspectaculosDelPaquete(paquete.getId())));
+
+        return paquetes;
+    }
+
+    @Override
+    public List<Paquete> getPaquetesPorIdArtista(Long idArtista) {
+        List<Paquete> paquetes = new ArrayList<>();
+        PreparedStatement sentencia;
+
+        try {
+            sentencia = conexion.getConexion().prepareStatement(espectaculosPorIdArtista);
+            sentencia.setLong(1, idArtista);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                paquetes.add((Paquete) paqueteMapper(rs));
+            }
+
+            paquetes.forEach(paquete -> paquete.setEspectaculos(getEspectaculosDelPaquete(paquete.getId())));
+        } catch (SQLException ex) {
+            Logger.getLogger(PaqueteServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return paquetes;
     }
 
@@ -106,7 +131,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         Date fechaFin = rs.getTimestamp("fechaFin");
         List<Espectaculo> espectaculosDelPaquete = getEspectaculosDelPaquete(rs.getLong("id"));
         String imagen = rs.getString("imagen");
-        return new Paquete(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), fechaInicio, fechaFin, descuento, espectaculosDelPaquete,imagen);
+        return new Paquete(rs.getLong("id"), rs.getString("nombre"), rs.getString("descripcion"), fechaInicio, fechaFin, descuento, espectaculosDelPaquete, imagen);
     }
 
     private List<Espectaculo> getEspectaculosDelPaquete(Long idPaquete) {
@@ -123,12 +148,12 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         }
         return espectaculos;
     }
-    
-    
-  public List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete , Long idPlataforma) {
+
+    @Override
+    public List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete, Long idPlataforma) {
         List<Espectaculo> espectaculos = new ArrayList<>();
         try {
-            PreparedStatement sentencia = conexion.getConexion().prepareStatement(EspectaculosDeNOPaquetes);
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculosDeNOPaquetes);
             sentencia.setLong(1, idPlataforma);
             sentencia.setLong(2, idPaquete);
             ResultSet rs = sentencia.executeQuery();
@@ -143,7 +168,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
 
     @Override
     public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
-         List<Paquete> paquetes = new ArrayList<>();
+        List<Paquete> paquetes = new ArrayList<>();
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosPaquetesPorIdEspectaculos);
             sentencia.setLong(1, id);
@@ -158,4 +183,3 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         return paquetes;
     }
 }
-

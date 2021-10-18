@@ -6,6 +6,8 @@ import edu.innova.helpers.HelperStrings;
 import java.math.BigDecimal;
 
 import edu.innova.logica.controladores.PaqueteControlador;
+import edu.innova.logica.dtos.EspectaculoDTO;
+import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.dtos.PaqueteDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
@@ -14,7 +16,7 @@ import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 public class PaqueteControladorImpl implements PaqueteControlador {
 
@@ -99,15 +101,32 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
         return paqueteServicio.getPaquetePorIdEspectaculo(id);
     }
-    
+
     //======================== ALTA DE PAQUETE-DTO ===========================//
     @Override
     public void altaPaqueteDTO(PaqueteDTO paquete) {
-       Paquete Nuevopaquete = new Paquete(paquete.getNombre(),paquete.getDescripcion(),paquete.getFechaInicio(),paquete.getFechaFin(),paquete.getDescuento(),paquete.getImagen());
-      this.altaPaquete(Nuevopaquete);  
+        Paquete Nuevopaquete = new Paquete(paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(), paquete.getDescuento(), paquete.getImagen());
+        this.altaPaquete(Nuevopaquete);
+    }
+    
+    @Override
+    public List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista) {
+        List<Paquete> paquetesDeArtista = paqueteServicio.getPaquetesPorIdArtista(idArtista);
+        return paquetesDeArtista.stream().map(this::paqueteDtoMapper).collect(Collectors.toList());
+    }
+    
+    private PaqueteDTO paqueteDtoMapper(Paquete paquete) {
+        List<EspectaculoDTO> espectaculos = paquete.getEspectaculos()
+                .stream()
+                .map(e ->  new EspectaculoDTO(e.getId(), e.getArtista().getId(), e.getNombre(), e.getPlataforma().getId(), e.getDescripcion(), e.getDuracion(),
+                        e.getEspectadoresMinimos(), e.getEspectadoresMaximos(), e.getUrl(), e.getCosto(), e.getFechaRegistro(), new ArrayList<FuncionDTO>(), e.getEstado(),
+                        e.getIdCategoria(), e.getImagen())).collect(Collectors.toList());
+        PaqueteDTO paqueteDTO = new PaqueteDTO(paquete.getId(), paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(),
+                paquete.getDescuento(), espectaculos, paquete.getImagen());
+        return paqueteDTO;
     }
     //======================== ALTA DE PAQUETE-DTO ===========================//
-    
+
     //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
     @Override
     public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos) {
