@@ -166,9 +166,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria) {
+    public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria) {
           return espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
-    }
-
-    
+    }    
 }

@@ -39,9 +39,12 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
     private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
     private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE EXISTS(SELECT * FROM funciones F WHERE ((E.idPlataforma = ? OR E.idCategoria = ?) OR (E.idPlataforma = ? AND E.idCategoria = ?)) AND E.id = F.idEspectaculo AND E.estado = 'Aceptado')";
+    private final String buscarEspectaculoDTOCategoria = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.estado = 'Aceptado'";
+    private final String buscarEspectaculoDTOPlataforma = "SELECT * FROM espectaculos e WHERE e.idPlataforma = ? AND e.estado = 'Aceptado'";
+    private final String buscarEspectaculoDTOCategoriaPlataforma = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.idPlataforma = ? AND e.estado = 'Aceptado'";
+
     //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-
     //INSTANCIA DE LA CLASE
     private static EspectaculoServicioImpl servicio;
 
@@ -394,17 +397,27 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //==================== OBTENER ESPECTACULO DTO ============//
     @Override
-    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria) {
+    public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria) {
         try {
-            List<Espectaculo> espectaculos = new ArrayList<>();
-            PreparedStatement sentencia = conexion.getConexion().prepareStatement(buscarEspectaculoDTO);
-            sentencia.setLong(1, idCategoria);
-            sentencia.setLong(2, idPlataforma);
-            sentencia.setLong(3, idCategoria);
-            sentencia.setLong(4, idPlataforma);
-            ResultSet rs = sentencia.executeQuery();
-            while (rs.next()) {
-                espectaculos.add(espectaculoMapper(rs));
+            List<EspectaculoDTO> espectaculos = new ArrayList<>();
+
+            PreparedStatement sentencia = null;
+            if (idPlataforma != null && idCategoria != null) {
+                sentencia = conexion.getConexion().prepareStatement(buscarEspectaculoDTOCategoriaPlataforma);
+                sentencia.setLong(1, idCategoria);
+                sentencia.setLong(2, idPlataforma);
+            } else if (idPlataforma != null && idCategoria == null) {
+                sentencia = conexion.getConexion().prepareStatement(buscarEspectaculoDTOPlataforma);
+                sentencia.setLong(1, idPlataforma);
+            } else if (idPlataforma == null && idCategoria != null) {
+                sentencia = conexion.getConexion().prepareStatement(buscarEspectaculoDTOCategoria);
+                sentencia.setLong(1, idCategoria);
+            }
+            if (sentencia != null) {
+                ResultSet rs = sentencia.executeQuery();
+                while (rs.next()) {
+                    espectaculos.add(espectaculoMapperDTO(rs));
+                }
             }
             return espectaculos;
         } catch (SQLException ex) {

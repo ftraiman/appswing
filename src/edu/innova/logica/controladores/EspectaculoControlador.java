@@ -26,18 +26,18 @@ public interface EspectaculoControlador {
     public void rechazarEspectaculo(Long id) throws SQLException;
 
     public List<Categoria> getCategoriaPorIdEspectaculo(Long idEspectaculo) throws SQLException;
-    
+
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
-    
+
     public EspectaculoDTO getEspectaculoPorIdDTO(Long idEspectaculo);
-    
+
     public List<EspectaculoDTO> getTodosLosEspectaculosDTO() throws SQLException;
-    
+
     public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista);
-    
+
     List<CategoriaDTO> getTodasLasCategoriasDTO();
 
     public void AltaEspectaculoDTO(EspectaculoDTO espectaculo);
-    
-    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
+
+    public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria);
 }

@@ -3,6 +3,7 @@ package edu.innova;
 import edu.innova.logica.Constantes;
 import edu.innova.logica.controladores.UsuarioControlador;
 import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
+import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectaculo;
@@ -18,6 +19,7 @@ import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class DatosDePrueba {
 
@@ -93,9 +95,12 @@ public class DatosDePrueba {
 //        usuarioControlador.dejarDeSeguir(Long.valueOf(1), Long.valueOf(2));
 //        System.err.print(usuarioControlador.usuariosQueSigue(Long.valueOf(1)));
 //        System.err.println(usuarioControlador.getTodosLosUsuarioDTO());
-
 //        System.err.println(usuarioControlador.getUsuarioDTOPorId(Long.valueOf(16)));
-
+//        Long idPlataforma = Long.valueOf(2);
+//        Long idPlataforma = Long.valueOf(1);
+//        Long idCategoria = null;
+//        List<EspectaculoDTO> espectaculos = espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
+//        System.err.println(espectaculos);
     }
 
 }

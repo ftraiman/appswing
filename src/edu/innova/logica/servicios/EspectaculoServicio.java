@@ -38,6 +38,6 @@ public interface EspectaculoServicio {
     
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo);
     
-    public List<Espectaculo> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
+    public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma,Long idCategoria);
 
 }
