@@ -18,12 +18,14 @@ public interface PaqueteControlador {
 
     public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete);
     
-    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException;
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id);
     
      public void altaPaqueteDTO(PaqueteDTO paquete);
      
      public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos);
      
      List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista);
+     
+     PaqueteDTO getPaqueteDTOporId(Long idPaquete);
     
 }

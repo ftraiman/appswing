@@ -98,7 +98,7 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     }
      */
     @Override
-    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id) {
         return paqueteServicio.getPaquetePorIdEspectaculo(id);
     }
 
@@ -113,6 +113,11 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista) {
         List<Paquete> paquetesDeArtista = paqueteServicio.getPaquetesPorIdArtista(idArtista);
         return paquetesDeArtista.stream().map(this::paqueteDtoMapper).collect(Collectors.toList());
+    }
+    
+    @Override
+    public PaqueteDTO getPaqueteDTOporId(Long idPaquete) {
+        return paqueteDtoMapper(paqueteServicio.getPaquetesPorId(idPaquete));
     }
     
     private PaqueteDTO paqueteDtoMapper(Paquete paquete) {

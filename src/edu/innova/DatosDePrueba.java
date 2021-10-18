@@ -96,7 +96,7 @@ public class DatosDePrueba {
 //        UsuarioDTO artistaWeb    = new UsuarioDTO(null, Constantes.ARTISTA, "elvis", "Elvis", "Presley", "elvis@fenomeno.com", new Date(), "El rey del rock", "Una gran biografia", "https://es.wikipedia.org/wiki/Elvis_Presley", "clave", "elvis.jpg");
 //        usuarioControlador.crearUsuarioDTO(espectadorWeb);
 //        usuarioControlador.crearUsuarioDTO(artistaWeb);
-//            usuarioControlador.seguirUsuario(Long.valueOf(1), Long.valueOf(2));
+//        usuarioControlador.seguirUsuario(Long.valueOf(1), Long.valueOf(2));
 //        usuarioControlador.seguirUsuario(Long.valueOf(1), Long.valueOf(2));
 //        System.err.print(usuarioControlador.usuariosQueSigue(Long.valueOf(1)));
 //        System.err.print(usuarioControlador.usuariosQueLoSiguen(Long.valueOf(2)));
@@ -113,9 +113,8 @@ public class DatosDePrueba {
 //        List<Paquete> paquetesPoridUsuario =paqueteServicio.getPaquetesPorIdArtista(Long.valueOf(2));
 //        System.err.println(paquetesPoridUsuario);
 
-
-        List<PaqueteDTO> paquetesDTOPoridUsuario =paqueteControlador.getPaquetesDTOPorIdArtista(Long.valueOf(2));
-        System.err.println(paquetesDTOPoridUsuario);
+//        List<PaqueteDTO> paquetesDTOPoridUsuario =paqueteControlador.getPaquetesDTOPorIdArtista(Long.valueOf(2));
+//        System.err.println(paquetesDTOPoridUsuario);
     }
 
 }

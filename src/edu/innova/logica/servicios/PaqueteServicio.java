@@ -15,7 +15,9 @@ public interface PaqueteServicio {
     
     List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete , Long idPlataforma);
      
-    List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException;
+    List<Paquete> getPaquetePorIdEspectaculo(Long id);
     
     List<Paquete> getPaquetesPorIdArtista(Long idArtista);
+    
+    Paquete getPaquetesPorId(Long idPaquete);
 }

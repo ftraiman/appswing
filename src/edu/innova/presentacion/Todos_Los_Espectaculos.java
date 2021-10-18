@@ -304,8 +304,6 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             this.TPaquete.setModel(tabla);
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Espectaculo No posee Ningun Paquete Asociado!![%s]", x.getMessage()));
-        } catch (SQLException ex) {
-            Logger.getLogger(Todos_Los_Espectadores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // TODO add your handling code here:

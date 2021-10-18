@@ -30,7 +30,8 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
     private final String espectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
     private final String espectaculosPorIdArtista = "SELECT DISTINCT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN espectaculos e on pe.idEspectaculo = e.id WHERE e.idUsuario = ?";
-
+    private final String paquetePorIdPaquete = "SELECT * FROM paquetes WHERE id = ?";
+    
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
 
@@ -124,6 +125,23 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         }
         return paquetes;
     }
+    
+    
+    @Override
+    public Paquete getPaquetesPorId(Long idPaquete) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(paquetePorIdPaquete);
+            sentencia.setLong(1, idPaquete);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return paqueteMapper(rs);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PaqueteServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     private Paquete paqueteMapper(ResultSet rs) throws SQLException {
         Date fechaInicio = rs.getTimestamp("fechaInicio");
@@ -167,7 +185,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     }
 
     @Override
-    public List<Paquete> getPaquetePorIdEspectaculo(Long id) throws SQLException {
+    public List<Paquete> getPaquetePorIdEspectaculo(Long id) {
         List<Paquete> paquetes = new ArrayList<>();
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosPaquetesPorIdEspectaculos);
