@@ -10,7 +10,7 @@ public interface PaqueteControlador {
     
     void altaPaquete(Paquete paquete);
 
-    void altaPaqueteEspectaculo(Long IdPaquete, Long IDEspectaculos);
+    void altaPaqueteEspectaculo(Long idPaquete, Long idEspectaculo);
     
     //List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas,Paquete paquetes);
 
@@ -22,7 +22,7 @@ public interface PaqueteControlador {
     
      public void altaPaqueteDTO(PaqueteDTO paquete);
      
-     public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos);
+     public void altaPaqueteDTOEspectaculo(Long idPaquete, Long iDEspectaculo);
      
      List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista);
      
