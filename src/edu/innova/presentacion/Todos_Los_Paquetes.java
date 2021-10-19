@@ -197,36 +197,32 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TablaEspectaculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaEspectaculosMouseClicked
-        try {
 
-            int indiceSeleccionado = TablaEspectaculos.rowAtPoint(evt.getPoint());
-            String nombrePaquete = String.valueOf(TablaEspectaculos.getValueAt(indiceSeleccionado, 0));
-            Paquete paqueteSeleccionado = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().stream().filter(paquete -> nombrePaquete.equalsIgnoreCase(paquete.getNombre())).findFirst().get();
+        int indiceSeleccionado = TablaEspectaculos.rowAtPoint(evt.getPoint());
+        String nombrePaquete = String.valueOf(TablaEspectaculos.getValueAt(indiceSeleccionado, 0));
+        Paquete paqueteSeleccionado = fabrica.getPaqueteServicioImpl().getTodosLosPaquetes().stream().filter(paquete -> nombrePaquete.equalsIgnoreCase(paquete.getNombre())).findFirst().get();
 
-            DefaultTableModel tablaEspectaculosModel = new DefaultTableModel();
-            tablaEspectaculosModel.addColumn("Id");
-            tablaEspectaculosModel.addColumn("Nombre");
-            tablaEspectaculosModel.addColumn("Artista");
-            tablaEspectaculosModel.addColumn("Precio");
-            tablaEspectaculosModel.addColumn("Categoria");
-            tablaEspectaculosModel.addColumn("Estado");
+        DefaultTableModel tablaEspectaculosModel = new DefaultTableModel();
+        tablaEspectaculosModel.addColumn("Id");
+        tablaEspectaculosModel.addColumn("Nombre");
+        tablaEspectaculosModel.addColumn("Artista");
+        tablaEspectaculosModel.addColumn("Precio");
+        tablaEspectaculosModel.addColumn("Categoria");
+        tablaEspectaculosModel.addColumn("Estado");
 
-            String fila[] = new String[6];
-            paqueteSeleccionado.getEspectaculos().stream().forEach(espectaculo -> {
-                fila[0] = espectaculo.getId().toString();
-                fila[1] = espectaculo.getNombre();
-                fila[2] = espectaculo.getArtista().toString();
-                fila[3] = espectaculo.getCosto().toString();
-                fila[4] = espectaculo.getIdCategoria().toString();
-                fila[5] = espectaculo.getEstado();
-                
-                tablaEspectaculosModel.addRow(fila);
-            });
-            TablaEspectaculosDelPaquete.setModel(tablaEspectaculosModel);
+        String fila[] = new String[6];
+        paqueteSeleccionado.getEspectaculos().stream().forEach(espectaculo -> {
+            fila[0] = espectaculo.getId().toString();
+            fila[1] = espectaculo.getNombre();
+            fila[2] = espectaculo.getArtista().toString();
+            fila[3] = espectaculo.getCosto().toString();
+            fila[4] = espectaculo.getIdCategoria().toString();
+            fila[5] = espectaculo.getEstado();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(Todos_Los_Paquetes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            tablaEspectaculosModel.addRow(fila);
+        });
+        TablaEspectaculosDelPaquete.setModel(tablaEspectaculosModel);
+
     }//GEN-LAST:event_TablaEspectaculosMouseClicked
 
     private void TablaEspectaculosDelPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaEspectaculosDelPaqueteMouseClicked
@@ -259,11 +255,11 @@ public class Todos_Los_Paquetes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TablaEspectaculosDelPaqueteMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Registrar_Paquete rp = new  Registrar_Paquete();
-            GUI_Proyecto.Panel.add(rp);
-            rp.toFront();
-            rp.setVisible(true);
-            this.dispose();
+        Registrar_Paquete rp = new Registrar_Paquete();
+        GUI_Proyecto.Panel.add(rp);
+        rp.toFront();
+        rp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

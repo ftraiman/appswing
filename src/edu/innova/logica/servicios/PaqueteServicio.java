@@ -11,7 +11,7 @@ public interface PaqueteServicio {
     
     void agregarEspectaculoAlPaquete(Long idEspectaculo, Long idPaquete);
     
-    List<Paquete> getTodosLosPaquetes() throws SQLException;
+    List<Paquete> getTodosLosPaquetes();
     
     List<Espectaculo> getEspectaculosNOPaquete(Long idPaquete , Long idPlataforma);
      

@@ -7,25 +7,28 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface PaqueteControlador {
-    
+
     void altaPaquete(Paquete paquete);
 
     void altaPaqueteEspectaculo(Long idPaquete, Long idEspectaculo);
-    
+
     //List<Espectaculo> getEspectaculoNOPaquete(Plataforma plataformas,Paquete paquetes);
+    List<Paquete> getTodosLosPaquetes() throws SQLException;
 
-    public List<Paquete> getTodosLosPaquetes() throws SQLException ;
+    List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete);
 
-    public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete);
+    List<Paquete> getPaquetePorIdEspectaculo(Long id);
+
+    void altaPaqueteDTO(PaqueteDTO paquete);
+
+    void altaPaqueteDTOEspectaculo(Long idPaquete, Long iDEspectaculo);
+
+    List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista);
+
+    PaqueteDTO getPaqueteDTOporId(Long idPaquete);
     
-    public List<Paquete> getPaquetePorIdEspectaculo(Long id);
+    List<PaqueteDTO> getPaqueteDTOPorIdEspectaculo(Long idEspectaculo);
     
-     public void altaPaqueteDTO(PaqueteDTO paquete);
-     
-     public void altaPaqueteDTOEspectaculo(Long idPaquete, Long iDEspectaculo);
-     
-     List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista);
-     
-     PaqueteDTO getPaqueteDTOporId(Long idPaquete);
-    
+    List<PaqueteDTO> getTodosLosPaquetesDTO();
+
 }

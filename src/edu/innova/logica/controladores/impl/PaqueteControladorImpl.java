@@ -63,11 +63,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public List<Espectaculo> getEspectaculoNOPaquete(Long idPlataforma, Long idPaquete) {
         if (idPlataforma != null && idPaquete != null) {
             return paqueteServicio.getEspectaculosNOPaquete(idPaquete, idPlataforma);
-
         } else {
             return new ArrayList<Espectaculo>();
         }
-
     }
 
     //Retorna una lista de todos los Paquetes
@@ -75,6 +73,18 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public List<Paquete> getTodosLosPaquetes() throws SQLException {
         try {
             return paqueteServicio.getTodosLosPaquetes();
+        } catch (BaseDeDatosException ex) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
+        }
+    }
+
+    @Override
+    public List<PaqueteDTO> getTodosLosPaquetesDTO() {
+        try {
+            return paqueteServicio.getTodosLosPaquetes()
+                    .stream()
+                    .map(this::paqueteDtoMapper)
+                    .collect(Collectors.toList());
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error en base de datos [%s]", ex.getMessage()));
         }
@@ -102,30 +112,38 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         return paqueteServicio.getPaquetePorIdEspectaculo(id);
     }
 
+    @Override
+    public List<PaqueteDTO> getPaqueteDTOPorIdEspectaculo(Long idEspectaculo) {
+        return paqueteServicio.getPaquetePorIdEspectaculo(idEspectaculo)
+                .stream()
+                .map(this::paqueteDtoMapper)
+                .collect(Collectors.toList());
+    }
+
     //======================== ALTA DE PAQUETE-DTO ===========================//
     @Override
     public void altaPaqueteDTO(PaqueteDTO paquete) {
         Paquete Nuevopaquete = new Paquete(paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(), paquete.getDescuento(), paquete.getImagen());
         this.altaPaquete(Nuevopaquete);
     }
-    
+
     @Override
     public List<PaqueteDTO> getPaquetesDTOPorIdArtista(Long idArtista) {
         List<Paquete> paquetesDeArtista = paqueteServicio.getPaquetesPorIdArtista(idArtista);
         return paquetesDeArtista.stream().map(this::paqueteDtoMapper).collect(Collectors.toList());
     }
-    
+
     @Override
     public PaqueteDTO getPaqueteDTOporId(Long idPaquete) {
         return paqueteDtoMapper(paqueteServicio.getPaquetesPorId(idPaquete));
     }
-    
+
     private PaqueteDTO paqueteDtoMapper(Paquete paquete) {
         List<EspectaculoDTO> espectaculos = paquete.getEspectaculos()
                 .stream()
-                .map(e ->  new EspectaculoDTO(e.getId(), e.getArtista().getId(), e.getNombre(), e.getPlataforma().getId(), e.getDescripcion(), e.getDuracion(),
-                        e.getEspectadoresMinimos(), e.getEspectadoresMaximos(), e.getUrl(), e.getCosto(), e.getFechaRegistro(), new ArrayList<FuncionDTO>(), e.getEstado(),
-                        e.getIdCategoria(), e.getImagen())).collect(Collectors.toList());
+                .map(e -> new EspectaculoDTO(e.getId(), e.getArtista().getId(), e.getNombre(), e.getPlataforma().getId(), e.getDescripcion(), e.getDuracion(),
+                e.getEspectadoresMinimos(), e.getEspectadoresMaximos(), e.getUrl(), e.getCosto(), e.getFechaRegistro(), new ArrayList<FuncionDTO>(), e.getEstado(),
+                e.getIdCategoria(), e.getImagen())).collect(Collectors.toList());
         PaqueteDTO paqueteDTO = new PaqueteDTO(paquete.getId(), paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(),
                 paquete.getDescuento(), espectaculos, paquete.getImagen());
         return paqueteDTO;
@@ -134,8 +152,8 @@ public class PaqueteControladorImpl implements PaqueteControlador {
 
     //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
     @Override
-    public void altaPaqueteDTOEspectaculo(Long IdPaquete, Long IDEspectaculos) {
-        this.altaPaqueteEspectaculo(IdPaquete, IDEspectaculos);
+    public void altaPaqueteDTOEspectaculo(Long idPaquete, Long idEspectaculo) {
+        this.altaPaqueteEspectaculo(idPaquete, idEspectaculo);
     }
     //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
 }
