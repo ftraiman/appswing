@@ -31,6 +31,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String espectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
     private final String espectaculosPorIdArtista = "SELECT DISTINCT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN espectaculos e on pe.idEspectaculo = e.id WHERE e.idUsuario = ?";
     private final String paquetePorIdPaquete = "SELECT * FROM paquetes WHERE id = ?";
+    private final String altaUsuarioEnPaquete = "INSERT INTO paquetes_usuarios (idUsuario, idPaquete, fechaRegistro) VALUES (?, ?, NOW())";
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
@@ -191,11 +192,24 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 paquetes.add((Paquete) paqueteMapper(rs));
-
             }
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
         return paquetes;
+    }
+    
+    @Override
+    public void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(altaUsuarioEnPaquete);
+            sentencia.setLong(1, idUsuario);
+            sentencia.setLong(2, idPaquete);
+            sentencia.executeUpdate();
+        } catch (MysqlDataTruncation ex) {
+            throw new InnovaModelException("Ya existe el Espectáculo en el Paquete");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
     }
 }

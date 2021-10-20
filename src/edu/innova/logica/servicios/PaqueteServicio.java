@@ -2,7 +2,6 @@ package edu.innova.logica.servicios;
 
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Paquete;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface PaqueteServicio {
@@ -20,4 +19,6 @@ public interface PaqueteServicio {
     List<Paquete> getPaquetesPorIdArtista(Long idArtista);
     
     Paquete getPaquetesPorId(Long idPaquete);
+    
+    void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
 }

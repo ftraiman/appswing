@@ -156,4 +156,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         this.altaPaqueteEspectaculo(idPaquete, idEspectaculo);
     }
     //======================== ALTA DE PAQUETE-ESPECTACULO DTO ===================//
+
+    @Override
+    public void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete) {
+        paqueteServicio.altaUsuarioEnPaquete(idUsuario, idPaquete);
+    }
 }

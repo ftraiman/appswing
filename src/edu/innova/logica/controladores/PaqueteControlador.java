@@ -30,5 +30,7 @@ public interface PaqueteControlador {
     List<PaqueteDTO> getPaqueteDTOPorIdEspectaculo(Long idEspectaculo);
     
     List<PaqueteDTO> getTodosLosPaquetesDTO();
+    
+    void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
 
 }
