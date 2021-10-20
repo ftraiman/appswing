@@ -139,6 +139,18 @@ create table espectadores_funciones
 )
 charset=utf8mb4;
 
+create table paquetes_artistas
+(
+	idArtista int null,
+	idPaquete int null,
+	constraint paquetes_artistas_pk
+		unique (idArtista, idPaquete),
+	constraint paquetes_artistas_paquetes_id_fk
+		foreign key (idPaquete) references paquetes (id),
+	constraint paquetes_artistas_usuarios_id_fk
+		foreign key (idArtista) references usuarios (id)
+);
+
 create table paquetes_espectaculos
 (
 	idEspectaculo int null,
@@ -155,8 +167,9 @@ charset=utf8mb4;
 create table paquetes_usuarios
 (
 	fechaRegistro datetime null,
-	idPaquete int null,
-	idUsuario int null,
+	idPaquete int not null,
+	idUsuario int not null,
+	primary key (idUsuario, idPaquete),
 	constraint paquetes_espectadores_paquetes_id_fk
 		foreign key (idPaquete) references paquetes (id),
 	constraint paquetes_espectadores_usuarios_id_fk
