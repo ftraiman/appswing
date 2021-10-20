@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PaqueteControlador {
 
-    void altaPaquete(Paquete paquete);
+    Long altaPaquete(Paquete paquete);
 
     void altaPaqueteEspectaculo(Long idPaquete, Long idEspectaculo);
 
@@ -19,7 +19,7 @@ public interface PaqueteControlador {
 
     List<Paquete> getPaquetePorIdEspectaculo(Long id);
 
-    void altaPaqueteDTO(PaqueteDTO paquete);
+    void altaPaqueteDTO(PaqueteDTO paquete, Long idArtista);
 
     void altaPaqueteDTOEspectaculo(Long idPaquete, Long iDEspectaculo);
 
@@ -34,5 +34,7 @@ public interface PaqueteControlador {
     void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
 
     List<PaqueteDTO> getPaquetesContratadosPorIdUsuario(Long idUsuario);
+    
+    void altaPaqueteArtista(Long idPaquete, Long idArtista);
     
 }

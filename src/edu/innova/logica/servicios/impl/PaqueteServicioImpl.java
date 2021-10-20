@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import edu.innova.logica.servicios.PaqueteServicio;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String paquetePorIdPaquete = "SELECT * FROM paquetes WHERE id = ?";
     private final String altaUsuarioEnPaquete = "INSERT INTO paquetes_usuarios (idUsuario, idPaquete, fechaRegistro) VALUES (?, ?, NOW())";
     private final String paquetesCompradosPorUsuario = "SELECT p.* FROM paquetes p JOIN paquetes_usuarios pu on p.id = pu.idPaquete WHERE pu.idUsuario = ?";
-
+    private final String paqueteArtista = "INSERT INTO paquetes_artistas (idArtista, idPaquete) VALUES (?, ?)";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
 
@@ -52,10 +53,10 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     }
 
     @Override
-    public void altaPaquete(Paquete paquete) {
+    public Long altaPaquete(Paquete paquete) {
         PreparedStatement sentencia;
         try {
-            sentencia = conexion.getConexion().prepareStatement(altaPaquete);
+            sentencia = conexion.getConexion().prepareStatement(altaPaquete, Statement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, paquete.getNombre());
             sentencia.setString(2, paquete.getDescripcion());
             sentencia.setDate(3, new java.sql.Date(paquete.getFechaInicio().getTime()));
@@ -63,10 +64,28 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia.setBigDecimal(5, paquete.getDescuento());
             sentencia.setDate(6, new java.sql.Date((new Date()).getTime()));
             sentencia.setString(7, paquete.getImagen());
-
             sentencia.executeUpdate();
+            
+            ResultSet rs = sentencia.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
         } catch (MySQLIntegrityConstraintViolationException ex) {
             throw new InnovaModelException(String.format("Ya existe un espectaculo con el nombre [%s]", paquete.getNombre()));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return null;
+    }
+    
+    @Override
+    public void altaPaqueteArtista(Long idPaquete, Long idArtista) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(paqueteArtista);
+            sentencia.setLong(1, idPaquete);
+            sentencia.setLong(2, idArtista);
+            sentencia.executeUpdate();
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
@@ -126,7 +145,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         }
         return paquetes;
     }
-    
+
     @Override
     public List<Paquete> getPaquetesContratadosPorIdUsuario(Long idUsuario) {
         List<Paquete> paquetes = new ArrayList<>();
@@ -217,7 +236,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         }
         return paquetes;
     }
-    
+
     @Override
     public void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete) {
         try {

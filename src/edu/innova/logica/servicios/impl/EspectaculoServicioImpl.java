@@ -23,8 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.UsuarioServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 

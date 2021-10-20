@@ -32,10 +32,10 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     }
 
     @Override
-    public void altaPaquete(Paquete paquete) {
+    public Long altaPaquete(Paquete paquete) {
         try {
             validarNuevoPaquete(paquete);
-            paqueteServicio.altaPaquete(paquete);
+            return paqueteServicio.altaPaquete(paquete);
 
         } catch (BaseDeDatosException ex) {
             throw new InnovaModelException(String.format("Error SQL [%s]", ex.getMessage()));
@@ -130,9 +130,10 @@ public class PaqueteControladorImpl implements PaqueteControlador {
 
     //======================== ALTA DE PAQUETE-DTO ===========================//
     @Override
-    public void altaPaqueteDTO(PaqueteDTO paquete) {
-        Paquete Nuevopaquete = new Paquete(paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(), paquete.getDescuento(), paquete.getImagen());
-        this.altaPaquete(Nuevopaquete);
+    public void altaPaqueteDTO(PaqueteDTO paquete, Long idArtista) {
+        Paquete nuevopaquete = new Paquete(paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(), paquete.getDescuento(), paquete.getImagen());
+        Long idPaquete = this.altaPaquete(nuevopaquete);
+        altaPaqueteArtista(idPaquete, idArtista);
     }
 
     @Override
@@ -170,5 +171,9 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         paqueteServicio.altaUsuarioEnPaquete(idUsuario, idPaquete);
     }
 
+    @Override
+    public void altaPaqueteArtista(Long idPaquete, Long idArtista) {
+        paqueteServicio.altaPaqueteArtista(idPaquete, idArtista);
+    }
 
 }
