@@ -208,6 +208,8 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             sentencia.executeUpdate();
         } catch (MysqlDataTruncation ex) {
             throw new InnovaModelException("Ya existe el Espectáculo en el Paquete");
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya dispone del paquete");
         } catch (SQLException ex) {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
