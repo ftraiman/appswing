@@ -32,6 +32,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String espectaculosPorIdArtista = "SELECT DISTINCT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN espectaculos e on pe.idEspectaculo = e.id WHERE e.idUsuario = ?";
     private final String paquetePorIdPaquete = "SELECT * FROM paquetes WHERE id = ?";
     private final String altaUsuarioEnPaquete = "INSERT INTO paquetes_usuarios (idUsuario, idPaquete, fechaRegistro) VALUES (?, ?, NOW())";
+    private final String paquetesCompradosPorUsuario = "SELECT p.* FROM paquetes p JOIN paquetes_usuarios pu on p.id = pu.idPaquete WHERE pu.idUsuario = ?";
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
@@ -115,6 +116,24 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         try {
             sentencia = conexion.getConexion().prepareStatement(espectaculosPorIdArtista);
             sentencia.setLong(1, idArtista);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                paquetes.add((Paquete) paqueteMapper(rs));
+            }
+            paquetes.forEach(paquete -> paquete.setEspectaculos(getEspectaculosDelPaquete(paquete.getId())));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return paquetes;
+    }
+    
+    @Override
+    public List<Paquete> getPaquetesContratadosPorIdUsuario(Long idUsuario) {
+        List<Paquete> paquetes = new ArrayList<>();
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(paquetesCompradosPorUsuario);
+            sentencia.setLong(1, idUsuario);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
                 paquetes.add((Paquete) paqueteMapper(rs));

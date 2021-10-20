@@ -21,4 +21,6 @@ public interface PaqueteServicio {
     Paquete getPaquetesPorId(Long idPaquete);
     
     void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
+    
+    List<Paquete> getPaquetesContratadosPorIdUsuario(Long idUsuario);
 }

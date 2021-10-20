@@ -119,6 +119,14 @@ public class PaqueteControladorImpl implements PaqueteControlador {
                 .map(this::paqueteDtoMapper)
                 .collect(Collectors.toList());
     }
+    
+    @Override
+    public List<PaqueteDTO> getPaquetesContratadosPorIdUsuario(Long idUsuario) {
+        return paqueteServicio.getPaquetesContratadosPorIdUsuario(idUsuario)
+                .stream()
+                .map(this::paqueteDtoMapper)
+                .collect(Collectors.toList());
+    }
 
     //======================== ALTA DE PAQUETE-DTO ===========================//
     @Override
@@ -161,4 +169,6 @@ public class PaqueteControladorImpl implements PaqueteControlador {
     public void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete) {
         paqueteServicio.altaUsuarioEnPaquete(idUsuario, idPaquete);
     }
+
+
 }

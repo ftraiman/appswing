@@ -33,4 +33,6 @@ public interface PaqueteControlador {
     
     void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
 
+    List<PaqueteDTO> getPaquetesContratadosPorIdUsuario(Long idUsuario);
+    
 }
