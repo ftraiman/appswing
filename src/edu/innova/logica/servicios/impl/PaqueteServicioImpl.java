@@ -30,11 +30,11 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String todosLosPaquetesPorIdEspectaculos = "SELECT * FROM paquetes p, paquetes_espectaculos pe WHERE p.id = pe.idPaquete AND pe.idEspectaculo = ?";
     private final String espectaculosEnPaquetes = "SELECT * FROM paquetes_espectaculos WHERE idPaquete = ?";
     private final String espectaculosDeNOPaquetes = "SELECT * FROM espectaculos e JOIN plataformas p on e.idPlataforma = p.id WHERE p.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id AND idPaquete = ?);";
-    private final String espectaculosPorIdArtista = "SELECT DISTINCT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN espectaculos e on pe.idEspectaculo = e.id WHERE e.idUsuario = ?";
+    private final String paquetesPorIdArtista = "SELECT p.* FROM paquetes p JOIN paquetes_artistas pa on p.id = pa.idPaquete WHERE idArtista = ?";
     private final String paquetePorIdPaquete = "SELECT * FROM paquetes WHERE id = ?";
     private final String altaUsuarioEnPaquete = "INSERT INTO paquetes_usuarios (idUsuario, idPaquete, fechaRegistro) VALUES (?, ?, NOW())";
     private final String paquetesCompradosPorUsuario = "SELECT p.* FROM paquetes p JOIN paquetes_usuarios pu on p.id = pu.idPaquete WHERE pu.idUsuario = ?";
-    private final String paqueteArtista = "INSERT INTO paquetes_artistas (idArtista, idPaquete) VALUES (?, ?)";
+    private final String paqueteArtista = "INSERT INTO paquetes_artistas (idPaquete, idArtista) VALUES (?, ?)";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
 
@@ -133,7 +133,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
         List<Paquete> paquetes = new ArrayList<>();
         PreparedStatement sentencia;
         try {
-            sentencia = conexion.getConexion().prepareStatement(espectaculosPorIdArtista);
+            sentencia = conexion.getConexion().prepareStatement(paquetesPorIdArtista);
             sentencia.setLong(1, idArtista);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
