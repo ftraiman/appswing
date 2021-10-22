@@ -26,9 +26,18 @@ public interface FuncionControlador { //Interfaz de Funcion
     
     public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
     
-    public void altaFuncionDTO(FuncionDTO funcion);
+    void altaFuncionDTO(FuncionDTO funcion);
     
-    public FuncionDTO getFuncionDTOPorId(Long idFuncion);
+    FuncionDTO getFuncionDTOPorId(Long idFuncion);
 
-    public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException;
+    List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException;
+    
+    Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario); 
+    
+    Boolean isFuncionCompleta(Long idFuncion);
+    
+    void altaEspectadorAFuncionDto(Long idFuncion , Long idUsuario, Date fechaRegistroEspectaculo, BigDecimal costo);
+    
+    List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
+    
 }

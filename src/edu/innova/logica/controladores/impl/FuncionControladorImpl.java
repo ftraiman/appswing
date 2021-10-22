@@ -49,13 +49,21 @@ public class FuncionControladorImpl implements FuncionControlador {
 
         funcionServicio.altaFuncion(espectaculo.getId(), funcion);
     }
+    
+    @Override
+    public void altaEspectadorAFuncionDto(Long idFuncion , Long idUsuario, Date fechaRegistroEspectaculo, BigDecimal costo) {
+        Funcion funcion = funcionServicio.getFuncionPorId(idFuncion);
+        Espectador espectador = new Espectador();
+        espectador.setId(idUsuario);
+        altaEspectadorAFuncion(funcion, espectador, fechaRegistroEspectaculo, costo);
+    }
 
     @Override
     public void altaEspectadorAFuncion(Funcion funcion, Espectador espectador, Date fechaRegistroEspectaculo, BigDecimal costo) {
         validarAltaEspectadorAFuncion(funcion, espectador, fechaRegistroEspectaculo, costo);
         funcionServicio.altaEspectadorAFuncion(funcion, espectador, fechaRegistroEspectaculo, costo);
     }
-
+    
     @Override
     public List<Funcion> getFuncionesPorIdEspectador(Espectador espectador) {
         if (espectador == null || espectador.getId() == null) {
@@ -75,6 +83,17 @@ public class FuncionControladorImpl implements FuncionControlador {
         funcionServicio.eliminarFuncionesDelEspectador(new ArrayList(funcionesParaCanjear), espectador);
         funcionServicio.altaEspectadorAFuncion(funcionSeleccionada, espectador, new Date(), BigDecimal.ZERO);
 
+    }
+    
+    @Override
+    public Boolean isFuncionCompleta(Long idFuncion) {
+        Funcion funcion = funcionServicio.getFuncionPorId(idFuncion);
+        try {
+            validarMaximaCantidadDeEspectadoresAFuncion(funcion);
+        } catch (InnovaModelException e) {
+            return true;
+        }
+        return false;
     }
 
     private void validarNuevaFuncion(Funcion funcion, Espectaculo espectaculo) {
@@ -107,7 +126,7 @@ public class FuncionControladorImpl implements FuncionControlador {
         if (costo.compareTo(BigDecimal.ZERO) < 0) {
             throw new InnovaModelException("El costo no puede ser negativo");
         }
-        HelperFecha.validarFechaPosteriorALaActual(fechaRegistroEspectaculo, "Fecha de la función");
+        HelperFecha.validarFechaAnteriorALaActual(fechaRegistroEspectaculo);
 
         validarMaximaCantidadDeEspectadoresAFuncion(funcion);
     }
@@ -184,4 +203,13 @@ public class FuncionControladorImpl implements FuncionControlador {
         return funcionServicio.getArtistasInvitadosAFuncionDTO(idFuncion);
     }
 
+    @Override
+    public Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario) {
+        return funcionServicio.getUsuarioRegistradoEnFuncion(idFuncion, idUsuario);
+    }
+
+    @Override
+    public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario) {
+        return funcionServicio.getFuncionesDeUsuarioParaCanjear(idUsuario);
+    }
 }

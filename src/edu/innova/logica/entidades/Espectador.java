@@ -18,7 +18,8 @@ public class Espectador extends Usuario {
         super(id, nombre, apellido, fechaNacimiento);
         this.tipo = "espectador";
     }
-    
-    
-    
+
+    public Espectador() {
+    }
+
 }

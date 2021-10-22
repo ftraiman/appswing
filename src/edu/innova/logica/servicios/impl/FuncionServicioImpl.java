@@ -40,6 +40,8 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String todosLasFuncionesPorIdEspectador = "SELECT * FROM espectadores_funciones WHERE idUsuario = ?";
     private final String eliminarFuncionesDeEspectador = "DELETE FROM espectadores_funciones WHERE idUsuario = ? AND idFuncion = ?";
     private final String cantRegistradosParaFuncion = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ?";
+    private final String cantFuncionesPorUsuario = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ? AND idUsuario = ?";
+    private final String funcionesParaCanjear = "SELECT * FROM funciones f JOIN espectadores_funciones ef on f.id = ef.idFuncion WHERE idUsuario = ? AND ef.costo > 0";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -95,12 +97,16 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //==================== OBTENER FUNCION POR ID ============//
     @Override
-    public Funcion getFuncionPorId(Long idFuncion) throws SQLException {
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorId);
-        sentencia.setLong(1, idFuncion);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            return funcionMapper(rs);
+    public Funcion getFuncionPorId(Long idFuncion) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionPorId);
+            sentencia.setLong(1, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return funcionMapper(rs);
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
         }
         throw new NoSuchElementException(String.format("Funcion con id %s no encontrado", idFuncion));
     }
@@ -234,6 +240,23 @@ public class FuncionServicioImpl implements FuncionServicio {
         return 0;
     }
 
+    @Override
+    public Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(cantFuncionesPorUsuario);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setLong(2, idUsuario);
+            ResultSet rs = sentencia.executeQuery();
+            Integer cantidad = 0;
+            while (rs.next()) {
+                cantidad = rs.getInt("cnt");
+            }
+            return cantidad > 0;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+
     private List<Artista> getArtistasInvitadosAFuncion(Long idFuncion) throws SQLException {
         List<Artista> artistasInvitados = new ArrayList<>();
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(artistaInvitadosEnFuncion);
@@ -348,9 +371,10 @@ public class FuncionServicioImpl implements FuncionServicio {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
         }
     }
+
     //==================== OBTENER FUNCION DTO POR ID ============//
     @Override
-     public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException {
+    public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException {
         List<UsuarioDTO> artistasInvitados = new ArrayList<>();
         PreparedStatement sentencia = conexion.getConexion().prepareStatement(artistaInvitadosEnFuncion);
         sentencia.setLong(1, idFuncion);
@@ -360,5 +384,22 @@ public class FuncionServicioImpl implements FuncionServicio {
             artistasInvitados.add(artistaInvitado);
         }
         return artistasInvitados;
+    }
+
+    @Override
+    public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario) {
+        List<FuncionDTO> funciones = new ArrayList<>();
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(funcionesParaCanjear);
+            sentencia.setLong(1, idUsuario);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(funcionMapperDTO(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+        return funciones;
     }
 }

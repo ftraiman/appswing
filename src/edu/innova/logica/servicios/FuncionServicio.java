@@ -14,7 +14,7 @@ public interface FuncionServicio {
     
     void altaFuncion(Long idEspectaculo, Funcion funcion);
     
-    Funcion getFuncionPorId(Long idFuncion) throws SQLException;
+    Funcion getFuncionPorId(Long idFuncion);
     
     List<Funcion> getTodosLasFunciones() throws SQLException;
     
@@ -41,4 +41,8 @@ public interface FuncionServicio {
     public FuncionDTO getFuncionDTOPorId(Long idFuncion);
     
     public List<UsuarioDTO> getArtistasInvitadosAFuncionDTO(Long idFuncion) throws SQLException;
+    
+    Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario);
+
+    public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
 }
