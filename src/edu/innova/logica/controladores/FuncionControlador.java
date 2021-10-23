@@ -1,6 +1,7 @@
 package edu.innova.logica.controladores;
 
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
+import edu.innova.logica.dtos.CanjeTresPorUnoDTO;
 import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Espectaculo;
@@ -39,5 +40,7 @@ public interface FuncionControlador { //Interfaz de Funcion
     void altaEspectadorAFuncionDto(Long idFuncion , Long idUsuario, Date fechaRegistroEspectaculo, BigDecimal costo);
     
     List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
+    
+    void canjearFunciones(CanjeTresPorUnoDTO canje);
     
 }

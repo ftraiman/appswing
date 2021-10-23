@@ -37,4 +37,6 @@ public interface PaqueteControlador {
     
     void altaPaqueteArtista(Long idPaquete, Long idArtista);
     
+    List<PaqueteDTO> getPaquetesConLaFuncion(Long idUsuario, Long idFuncion);
+    
 }

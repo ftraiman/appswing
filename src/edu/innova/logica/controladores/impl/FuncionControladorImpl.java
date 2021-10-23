@@ -4,7 +4,9 @@ import edu.innova.exceptions.BaseDeDatosException;
 import edu.innova.exceptions.InnovaModelException;
 import edu.innova.helpers.HelperFecha;
 import edu.innova.helpers.HelperStrings;
+import edu.innova.logica.controladores.CanjeControlador;
 import edu.innova.logica.controladores.FuncionControlador;
+import edu.innova.logica.dtos.CanjeTresPorUnoDTO;
 import edu.innova.logica.dtos.FuncionDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FuncionControladorImpl implements FuncionControlador {
 
@@ -39,8 +42,8 @@ public class FuncionControladorImpl implements FuncionControlador {
     }
 
     private FuncionServicio funcionServicio = new FuncionServicioImpl().getInstance();
-
     private EspectaculoServicio espectaculoServicio = new EspectaculoServicioImpl().getInstance();
+    private CanjeControlador canjeControlador = CanjeControladorImpl.getInstance();
 
     @Override
     public void altaFuncion(Funcion funcion, Espectaculo espectaculo) {
@@ -49,9 +52,9 @@ public class FuncionControladorImpl implements FuncionControlador {
 
         funcionServicio.altaFuncion(espectaculo.getId(), funcion);
     }
-    
+
     @Override
-    public void altaEspectadorAFuncionDto(Long idFuncion , Long idUsuario, Date fechaRegistroEspectaculo, BigDecimal costo) {
+    public void altaEspectadorAFuncionDto(Long idFuncion, Long idUsuario, Date fechaRegistroEspectaculo, BigDecimal costo) {
         Funcion funcion = funcionServicio.getFuncionPorId(idFuncion);
         Espectador espectador = new Espectador();
         espectador.setId(idUsuario);
@@ -63,7 +66,7 @@ public class FuncionControladorImpl implements FuncionControlador {
         validarAltaEspectadorAFuncion(funcion, espectador, fechaRegistroEspectaculo, costo);
         funcionServicio.altaEspectadorAFuncion(funcion, espectador, fechaRegistroEspectaculo, costo);
     }
-    
+
     @Override
     public List<Funcion> getFuncionesPorIdEspectador(Espectador espectador) {
         if (espectador == null || espectador.getId() == null) {
@@ -77,14 +80,33 @@ public class FuncionControladorImpl implements FuncionControlador {
     }
 
     @Override
+        public void canjearFunciones(CanjeTresPorUnoDTO canje) {
+        canjeControlador.altaCanjeTresPorUno(canje);
+
+        Espectador espectador = new Espectador();
+        espectador.setId(canje.getIdUsuario());
+        
+        Funcion funcionSeleccionada = new Funcion();
+        funcionSeleccionada.setId(canje.getIdFuncionObtenida());
+        funcionSeleccionada.setIdEspectaculo(canje.getIdEspectaculoDeFuncion());
+        
+        Set<Funcion> funcionesParaCanjear
+                = Stream.of(canje.getFuncionesCanjeadas().split(",")).map(idFuncion -> {
+                    Funcion funcion = new Funcion();
+                    funcion.setId(Long.valueOf(idFuncion));
+                    return funcion;
+                }).collect(Collectors.toSet());
+
+        this.canjearFunciones(espectador, funcionSeleccionada, funcionesParaCanjear);
+    }
+
+    @Override
     public void canjearFunciones(Espectador espectador, Funcion funcionSeleccionada, Set<Funcion> funcionesParaCanjear) {
         validarCanjearFunciones(espectador, funcionSeleccionada, funcionesParaCanjear);
-
         funcionServicio.eliminarFuncionesDelEspectador(new ArrayList(funcionesParaCanjear), espectador);
         funcionServicio.altaEspectadorAFuncion(funcionSeleccionada, espectador, new Date(), BigDecimal.ZERO);
-
     }
-    
+
     @Override
     public Boolean isFuncionCompleta(Long idFuncion) {
         Funcion funcion = funcionServicio.getFuncionPorId(idFuncion);

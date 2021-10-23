@@ -9,10 +9,12 @@ import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.dtos.PaqueteDTO;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.dtos.CanjeTresPorUnoDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Paquete;
 import edu.innova.logica.entidades.Plataforma;
+import edu.innova.logica.servicios.CanjeServicio;
 import edu.innova.logica.servicios.EspectaculoServicio;
 import edu.innova.logica.servicios.PaqueteServicio;
 import edu.innova.logica.servicios.PlataformaServicio;
@@ -20,6 +22,7 @@ import edu.innova.logica.servicios.impl.PlataformaServicioImpl;
 import java.sql.SQLException;
 import java.util.Date;
 import edu.innova.logica.servicios.UsuarioServicio;
+import edu.innova.logica.servicios.impl.CanjeServicioImpl;
 import edu.innova.logica.servicios.impl.EspectaculoServicioImpl;
 import edu.innova.logica.servicios.impl.PaqueteServicioImpl;
 
@@ -37,6 +40,7 @@ public class DatosDePrueba {
         UsuarioControlador usuarioControlador = new UsuarioControladorImpl().getInstance();
         PaqueteServicio paqueteServicio = new PaqueteServicioImpl().getInstance();
         PaqueteControlador paqueteControlador = new PaqueteControladorImpl().getInstance();
+        CanjeServicio canjeServicio = CanjeServicioImpl.getInstance();
 
 //
 //        // Alta artistas 
@@ -109,15 +113,13 @@ public class DatosDePrueba {
 //        Long idCategoria = null;
 //        List<EspectaculoDTO> espectaculos = espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
 //        System.err.println(espectaculos);
-
 //        List<Paquete> paquetesPoridUsuario =paqueteServicio.getPaquetesPorIdArtista(Long.valueOf(2));
 //        System.err.println(paquetesPoridUsuario);
-
 //        List<PaqueteDTO> paquetesDTOPoridUsuario =paqueteControlador.getPaquetesDTOPorIdArtista(Long.valueOf(2));
 //        System.err.println(paquetesDTOPoridUsuario);
-
 //           List<EspectaculoDTO> espectaculos = espectaculoServicio.getEspectaculosDTONoIncluidosEnPaquete(Long.valueOf(2), Long.valueOf(3));
 //           System.err.println(espectaculos);
+//        canjeServicio.altaCanjeTresPorUno(new CanjeTresPorUnoDTO(Long.valueOf(1), Long.valueOf(1), "4,5,6"));
     }
 
 }

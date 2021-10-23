@@ -41,7 +41,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String eliminarFuncionesDeEspectador = "DELETE FROM espectadores_funciones WHERE idUsuario = ? AND idFuncion = ?";
     private final String cantRegistradosParaFuncion = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ?";
     private final String cantFuncionesPorUsuario = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ? AND idUsuario = ?";
-    private final String funcionesParaCanjear = "SELECT * FROM funciones f JOIN espectadores_funciones ef on f.id = ef.idFuncion WHERE idUsuario = ? AND ef.costo > 0";
+    private final String funcionesParaCanjear = "SELECT f.* FROM funciones f JOIN espectadores_funciones ef on f.id = ef.idFuncion WHERE idUsuario = ? AND ef.costo > 0";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE

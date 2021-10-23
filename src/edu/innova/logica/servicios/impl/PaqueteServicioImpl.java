@@ -35,6 +35,7 @@ public class PaqueteServicioImpl implements PaqueteServicio {
     private final String altaUsuarioEnPaquete = "INSERT INTO paquetes_usuarios (idUsuario, idPaquete, fechaRegistro) VALUES (?, ?, NOW())";
     private final String paquetesCompradosPorUsuario = "SELECT p.* FROM paquetes p JOIN paquetes_usuarios pu on p.id = pu.idPaquete WHERE pu.idUsuario = ?";
     private final String paqueteArtista = "INSERT INTO paquetes_artistas (idPaquete, idArtista) VALUES (?, ?)";
+    private final String paquetesPorFuncionYUsuario = "SELECT p.* FROM paquetes p JOIN paquetes_espectaculos pe on p.id = pe.idPaquete JOIN funciones f on pe.idEspectaculo = f.idEspectaculo JOIN paquetes_usuarios pu on p.id = pu.idPaquete WHERE pu.idUsuario = ? AND f.id = ? AND NOT EXISTS(SELECT * FROM paquetes_espectaculos_utilizados peu WHERE peu.idUsuario = pu.idUsuario AND peu.idPaquete = pe.idPaquete AND peu.idEspectaculo = pe.idEspectaculo)";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     private static PaqueteServicioImpl servicio;
 
@@ -252,4 +253,23 @@ public class PaqueteServicioImpl implements PaqueteServicio {
             throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
         }
     }
+
+    @Override
+    public List<Paquete> getPaquetesConLaFuncion(Long idUsuario, Long idFuncion) {
+        List<Paquete> paquetes = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(paquetesPorFuncionYUsuario);
+            sentencia.setLong(1, idUsuario);
+            sentencia.setLong(2, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                paquetes.add((Paquete) paqueteMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()));
+        }
+        return paquetes;
+    }
+    
+    
 }

@@ -176,4 +176,11 @@ public class PaqueteControladorImpl implements PaqueteControlador {
         paqueteServicio.altaPaqueteArtista(idPaquete, idArtista);
     }
 
+    @Override
+    public List<PaqueteDTO> getPaquetesConLaFuncion(Long idUsuario, Long idFuncion) {
+        return paqueteServicio.getPaquetesConLaFuncion(idUsuario, idFuncion)
+                .stream()
+                .map(this::paqueteDtoMapper)
+                .collect(Collectors.toList());
+    }
 }
