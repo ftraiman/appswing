@@ -15,6 +15,7 @@ INSERT INTO coronatickets.usuarios (clave, id, tipo, apellido, nickname, nombre,
 INSERT INTO coronatickets.usuarios (clave, id, tipo, apellido, nickname, nombre, email, fechaNacimiento, imagen) VALUES ('a35b1968765a9df8ab3fbb183fb26c44869f84404e2b68e47ba09f646141870c212f2a392e67f6c50466b0fc9068100d2ab35ee2ed39d36449b6ded24610de88', 15, 'espectador', 'Imba', 'colimba', 'Col', 'hola@hola.com', '2021-10-04', 'colimba.jpeg');
 INSERT INTO coronatickets.usuarios (clave, id, tipo, apellido, nickname, nombre, email, fechaNacimiento, imagen) VALUES ('a35b1968765a9df8ab3fbb183fb26c44869f84404e2b68e47ba09f646141870c212f2a392e67f6c50466b0fc9068100d2ab35ee2ed39d36449b6ded24610de88', 16, 'espectador', 'Traiman', 'fede', 'Federico', 'fede@montevideo.com.uy', '2021-10-06', 'fede.jpeg');
 INSERT INTO coronatickets.usuarios (clave, id, tipo, apellido, nickname, nombre, email, fechaNacimiento, imagen) VALUES ('a35b1968765a9df8ab3fbb183fb26c44869f84404e2b68e47ba09f646141870c212f2a392e67f6c50466b0fc9068100d2ab35ee2ed39d36449b6ded24610de88', 17, 'espectador', 'Nombre prueba', 'prueba', 'Nombre prueba', 'prueba@prueba.com', '2021-10-04', 'prueba.png');
+INSERT INTO coronatickets.usuarios (clave, id, tipo, apellido, nickname, nombre, email, fechaNacimiento, imagen) VALUES ('a35b1968765a9df8ab3fbb183fb26c44869f84404e2b68e47ba09f646141870c212f2a392e67f6c50466b0fc9068100d2ab35ee2ed39d36449b6ded24610de88', 34, 'espectador', 'Messi', 'messi', 'Lionel', 'messi@messi.com', '2000-08-11', 'messi.png');
 
 INSERT INTO coronatickets.datos_artistas (linkUsuario, nickname, descripcion, biografia) VALUES ('www.jaime.com', 'jaimeross', 'La nueva descripcion de Jaime', 'La biografia de Jaime');
 INSERT INTO coronatickets.datos_artistas (linkUsuario, nickname, descripcion, biografia) VALUES ('www.shakira.com', 'shakira', 'La descripcion de Shakira', 'La biografia de Shakira');
@@ -32,6 +33,16 @@ INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguid
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (6, 8);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (6, 11);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 13);
+
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2022-10-12', 'Paqueton Shakira', 1, 'Descripcion Prueba paquete Shakira', '2021-10-19', 20.00, '2021-10-18 00:00:00', 'Paquete1.jpg');
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-22', 'Paqueton economico de Shakira', 2, 'Paqueton economico de Shakira para fanaticos', '2021-10-01', 12.00, '2021-10-18 00:00:00', 'Paquete2.jpg');
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-22', 'Super paquete feliz', 3, 'Paqueton feliz de Shakira para fanaticos', '2021-10-01', 12.00, '2021-10-18 00:00:00', 'ElPaquetedeShakira.jpg');
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-30', 'Super paqueton', 4, 'Buen paquete', '2021-10-21', 15.00, '2021-10-20 00:00:00', 'Paquete3.jpg');
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-31', 'Paquetón Jaime Ross', 6, 'El paquete de Jaime', '2021-10-29', 30.00, '2021-10-20 00:00:00', 'Paquete4.jpg');
+INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-29', 'Otro paquete de Jaime', 7, 'Otro paqueton', '2021-10-22', 45.00, '2021-10-20 00:00:00', 'Paquete5.jpg');
+
+INSERT INTO coronatickets.paquetes_artistas (idArtista, idPaquete) VALUES (1, 6);
+INSERT INTO coronatickets.paquetes_artistas (idArtista, idPaquete) VALUES (1, 7);
 
 INSERT INTO coronatickets.plataformas (url, id, nombre, descripcion) VALUES ('www.Facebook.com', 1, 'Facebook', 'Descripcion de Facebook');
 INSERT INTO coronatickets.plataformas (url, id, nombre, descripcion) VALUES ('www.twitter.com', 2, 'Twitter', 'Descripcion de Twitter');
