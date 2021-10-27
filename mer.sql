@@ -55,6 +55,18 @@ create table usuarios
 )
 charset=utf8mb4;
 
+create table canjes_tres_por_uno
+(
+	id int auto_increment
+		primary key,
+	idUsuario int not null,
+	idFuncionObtenida int null,
+	funcionesCanjeadas varchar(20) null,
+	fechaRegistro datetime null,
+	constraint canjes_tres_por_uno_usuarios_id_fk
+		foreign key (idUsuario) references usuarios (id)
+);
+
 create table datos_artistas
 (
 	linkUsuario varchar(255) null,
@@ -163,6 +175,19 @@ create table paquetes_espectaculos
 		foreign key (idPaquete) references paquetes (id)
 )
 charset=utf8mb4;
+
+create table paquetes_espectaculos_utilizados
+(
+	idUsuario int null,
+	idPaquete int null,
+	idEspectaculo int null,
+	constraint paquetes_espectaculos_utilizados_espectaculos_id_fk
+		foreign key (idEspectaculo) references espectaculos (id),
+	constraint paquetes_espectaculos_utilizados_paquetes_id_fk
+		foreign key (idPaquete) references paquetes (id),
+	constraint paquetes_espectaculos_utilizados_usuarios_id_fk
+		foreign key (idUsuario) references usuarios (id)
+);
 
 create table paquetes_usuarios
 (
