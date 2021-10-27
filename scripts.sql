@@ -25,14 +25,20 @@ INSERT INTO coronatickets.datos_artistas (linkUsuario, nickname, descripcion, bi
 INSERT INTO coronatickets.datos_artistas (linkUsuario, nickname, descripcion, biografia) VALUES ('https://es.wikipedia.org/wiki/Elvis_Presley', 'elvis', 'El rey del rock', 'Una gran biografia');
 
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (3, 1);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 2);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (16, 2);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 4);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (16, 4);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (2, 5);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (6, 5);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 6);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (16, 6);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 7);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (6, 8);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (6, 11);
 INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 13);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (1, 16);
+INSERT INTO coronatickets.usuarios_seguidores (idUsuarioSeguido, idUsuarioSeguidor) VALUES (11, 16);
 
 INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2022-10-12', 'Paqueton Shakira', 1, 'Descripcion Prueba paquete Shakira', '2021-10-19', 20.00, '2021-10-18 00:00:00', 'Paquete1.jpg');
 INSERT INTO coronatickets.paquetes (fechaFin, nombre, id, descripcion, fechaInicio, descuento, fechaRegistro, imagen) VALUES ('2021-10-22', 'Paqueton economico de Shakira', 2, 'Paqueton economico de Shakira para fanaticos', '2021-10-01', 12.00, '2021-10-18 00:00:00', 'Paquete2.jpg');
@@ -52,3 +58,65 @@ INSERT INTO coronatickets.categorias (id, nombre) VALUES (1, 'Rock');
 INSERT INTO coronatickets.categorias (id, nombre) VALUES (2, 'Pop');
 INSERT INTO coronatickets.categorias (id, nombre) VALUES (3, 'Clasico');
 INSERT INTO coronatickets.categorias (id, nombre) VALUES (4, 'Alternativo');
+
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (100, 'www.superjaime.com', 1000, 'Jaime Ross online', 1, 90, 'Jaime Ross nuevo disco', '2021-10-07', 1, 1, 1000, 1, 'aceptado', 'jaimerossonline.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (1, 'www.superpique.com', 1001, 'Shakira en twitch', 2, 60, 'Shakira y Pique', '2021-10-07', 2, 3, 3, 1, 'aceptado', 'shakiraentwitch.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (2, 'www.shakira.com', 4, 'Shakira recien ingresado', 3, 1, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 100, 4, 'ingresado', 'Shakirashakira2.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (100, 'www.shakira.com', 1245, 'Shakira cantando bien', 5, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 500, 2, 'aceptado', 'shakiraacompaniada.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (100, 'www.shakira.com', 250, 'Shakira cantando mal', 6, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 2, 500, 4, 'rechazado', 'Shakirashakira2.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (100, 'url', 340, 'Shakira en vivio', 9, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakirashow.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (100, 'url', 340, 'Shakira en vivo 2', 10, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakiravivo.jpg');
+INSERT INTO coronatickets.espectaculos (espectadoresMinimos, url, costo, nombre, id, duracion, descripcion, fechaRegistro, idUsuario, idPlataforma, espectadoresMaximos, idCategoria, estado, imagen) VALUES (120, 'www.shakira.com', 450, 'Shakira clásico', 11, 80, 'Shakira cantando musica clásica', '2021-10-19', 2, 2, 240, 3, 'ingresado', 'Shakiraclasico.jpg');
+
+
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 1, '2021-10-24 00:00:00', 'Shakira el domingo', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (2, '2021-10-15 00:00:00', 4, '2021-10-19 00:00:00', 'Shakira el martes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (9, '2021-10-19 00:00:00', 5, '2021-10-28 00:00:00', 'Funcion el Jueves', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (10, '2021-10-19 00:00:00', 6, '2021-10-31 00:00:00', 'Shakira el Domingo de tarde', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 7, '2021-10-25 00:00:00', 'Shakira el Lunes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 8, '2021-10-26 21:30:00', 'Shakira el Martes 2', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 9, '2021-10-27 22:30:00', 'Shakira el Miercoles', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 10, '2021-10-28 21:00:00', 'Shakira el Jueves 2', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (5, '2021-10-14 00:00:00', 11, '2021-10-29 21:00:00', 'Shakira el Viernes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (2, '2021-10-15 00:00:00', 12, '2021-11-25 00:00:00', 'Shakira con Pique el Lunes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (2, '2021-10-15 00:00:00', 13, '2021-11-26 00:00:00', 'Shakira con Pique el Martes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (2, '2021-10-15 00:00:00', 14, '2021-11-27 00:00:00', 'Shakira con Pique el Miercoles', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (2, '2021-10-15 00:00:00', 15, '2021-11-28 00:00:00', 'Shakira con Pique el Jueves', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (9, '2021-10-15 00:00:00', 16, '2021-12-25 00:00:00', 'Shakira Shakira en vivio el Lunes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (9, '2021-10-15 00:00:00', 17, '2021-12-26 00:00:00', 'Shakira Shakira en vivio el Martes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (9, '2021-10-15 00:00:00', 18, '2021-12-27 00:00:00', 'Shakira Shakira en vivio el Miercoles', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (9, '2021-10-15 00:00:00', 19, '2021-12-28 00:00:00', 'Shakira Shakira en vivio el Jueves', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (1, '2021-10-15 00:00:00', 20, '2021-11-15 00:00:00', 'Jaime con los murguistas funcion 1', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (1, '2021-10-15 00:00:00', 21, '2021-11-16 00:00:00', 'Jaime con los murguistas funcion 2', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (1, '2021-10-15 00:00:00', 22, '2021-11-17 00:00:00', 'Jaime con los murguistas funcion 3', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (1, '2021-10-15 00:00:00', 23, '2021-11-18 00:00:00', 'Jaime con los murguistas funcion 4', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (1, '2021-10-15 00:00:00', 24, '2021-11-19 00:00:00', 'Jaime con los murguistas funcion 5', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (10, '2022-01-15 00:00:00', 25, '2022-01-25 00:00:00', 'Shakira Shakira en vivio 2 el Lunes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (10, '2021-01-15 00:00:00', 26, '2021-01-26 00:00:00', 'Shakira Shakira en vivio 2 el Martes', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (10, '2021-01-15 00:00:00', 27, '2021-01-27 00:00:00', 'Shakira Shakira en vivio 2 el Miercoles', null);
+INSERT INTO coronatickets.funciones (idEspectaculo, fechaRegistro, id, fechaInicio, nombre, imagen) VALUES (10, '2021-01-15 00:00:00', 28, '2021-01-28 00:00:00', 'Shakira Shakira en vivio 2 el Jueves', null);
+
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (1, 7);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (2, 3);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (5, 2);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (5, 3);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (5, 4);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (9, 2);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (9, 3);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (10, 2);
+INSERT INTO coronatickets.paquetes_espectaculos (idEspectaculo, idPaquete) VALUES (10, 3);
+
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:04', 1, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:06', 2, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:07', 3, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:08', 4, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:09', 6, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-22 23:20:10', 7, 1);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-20 15:40:43', 1, 2);
+INSERT INTO coronatickets.paquetes_usuarios (fechaRegistro, idPaquete, idUsuario) VALUES ('2021-10-20 19:13:57', 3, 16);
+
+INSERT INTO coronatickets.espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (4, 2, '2021-10-21 18:43:47', 1200);
+INSERT INTO coronatickets.espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (4, 34, '2021-10-21 00:00:00', 1001);
+INSERT INTO coronatickets.espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (1, 1, '2021-10-21 12:14:16', 100);
+INSERT INTO coronatickets.espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (4, 1, '2021-10-22 09:01:20', 200);
+INSERT INTO coronatickets.espectadores_funciones (idFuncion, idUsuario, fechaRegistro, costo) VALUES (5, 1, '2021-10-22 09:01:41', 345);
