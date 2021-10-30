@@ -141,13 +141,9 @@ public class DtoPrueba extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        try {
-            Long id  = Long.parseLong(this.idEspectaculo.getText());
-            System.out.println(fabrica.getFuncionControlador().getArtistasInvitadosAFuncionDTO(id));
-        } catch (SQLException ex) {
-            Logger.getLogger(DtoPrueba.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String a = this.idEspectaculo.getText();
         
+        System.out.println(fabrica.getEspectaculoControlador().getEspectaculosPorNombre(a));
         
         
     }//GEN-LAST:event_jButton2ActionPerformed

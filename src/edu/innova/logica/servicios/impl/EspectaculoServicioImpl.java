@@ -41,6 +41,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE EXISTS(SELECT * FROM funciones F WHERE ((E.idPlataforma = ? OR E.idCategoria = ?) OR (E.idPlataforma = ? AND E.idCategoria = ?)) AND E.id = F.idEspectaculo AND E.estado = 'Aceptado')";
     private final String buscarEspectaculoDTOCategoria = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.estado = 'Aceptado'";
     private final String buscarEspectaculoDTOPlataforma = "SELECT * FROM espectaculos e WHERE e.idPlataforma = ? AND e.estado = 'Aceptado'";
+    private final String espectaculoPorNombre = "SELECT * FROM espectaculos WHERE nombre = ?";
     private final String buscarEspectaculoDTOCategoriaPlataforma = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.idPlataforma = ? AND e.estado = 'Aceptado'";
     private final String espectaculosNoIncluidosEnPaquete = "SELECT e.* FROM espectaculos e LEFT JOIN paquetes_espectaculos pe on e.id = pe.idEspectaculo WHERE idUsuario = ? AND e.estado = 'aceptado' AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id\n"
             + "AND pe.idPaquete = ?)";
@@ -446,4 +447,22 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //==================== OBTENER ESPECTACULO DTO ============//
+    
+    //==================== OBTENER ESPECTACULO POR Nombre ============//
+    @Override
+    public EspectaculoDTO getEspectaculoPorNombre(String nombre) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoPorNombre);
+            sentencia.setString(1, nombre);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                return espectaculoMapperDTO(rs);
+            }
+            return null;
+            //throw new NoSuchElementException(String.format("Espectaculo con id %s no encontrado", nombre));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //==================== OBTENER ESPECTACULO POR Nombre ============//
 }

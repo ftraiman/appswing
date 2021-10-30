@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 public class HelperFecha {
     
@@ -53,6 +54,20 @@ public class HelperFecha {
     public static void validarFechaAnteriorALaActual(Date fecha) {
         if(fecha.compareTo(new Date()) > 0) {
             throw new InnovaModelException("La fecha ingresada es posterior a la fecha actual");
+        }   
+    }
+    
+    public static void validarFecha18(Date fecha) {
+        Date fechaActual = new Date();
+        SimpleDateFormat getYear = new SimpleDateFormat("yyyy");
+        String anioActual = getYear.format(fechaActual);
+        String anioIngresado = getYear.format(fecha);
+        int actual , ingresado;
+        actual = Integer.parseInt(anioActual);
+        ingresado = Integer.parseInt(anioIngresado);
+        System.out.println(actual - ingresado);
+        if((actual - ingresado) < 18) {
+            throw new InnovaModelException("La fecha es INVALIDA");
         }   
     }
     

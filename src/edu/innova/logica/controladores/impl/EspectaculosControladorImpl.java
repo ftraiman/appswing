@@ -87,7 +87,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public List<Categoria> getTodasLasCategorias() throws SQLException {
+    public List<Categoria> getTodasLasCategorias(){
         return espectaculoServicio.getTodasLasCategorias();
     }
     
@@ -173,5 +173,10 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete) {
         return espectaculoServicio.getEspectaculosDTONoIncluidosEnPaquete(idArtista, idPaquete);
+    }
+    
+    @Override
+    public EspectaculoDTO getEspectaculosPorNombre(String nombre) {
+        return espectaculoServicio.getEspectaculoPorNombre(nombre);
     }
 }

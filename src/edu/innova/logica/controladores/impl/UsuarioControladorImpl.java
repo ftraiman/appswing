@@ -146,6 +146,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(espectador.getNombre(), "nombre");
         HelperStrings.stringNoVacio(espectador.getApellido(), "apellido");
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
+        HelperFecha.validarFecha18(espectador.getFechaNacimiento());
     }
 
     private void validarParametrosModificarArtista(Artista artista) {
@@ -157,6 +158,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(artista.getBiografia(), "biografia");
         HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
         HelperStrings.urlValidator(artista.getLinkUsuario());
+        HelperFecha.validarFecha18(artista.getFechaNacimiento());
     }
 
     private void validarParametrosEspectador(Espectador espectador) {
@@ -166,6 +168,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(espectador.getEmail(), "email");
         HelperStrings.ValidarEmail(espectador.getEmail());
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
+        HelperFecha.validarFecha18(espectador.getFechaNacimiento());
     }
 
     private void validarParametrosArtista(Artista artista) {
@@ -180,6 +183,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
         HelperStrings.urlValidator(artista.getLinkUsuario());
         HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
+        HelperFecha.validarFecha18(artista.getFechaNacimiento());
     }
 
     private void validarParametrosEspectadorWeb(Espectador espectador) {
@@ -190,6 +194,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.ValidarEmail(espectador.getEmail());
         HelperStrings.stringNoVacio(espectador.getClave(), "clave");
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
+        HelperFecha.validarFecha18(espectador.getFechaNacimiento());
     }
 
     private void validarParametrosArtistaWeb(Artista artista) {
@@ -205,6 +210,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(artista.getLinkUsuario(), "link");
         HelperStrings.urlValidator(artista.getLinkUsuario());
         HelperFecha.validarFechaAnteriorALaActual(artista.getFechaNacimiento());
+        HelperFecha.validarFecha18(artista.getFechaNacimiento());
     }
     //=========================== Validar Datos ==============================//
 

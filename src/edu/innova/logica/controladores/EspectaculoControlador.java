@@ -17,7 +17,7 @@ public interface EspectaculoControlador {
 
     public void altaCategoria(Categoria cat);
 
-    public List<Categoria> getTodasLasCategorias() throws SQLException;
+    public List<Categoria> getTodasLasCategorias();
 
     public List<Espectaculo> getTodosLosEspectaculosIngresados() throws SQLException;
 
@@ -42,4 +42,6 @@ public interface EspectaculoControlador {
     public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria);
     
     List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete);
+    
+    public EspectaculoDTO getEspectaculosPorNombre(String nombre);
 }

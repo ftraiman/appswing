@@ -55,7 +55,7 @@ public class HelperStrings {
             return true;
         } 
         catch(IOException e) {
-              throw new InnovaModelException(String.format("El parametro [%s] no es un Enlace", url));
+              throw new InnovaModelException(String.format("El parametro [%s] no es un LinK", url));
             // nada muy importante
         }
         //return false; //Esto porque pide la mierda del IDE
