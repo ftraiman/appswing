@@ -14,11 +14,12 @@ public class Funcion {
     private Date fechaRegistro;
     private List<Artista> artistasInvitados = new ArrayList<>();
     private String imagen;
+    private Boolean sorteo;
 
     public Funcion() {
     }
 
-    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre, String imagen) {
+    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre, String imagen, Boolean sorteo) {
         this.id = id;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -26,17 +27,26 @@ public class Funcion {
         this.artistasInvitados = artistasInvitados;
         this.nombre = nombre;
         this.imagen = imagen;
+        this.sorteo = sorteo;
     }
-
-    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen) {
+    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen, Boolean sorteo) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
+        this.sorteo = sorteo;
     }
 
+    public Boolean getSorteo() {
+        return sorteo;
+    }
+
+    public void setSorteo(Boolean sorteo) {
+        this.sorteo = sorteo;
+    }    
+    
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }

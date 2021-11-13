@@ -239,8 +239,6 @@ public class Todas_Las_Funciones_Espectaculos extends javax.swing.JInternalFrame
 
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Espectaculo NO Posee Funciones!![%s]", x.getMessage()));
-        } catch (SQLException ex) {
-            Logger.getLogger(Todas_Las_Funciones_Espectaculos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_DatosEspectaculosMouseClicked
 

@@ -18,7 +18,7 @@ public interface FuncionServicio {
     
     List<Funcion> getTodosLasFunciones() throws SQLException;
     
-    List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) throws SQLException;
+    List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo);
     //Obtener todas las funciones de la base de datos de un usuario espesifico
     List<Funcion> getTodosLasFuncionesPorIdUsuario(Long IdUsuario) throws SQLException;
     
@@ -34,7 +34,7 @@ public interface FuncionServicio {
 
     public Integer getCantidadRegistrados(Long id);
     
-    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException;
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo);
     
     public void altaFuncionDTO(FuncionDTO funcion);
     
@@ -45,4 +45,6 @@ public interface FuncionServicio {
     Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario);
 
     public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
+    
+    public void entregaDePremios(Long idFuncion);
 }

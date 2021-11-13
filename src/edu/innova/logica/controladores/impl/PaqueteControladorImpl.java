@@ -152,7 +152,7 @@ public class PaqueteControladorImpl implements PaqueteControlador {
                 .stream()
                 .map(e -> new EspectaculoDTO(e.getId(), e.getArtista().getId(), e.getNombre(), e.getPlataforma().getId(), e.getDescripcion(), e.getDuracion(),
                 e.getEspectadoresMinimos(), e.getEspectadoresMaximos(), e.getUrl(), e.getCosto(), e.getFechaRegistro(), new ArrayList<FuncionDTO>(), e.getEstado(),
-                e.getIdCategoria(), e.getImagen())).collect(Collectors.toList());
+                e.getIdCategoria(), e.getImagen(),e.getDescripcionPremios(),e.getCantidadPremios())).collect(Collectors.toList());
         PaqueteDTO paqueteDTO = new PaqueteDTO(paquete.getId(), paquete.getNombre(), paquete.getDescripcion(), paquete.getFechaInicio(), paquete.getFechaFin(),
                 paquete.getDescuento(), espectaculos, paquete.getImagen());
         return paqueteDTO;

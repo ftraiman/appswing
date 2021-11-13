@@ -314,4 +314,24 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         }
     }
     //============================= GET USUARIO DTO ==========================//
+
+    @Override
+    public List<Espectador> getEspectadoresPorIdFuncion(Long idFuncion) {
+        return usuarioServicio.getEspectadoresPorIdFuncion(idFuncion);
+    }
+
+    @Override
+    public List<UsuarioDTO> usuariosDelSorteo(Long idFuncion, int premios) {
+        return usuarioServicio.usuariosDelSorteo(idFuncion, premios);
+    }
+
+    @Override
+    public void altaGanadores(Long idUsuario, Long idFuncion, String premio) {
+        usuarioServicio.altaGanadores(idUsuario, idFuncion, premio);
+    }
+
+    @Override
+    public List<Espectador> getGanadores(Long idFuncion) {
+        return usuarioServicio.getGanadores(idFuncion);
+    }
 }

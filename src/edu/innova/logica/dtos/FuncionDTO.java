@@ -14,13 +14,14 @@ public class FuncionDTO {
     private Date fechaRegistro;
     private List<UsuarioDTO> artistasInvitados;
     private String imagen;
+    private Boolean sorteo;
     //============================ ATRIBUTOS =================================//
 
     //============================ CONSTRUCTURES =============================//
     public FuncionDTO() {
     }
 
-    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen) {
+    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo) {
         this.id = id;
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
@@ -28,19 +29,30 @@ public class FuncionDTO {
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
+        this.sorteo = sorteo;
     }
     
-    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen) {
+    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
         this.fechaRegistro = fechaRegistro;
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
+        this.sorteo = sorteo;
     }
     //============================ CONSTRUCTURES =============================//
 
     //======================== GETTER & SETTER ===============================//
+
+    public Boolean getSorteo() {
+        return sorteo;
+    }
+
+    public void setSorteo(Boolean sorteo) {
+        this.sorteo = sorteo;
+    }
+        
     public Long getId() {
         return id;
     }

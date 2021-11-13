@@ -23,13 +23,15 @@ public class EspectaculoDTO {
     private String estado;
     private Long idCategoria;
     private String imagen;
+    private String descripcionPremios;
+    private Integer cantidadPremios;
     //============================ ATRIBUTOS =================================//
 
     //============================ CONSTRUCTURES =============================//
     public EspectaculoDTO() {
     }
 
-    public EspectaculoDTO(Long id, Long idArtista, String nombre, Long idPlataforma, String descripcion, Integer duracion, Integer espectadoresMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<FuncionDTO> funciones, String estado, Long idCategoria, String imagen) {
+    public EspectaculoDTO(Long id, Long idArtista, String nombre, Long idPlataforma, String descripcion, Integer duracion, Integer espectadoresMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<FuncionDTO> funciones, String estado, Long idCategoria, String imagen, String descripcionPremios,Integer cantidadPremios) {
         this.id = id;
         this.idArtista = idArtista;
         this.nombre = nombre;
@@ -45,9 +47,11 @@ public class EspectaculoDTO {
         this.estado = estado;
         this.idCategoria = idCategoria;
         this.imagen = imagen;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
     
-    public EspectaculoDTO(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado,String imagen,Long idArtista, Long idPlataforma) {
+    public EspectaculoDTO(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado,String imagen,Long idArtista, Long idPlataforma, String descripcionPremios,Integer cantidadPremios) {
         this.nombre = nombre;
         this.idArtista = idArtista;
         this.idPlataforma = idPlataforma;
@@ -61,10 +65,30 @@ public class EspectaculoDTO {
         this.idCategoria = idCategoria;
         this.estado = estado;
         this.imagen = imagen;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
     //============================ CONSTRUCTURES =============================//
 
     //======================== GETTER & SETTER ===============================//
+
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Integer getCantidadPremios() {
+        return cantidadPremios;
+    }
+
+    public void setCantidadPremios(Integer cantidadPremios) {
+        this.cantidadPremios = cantidadPremios;
+    }
+    
+    
     public Long getId() {
         return id;
     }

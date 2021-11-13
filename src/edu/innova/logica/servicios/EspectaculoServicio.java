@@ -44,4 +44,6 @@ public interface EspectaculoServicio {
     
     public EspectaculoDTO getEspectaculoPorNombre(String nombre);
 
+    public List<Espectaculo> getTodosLosEspectaculosAceptados();
+    
 }

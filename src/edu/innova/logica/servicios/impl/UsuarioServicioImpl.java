@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import edu.innova.logica.servicios.UsuarioServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioServicioImpl implements UsuarioServicio {
 
@@ -39,6 +41,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String usuariosQueSigue = "SELECT * FROM usuarios_seguidores JOIN usuarios u on u.id = usuarios_seguidores.idUsuarioSeguido WHERE idUsuarioSeguidor = ?";
     private final String usuariosQueLoSiguen = "SELECT * FROM usuarios_seguidores us JOIN usuarios u on u.id = us.idUsuarioSeguidor WHERE idUsuarioSeguido = ?";
     private final String dejarDeSeguirUsuario = "DELETE FROM usuarios_seguidores WHERE idUsuarioSeguidor = ? AND idUsuarioSeguido = ?";
+    private final String espectadoresPorIdFuncion = "SELECT * FROM usuarios AS U, espectadores_funciones AS EF WHERE U.id = EF.idUsuario AND EF.idFuncion = ?";
+    private final String entregaDePremios = "SELECT DISTINCT * FROM usuarios U, espectadores_funciones EF WHERE EF.idUsuario = U.id AND EF.idFuncion = ? ORDER BY RAND() LIMIT ?";
+    private final String insertarGanadores = "INSERT INTO `usuarios_ganadores` (`idUsuario`, `idFuncion`, `premio`) VALUES (?, ?, ?);";
+    private final String mostrarGanadores = "SELECT * FROM usuarios u, usuarios_ganadores ug, funciones f WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.id = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     //INSTANCIA DE LA CLASE
     private static UsuarioServicioImpl servicioUsuario;
@@ -432,4 +438,75 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
     //============================ DTO MODIFICAR ESPECTADOR =========================//
 
+    //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    @Override
+    public List<Espectador> getEspectadoresPorIdFuncion(Long idFuncion) {
+        List<Espectador> espectadores = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectadoresPorIdFuncion);
+            sentencia.setLong(1, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectadores.add(espectadorMapper(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return espectadores;
+    }
+     //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    
+    //=================== ESPECTADORES PARA EL SORTEO ========================//
+    @Override
+    public List<UsuarioDTO> usuariosDelSorteo(Long idFuncion, int premios) {
+        List<UsuarioDTO> usuarios = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(entregaDePremios);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setInt(2, premios);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                usuarios.add(dtoEspectadorMapper(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+        return usuarios;
+    }
+    //=================== ESPECTADORES PARA EL SORTEO ========================//
+    
+    //============================= ALTA GANADOR =============================//
+    @Override
+    public void altaGanadores(Long idUsuario, Long idFuncion, String premio) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(insertarGanadores);
+            sentencia.setLong(1, idUsuario);
+            sentencia.setLong(2, idFuncion);
+            sentencia.setString(3, premio);
+            
+            sentencia.executeUpdate();
+        } catch (SQLException ex) {
+            throw new InnovaModelException(String.format("Error desconocido"));
+        }            
+    }
+    //============================= ALTA GANADOR =============================//
+    
+    //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    @Override
+    public List<Espectador> getGanadores(Long idFuncion) {
+        List<Espectador> espectadores = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(mostrarGanadores);
+            sentencia.setLong(1, idFuncion);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectadores.add(espectadorMapper(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return espectadores;
+    }
+     //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    
 }

@@ -211,11 +211,13 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
         tabla.addColumn("Espectadores Maximos");
         tabla.addColumn("Categoria");
         tabla.addColumn("Estado");
+        tabla.addColumn("Descripción del premio");
+        tabla.addColumn("Cantidad de premios");
 
         //Hacemos una lista de Espectaculos por Id plataforma
         List<Espectaculo> espectaculos = fabrica.getEspectaculoControlador().getEspectaculosPorIdPlataforma(plataformaSeleccionada.getId());
         for (Espectaculo espectaculo : espectaculos) {
-            String fila[] = new String[13];//Limite de dos porque solo mostramos el nombre y el apellido
+            String fila[] = new String[15];//Limite de dos porque solo mostramos el nombre y el apellido
 
             fila[0] = espectaculo.getId().toString();
             fila[1] = espectaculo.getNombre();
@@ -233,6 +235,10 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             fila[10] = espectaculo.getEspectadoresMaximos().toString();
             fila[11] = espectaculo.getIdCategoria().toString();
             fila[12] = espectaculo.getEstado();
+            
+            fila[13] = espectaculo.getDescripcionPremios();
+            fila[14] = espectaculo.getCantidadPremios().toString();
+            
             tabla.addRow(fila); //Se agrega la fila al modelo de la tabla
         }
         this.Tabla_Espectaculo.setModel(tabla);
@@ -270,8 +276,6 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             this.TFuncion.setModel(tabla);
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Espectaculo No posee Funcion Asociada!![%s]", x.getMessage()));
-        } catch (SQLException ex) {
-            Logger.getLogger(Todos_Los_Espectadores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // TODO add your handling code here:

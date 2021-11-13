@@ -22,12 +22,13 @@ public class Espectaculo {
     private String estado;
     private Long idCategoria;
     private String imagen;
-        
+    private String descripcionPremios;
+    private Integer cantidadPremios;
+
     public Espectaculo() {
     }
-    
 
-    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones,Long idCategoria, String estado, String imagen) {
+    public Espectaculo(Long id, Artista artista, String nombre, Plataforma plataforma, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, List<Funcion> funciones, Long idCategoria, String estado, String imagen, String descripcionPremios, Integer cantidadPremios) {
         this.id = id;
         this.artista = artista;
         this.nombre = nombre;
@@ -43,6 +44,8 @@ public class Espectaculo {
         this.idCategoria = idCategoria;
         this.estado = estado;
         this.imagen = imagen;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
 
     public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro) {
@@ -55,9 +58,9 @@ public class Espectaculo {
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
     }
-    
+
     //Alta de Espectaculo
-    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro,Long idCategoria, String estado,String imagen) {
+    public Espectaculo(String nombre, String descripcion, Integer duracion, Integer espectadoredMinimos, Integer espectadoresMaximos, String url, BigDecimal costo, Date fechaRegistro, Long idCategoria, String estado, String imagen, String descripcionPremios, Integer cantidadPremios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -69,6 +72,24 @@ public class Espectaculo {
         this.idCategoria = idCategoria;
         this.estado = estado;
         this.imagen = imagen;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
+    }
+
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Integer getCantidadPremios() {
+        return cantidadPremios;
+    }
+
+    public void setCantidadPremios(Integer cantidadPremios) {
+        this.cantidadPremios = cantidadPremios;
     }
 
     public void setImagen(String imagen) {
@@ -182,7 +203,7 @@ public class Espectaculo {
     public void setFunciones(List<Funcion> funciones) {
         this.funciones = funciones;
     }
-    
+
     public void setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
     }

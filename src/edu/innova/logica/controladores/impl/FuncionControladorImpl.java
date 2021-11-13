@@ -208,7 +208,7 @@ public class FuncionControladorImpl implements FuncionControlador {
             return artista;
         }).collect(Collectors.toList());
         Funcion nuevaFuncion = new Funcion(funcion.getNombre(), funcion.getIdEspectaculo(), funcion.getFechaInicio(), funcion.getFechaRegistro(),
-                artistasInvitados, funcion.getImagen());
+                artistasInvitados, funcion.getImagen(),funcion.getSorteo());
         this.altaFuncion(nuevaFuncion, espectaculo);
     }
     //==================== AlTA DE FUNCION DTO=======================//
@@ -233,5 +233,15 @@ public class FuncionControladorImpl implements FuncionControlador {
     @Override
     public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario) {
         return funcionServicio.getFuncionesDeUsuarioParaCanjear(idUsuario);
+    }
+
+    @Override
+    public List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) {
+        return funcionServicio.getTodosLasFuncionesPorIdEspectaculo(idEspectaculo);
+    }
+
+    @Override
+    public void entregaDePremios(Long idFuncion) {
+        funcionServicio.entregaDePremios(idFuncion);
     }
 }

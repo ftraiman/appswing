@@ -35,6 +35,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        Sorteo = new javax.swing.JMenu();
+        SorteoEspectadores = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
@@ -178,6 +180,18 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
         Registro.add(jMenu8);
 
+        Sorteo.setText("Sorteos");
+
+        SorteoEspectadores.setText("Sorteo para espectadores");
+        SorteoEspectadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SorteoEspectadoresActionPerformed(evt);
+            }
+        });
+        Sorteo.add(SorteoEspectadores);
+
+        Registro.add(Sorteo);
+
         Menu.add(Registro);
 
         jMenu3.setText("Consultas");
@@ -283,7 +297,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
 
     private void EspectadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EspectadorActionPerformed
         Registrar_Espectador re = new Registrar_Espectador();
-        this.Panel.add(re);
+        GUI_Proyecto.Panel.add(re);
         re.show();
     }//GEN-LAST:event_EspectadorActionPerformed
 
@@ -417,6 +431,12 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             Logger.getLogger(GUI_Proyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Aceptar_Rechazar_EspectaculoActionPerformed
+
+    private void SorteoEspectadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SorteoEspectadoresActionPerformed
+        Sorteo_Espectadores se  = new Sorteo_Espectadores();
+        this.Panel.add(se);
+        se.show();
+    }//GEN-LAST:event_SorteoEspectadoresActionPerformed
     
 
     public static void main(String args[]) {
@@ -463,6 +483,8 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenu Plataforma;
     private javax.swing.JMenuItem Plataforma1;
     private javax.swing.JMenu Registro;
+    private javax.swing.JMenu Sorteo;
+    private javax.swing.JMenuItem SorteoEspectadores;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

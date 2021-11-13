@@ -42,6 +42,7 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String cantRegistradosParaFuncion = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ?";
     private final String cantFuncionesPorUsuario = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ? AND idUsuario = ?";
     private final String funcionesParaCanjear = "SELECT f.* FROM funciones f JOIN espectadores_funciones ef on f.id = ef.idFuncion WHERE idUsuario = ? AND ef.costo > 0";
+    private final String sorteoRealizado = "UPDATE `funciones` SET `sorteo` = '1' WHERE `funciones`.`id` = ?";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -141,13 +142,17 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //==================== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO=========//
     @Override
-    public List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) throws SQLException {
+    public List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) {
         List<Funcion> funciones = new ArrayList<>();
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
-        sentencia.setLong(1, idEspectaculo);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            funciones.add(funcionMapper(rs));
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
+            sentencia.setLong(1, idEspectaculo);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(funcionMapper(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return funciones;
     }
@@ -277,10 +282,11 @@ public class FuncionServicioImpl implements FuncionServicio {
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
+        Boolean sorteo = rs.getBoolean("sorteo");
 
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
-        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre, imagen);
+        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre, imagen, sorteo);
     }
 
     private void validarParametrosEliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {
@@ -296,13 +302,17 @@ public class FuncionServicioImpl implements FuncionServicio {
 
     //========== OBTENER TODOS LAS FUNCIONES POR ID ESPECTACULO DTO =========//
     @Override
-    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) throws SQLException {
+    public List<FuncionDTO> getFuncionesPorIdEspectaculoDTO(Long idEspectaculo) {
         List<FuncionDTO> funciones = new ArrayList<>();
-        PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
-        sentencia.setLong(1, idEspectaculo);
-        ResultSet rs = sentencia.executeQuery();
-        while (rs.next()) {
-            funciones.add(funcionMapperDTO(rs));
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionesPorIdEspectaculo);
+            sentencia.setLong(1, idEspectaculo);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(funcionMapperDTO(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return funciones;
     }
@@ -317,10 +327,11 @@ public class FuncionServicioImpl implements FuncionServicio {
         Date fechaRegistro = rs.getTimestamp("fechaRegistro");
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
+        Boolean sorteo = rs.getBoolean("sorteo");
 
         List<UsuarioDTO> artistasInvitados = getArtistasInvitadosAFuncionDTO(idFuncion);
 
-        return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen);
+        return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen, sorteo);
     }
     //========================== MAPPER FUNCION DTO ==========================//
 
@@ -402,4 +413,21 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
         return funciones;
     }
+
+    //============================ MODIFICAR Usuario =========================//
+    @Override
+    public void entregaDePremios(Long idFuncion) {
+
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(sorteoRealizado);
+            sentencia.setLong(1, idFuncion);
+            sentencia.executeUpdate();
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+
+    }
+    //============================ MODIFICAR ESPECTADOR =========================//
+
 }

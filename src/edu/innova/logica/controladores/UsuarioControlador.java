@@ -36,4 +36,12 @@ public interface UsuarioControlador { //Interfaz usuario
     public UsuarioDTO getUsuarioDTOPorId(Long id);
     
     public void modificarUsuarioDTO(UsuarioDTO usuario);
+    
+    public List<Espectador> getEspectadoresPorIdFuncion(Long idFuncion);
+    
+    public List<UsuarioDTO> usuariosDelSorteo(Long idFuncion, int premios);
+    
+    public void altaGanadores(Long idUsuario, Long idFuncion, String premio);
+    
+    public List<Espectador> getGanadores(Long idFuncion);
 }

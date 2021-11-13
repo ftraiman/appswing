@@ -44,4 +44,6 @@ public interface EspectaculoControlador {
     List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete);
     
     public EspectaculoDTO getEspectaculosPorNombre(String nombre);
+    
+    public List<Espectaculo> getTodosLosEspectaculosAceptados();
 }

@@ -284,7 +284,7 @@ public class Registrar_Funcion extends javax.swing.JInternalFrame {
             Date fechaDeRegistro = new Date();
             List<Artista> artistasInvitados = new ArrayList<>(artistasSeleccionados);
 
-            Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados, "imagen");
+            Funcion funcion = new Funcion(nombre, idEspectaculo, fechaInicio, fechaDeRegistro, artistasInvitados, "imagen", false);
             
             //Mandar al controlador
             fabrica.getFuncionControlador().altaFuncion(funcion, espectaculoSeleccionado);

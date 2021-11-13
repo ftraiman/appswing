@@ -43,4 +43,8 @@ public interface FuncionControlador { //Interfaz de Funcion
     
     void canjearFunciones(CanjeTresPorUnoDTO canje);
     
+    List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo);
+    
+    public void entregaDePremios(Long idFuncion);
+    
 }
