@@ -6,7 +6,6 @@ import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.Constantes;
 import static edu.innova.logica.Constantes.ALGORITMO;
 import static edu.innova.logica.Constantes.ARTISTA;
-import static edu.innova.logica.Constantes.ESPECTADOR;
 import static edu.innova.logica.Hash.getHash;
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
@@ -224,19 +223,28 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     //============================ MODIFICAR ESPECTADOR =========================//
 
     //========================= DEVUELVE EL ESPECTADOR =======================//
-    private Espectador espectadorMapper(ResultSet rs) throws SQLException {
-        Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        return new Espectador(rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
-                rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
-
+    private Espectador espectadorMapper(ResultSet rs) {
+        Date fechaNacimiento;
+        try {
+            fechaNacimiento = rs.getTimestamp("fechaNacimiento");
+            return new Espectador(rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
+                    rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
     }
     //========================= DEVUELVE EL Artista =======================//
 
-    private Artista artistaMapper(ResultSet rs) throws SQLException {
-        Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        Artista artista = new Artista(rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
-                rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
-        return artista;
+    private Artista artistaMapper(ResultSet rs) {
+        Date fechaNacimiento;
+        try {
+            fechaNacimiento = rs.getTimestamp("fechaNacimiento");
+            Artista artista = new Artista(rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), rs.getLong("id"), rs.getString("clave"), rs.getString("nickname"), rs.getString("nombre"),
+                    rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("imagen"));
+            return artista;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
     }
 
     //======================= BUSCAR Usuario PARA DTO =========================//
@@ -326,16 +334,26 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //======================= BUSCAR Usuario PARA DTO =========================//
     //========================= MAPPERS DE DTO USUARIOS =======================//
-    private UsuarioDTO dtoArtistaMapper(ResultSet rs) throws SQLException {
-        Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO artista = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
-        return artista;
+    private UsuarioDTO dtoArtistaMapper(ResultSet rs) {
+        Date fechaNacimiento;
+        try {
+            fechaNacimiento = rs.getTimestamp("fechaNacimiento");
+            UsuarioDTO artista = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, rs.getString("descripcion"), rs.getString("biografia"), rs.getString("linkUsuario"), null, rs.getString("imagen"));
+            return artista;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
     }
 
-    private UsuarioDTO dtoEspectadorMapper(ResultSet rs) throws SQLException {
-        Date fechaNacimiento = rs.getTimestamp("fechaNacimiento");
-        UsuarioDTO espectador = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, null, null, null, null, rs.getString("imagen"));
-        return espectador;
+    private UsuarioDTO dtoEspectadorMapper(ResultSet rs) {
+        Date fechaNacimiento;
+        try {
+            fechaNacimiento = rs.getTimestamp("fechaNacimiento");
+            UsuarioDTO espectador = new UsuarioDTO(rs.getLong("id"), rs.getString("tipo"), rs.getString("nickname"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), fechaNacimiento, null, null, null, null, rs.getString("imagen"));
+            return espectador;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
     }
     //========================= MAPPERS DE DTO USUARIOS =======================//
 
@@ -368,7 +386,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //============================= GET USUARIO DTO ==========================//
     @Override
-    public UsuarioDTO getUsuarioDTOPorId(Long id){
+    public UsuarioDTO getUsuarioDTOPorId(Long id) {
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(usuarioPorId);
             sentencia.setLong(1, id);
@@ -386,8 +404,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
     }
     //============================= GET USUARIO DTO ==========================//
-    
-     //============================ DTO MODIFICAR Usuario =========================//
+
+    //============================ DTO MODIFICAR Usuario =========================//
     @Override
     public void modificarUsuarioDTO(UsuarioDTO usuario) {
         //System.out.println("ACAANOOOO");
@@ -399,8 +417,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             sentencia.setDate(3, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
             sentencia.setLong(4, usuario.getId());
             sentencia.executeUpdate();
-            if (usuario.getTipo().equals(ARTISTA)){
-            System.out.println("version 2.0");
+            if (usuario.getTipo().equals(ARTISTA)) {
+                System.out.println("version 2.0");
                 sentencia = conexion.getConexion().prepareStatement(modificarDatosArtista);
                 sentencia.setString(1, usuario.getDescripcion());
                 sentencia.setString(2, usuario.getBiografia());
@@ -413,5 +431,5 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
     }
     //============================ DTO MODIFICAR ESPECTADOR =========================//
-    
+
 }

@@ -8,6 +8,7 @@ import java.util.List;
 public class PaqueteDTO {
     
     private Long id;
+    private Long idArtista;
     private String nombre;
     private String descripcion;
     private Date fechaInicio;
@@ -93,6 +94,15 @@ public class PaqueteDTO {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public Long getIdArtista() {
+        return idArtista;
+    }
+
+    public void setIdArtista(Long idArtista) {
+        this.idArtista = idArtista;
+    }
+    
     
     
     

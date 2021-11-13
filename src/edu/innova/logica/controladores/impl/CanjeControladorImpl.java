@@ -28,6 +28,12 @@ public class CanjeControladorImpl implements CanjeControlador {
         canjeServicio.altaCanjeTresPorUno(canje);
     }
     
+
+    @Override
+    public void altaEspectaculoPaqueteUtilizado(Long idUsuario, Long idPaquete, Long idEspectaculo) {
+        canjeServicio.altaEspectaculoPaqueteUtilizado(idUsuario, idPaquete, idEspectaculo);
+    }
+    
     public void validarCanjeTresPorUno(CanjeTresPorUnoDTO canje) {
         Optional.ofNullable(canje.getIdUsuario()).orElseThrow(()-> new InnovaModelException("Falta idUsuario"));
         Optional.ofNullable(canje.getIdFuncionObtenida()).orElseThrow(()-> new InnovaModelException("Falta la funcion obtenida"));
@@ -41,10 +47,5 @@ public class CanjeControladorImpl implements CanjeControlador {
                 .contains(canje.getIdFuncionObtenida())) {
             throw new InnovaModelException("No se puede canjear la misma funcion");
         }       
-    }
-
-    @Override
-    public void altaEspectaculoPaqueteUtilizado(Long idUsuario, Long idPaquete, Long idEspectaculo) {
-        canjeServicio.altaEspectaculoPaqueteUtilizado(idUsuario, idPaquete, idEspectaculo);
     }
 }

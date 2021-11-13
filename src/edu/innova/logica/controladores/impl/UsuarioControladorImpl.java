@@ -195,6 +195,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(espectador.getClave(), "clave");
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
         HelperFecha.validarFecha18(espectador.getFechaNacimiento());
+        
     }
 
     private void validarParametrosArtistaWeb(Artista artista) {
