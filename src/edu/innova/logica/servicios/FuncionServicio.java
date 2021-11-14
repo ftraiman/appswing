@@ -45,4 +45,10 @@ public interface FuncionServicio {
     Boolean getUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario);
 
     public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
+    
+    void altaFuncionFavorita(Long idFuncion, Long idUsuario);
+    
+    void bajaFuncionFavorita(Long idFuncion, Long idUsuario);
+    
+    List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario);
 }

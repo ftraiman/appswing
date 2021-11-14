@@ -234,4 +234,19 @@ public class FuncionControladorImpl implements FuncionControlador {
     public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario) {
         return funcionServicio.getFuncionesDeUsuarioParaCanjear(idUsuario);
     }
+
+    @Override
+    public void altaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        funcionServicio.altaFuncionFavorita(idFuncion, idUsuario);
+    }
+
+    @Override
+    public void bajaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        funcionServicio.bajaFuncionFavorita(idFuncion, idUsuario);
+    }
+
+    @Override
+    public List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario) {
+        return funcionServicio.getFuncionFavoritasesDeUsuario(idUsuario);
+    }
 }
