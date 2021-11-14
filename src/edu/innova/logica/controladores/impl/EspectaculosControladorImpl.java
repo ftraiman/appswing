@@ -145,9 +145,7 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
                     espectaculo.getFechaRegistro(), 
                     espectaculo.getIdCategoria(), 
                     espectaculo.getEstado(), 
-                    espectaculo.getImagen(), 
-                    espectaculo.getDescripcionPremios(), 
-                    espectaculo.getCantidadPremios()
+                    espectaculo.getImagen()
             );
 
         validarNuevoEspectaculo(idArtista, idPlataforma, espc);

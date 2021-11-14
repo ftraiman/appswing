@@ -195,7 +195,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
         HelperStrings.stringNoVacio(espectador.getClave(), "clave");
         HelperFecha.validarFechaAnteriorALaActual(espectador.getFechaNacimiento());
         HelperFecha.validarFecha18(espectador.getFechaNacimiento());
-        
+
     }
 
     private void validarParametrosArtistaWeb(Artista artista) {
@@ -300,7 +300,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     //========================= MODIFICAR USUARIO CON DTO =====================//
     @Override
     public void modificarUsuarioDTO(UsuarioDTO usuario) { //MODIFICAR EL USUARIO CON UN DTO
-       usuarioServicio.modificarUsuarioDTO(usuario);
+        usuarioServicio.modificarUsuarioDTO(usuario);
     }
     //========================= MODIFICAR USUARIO CON DTO =====================//
 
@@ -331,7 +331,15 @@ public class UsuarioControladorImpl implements UsuarioControlador {
     }
 
     @Override
-    public List<Espectador> getGanadores(Long idFuncion) {
+    public List<UsuarioDTO> getGanadores(Long idFuncion) {
         return usuarioServicio.getGanadores(idFuncion);
+    }
+
+    @Override
+    public List<UsuarioDTO> getPremiosEspectadores(String email) {
+        if (HelperStrings.ValidarEmail(email)) {
+            return usuarioServicio.getPremiosEspectadores(email);
+        }
+        return null;
     }
 }

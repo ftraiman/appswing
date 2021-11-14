@@ -19,10 +19,29 @@ public class UsuarioDTO {
     private String descripcion;
     private String biografia;
     private String linkUsuario;
-
+    
+    //Atributos del Espectador ganador
+    private String descripcionPremios;
+    private Date fechaSorteo;
+    private Long idFuncion;
+    private Long idEspectaculo;
    
     public UsuarioDTO() {  
+    }  
+    
+    //====================== COSTRUCTOR DE USUARIO GANADOR ===================//
+    public UsuarioDTO(Long id, String nombre, String apellido, String descripcionPremios, Date fechaSorteo, Long idFuncion, Long idEspectaculo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.descripcionPremios = descripcionPremios;
+        this.fechaSorteo = fechaSorteo;
+        this.idFuncion = idFuncion;
+        this.idEspectaculo = idEspectaculo;
     }
+    //====================== COSTRUCTOR DE USUARIO GANADOR ===================//    
+    
+    
     
     public UsuarioDTO(Long id, String tipo, String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String descripcion, String biografia, String linkUsuario, String clave, String imagen) {
         this.id = id;
@@ -50,6 +69,40 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Date getFechaSorteo() {
+        return fechaSorteo;
+    }
+
+    public void setFechaSorteo(Date fechaSorteo) {
+        this.fechaSorteo = fechaSorteo;
+    }
+
+    public Long getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(Long idFuncion) {
+        this.idFuncion = idFuncion;
+    }
+
+    public Long getIdEspectaculo() {
+        return idEspectaculo;
+    }
+
+    public void setIdEspectaculo(Long idEspectaculo) {
+        this.idEspectaculo = idEspectaculo;
+    }
+
+    
+    
     public UsuarioDTO(Long id) {
         this.id = id;
     }    

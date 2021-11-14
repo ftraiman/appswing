@@ -15,13 +15,16 @@ public class FuncionDTO {
     private List<UsuarioDTO> artistasInvitados;
     private String imagen;
     private Boolean sorteo;
+    private String descripcionPremios;
+    private Integer cantidadPremios;
+    
     //============================ ATRIBUTOS =================================//
 
     //============================ CONSTRUCTURES =============================//
     public FuncionDTO() {
     }
 
-    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo) {
+    public FuncionDTO(Long id, String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo, String descripcionPremios, int cantidadPremios) {
         this.id = id;
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
@@ -30,9 +33,11 @@ public class FuncionDTO {
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
         this.sorteo = sorteo;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
     
-    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo) {
+    public FuncionDTO(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<UsuarioDTO> artistasInvitados, String imagen, Boolean sorteo, String descripcionPremios, int cantidadPremios) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -40,10 +45,29 @@ public class FuncionDTO {
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
         this.sorteo = sorteo;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
     //============================ CONSTRUCTURES =============================//
 
+    
+
     //======================== GETTER & SETTER ===============================//
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Integer getCantidadPremios() {
+        return cantidadPremios;
+    }
+    
+    public void setCantidadPremios(int cantidadPremios) {
+        this.cantidadPremios = cantidadPremios;
+    }
 
     public Boolean getSorteo() {
         return sorteo;

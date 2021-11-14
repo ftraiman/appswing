@@ -45,5 +45,7 @@ public interface UsuarioServicio {
     
     public void altaGanadores(Long idUsuario, Long idFuncion, String premio);
     
-    public List<Espectador> getGanadores(Long idFuncion);
+    public List<UsuarioDTO> getGanadores(Long idFuncion);
+    
+    public List<UsuarioDTO> getPremiosEspectadores(String email);
 }

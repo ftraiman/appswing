@@ -230,14 +230,9 @@ public final class Sorteo_Espectadores extends javax.swing.JInternalFrame {
             int seleccionar = tablaEspectaculos.rowAtPoint(evt.getPoint());
 
             Long id = Long.parseLong(String.valueOf(tablaEspectaculos.getValueAt(seleccionar, 0)));
-            EspectaculoDTO esp = fabrica.getEspectaculoControlador().getEspectaculoPorIdDTO(id);
-
-            this.lbl_Premio.setText(esp.getDescripcionPremios());
-            this.lbl_CantidadPremios.setText(esp.getCantidadPremios().toString());
+            //FuncionDTO fun = fabrica.getFuncionControlador().getFuncionDTOPorId(id);
 
             cargarDatosFunciones(id);
-            cantidadPremios = esp.getCantidadPremios().toString();
-            premio = esp.getDescripcionPremios();
 
         } catch (InnovaModelException x) {
             JOptionPane.showMessageDialog(rootPane, String.format("Este Espectaculo NO Posee Funciones!![%s]", x.getMessage()));
@@ -251,6 +246,12 @@ public final class Sorteo_Espectadores extends javax.swing.JInternalFrame {
         FuncionDTO funcion = fabrica.getFuncionControlador().getFuncionDTOPorId(id);
 
         ID_FUNCION = funcion.getId();
+        //System.out.println(ID_FUNCION);
+        this.lbl_Premio.setText(funcion.getDescripcionPremios());
+        this.lbl_CantidadPremios.setText(funcion.getCantidadPremios().toString());
+
+        cantidadPremios = funcion.getCantidadPremios().toString();
+        premio = funcion.getDescripcionPremios();
 
         this.lbl_IdFuncion.setText(funcion.getId().toString());
         SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
@@ -298,7 +299,7 @@ public final class Sorteo_Espectadores extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No hay ganadores");
         }
-        
+
     }//GEN-LAST:event_btnMostrarGanadoresActionPerformed
 
 

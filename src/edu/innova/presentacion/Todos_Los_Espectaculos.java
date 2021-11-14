@@ -236,9 +236,6 @@ public class Todos_Los_Espectaculos extends javax.swing.JInternalFrame {
             fila[11] = espectaculo.getIdCategoria().toString();
             fila[12] = espectaculo.getEstado();
             
-            fila[13] = espectaculo.getDescripcionPremios();
-            fila[14] = espectaculo.getCantidadPremios().toString();
-            
             tabla.addRow(fila); //Se agrega la fila al modelo de la tabla
         }
         this.Tabla_Espectaculo.setModel(tabla);

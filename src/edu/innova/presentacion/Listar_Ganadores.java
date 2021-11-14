@@ -2,8 +2,10 @@ package edu.innova.presentacion;
 
 import static edu.innova.logica.Constantes.ID_FUNCION;
 import edu.innova.logica.Fabrica;
+import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +16,7 @@ public class Listar_Ganadores extends javax.swing.JInternalFrame {
     public Listar_Ganadores() {
         initComponents();
 
+        //System.out.println(ID_FUNCION);
         cargarGanadores(ID_FUNCION);
 
     }
@@ -74,12 +77,15 @@ public class Listar_Ganadores extends javax.swing.JInternalFrame {
         //Defino las columnas que quiero
         tabla.addColumn("Nombre");
         tabla.addColumn("Apellido");
+        tabla.addColumn("Fecha del sorteo");
 
-        List<Espectador> espectadores = fabrica.getUsuarioControlador().getGanadores(idFuncion);
-        for (Espectador espectador : espectadores) {
-            String fila[] = new String[2];//Limite de dos porque solo mostramos el nombre y el apellido
+        List<UsuarioDTO> espectadores = fabrica.getUsuarioControlador().getGanadores(idFuncion);
+        for (UsuarioDTO espectador : espectadores) {
+            String fila[] = new String[3];//Limite de dos porque solo mostramos el nombre y el apellido
             fila[0] = espectador.getNombre();
             fila[1] = espectador.getApellido();
+            SimpleDateFormat dateform = new SimpleDateFormat("dd/MM/Y");
+            fila[2] = dateform.format(espectador.getFechaSorteo());
 
             tabla.addRow(fila); //Se agrega la fila al modelo de la tabla
         }

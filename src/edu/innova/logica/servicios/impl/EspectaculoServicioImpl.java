@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 public class EspectaculoServicioImpl implements EspectaculoServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado,imagen,descripcionPremios,cantidadPremios) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String altaEspectaculo = "INSERT INTO espectaculos (nombre,costo,url,duracion,descripcion,fechaRegistro,idUsuario,idPlataforma,espectadoresMinimos,espectadoresMaximos,idCategoria,estado,imagen) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String altaCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String todosLosEspectaculosAceptados = "SELECT * FROM espectaculos WHERE estado = 'Aceptado'";
@@ -91,8 +91,6 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             sentencia.setLong(11, espectaculo.getIdCategoria());
             sentencia.setString(12, espectaculo.getEstado());
             sentencia.setString(13, espectaculo.getImagen());
-            sentencia.setString(14, espectaculo.getDescripcionPremios());
-            sentencia.setInt(15, espectaculo.getCantidadPremios());
 
             sentencia.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
@@ -272,12 +270,10 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Long idCategoria = rs.getLong("idCategoria");
         String estado = rs.getString("estado");
         String imagen = rs.getString("imagen");
-        String descripcionPremios = rs.getString("descripcionPremios");
-        Integer cantidadPremios = rs.getInt("cantidadPremios");
 
         List<Funcion> funciones = funcionServicio.getTodosLasFuncionesPorIdEspectaculo(id);
 
-        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado, imagen, descripcionPremios, cantidadPremios);
+        return new Espectaculo(id, artista, nombre, plataforma, descripcion, duracion, espectadoresMinimos, espectadoresMaximos, url, costo, fechaRegistro, funciones, idCategoria, estado, imagen);
     }
 
     private Categoria categoriaMapper(ResultSet rs) throws SQLException {
@@ -404,8 +400,6 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         Long idCategoria = rs.getLong("idCategoria");
         String estado = rs.getString("estado");
         String imagen = rs.getString("imagen");
-        String descripcionPremios = rs.getString("descripcionPremios");
-        Integer cantPremios = rs.getInt("cantidadPremios");
 
         List<FuncionDTO> funciones = funcionServicio.getFuncionesPorIdEspectaculoDTO(id);
 
@@ -425,9 +419,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
             funciones, 
             estado, 
             idCategoria, 
-            imagen,
-            descripcionPremios,
-            cantPremios
+            imagen
         );
     }
     //======================= MAPPER ESPECTACULO DTO =========================//

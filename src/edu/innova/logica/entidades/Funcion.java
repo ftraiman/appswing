@@ -15,11 +15,15 @@ public class Funcion {
     private List<Artista> artistasInvitados = new ArrayList<>();
     private String imagen;
     private Boolean sorteo;
+    private String descripcionPremios;
+    private Integer cantidadPremios;
 
     public Funcion() {
     }
+    
+    
 
-    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre, String imagen, Boolean sorteo) {
+    public Funcion(Long id, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String nombre, String imagen, Boolean sorteo, String descripcionPremios, int cantidadPremios) {
         this.id = id;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -28,8 +32,10 @@ public class Funcion {
         this.nombre = nombre;
         this.imagen = imagen;
         this.sorteo = sorteo;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
-    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen, Boolean sorteo) {
+    public Funcion(String nombre, Long idEspectaculo, Date fechaInicio, Date fechaRegistro, List<Artista> artistasInvitados, String imagen, Boolean sorteo, String descripcionPremios, int cantidadPremios) {
         this.nombre = nombre;
         this.idEspectaculo = idEspectaculo;
         this.fechaInicio = fechaInicio;
@@ -37,7 +43,27 @@ public class Funcion {
         this.artistasInvitados = artistasInvitados;
         this.imagen = imagen;
         this.sorteo = sorteo;
+        this.descripcionPremios = descripcionPremios;
+        this.cantidadPremios = cantidadPremios;
     }
+
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Integer getCantidadPremios() {
+        return cantidadPremios;
+    }
+
+    public void setCantidadPremios(int cantidadPremios) {
+        this.cantidadPremios = cantidadPremios;
+    }
+    
+    
 
     public Boolean getSorteo() {
         return sorteo;

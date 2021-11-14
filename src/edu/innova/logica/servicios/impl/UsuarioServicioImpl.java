@@ -42,9 +42,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String usuariosQueLoSiguen = "SELECT * FROM usuarios_seguidores us JOIN usuarios u on u.id = us.idUsuarioSeguidor WHERE idUsuarioSeguido = ?";
     private final String dejarDeSeguirUsuario = "DELETE FROM usuarios_seguidores WHERE idUsuarioSeguidor = ? AND idUsuarioSeguido = ?";
     private final String espectadoresPorIdFuncion = "SELECT * FROM usuarios AS U, espectadores_funciones AS EF WHERE U.id = EF.idUsuario AND EF.idFuncion = ?";
+    
     private final String entregaDePremios = "SELECT DISTINCT * FROM usuarios U, espectadores_funciones EF WHERE EF.idUsuario = U.id AND EF.idFuncion = ? ORDER BY RAND() LIMIT ?";
-    private final String insertarGanadores = "INSERT INTO `usuarios_ganadores` (`idUsuario`, `idFuncion`, `premio`) VALUES (?, ?, ?);";
-    private final String mostrarGanadores = "SELECT * FROM usuarios u, usuarios_ganadores ug, funciones f WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.id = ?";
+    private final String insertarGanadores = "INSERT INTO `usuarios_ganadores` (`idUsuario`, `idFuncion`, `premio`,`fechaSorteo`) VALUES (?,?, ?, ?);";
+    private final String mostrarGanadores = "SELECT u.id, u.nombre, u.apellido, ug.premio, ug.fechaSorteo, f.id, e.id FROM usuarios u, usuarios_ganadores ug, funciones f, espectaculos e WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.idEspectaculo = e.id AND f.id =?";
+    private final String mostrarPremiosDelEspectador = "SELECT u.id, u.nombre, u.apellido, ug.premio, ug.fechaSorteo, f.id, e.id FROM usuarios u, usuarios_ganadores ug, funciones f, espectaculos e WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.idEspectaculo = e.id AND u.email =? ORDER BY ug.id DESC";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
     //INSTANCIA DE LA CLASE
     private static UsuarioServicioImpl servicioUsuario;
@@ -483,6 +485,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             sentencia.setLong(1, idUsuario);
             sentencia.setLong(2, idFuncion);
             sentencia.setString(3, premio);
+            Date fecha = new Date();
+            sentencia.setDate(4,  new java.sql.Date(fecha.getTime()));
             
             sentencia.executeUpdate();
         } catch (SQLException ex) {
@@ -491,22 +495,55 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
     //============================= ALTA GANADOR =============================//
     
-    //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    //======= OBTENER TODOS LAS ESPECTADORES GANADORES DE UNA FUNCION ========//
     @Override
-    public List<Espectador> getGanadores(Long idFuncion) {
-        List<Espectador> espectadores = new ArrayList<>();
+    public List<UsuarioDTO> getGanadores(Long idFuncion) {
+        List<UsuarioDTO> espectadores = new ArrayList<>();
         try {
             PreparedStatement sentencia = conexion.getConexion().prepareStatement(mostrarGanadores);
             sentencia.setLong(1, idFuncion);
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
-                espectadores.add(espectadorMapper(rs));
+                espectadores.add(espectadorGanadorMapper(rs));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FuncionServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return espectadores;
     }
-     //============= OBTENER TODOS LAS ESPECTADORES DE UNA FUNCION ============//
+    //======= OBTENER TODOS LAS ESPECTADORES GANADORES DE UNA FUNCION ========//
     
+    //======= OBTENER TODOS LAS PREMIOS DEL ESPECTADOR DE UNA FUNCION ========//
+    @Override
+    public List<UsuarioDTO> getPremiosEspectadores(String email) {
+        List<UsuarioDTO> espectadores = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(mostrarPremiosDelEspectador);
+            sentencia.setString(1, email);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectadores.add(espectadorGanadorMapper(rs));
+            }
+            if(espectadores.isEmpty()){
+                System.out.println("aca");
+                return null;
+            }
+            return espectadores;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }        
+    }
+    //======= OBTENER TODOS LAS PREMIOS DEL ESPECTADOR DE UNA FUNCION ========//
+    
+    //===================== MAPPER USUARIO GANADOR ===========================//
+    private UsuarioDTO espectadorGanadorMapper(ResultSet rs) {
+        Date fechaNacimiento;
+        try {
+            fechaNacimiento = rs.getTimestamp("fechaSorteo");
+            return new UsuarioDTO(rs.getLong("id"),rs.getString("nombre"),rs.getString("apellido"), rs.getString("premio"), fechaNacimiento, rs.getLong("id"), rs.getLong("id"));
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //===================== MAPPER USUARIO GANADOR ===========================//    
 }

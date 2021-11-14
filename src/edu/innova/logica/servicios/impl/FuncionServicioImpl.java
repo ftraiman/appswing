@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class FuncionServicioImpl implements FuncionServicio {
 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
-    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro,imagen) VALUES (?, ?, ?, ?, ?)";
+    private final String altaFunciones = "INSERT INTO funciones (idEspectaculo, nombre, fechaInicio, fechaRegistro,imagen,descripcionPremios,cantidadPremios) VALUES (?,?,?, ?, ?, ?, ?)";
     private final String todosLasFunciones = "SELECT * FROM funciones";
     private final String funcionesPorIdEspectaculo = "SELECT * FROM funciones WHERE idEspectaculo = ?";
     private final String funcionesPorIdUsuario = "SELECT * FROM funciones AS FF, espectadores_funciones AS EF WHERE FF.id = EF.idFuncion AND EF.idUsuario = ?";
@@ -75,6 +75,8 @@ public class FuncionServicioImpl implements FuncionServicio {
             sentencia.setDate(3, new java.sql.Date(funcion.getFechaInicio().getTime()));
             sentencia.setDate(4, new java.sql.Date(funcion.getFechaRegistro().getTime()));
             sentencia.setString(5, funcion.getImagen());
+            sentencia.setString(6, funcion.getDescripcionPremios());
+            sentencia.setInt(7,funcion.getCantidadPremios());
             sentencia.executeUpdate();
 
             Integer newId = null;
@@ -283,10 +285,12 @@ public class FuncionServicioImpl implements FuncionServicio {
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
         Boolean sorteo = rs.getBoolean("sorteo");
+        String descripcionPremios = rs.getString("descripcionPremios");
+        int cantidadPremios = rs.getInt("cantidadPremios");
 
         List<Artista> artistasInvitados = getArtistasInvitadosAFuncion(idFuncion);
 
-        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre, imagen, sorteo);
+        return new Funcion(idFuncion, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, nombre, imagen, sorteo,descripcionPremios,cantidadPremios);
     }
 
     private void validarParametrosEliminarFuncionesDelEspectador(ArrayList<Funcion> funciones, Espectador espectador) {
@@ -328,10 +332,12 @@ public class FuncionServicioImpl implements FuncionServicio {
         String nombre = rs.getString("nombre");
         String imagen = rs.getString("imagen");
         Boolean sorteo = rs.getBoolean("sorteo");
+        String descripcionPremios = rs.getString("descripcionPremios");
+        int cantidadPremios = rs.getInt("cantidadPremios");
 
         List<UsuarioDTO> artistasInvitados = getArtistasInvitadosAFuncionDTO(idFuncion);
 
-        return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen, sorteo);
+        return new FuncionDTO(idFuncion, nombre, idEspectaculo, fechaInicio, fechaRegistro, artistasInvitados, imagen, sorteo,descripcionPremios,cantidadPremios);
     }
     //========================== MAPPER FUNCION DTO ==========================//
 
@@ -426,7 +432,6 @@ public class FuncionServicioImpl implements FuncionServicio {
         } catch (SQLException ex) {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
         }
-
     }
     //============================ MODIFICAR ESPECTADOR =========================//
 

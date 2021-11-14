@@ -41,6 +41,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         jMenu_Usuarios = new javax.swing.JMenu();
         jMenuItem_Espectador = new javax.swing.JMenuItem();
         jMenuItem_Artistas = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -213,6 +214,14 @@ public class GUI_Proyecto extends javax.swing.JFrame {
             }
         });
         jMenu_Usuarios.add(jMenuItem_Artistas);
+
+        jMenuItem7.setText("Premios del espectador");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu_Usuarios.add(jMenuItem7);
 
         jMenu3.add(jMenu_Usuarios);
 
@@ -437,6 +446,13 @@ public class GUI_Proyecto extends javax.swing.JFrame {
         this.Panel.add(se);
         se.show();
     }//GEN-LAST:event_SorteoEspectadoresActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Consultar_Premios cp = new Consultar_Premios();
+        this.Panel.add(cp);
+        cp.show();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
     
 
     public static void main(String args[]) {
@@ -499,6 +515,7 @@ public class GUI_Proyecto extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem_Artistas;
     private javax.swing.JMenuItem jMenuItem_Espectador;
     private javax.swing.JMenuItem jMenuModificarArtista;

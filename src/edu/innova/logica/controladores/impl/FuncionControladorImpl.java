@@ -208,7 +208,7 @@ public class FuncionControladorImpl implements FuncionControlador {
             return artista;
         }).collect(Collectors.toList());
         Funcion nuevaFuncion = new Funcion(funcion.getNombre(), funcion.getIdEspectaculo(), funcion.getFechaInicio(), funcion.getFechaRegistro(),
-                artistasInvitados, funcion.getImagen(),funcion.getSorteo());
+                artistasInvitados, funcion.getImagen(),funcion.getSorteo(),funcion.getDescripcionPremios(),funcion.getCantidadPremios());
         this.altaFuncion(nuevaFuncion, espectaculo);
     }
     //==================== AlTA DE FUNCION DTO=======================//
