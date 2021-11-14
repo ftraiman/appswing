@@ -46,4 +46,7 @@ public interface EspectaculoServicio {
 
     public List<Espectaculo> getTodosLosEspectaculosAceptados();
     
+    public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre);
+    
+    public void finalizarEspectaculo(Long id);
 }

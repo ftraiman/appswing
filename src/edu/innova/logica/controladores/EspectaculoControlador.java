@@ -46,4 +46,8 @@ public interface EspectaculoControlador {
     public EspectaculoDTO getEspectaculosPorNombre(String nombre);
     
     public List<Espectaculo> getTodosLosEspectaculosAceptados();
+    
+     public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre);
+     
+     public void finalizarEspectaculo(Long id);
 }

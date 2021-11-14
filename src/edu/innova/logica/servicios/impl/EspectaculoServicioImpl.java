@@ -33,6 +33,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String altaCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
     private final String todosLosEspectaculos = "SELECT * FROM espectaculos";
     private final String todosLosEspectaculosAceptados = "SELECT * FROM espectaculos WHERE estado = 'Aceptado'";
+    private final String todosLosEspectaculosAceptadosPorNombre = "SELECT e.* FROM espectaculos e, usuarios u WHERE e.estado = 'Aceptado' AND e.idUsuario = u.id AND u.email = ?";
     private final String todosLosEspectaculosPorIdPlataforma = "SELECT * FROM espectaculos WHERE idPlataforma = ? AND estado = 'Aceptado'";
     private final String espectaculoPorId = "SELECT * FROM espectaculos WHERE id = ?";
     private final String espectaculoPorIdA = "SELECT * FROM espectaculos WHERE idUsuario = ?";
@@ -40,6 +41,7 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String todosLosEspectaculosIngresados = "SELECT * FROM espectaculos WHERE estado = 'Ingresado'";
     private final String aceptarEspectaculo = "UPDATE espectaculos SET estado = 'Aceptado' WHERE espectaculos.id = ?";
     private final String rechazarEspectaculo = "UPDATE espectaculos SET estado = 'Rechazado' WHERE espectaculos.id = ?";
+    private final String finalizarEspectaculo = "UPDATE espectaculos SET estado = 'Finalizado' WHERE espectaculos.id = ?";
     private final String categoriasPorIdEspectaculo = "SELECT C.id, C.nombre FROM categorias AS C, espectaculos AS E WHERE C.id = E.idCategoria AND E.id = ?";
     private final String buscarEspectaculoDTO = "SELECT * FROM espectaculos E WHERE EXISTS(SELECT * FROM funciones F WHERE ((E.idPlataforma = ? OR E.idCategoria = ?) OR (E.idPlataforma = ? AND E.idCategoria = ?)) AND E.id = F.idEspectaculo AND E.estado = 'Aceptado')";
     private final String buscarEspectaculoDTOCategoria = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.estado = 'Aceptado'";
@@ -312,6 +314,20 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //====================== RECHAZAR ESPECTACULO ==============================
+    
+     //====================== RECHAZAR ESPECTACULO =============================== 
+    @Override
+    public void finalizarEspectaculo(Long id) {
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(finalizarEspectaculo);
+            sentencia.setString(1, id.toString());
+            sentencia.executeUpdate();
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //====================== RECHAZAR ESPECTACULO ==============================
 
     //==================== OBTENER ESPECTACULO POR ID ============//
     @Override
@@ -403,23 +419,22 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
 
         List<FuncionDTO> funciones = funcionServicio.getFuncionesPorIdEspectaculoDTO(id);
 
-        return new 
-        EspectaculoDTO(
-            id, 
-            idArtista, 
-            nombre, 
-            idPlataforma, 
-            descripcion, 
-            duracion, 
-            espectadoresMinimos, 
-            espectadoresMaximos, 
-            url, 
-            costo, 
-            fechaRegistro, 
-            funciones, 
-            estado, 
-            idCategoria, 
-            imagen
+        return new EspectaculoDTO(
+                id,
+                idArtista,
+                nombre,
+                idPlataforma,
+                descripcion,
+                duracion,
+                espectadoresMinimos,
+                espectadoresMaximos,
+                url,
+                costo,
+                fechaRegistro,
+                funciones,
+                estado,
+                idCategoria,
+                imagen
         );
     }
     //======================= MAPPER ESPECTACULO DTO =========================//
@@ -502,4 +517,26 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //==================== OBTENER ESPECTACULO POR Nombre ============//
+
+    //=============== OBTENER TODOS LOS ESPECTACULOS ACEPTADOS ===============//
+    @Override
+    public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre) {
+        List<Espectaculo> espectaculos = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(todosLosEspectaculosAceptadosPorNombre);
+            sentencia.setString(1, nombre);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                espectaculos.add(espectaculoMapper(rs));
+            }
+            if(espectaculos.isEmpty()){
+                //System.out.println("aca");
+                return null;
+            }
+            return espectaculos;
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
+        }
+    }
+    //=============== OBTENER TODOS LOS ESPECTACULOS ACEPTADOS ===============//
 }

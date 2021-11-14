@@ -2,6 +2,7 @@ package edu.innova.logica.controladores;
 
 import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
+import edu.innova.logica.entidades.Espectaculo;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
 import java.util.List;
@@ -46,4 +47,6 @@ public interface UsuarioControlador { //Interfaz usuario
     public List<UsuarioDTO> getGanadores(Long idFuncion);
     
     public List<UsuarioDTO> getPremiosEspectadores(String email);
+    
+   
 }

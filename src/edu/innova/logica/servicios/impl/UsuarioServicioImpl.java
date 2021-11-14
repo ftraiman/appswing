@@ -525,7 +525,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 espectadores.add(espectadorGanadorMapper(rs));
             }
             if(espectadores.isEmpty()){
-                System.out.println("aca");
+                //System.out.println("aca");
                 return null;
             }
             return espectadores;

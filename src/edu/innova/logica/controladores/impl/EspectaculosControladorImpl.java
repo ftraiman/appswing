@@ -87,14 +87,14 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     }
 
     @Override
-    public List<Categoria> getTodasLasCategorias(){
+    public List<Categoria> getTodasLasCategorias() {
         return espectaculoServicio.getTodasLasCategorias();
     }
-    
+
     @Override
     public List<CategoriaDTO> getTodasLasCategoriasDTO() {
         List<Categoria> categorias = espectaculoServicio.getTodasLasCategorias();
-        if (categorias!= null ) {
+        if (categorias != null) {
             return espectaculoServicio.getTodasLasCategorias().stream().map(this::categoriaDTOMapper).collect(Collectors.toList());
         }
         return new ArrayList<>();
@@ -133,20 +133,19 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public void altaEspectaculoDTO(EspectaculoDTO espectaculo) {
         Long idArtista = espectaculo.getIdArtista();
         Long idPlataforma = espectaculo.getIdPlataforma();
-        Espectaculo espc = new 
-            Espectaculo(
-                    espectaculo.getNombre(), 
-                    espectaculo.getDescripcion(), 
-                    espectaculo.getDuracion(), 
-                    espectaculo.getEspectadoresMinimos(), 
-                    espectaculo.getEspectadoresMaximos(), 
-                    espectaculo.getUrl(), 
-                    espectaculo.getCosto(), 
-                    espectaculo.getFechaRegistro(), 
-                    espectaculo.getIdCategoria(), 
-                    espectaculo.getEstado(), 
-                    espectaculo.getImagen()
-            );
+        Espectaculo espc = new Espectaculo(
+                espectaculo.getNombre(),
+                espectaculo.getDescripcion(),
+                espectaculo.getDuracion(),
+                espectaculo.getEspectadoresMinimos(),
+                espectaculo.getEspectadoresMaximos(),
+                espectaculo.getUrl(),
+                espectaculo.getCosto(),
+                espectaculo.getFechaRegistro(),
+                espectaculo.getIdCategoria(),
+                espectaculo.getEstado(),
+                espectaculo.getImagen()
+        );
 
         validarNuevoEspectaculo(idArtista, idPlataforma, espc);
 
@@ -168,26 +167,26 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     public List<EspectaculoDTO> getTodosLosEspectaculosPorArtistaDTO(Long idArtista) {
         return espectaculoServicio.getTodosLosEspectaculosPorArtistaDTO(idArtista);
     }
-    
+
     @Override
-    public void AltaEspectaculoDTO(EspectaculoDTO espectaculo){
+    public void AltaEspectaculoDTO(EspectaculoDTO espectaculo) {
         espectaculoServicio.altaEspectaculoDTO(espectaculo);
     }
-    
+
     public CategoriaDTO categoriaDTOMapper(Categoria categoria) {
         return new CategoriaDTO(categoria.getId(), categoria.getNombre());
     }
 
     @Override
     public List<EspectaculoDTO> buscarEspectaculosDTO(Long idPlataforma, Long idCategoria) {
-          return espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
-    }    
+        return espectaculoServicio.buscarEspectaculosDTO(idPlataforma, idCategoria);
+    }
 
     @Override
     public List<EspectaculoDTO> getEspectaculosDTONoIncluidosEnPaquete(Long idArtista, Long idPaquete) {
         return espectaculoServicio.getEspectaculosDTONoIncluidosEnPaquete(idArtista, idPaquete);
     }
-    
+
     @Override
     public EspectaculoDTO getEspectaculosPorNombre(String nombre) {
         return espectaculoServicio.getEspectaculoPorNombre(nombre);
@@ -196,5 +195,17 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
     @Override
     public List<Espectaculo> getTodosLosEspectaculosAceptados() {
         return espectaculoServicio.getTodosLosEspectaculosAceptados();
+    }
+
+    @Override
+    public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre) {
+        return espectaculoServicio.getTodosLosEspectaculosAceptadosPorNombre(nombre);
+    }
+
+    @Override
+    public void finalizarEspectaculo(Long id) {
+
+        espectaculoServicio.finalizarEspectaculo(id);
+
     }
 }
