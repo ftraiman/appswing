@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2021 a las 22:38:07
+-- Tiempo de generación: 14-11-2021 a las 22:28:34
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -120,27 +120,25 @@ CREATE TABLE `espectaculos` (
   `espectadoresMaximos` int(11) DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  `descripcionPremios` varchar(255) DEFAULT NULL,
-  `cantidadPremios` int(255) DEFAULT NULL
+  `imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `espectaculos`
 --
 
-INSERT INTO `espectaculos` (`espectadoresMinimos`, `url`, `costo`, `nombre`, `id`, `duracion`, `descripcion`, `fechaRegistro`, `idUsuario`, `idPlataforma`, `espectadoresMaximos`, `idCategoria`, `estado`, `imagen`, `descripcionPremios`, `cantidadPremios`) VALUES
-(100, 'www.superjaime.com', '1000', 'Jaime Ross online', 1, 90, 'Jaime Ross nuevo disco', '2021-10-07', 1, 1, 1000, 1, 'aceptado', 'jaimerossonline.jpg', NULL, NULL),
-(1, 'www.superpique.com', '1001', 'Shakira en twitch', 2, 60, 'Shakira y Pique', '2021-10-07', 2, 3, 3, 1, 'aceptado', 'shakiraentwitch.jpg', 'pique', 2),
-(2, 'www.shakira.com', '4', 'Shakira recien ingresado', 3, 1, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 100, 4, 'ingresado', 'Shakirashakira2.jpg', NULL, NULL),
-(100, 'www.shakira.com', '1245', 'Shakira cantando bien', 5, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 500, 2, 'aceptado', 'shakiraacompaniada.jpg', NULL, NULL),
-(100, 'www.shakira.com', '250', 'Shakira cantando mal', 6, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 2, 500, 4, 'rechazado', 'Shakirashakira2.jpg', NULL, NULL),
-(100, 'url', '340', 'Shakira en vivio', 9, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakirashow.jpg', NULL, NULL),
-(100, 'url', '340', 'Shakira en vivo 2', 10, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakiravivo.jpg', NULL, NULL),
-(120, 'www.shakira.com', '450', 'Shakira clásico', 11, 80, 'Shakira cantando musica clásica', '2021-10-19', 2, 2, 240, 3, 'ingresado', 'Shakiraclasico.jpg', NULL, NULL),
-(100, 'www.twitch.com', '1000', 'El pollo asado nos ataca?', 12, 120, 'Descripcion de Twitch', '2022-01-01', 5, 3, 125, 4, 'Aceptado', 'imagen', NULL, NULL),
-(150, 'www.twitch.com', '100', 'Secuelas del pollo', 13, 180, 'Descripcion de Twitch', '2022-03-01', 5, 3, 200, 4, 'Ingresado', 'imagen', NULL, NULL),
-(50, 'www.twitch.com', '300', 'Pesca de lombrices', 14, 240, 'Descripcion de Twitch', '2025-02-01', 3, 3, 75, 4, 'Aceptado', 'imagen', 'La lombris que siga viva o que se escape del pez', 1);
+INSERT INTO `espectaculos` (`espectadoresMinimos`, `url`, `costo`, `nombre`, `id`, `duracion`, `descripcion`, `fechaRegistro`, `idUsuario`, `idPlataforma`, `espectadoresMaximos`, `idCategoria`, `estado`, `imagen`) VALUES
+(100, 'www.superjaime.com', '1000', 'Jaime Ross online', 1, 90, 'Jaime Ross nuevo disco', '2021-10-07', 1, 1, 1000, 1, 'aceptado', 'jaimerossonline.jpg'),
+(1, 'www.superpique.com', '1001', 'Shakira en twitch', 2, 60, 'Shakira y Pique', '2021-10-07', 2, 3, 3, 1, 'aceptado', 'shakiraentwitch.jpg'),
+(2, 'www.shakira.com', '4', 'Shakira recien ingresado', 3, 1, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 100, 4, 'ingresado', 'Shakirashakira2.jpg'),
+(100, 'www.shakira.com', '1245', 'Shakira cantando bien', 5, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 1, 500, 2, 'aceptado', 'shakiraacompaniada.jpg'),
+(100, 'www.shakira.com', '250', 'Shakira cantando mal', 6, 90, 'la descripcion del espectaculo de shakira', '2021-10-13', 2, 2, 500, 4, 'rechazado', 'Shakirashakira2.jpg'),
+(100, 'url', '340', 'Shakira en vivio', 9, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakirashow.jpg'),
+(100, 'url', '340', 'Shakira en vivo 2', 10, 45, 'descripcion', '2021-10-13', 2, 2, 500, 4, 'aceptado', 'shakiravivo.jpg'),
+(120, 'www.shakira.com', '450', 'Shakira clásico', 11, 80, 'Shakira cantando musica clásica', '2021-10-19', 2, 2, 240, 3, 'ingresado', 'Shakiraclasico.jpg'),
+(100, 'www.twitch.com', '1000', 'El pollo asado nos ataca?', 12, 120, 'Descripcion de Twitch', '2022-01-01', 5, 3, 125, 4, 'Aceptado', 'imagen'),
+(150, 'www.twitch.com', '100', 'Secuelas del pollo', 13, 180, 'Descripcion de Twitch', '2022-03-01', 5, 3, 200, 4, 'Ingresado', 'imagen'),
+(50, 'www.twitch.com', '300', 'Pesca de lombrices', 14, 240, 'Descripcion de Twitch', '2025-02-01', 3, 3, 75, 4, 'Aceptado', 'imagen');
 
 -- --------------------------------------------------------
 
@@ -185,42 +183,44 @@ CREATE TABLE `funciones` (
   `fechaInicio` datetime DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   `imagen` varchar(255) DEFAULT NULL,
-  `sorteo` tinyint(1) DEFAULT NULL
+  `sorteo` tinyint(1) DEFAULT NULL,
+  `descripcionPremios` varchar(255) DEFAULT NULL,
+  `cantidadPremios` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `funciones`
 --
 
-INSERT INTO `funciones` (`idEspectaculo`, `fechaRegistro`, `id`, `fechaInicio`, `nombre`, `imagen`, `sorteo`) VALUES
-(5, '2021-10-14 00:00:00', 1, '2021-10-24 00:00:00', 'Shakira el domingo', NULL, 0),
-(2, '2021-10-15 00:00:00', 4, '2021-10-19 00:00:00', 'Shakira el martes', NULL, 1),
-(9, '2021-10-19 00:00:00', 5, '2021-10-28 00:00:00', 'Funcion el Jueves', NULL, 0),
-(10, '2021-10-19 00:00:00', 6, '2021-10-31 00:00:00', 'Shakira el Domingo de tarde', NULL, NULL),
-(5, '2021-10-14 00:00:00', 7, '2021-10-25 00:00:00', 'Shakira el Lunes', NULL, NULL),
-(5, '2021-10-14 00:00:00', 8, '2021-10-26 21:30:00', 'Shakira el Martes 2', NULL, NULL),
-(5, '2021-10-14 00:00:00', 9, '2021-10-27 22:30:00', 'Shakira el Miercoles', NULL, NULL),
-(5, '2021-10-14 00:00:00', 10, '2021-10-28 21:00:00', 'Shakira el Jueves 2', NULL, NULL),
-(5, '2021-10-14 00:00:00', 11, '2021-10-29 21:00:00', 'Shakira el Viernes', NULL, NULL),
-(2, '2021-10-15 00:00:00', 12, '2021-11-25 00:00:00', 'Shakira con Pique el Lunes', NULL, NULL),
-(2, '2021-10-15 00:00:00', 13, '2021-11-26 00:00:00', 'Shakira con Pique el Martes', NULL, NULL),
-(2, '2021-10-15 00:00:00', 14, '2021-11-27 00:00:00', 'Shakira con Pique el Miercoles', NULL, NULL),
-(2, '2021-10-15 00:00:00', 15, '2021-11-28 00:00:00', 'Shakira con Pique el Jueves', NULL, NULL),
-(9, '2021-10-15 00:00:00', 16, '2021-12-25 00:00:00', 'Shakira Shakira en vivio el Lunes', NULL, NULL),
-(9, '2021-10-15 00:00:00', 17, '2021-12-26 00:00:00', 'Shakira Shakira en vivio el Martes', NULL, NULL),
-(9, '2021-10-15 00:00:00', 18, '2021-12-27 00:00:00', 'Shakira Shakira en vivio el Miercoles', NULL, NULL),
-(9, '2021-10-15 00:00:00', 19, '2021-12-28 00:00:00', 'Shakira Shakira en vivio el Jueves', NULL, NULL),
-(1, '2021-10-15 00:00:00', 20, '2021-11-15 00:00:00', 'Jaime con los murguistas funcion 1', NULL, NULL),
-(1, '2021-10-15 00:00:00', 21, '2021-11-16 00:00:00', 'Jaime con los murguistas funcion 2', NULL, NULL),
-(1, '2021-10-15 00:00:00', 22, '2021-11-17 00:00:00', 'Jaime con los murguistas funcion 3', NULL, NULL),
-(1, '2021-10-15 00:00:00', 23, '2021-11-18 00:00:00', 'Jaime con los murguistas funcion 4', NULL, NULL),
-(1, '2021-10-15 00:00:00', 24, '2021-11-19 00:00:00', 'Jaime con los murguistas funcion 5', NULL, NULL),
-(10, '2022-01-15 00:00:00', 25, '2022-01-25 00:00:00', 'Shakira Shakira en vivio 2 el Lunes', NULL, NULL),
-(10, '2021-01-15 00:00:00', 26, '2021-01-26 00:00:00', 'Shakira Shakira en vivio 2 el Martes', NULL, NULL),
-(10, '2021-01-15 00:00:00', 27, '2021-01-27 00:00:00', 'Shakira Shakira en vivio 2 el Miercoles', NULL, NULL),
-(10, '2021-01-15 00:00:00', 28, '2021-01-28 00:00:00', 'Shakira Shakira en vivio 2 el Jueves', NULL, NULL),
-(12, '2021-11-13 00:00:00', 29, '2022-01-01 00:00:00', '1er Acto - Desplumar al pollo', 'imagen', NULL),
-(14, '2021-01-01 00:00:00', 30, '2021-01-21 00:00:00', 'Worms', 'imagen', 1);
+INSERT INTO `funciones` (`idEspectaculo`, `fechaRegistro`, `id`, `fechaInicio`, `nombre`, `imagen`, `sorteo`, `descripcionPremios`, `cantidadPremios`) VALUES
+(5, '2021-10-14 00:00:00', 1, '2021-10-24 00:00:00', 'Shakira el domingo', NULL, 1, NULL, NULL),
+(2, '2021-10-15 00:00:00', 4, '2021-10-19 00:00:00', 'Shakira el martes', NULL, 1, 'Pañuelo usado', 2),
+(9, '2021-10-19 00:00:00', 5, '2021-10-28 00:00:00', 'Funcion el Jueves', NULL, 0, NULL, NULL),
+(10, '2021-10-19 00:00:00', 6, '2021-10-31 00:00:00', 'Shakira el Domingo de tarde', NULL, NULL, NULL, NULL),
+(5, '2021-10-14 00:00:00', 7, '2021-10-25 00:00:00', 'Shakira el Lunes', NULL, NULL, NULL, NULL),
+(5, '2021-10-14 00:00:00', 8, '2021-10-26 21:30:00', 'Shakira el Martes 2', NULL, NULL, NULL, NULL),
+(5, '2021-10-14 00:00:00', 9, '2021-10-27 22:30:00', 'Shakira el Miercoles', NULL, NULL, NULL, NULL),
+(5, '2021-10-14 00:00:00', 10, '2021-10-28 21:00:00', 'Shakira el Jueves 2', NULL, NULL, NULL, NULL),
+(5, '2021-10-14 00:00:00', 11, '2021-10-29 21:00:00', 'Shakira el Viernes', NULL, NULL, NULL, NULL),
+(2, '2021-10-15 00:00:00', 12, '2021-11-25 00:00:00', 'Shakira con Pique el Lunes', NULL, NULL, NULL, NULL),
+(2, '2021-10-15 00:00:00', 13, '2021-11-26 00:00:00', 'Shakira con Pique el Martes', NULL, NULL, NULL, NULL),
+(2, '2021-10-15 00:00:00', 14, '2021-11-27 00:00:00', 'Shakira con Pique el Miercoles', NULL, NULL, NULL, NULL),
+(2, '2021-10-15 00:00:00', 15, '2021-11-28 00:00:00', 'Shakira con Pique el Jueves', NULL, NULL, NULL, NULL),
+(9, '2021-10-15 00:00:00', 16, '2021-12-25 00:00:00', 'Shakira Shakira en vivio el Lunes', NULL, NULL, NULL, NULL),
+(9, '2021-10-15 00:00:00', 17, '2021-12-26 00:00:00', 'Shakira Shakira en vivio el Martes', NULL, NULL, NULL, NULL),
+(9, '2021-10-15 00:00:00', 18, '2021-12-27 00:00:00', 'Shakira Shakira en vivio el Miercoles', NULL, NULL, NULL, NULL),
+(9, '2021-10-15 00:00:00', 19, '2021-12-28 00:00:00', 'Shakira Shakira en vivio el Jueves', NULL, NULL, NULL, NULL),
+(1, '2021-10-15 00:00:00', 20, '2021-11-15 00:00:00', 'Jaime con los murguistas funcion 1', NULL, NULL, NULL, NULL),
+(1, '2021-10-15 00:00:00', 21, '2021-11-16 00:00:00', 'Jaime con los murguistas funcion 2', NULL, NULL, NULL, NULL),
+(1, '2021-10-15 00:00:00', 22, '2021-11-17 00:00:00', 'Jaime con los murguistas funcion 3', NULL, NULL, NULL, NULL),
+(1, '2021-10-15 00:00:00', 23, '2021-11-18 00:00:00', 'Jaime con los murguistas funcion 4', NULL, NULL, NULL, NULL),
+(1, '2021-10-15 00:00:00', 24, '2021-11-19 00:00:00', 'Jaime con los murguistas funcion 5', NULL, NULL, NULL, NULL),
+(10, '2022-01-15 00:00:00', 25, '2022-01-25 00:00:00', 'Shakira Shakira en vivio 2 el Lunes', NULL, NULL, NULL, NULL),
+(10, '2021-01-15 00:00:00', 26, '2021-01-26 00:00:00', 'Shakira Shakira en vivio 2 el Martes', NULL, NULL, NULL, NULL),
+(10, '2021-01-15 00:00:00', 27, '2021-01-27 00:00:00', 'Shakira Shakira en vivio 2 el Miercoles', NULL, NULL, NULL, NULL),
+(10, '2021-01-15 00:00:00', 28, '2021-01-28 00:00:00', 'Shakira Shakira en vivio 2 el Jueves', NULL, NULL, NULL, NULL),
+(12, '2021-11-13 00:00:00', 29, '2022-01-01 00:00:00', '1er Acto - Desplumar al pollo', 'imagen', NULL, NULL, NULL),
+(14, '2021-01-01 00:00:00', 30, '2021-01-21 00:00:00', 'Worms', 'imagen', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -409,17 +409,17 @@ CREATE TABLE `usuarios_ganadores` (
   `id` int(11) NOT NULL,
   `idUsuario` int(255) DEFAULT NULL,
   `idFuncion` int(255) DEFAULT NULL,
-  `premio` varchar(255) DEFAULT NULL
+  `premio` varchar(255) DEFAULT NULL,
+  `fechaSorteo` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios_ganadores`
 --
 
-INSERT INTO `usuarios_ganadores` (`id`, `idUsuario`, `idFuncion`, `premio`) VALUES
-(8, 1, 4, 'pique'),
-(9, 2, 4, 'pique'),
-(10, 34, 30, 'La lombris que siga viva o que se escape del pez');
+INSERT INTO `usuarios_ganadores` (`id`, `idUsuario`, `idFuncion`, `premio`, `fechaSorteo`) VALUES
+(13, 1, 4, 'Pañuelo usado', '2021-11-14'),
+(14, 34, 4, 'Pañuelo usado', '2021-11-14');
 
 -- --------------------------------------------------------
 
@@ -625,7 +625,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios_ganadores`
 --
 ALTER TABLE `usuarios_ganadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
