@@ -10,6 +10,7 @@ public class CanjeTresPorUnoDTO {
     private Long idEspectaculoDeFuncion;
     private String funcionesCanjeadas;
     private Date fechaRegistro;
+    private String funciones;
 
     public CanjeTresPorUnoDTO() {
     }
@@ -46,22 +47,6 @@ public class CanjeTresPorUnoDTO {
         this.idUsuario = idUsuario;
     }
 
-    public String getFuncionesCanjeadas() {
-        return funcionesCanjeadas;
-    }
-
-    public void setFunciones(String funciones) {
-        this.funcionesCanjeadas = funcionesCanjeadas;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
     public Long getIdFuncionObtenida() {
         return idFuncionObtenida;
     }
@@ -77,5 +62,31 @@ public class CanjeTresPorUnoDTO {
     public void setIdEspectaculoDeFuncion(Long idEspectaculoDeFuncion) {
         this.idEspectaculoDeFuncion = idEspectaculoDeFuncion;
     }
+
+    public String getFuncionesCanjeadas() {
+        return funcionesCanjeadas;
+    }
+
+    public void setFuncionesCanjeadas(String funcionesCanjeadas) {
+        this.funcionesCanjeadas = funcionesCanjeadas;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(String funciones) {
+        this.funciones = funciones;
+    }
+
+    
     
 }
