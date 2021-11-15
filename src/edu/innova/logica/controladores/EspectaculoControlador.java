@@ -50,4 +50,10 @@ public interface EspectaculoControlador {
      public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre);
      
      public void finalizarEspectaculo(Long id);
+     
+     void altaEspectaculoFavorito(Long idFuncion, Long idUsuario);
+    
+    void bajaEspectaculoFavorito(Long idFuncion, Long idUsuario);
+
+    List<EspectaculoDTO> getEspectaculosFavoritosDeUsuario(Long idUsuario);
 }

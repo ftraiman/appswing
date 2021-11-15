@@ -1,8 +1,12 @@
 package edu.innova.logica.servicios;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import edu.innova.exceptions.BaseDeDatosException;
+import edu.innova.exceptions.InnovaModelException;
 import edu.innova.logica.dtos.EspectaculoDTO;
 import edu.innova.logica.entidades.Categoria;
 import edu.innova.logica.entidades.Espectaculo;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -49,4 +53,10 @@ public interface EspectaculoServicio {
     public List<Espectaculo> getTodosLosEspectaculosAceptadosPorNombre(String nombre);
     
     public void finalizarEspectaculo(Long id);
+    
+    void altaEspectaculoFavorito(Long idFuncion, Long idUsuario);
+    
+    void bajaEspectaculoFavorito(Long idFuncion, Long idUsuario);
+
+    List<EspectaculoDTO> getEspectaculosFavoritosDeUsuario(Long idUsuario);
 }

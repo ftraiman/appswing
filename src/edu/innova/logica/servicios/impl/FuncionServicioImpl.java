@@ -440,8 +440,6 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
     }
     //============================ MODIFICAR ESPECTADOR =========================//
-
-
     
     @Override
     public void altaFuncionFavorita(Long idFuncion, Long idUsuario) {

@@ -50,6 +50,11 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
     private final String buscarEspectaculoDTOCategoriaPlataforma = "SELECT * FROM espectaculos e WHERE e.idCategoria = ? AND e.idPlataforma = ? AND e.estado = 'Aceptado'";
     private final String espectaculosNoIncluidosEnPaquete = "SELECT e.* FROM espectaculos e LEFT JOIN paquetes_espectaculos pe on e.id = pe.idEspectaculo WHERE idUsuario = ? AND e.estado = 'aceptado' AND NOT EXISTS(SELECT * FROM paquetes_espectaculos pe WHERE pe.idEspectaculo = e.id\n"
             + "AND pe.idPaquete = ?)";
+    
+    // Favoritos
+    private final String espectaculoFavoritoAlta = "INSERT INTO espectaculos_favoritos (idEspectaculo, idUsuario) VALUES (?, ?)";
+    private final String espectaculoFavoritoBaja = "DELETE FROM espectaculos_favoritos WHERE idEspectaculo = ? AND idUsuario = ?";
+    private final String espectaculoFavoritoConsultaUsuario = "SELECT * FROM espectaculos e JOIN espectaculos_favoritos ef ON e.id = ef.idEspectaculo WHERE ef.idUsuario = ?";
 
     //private final String altaEspectaculoDTO 
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
@@ -539,4 +544,53 @@ public class EspectaculoServicioImpl implements EspectaculoServicio {
         }
     }
     //=============== OBTENER TODOS LOS ESPECTACULOS ACEPTADOS ===============//
+    
+    @Override
+    public void altaEspectaculoFavorito(Long idFuncion, Long idUsuario) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoFavoritoAlta);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setLong(2, idUsuario);
+            
+            sentencia.executeUpdate();
+            
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya tiene asignada la funcion como favorita");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    
+    @Override
+    public void bajaEspectaculoFavorito(Long idFuncion, Long idUsuario) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(espectaculoFavoritoBaja);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setLong(2, idUsuario);
+            
+            sentencia.executeUpdate();
+            
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya tiene asignado el Espectaculo como favorito");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    
+    @Override
+    public List<EspectaculoDTO> getEspectaculosFavoritosDeUsuario(Long idUsuario) {
+        List<EspectaculoDTO> funciones = new ArrayList<>();
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(espectaculoFavoritoConsultaUsuario);
+            sentencia.setLong(1, idUsuario);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(espectaculoMapperDTO(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+        return funciones;
+    }
 }

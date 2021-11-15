@@ -204,8 +204,21 @@ public class EspectaculosControladorImpl implements EspectaculoControlador {
 
     @Override
     public void finalizarEspectaculo(Long id) {
-
         espectaculoServicio.finalizarEspectaculo(id);
+    }
 
+    @Override
+    public void altaEspectaculoFavorito(Long idFuncion, Long idUsuario) {
+        espectaculoServicio.altaEspectaculoFavorito(idFuncion, idUsuario);
+    }
+
+    @Override
+    public void bajaEspectaculoFavorito(Long idFuncion, Long idUsuario) {
+        espectaculoServicio.bajaEspectaculoFavorito(idFuncion, idUsuario);
+    }
+
+    @Override
+    public List<EspectaculoDTO> getEspectaculosFavoritosDeUsuario(Long idUsuario) {
+        return espectaculoServicio.getEspectaculosFavoritosDeUsuario(idUsuario);
     }
 }
