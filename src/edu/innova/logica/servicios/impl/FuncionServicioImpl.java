@@ -43,6 +43,11 @@ public class FuncionServicioImpl implements FuncionServicio {
     private final String cantFuncionesPorUsuario = "SELECT COUNT(*) as cnt FROM espectadores_funciones WHERE idFuncion = ? AND idUsuario = ?";
     private final String funcionesParaCanjear = "SELECT f.* FROM funciones f JOIN espectadores_funciones ef on f.id = ef.idFuncion WHERE idUsuario = ? AND ef.costo > 0";
     private final String sorteoRealizado = "UPDATE `funciones` SET `sorteo` = '1' WHERE `funciones`.`id` = ?";
+    // Favoritos
+    private final String funcionFavoritaAlta = "INSERT INTO funciones_favoritas (idFuncion, idUsuario) VALUES (?, ?)";
+    private final String funcionFavoritaBaja = "DELETE FROM funciones_favoritas WHERE idFuncion = ? AND idUsuario = ?";
+    private final String funcionFavoritaConsultaUsuario = "SELECT * FROM funciones f JOIN funciones_favoritas ff ON f.id =ff.idFuncion WHERE ff.idUsuario = ?";
+
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
 
     //INSTANCIA DE LA CLASE
@@ -420,6 +425,7 @@ public class FuncionServicioImpl implements FuncionServicio {
         return funciones;
     }
 
+
     //============================ MODIFICAR Usuario =========================//
     @Override
     public void entregaDePremios(Long idFuncion) {
@@ -434,5 +440,56 @@ public class FuncionServicioImpl implements FuncionServicio {
         }
     }
     //============================ MODIFICAR ESPECTADOR =========================//
+
+
+    
+    @Override
+    public void altaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionFavoritaAlta);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setLong(2, idUsuario);
+            
+            sentencia.executeUpdate();
+            
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya tiene asignada la funcion como favorita");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    
+    @Override
+    public void bajaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        try {
+            PreparedStatement sentencia = conexion.getConexion().prepareStatement(funcionFavoritaBaja);
+            sentencia.setLong(1, idFuncion);
+            sentencia.setLong(2, idUsuario);
+            
+            sentencia.executeUpdate();
+            
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            throw new InnovaModelException("El usuario ya tiene asignada la funcion como favorita");
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+    }
+    
+    @Override
+    public List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario) {
+        List<FuncionDTO> funciones = new ArrayList<>();
+        PreparedStatement sentencia;
+        try {
+            sentencia = conexion.getConexion().prepareStatement(funcionFavoritaConsultaUsuario);
+            sentencia.setLong(1, idUsuario);
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                funciones.add(funcionMapperDTO(rs));
+            }
+        } catch (SQLException ex) {
+            throw new BaseDeDatosException(String.format("Error SQL [%s]", ex.getMessage()), ex.getCause());
+        }
+        return funciones;
+    }
 
 }

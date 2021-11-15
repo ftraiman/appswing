@@ -46,5 +46,11 @@ public interface FuncionServicio {
 
     public List<FuncionDTO> getFuncionesDeUsuarioParaCanjear(Long idUsuario);
     
+    void altaFuncionFavorita(Long idFuncion, Long idUsuario);
+    
+    void bajaFuncionFavorita(Long idFuncion, Long idUsuario);
+    
+    List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario);
+
     public void entregaDePremios(Long idFuncion);
 }

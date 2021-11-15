@@ -236,6 +236,7 @@ public class FuncionControladorImpl implements FuncionControlador {
     }
 
     @Override
+
     public List<Funcion> getTodosLasFuncionesPorIdEspectaculo(Long idEspectaculo) {
         return funcionServicio.getTodosLasFuncionesPorIdEspectaculo(idEspectaculo);
     }
@@ -243,5 +244,20 @@ public class FuncionControladorImpl implements FuncionControlador {
     @Override
     public void entregaDePremios(Long idFuncion) {
         funcionServicio.entregaDePremios(idFuncion);
+    }
+
+    @Override
+    public void altaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        funcionServicio.altaFuncionFavorita(idFuncion, idUsuario);
+    }
+
+    @Override
+    public void bajaFuncionFavorita(Long idFuncion, Long idUsuario) {
+        funcionServicio.bajaFuncionFavorita(idFuncion, idUsuario);
+    }
+
+    @Override
+    public List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario) {
+        return funcionServicio.getFuncionFavoritasesDeUsuario(idUsuario);
     }
 }
