@@ -1,5 +1,6 @@
 package edu.innova.presentacion;
 
+import edu.innova.exceptions.InnovaModelException;
 import static edu.innova.logica.Constantes.ID_FUNCION;
 import edu.innova.logica.Fabrica;
 import edu.innova.logica.dtos.UsuarioDTO;
@@ -142,22 +143,26 @@ public class Espectadores_Para_Sorteo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int cant = Integer.parseInt(this.lbl_cantidadPremio.getText());
-        cargarDatosGanadores(cant);
-        
-        int cantRow = this.tablaGanadores.getRowCount();
-        //System.out.println(cantRow);
-        for(int i = 0; i < cantRow; i++){
-            Long id = Long.parseLong(String.valueOf(tablaGanadores.getValueAt(i, 0)));
-            fabrica.getUsuarioControlador().altaGanadores(id, ID_FUNCION, this.lbl_premio.getText());
+
+        try {
+            
+            //Inserta los ganadores en la tabla ganadores en la BD
+            int cantRow = this.tablaGanadores.getRowCount();
+            for (int i = 0; i < cantRow; i++) {
+                Long id = Long.parseLong(String.valueOf(tablaGanadores.getValueAt(i, 0)));
+                fabrica.getUsuarioControlador().altaGanadores(id, ID_FUNCION, this.lbl_premio.getText());
+            }
+
+            //Carga los datos de quien gano
+            int cant = Integer.parseInt(this.lbl_cantidadPremio.getText());
+            cargarDatosGanadores(cant);
+
+            //Carga true la tabla del sorteo
+            fabrica.getFuncionControlador().entregaDePremios(ID_FUNCION);
+        } catch (InnovaModelException x) {
+            JOptionPane.showMessageDialog(rootPane, String.format("[%s]", x.getMessage()));
         }
-        
-        fabrica.getFuncionControlador().entregaDePremios(ID_FUNCION);
-        
-        JOptionPane.showMessageDialog(null, "Se realizo el sorteo correctamente");
-        
-        dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

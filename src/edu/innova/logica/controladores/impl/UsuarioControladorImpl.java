@@ -12,7 +12,9 @@ import edu.innova.logica.dtos.UsuarioDTO;
 import edu.innova.logica.entidades.Artista;
 import edu.innova.logica.entidades.Espectador;
 import edu.innova.logica.entidades.Usuario;
+import edu.innova.logica.servicios.FuncionServicio;
 import edu.innova.logica.servicios.UsuarioServicio;
+import edu.innova.logica.servicios.impl.FuncionServicioImpl;
 import edu.innova.logica.servicios.impl.UsuarioServicioImpl;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
     //Obtener instancia de servicio usuario
     private final UsuarioServicio usuarioServicio = new UsuarioServicioImpl().getInstance();
+    private final FuncionServicio funcionServicio = new FuncionServicioImpl().getInstance();
 
     @Override
     public UsuarioDTO getUsuarioDto(String nickname, String email, String clave) {
@@ -327,7 +330,17 @@ public class UsuarioControladorImpl implements UsuarioControlador {
 
     @Override
     public void altaGanadores(Long idUsuario, Long idFuncion, String premio) {
-        usuarioServicio.altaGanadores(idUsuario, idFuncion, premio);
+
+        try {
+            if (!funcionServicio.getFuncionDTOPorId(idFuncion).getSorteo()) {
+                //No hay sorteo en esa funcion
+                usuarioServicio.altaGanadores(idUsuario, idFuncion, premio);
+            } else { //Sino ya hay un sorteo 
+                throw new InnovaModelException(String.format("Ya hay un sorteo de esa Funcion!!!"));
+            }
+        } catch (BaseDeDatosException e) {
+            throw new InnovaModelException(String.format("Error en base de datos [%s]", e.getMessage()));
+        }
     }
 
     @Override

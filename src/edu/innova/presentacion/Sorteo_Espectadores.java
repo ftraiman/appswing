@@ -272,18 +272,18 @@ public final class Sorteo_Espectadores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaFuncionesAsiciadasMouseClicked
 
     private void btnRealizarSorteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarSorteoActionPerformed
-        // TODO add your handling code here:
-        if (this.lbl_Realizado.getText().equals("Si") && this.lbl_Sorteo.getText().equals("No")) {
-            Espectadores_Para_Sorteo se = new Espectadores_Para_Sorteo();
 
+        if (ID_FUNCION != null) { //Preguntar si ya selecciono algo
+            Espectadores_Para_Sorteo se = new Espectadores_Para_Sorteo();
+            
             se.lbl_cantidadPremio.setText(cantidadPremios);
             se.lbl_premio.setText(premio);
-
+            
             GUI_Proyecto.Panel.add(se);
             se.show();
             //System.out.println(ID_FUNCION);
         } else {
-            JOptionPane.showMessageDialog(null, "No se puede realizar un sorteo en esta función");
+            JOptionPane.showMessageDialog(null, "Seleccione una Funcion!!!");
         }
 
 
