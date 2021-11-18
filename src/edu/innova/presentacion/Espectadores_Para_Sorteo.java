@@ -146,16 +146,16 @@ public class Espectadores_Para_Sorteo extends javax.swing.JInternalFrame {
 
         try {
             
+            //Carga los datos de quien gano
+            int cant = Integer.parseInt(this.lbl_cantidadPremio.getText());
+            cargarDatosGanadores(cant);
+            
             //Inserta los ganadores en la tabla ganadores en la BD
             int cantRow = this.tablaGanadores.getRowCount();
             for (int i = 0; i < cantRow; i++) {
                 Long id = Long.parseLong(String.valueOf(tablaGanadores.getValueAt(i, 0)));
                 fabrica.getUsuarioControlador().altaGanadores(id, ID_FUNCION, this.lbl_premio.getText());
             }
-
-            //Carga los datos de quien gano
-            int cant = Integer.parseInt(this.lbl_cantidadPremio.getText());
-            cargarDatosGanadores(cant);
 
             //Carga true la tabla del sorteo
             fabrica.getFuncionControlador().entregaDePremios(ID_FUNCION);

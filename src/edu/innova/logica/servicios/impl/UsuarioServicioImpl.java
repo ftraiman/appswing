@@ -44,7 +44,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final String espectadoresPorIdFuncion = "SELECT * FROM usuarios AS U, espectadores_funciones AS EF WHERE U.id = EF.idUsuario AND EF.idFuncion = ?";
     
     private final String entregaDePremios = "SELECT DISTINCT * FROM usuarios U, espectadores_funciones EF WHERE EF.idUsuario = U.id AND EF.idFuncion = ? ORDER BY RAND() LIMIT ?";
-    private final String insertarGanadores = "INSERT INTO `usuarios_ganadores` (`idUsuario`, `idFuncion`, `premio`,`fechaSorteo`) VALUES (?,?, ?, ?);";
+    private final String insertarGanadores = "INSERT INTO `usuarios_ganadores` (`idUsuario`, `idFuncion`, `premio`,`fechaSorteo`) VALUES (?, ?, ?, ?);";
     private final String mostrarGanadores = "SELECT u.id, u.nombre, u.apellido, ug.premio, ug.fechaSorteo, f.id, e.id FROM usuarios u, usuarios_ganadores ug, funciones f, espectaculos e WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.idEspectaculo = e.id AND f.id =?";
     private final String mostrarPremiosDelEspectador = "SELECT u.id, u.nombre, u.apellido, ug.premio, ug.fechaSorteo, f.id, e.id FROM usuarios u, usuarios_ganadores ug, funciones f, espectaculos e WHERE ug.idUsuario = u.id AND ug.idFuncion = f.id AND f.idEspectaculo = e.id AND u.email =? ORDER BY ug.id DESC";
     //====================== CONSULTAS PARA LA BASE DE DATOS =================//
