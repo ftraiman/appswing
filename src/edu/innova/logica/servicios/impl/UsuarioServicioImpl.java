@@ -524,10 +524,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             while (rs.next()) {
                 espectadores.add(espectadorGanadorMapper(rs));
             }
-            if(espectadores.isEmpty()){
-                //System.out.println("aca");
-                return null;
-            }
             return espectadores;
         } catch (SQLException ex) {
             throw new BaseDeDatosException(ex.getMessage(), ex.getCause());
